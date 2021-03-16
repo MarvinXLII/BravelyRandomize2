@@ -1,0 +1,7 @@
+*.pyc
+*.pak
+*.uasset
+*.uexp
+*~
+settingsMine.json
+Sunrise-E-Switch
