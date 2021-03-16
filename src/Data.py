@@ -111,12 +111,30 @@ class UASSET(FILE):
         self.addToFooter1(addr, length)
 
     def getName(self, index):
-        return self.idxToName[index]
+        name = self.idxToName[index & 0xFFFFFFFF]
+        index >>= 32
+        if index:
+            return f"{name}_{index-1}"
+        return name    
         
     def getIndex(self, name):
-        return self.nameToIdx[name]
+        if name in self.nameToIdx:
+            return self.nameToIdx[name]
+        nameBase = '_'.join(name.split('_')[:-1])
+        if nameBase not in self.nameToIdx:
+            sys.exit(f"{nameBase} does not exist in this uasset")
+        value = int(name.split('_')[-1]) + 1
+        value <<= 32
+        value += self.nameToIdx[nameBase]
+        return value
 
     def getEntry(self, name):
+        if name in self.entries:
+            return self.entries[name]
+        # Get name base
+        index = self.getIndex(name)
+        name = self.idxToName[index & 0xFFFFFFFF]
+        # Return entry for the name base
         return self.entries[name]
 
 
@@ -155,10 +173,10 @@ class DATA:
                 table = self.table[name]['data']
                 data += self.uexp.getInt(len(table), size=4)
                 for key in table: # For JOB in table
-                    if self.table[name]['type1'] == 'EnumProperty':
-                        data += self.uexp.getInt(self.uasset.getIndex(key), size=8)
-                    elif self.table[name]['type1'] == 'IntProperty':
+                    if self.table[name]['type1'] == 'IntProperty':
                         data += self.uexp.getInt(key, size=4)
+                    else: # EnumProperty, NameProperty
+                        data += self.uexp.getInt(self.uasset.getIndex(key), size=8)
                     for key2, d in table[key].items():
                         data += self.uexp.getInt(self.uasset.getIndex(key2), size=8)
                         data += self.uexp.getInt(self.uasset.getIndex(d['type']), size=8) ## ASSUMED FOR NOW
@@ -180,6 +198,8 @@ class DATA:
                             data += self.mergeStructProperty(d['entry'])
                         elif d['type'] == 'FloatProperty':
                             data += self.mergeFloatProperty(d['entry'])
+                        elif d['type'] == 'ByteProperty':
+                            data += self.mergeByteProperty(d['entry'])
                         else:
                             sys.exit(f"Property {d['type']} not yet included!")
                             
@@ -221,16 +241,16 @@ class DATA:
     def loadEnumProperty(self):
         size = self.uexp.readInt(size=8)
         assert size == 8, f"EnumProperty must always have a size of 8. Here size is {size}"
-        value1 = self.uasset.getName(self.uexp.readInt(size=8))
+        value0 = self.uasset.getName(self.uexp.readInt(size=8))
         assert self.uexp.readInt(size=1) == 0, f"EnumProperty must have 0 before the full value."
-        value2 = self.uasset.getName(self.uexp.readInt(size=8))
-        return {'size': size, 'value1': value1, 'value2': value2}
+        value = self.uasset.getName(self.uexp.readInt(size=8))
+        return {'size': size, 'value0': value0, 'value': value}
 
     def mergeEnumProperty(self, entry):
         tmp = self.uexp.getInt(entry['size'], size=8)
-        tmp += self.uexp.getInt(self.uasset.getIndex(entry['value1']), size=8)
+        tmp += self.uexp.getInt(self.uasset.getIndex(entry['value0']), size=8)
         tmp += bytearray([0])
-        tmp += self.uexp.getInt(self.uasset.getIndex(entry['value2']), size=8)
+        tmp += self.uexp.getInt(self.uasset.getIndex(entry['value']), size=8)
         return tmp
 
     def loadBoolProperty(self):
@@ -288,12 +308,12 @@ class DATA:
         size = self.uexp.readInt(size=8)
         self.uexp.addr += 1
         name = self.uasset.getName(self.uexp.readInt(size=8))
-        return {'size': size, 'name': name}
+        return {'size': size, 'value': name}
 
     def mergeNameProperty(self, entry):
         tmp = self.uexp.getInt(entry['size'], size=8)
         tmp += bytearray([0])
-        tmp += self.uexp.getInt(self.uasset.getIndex(entry['name']), size=8)
+        tmp += self.uexp.getInt(self.uasset.getIndex(entry['value']), size=8)
         return tmp
     
     def loadIntProperty(self):
@@ -308,6 +328,21 @@ class DATA:
         tmp += self.uexp.getInt(entry['value'], size=entry['size'])
         return tmp
 
+    def loadByteProperty(self):
+        size = self.uexp.readInt(size=8)
+        assert size == 1
+        assert self.uexp.readInt(size=8) == self.none
+        self.uexp.addr += 1
+        value = self.uexp.readInt(size=1)
+        return {'size': size, 'value': value}
+
+    def mergeByteProperty(self, entry):
+        tmp = self.uexp.getInt(entry['size'], size=8)
+        tmp += self.uexp.getInt(self.none, size=8)
+        tmp += bytearray([0])
+        tmp += self.uexp.getInt(entry['value'], size=1)
+        return tmp
+
     # MonsterDataAsset: Float I won't need to modify.
     def loadStructProperty(self):
         size = self.uexp.readInt(size=8)
@@ -315,7 +350,7 @@ class DATA:
         self.uexp.addr += 17
         structData = self.uexp.data[self.uexp.addr:self.uexp.addr+size]
         self.uexp.addr += size
-        return {'size':size, 'value':value, 'struct':structData}
+        return {'size': size, 'value': value, 'struct': structData}
 
     def mergeStructProperty(self, entry):
         tmp = self.uexp.getInt(entry['size'], size=8)
@@ -374,12 +409,10 @@ class DATA:
                 table[name]['size'] = self.uexp.readInt(size=8)
                 type1 = self.uasset.getName(self.uexp.readInt(size=8))
                 type2 = self.uasset.getName(self.uexp.readInt(size=8))
-                assert type1 == 'EnumProperty' or type1 == 'IntProperty'
+                assert type1 == 'EnumProperty' or type1 == 'IntProperty' or type1 == 'NameProperty'
                 assert type2 == 'StructProperty'
                 table[name]['type1'] = type1
-                self.uexp.addr += 1
-                # self.uexp.addr += table[name]['size']
-                self.uexp.addr += 4
+                self.uexp.addr += 5
                 numEntries = self.uexp.readInt(size=4)
                 table[name]['data'] = {}
                 for _ in range(numEntries): # one entry per job
@@ -387,6 +420,8 @@ class DATA:
                         key = self.uasset.getName(self.uexp.readInt(size=8))
                     elif type1 == 'IntProperty':
                         key = self.uexp.readInt(size=4)
+                    elif type1 == 'NameProperty':
+                        key = self.uasset.getName(self.uexp.readInt(size=8))
                     table[name]['data'][key] = {}
                     nextValue = self.uexp.readInt(size=8)
                     while nextValue != self.none:
@@ -436,6 +471,11 @@ class DATA:
                             table[name]['data'][key][key2] = {
                                 'type': prop,
                                 'entry': self.loadFloatProperty(),
+                            }
+                        elif prop == 'ByteProperty':
+                            table[name]['data'][key][key2] = {
+                                'type': prop,
+                                'entry': self.loadByteProperty(),
                             }
                         else:
                             sys.exit(f"{prop} not yet included")
@@ -565,16 +605,79 @@ class MONSTERS(DATA):
             d['Jp']['entry']['value'] = min(jp, 9999)
 
 
+class TREASURES(DATA):
+    def __init__(self, rom, text, locations):
+        super().__init__(rom, 'TreasureBoxDataAsset')
+        self.text = text
+        self.locations = locations
+        self.data = list(self.table.values())[0]['data']
+
+    # Input TreasureBoxId, e.g.
+    #      TW0050_01 --> MAP_TW_0050
+    #      MAP0012_04 --> MAP_ND_0012
+    def getLocation(self, boxId):
+        box = boxId.split('_')
+        if len(box) != 2:
+            return ''
+        else:
+            box = box[0]
+
+        if box[:2] == 'TW':
+            value = box[2:]
+            key = f'MAP_TW_{value}'
+        elif box[:3] == 'MAP':
+            value = box[3:]
+            key = f'MAP_ND_{value}'
+        elif box[:5] == 'Field':
+            value = box[-1]
+            key = f'Field_Chapter{value}'
+        else:
+            sys.exit('Not considered!')
+        return self.locations.getName(key)
+        
+    def print(self, fileName):
+        keys = list(self.data.keys()) # TW_0010_TN_1
+        headers = self.data[keys[0]].keys()
+        with open(fileName, 'w') as sys.stdout:
+            print(',,'+','.join(headers))
+            for key in keys:
+                t = []
+                for hi in headers:
+                    t.append(self.data[key][hi]['entry']['value'])
+                t = list(map(str, t))
+                try:
+                    count = self.data[key]['ItemCount']['entry']['value']
+                    if self.data[key]['TreasureType']['entry']['value'] == 'ETreasureType::Item':
+                        item = self.text.getName(self.data[key]['ItemId']['entry']['value'])
+                        if count > 1:
+                            item = f"{count}x {item}"
+                    elif self.data[key]['TreasureType']['entry']['value'] == 'ETreasureType::Money':
+                        item = f"{count} pg"
+                except:
+                    item = ''
+                try:
+                    location = self.getLocation(key)
+                except:
+                    location = ''
+                print(location + ',' + item + ',' + ','.join(t))
+
+        sys.stdout = sys.__stdout__
+    
+
 class TEXT(DATA):
     def __init__(self, rom, baseName):
         super().__init__(rom, baseName)
         self.data = list(self.table.values())[0]['data']
         keys = list(self.data[next(iter(self.data))].keys())
         self.nameKey = list(filter(lambda key: 'Name' in key, keys))[0]
-        self.descKey = list(filter(lambda key: 'Description' in key, keys))[0]
+        try:
+            self.descKey = list(filter(lambda key: 'Description' in key, keys))[0]
+        except:
+            self.descKey = None
 
     def getName(self, key):
         return self.data[key][self.nameKey]['entry']['string']
 
     def getDescription(self, key):
-        return self.data[key][self.descKey]['entry']['string']
+        if self.descKey:
+            return self.data[key][self.descKey]['entry']['string']

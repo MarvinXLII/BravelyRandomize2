@@ -2,6 +2,8 @@
 *.pak
 *.uasset
 *.uexp
+*.txt
+*.csv
 *~
 settingsMine.json
 Sunrise-E-Switch
