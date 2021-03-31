@@ -3,11 +3,16 @@ import hjson
 import sys
 sys.path.append('src')
 from ROM import ROM
-from Data import DATA, JOBS, JOBDATA, MONSTERS, TREASURES, TEXT
+from Data import DATA, QUESTS, JOBS, JOBDATA, MONSTERS, TREASURES, TEXT
+from Items import shuffleItems
 # from World import WORLD
 # from gui import randomize
+import random
 
 def main(settings):
+    # Set seed
+    random.seed(settings['seed'])
+    
     # Load ROM
     pak = settings['rom']
     rom = ROM(pak)
@@ -24,7 +29,7 @@ def main(settings):
     jobdata = JOBDATA(rom)
     monsters = MONSTERS(rom)
     treasures = TREASURES(rom, itemText, locationText)
-    treasures.print('treasures.csv')
+    quests = QUESTS(rom, itemText, locationText)
 
     ### STATS
     if settings['job-stats'] == 'swap':
@@ -49,6 +54,10 @@ def main(settings):
     else:
         print('Skipping the job traits randomizer.')
 
+    ### ITEM SHUFFLER
+    if settings['items']:
+        shuffleItems(treasures, quests)
+
     ### QOL
     try:
         print('Scaling EXP, JP and pg')
@@ -68,10 +77,17 @@ def main(settings):
     specialText.update()
     itemText.update()
     treasures.update()
+    quests.update()
 
     # Dump pak
     rom.buildPak('Sunrise-E-Switch_2_P.pak')
     print('Done!')
+
+    # Print spoilers
+    quests.spoilers('spoilers_quests.log')
+    treasures.spoilers('spoilers_treasures.log')
+    treasures.print('treasures.csv')
+    quests.print('quests.csv')
 
 
 if __name__=='__main__':

@@ -3,16 +3,19 @@
   rom: 'Sunrise-E-Switch.pak'
   seed: 42
 
-  job-stats: 'none'
+  // job-stats: 'none'
   // job-stats: 'swap'
-  // job-stats: 'random'
+  job-stats: 'random'
 
-  job-abilities: 'none'
+  // job-abilities: 'none'
   // job-abilities: 'separately'
-  // job-abilities: 'all'
+  job-abilities: 'all'
 
-  job-traits: false
-  // job-traits: true
+  // job-traits: false
+  job-traits: true
+
+  // items: false
+  items: true
 
   qol-scale-exp: 1
   qol-scale-jp: 1

@@ -3,7 +3,9 @@
 *.uasset
 *.uexp
 *.txt
+*.log
 *.csv
+*.xlsx
 *~
 settingsMine.json
 Sunrise-E-Switch

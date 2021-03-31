@@ -650,12 +650,158 @@ class MONSTERS(DATA):
             d['Jp']['entry']['value'] = min(jp, 9999)
 
 
+class QUESTS(DATA):
+    def __init__(self, rom, text, locations):
+        super().__init__(rom, 'QuestAsset')
+        self.text = text
+        self.locations = locations
+        self.questArray = self.table['QuestArray']['data']['arr']
+
+        ## Organize data for shuffler
+        self.questRewards = {i:[] for i in range(8)}
+        for i, quest in enumerate(self.questArray[148:]):
+            chapter = self.getChapter(quest['QuestID']['entry']['value'])
+            if chapter == "----": continue
+            self.questRewards[chapter].append({
+                'Index': 148+i,
+                'RewardID': quest['RewardID']['entry']['value'],
+                'RewardCount': quest['RewardCount']['entry']['value'],
+                'Vanilla': self.getReward(quest['RewardID']['entry']['value'], quest['RewardCount']['entry']['value']),
+                'Swap': '',
+            })
+            if self.questRewards[chapter][-1]['Vanilla'] == "----":
+                self.questRewards[chapter].pop()
+
+    def update(self):
+        for chapterQuests in self.questRewards.values():
+            for quest in chapterQuests:
+                i = quest['Index']
+                self.questArray[i]['RewardID']['entry']['value'] = quest['RewardID']
+                self.questArray[i]['RewardCount']['entry']['value'] = quest['RewardCount']
+                if quest['RewardID'] == -1 and quest['RewardCount'] > 0:
+                    self.questArray[i]['RewardType']['entry']['value'] = "EQuestRewardType::Money"
+                else:
+                    self.questArray[i]['RewardType']['entry']['value'] = "EQuestRewardType::Item"
+            
+        super().update()
+
+    def getReward(self, rewardID, rewardCount):
+        if rewardID < 0 and rewardCount > 0:
+            return f"{rewardCount} pg"
+        if rewardID > 0:
+            item = self.text.getName(rewardID)
+            return f"x{rewardCount} {item}"
+        return "----"
+            
+    def getChapter(self, questID):
+        if questID[:5] == 'SUB_S':
+            return int(questID.split('_')[-1][1])
+        return "----"
+
+    def spoilers(self, filename):
+        with open(filename, 'w') as sys.stdout:
+            for i in range(8):
+                if i < 6:
+                    if i == 0:
+                        print('')
+                        print('')
+                        print('--------')
+                        print('Prologue')
+                        print('--------')
+                    elif i < 5:
+                        print('')
+                        print('')
+                        print('----------')
+                        print(f'Chapter {i}')
+                        print('----------')
+                    else:
+                        print('')
+                        print('')
+                        print('----------')
+                        print('Chapter 5+')
+                        print('----------')
+                    print('')
+                for quest in self.questRewards[i]:
+                    if quest['Vanilla'] == '----': continue
+                    print('   ', quest['Vanilla'].ljust(35, ' '), ' <-- ', quest['Swap'].ljust(15, ' '))
+                          
+
+        sys.stdout = sys.__stdout__
+        
+    def print(self, fileName):
+        with open(fileName, 'w') as sys.stdout:
+            for i, q in enumerate(self.questArray):
+                reward = self.getReward(q['RewardID']['entry']['value'], q['RewardCount']['entry']['value'])
+                print(', '.join([str(i), q['QuestID']['entry']['value'], str(q['Chapter']['entry']['value']), str(self.getChapter(q['QuestID']['entry']['value'])), reward]))
+
+        sys.stdout = sys.__stdout__
+        
 class TREASURES(DATA):
     def __init__(self, rom, text, locations):
         super().__init__(rom, 'TreasureBoxDataAsset')
         self.text = text
         self.locations = locations
         self.data = list(self.table.values())[0]['data']
+
+        self.boxes = {i:[] for i in range(8)}
+        for key, value in self.data.items():
+            chapter = self.getChapter(key)
+            if chapter == "----": continue
+            self.boxes[chapter].append({
+                'key': key,
+                'ItemId': value['ItemId']['entry']['value'],
+                'ItemCount': value['ItemCount']['entry']['value'],
+                'EnemyPartyId': value['EnemyPartyId']['entry']['value'],
+                'EventType': value['EventType']['entry']['value'],
+                'Vanilla': self.getContents(value['ItemId']['entry']['value'], value['ItemCount']['entry']['value']),
+                'Swap': '',
+            })
+            if self.boxes[chapter][-1]['Vanilla'] == "----":
+                self.boxes[chapter].pop()
+
+    def update(self):
+        for chapterBoxes in self.boxes.values():
+            for box in chapterBoxes:
+                data = self.data[box['key']]
+                data['ItemId']['entry']['value'] = box['ItemId']
+                data['ItemCount']['entry']['value'] = box['ItemCount']
+                data['EnemyPartyId']['entry']['value'] = box['EnemyPartyId']
+                data['EventType']['entry']['value'] = box['EventType']
+                # NO BATTLES FROM CHESTS IN TOWNS!!!
+                if box['key'][:3] == 'MAP' or box['key'][:5] == 'Field':
+                    data['EnemyPartyId']['entry']['value'] = 2000
+                    data['EventType']['entry']['value'] = 3
+                else:
+                    print(box['key'])
+                # Must update type for money or item
+                if box['ItemId'] == -1 and box['ItemCount'] > 0:
+                    data['TreasureType']['entry']['value'] = "ETreasureType::Money"
+                else:
+                    data['TreasureType']['entry']['value'] = "ETreasureType::Item"
+        super().update()
+
+    def getChapter(self, mapId):
+        if mapId[:5] == 'TRBOX':
+            return "----"
+        elif mapId[:3] == 'TW_':
+            return "----"
+        elif mapId[:3] == 'ND_':
+            return "----"
+        elif mapId[:3] == 'MAP':
+            return int(mapId[3])
+        elif mapId[:2] == 'TW':
+            return int(mapId[4])
+        elif mapId[:5] == 'Field':
+            return int(mapId[8])
+        return "----"
+
+    def getContents(self, itemId, itemCount):
+        if itemId < 0:
+            return f"{itemCount} pg"
+        else:
+            item = self.text.getName(itemId)
+            return f"x{itemCount} {item}"
+        return "----"
 
     # Input TreasureBoxId, e.g.
     #      TW0050_01 --> MAP_TW_0050
@@ -707,6 +853,35 @@ class TREASURES(DATA):
                 print(location + ',' + item + ',' + ','.join(t))
 
         sys.stdout = sys.__stdout__
+
+    def spoilers(self, filename):
+        with open(filename, 'w') as sys.stdout:
+            for i in range(8):
+                if i < 6:
+                    if i == 0:
+                        print('')
+                        print('')
+                        print('--------')
+                        print('Prologue')
+                        print('--------')
+                    elif i < 5:
+                        print('')
+                        print('')
+                        print('----------')
+                        print(f'Chapter {i}')
+                        print('----------')
+                    else:
+                        print('')
+                        print('')
+                        print('----------')
+                        print('Chapter 5+')
+                        print('----------')
+                    print('')
+                for box in self.boxes[i]:
+                    print('   ', box['Vanilla'].ljust(35, ' '), ' <-- ', box['Swap'].ljust(15, ' '))
+                    
+
+        sys.stdout = sys.__stdout__
     
 
 class TEXT(DATA):
@@ -729,10 +904,3 @@ class TEXT(DATA):
 
 
 
-class QUESTS(DATA):
-    def __init__(self, rom):
-        super().__init__(rom, 'QuestAsset')
-        # Each entry of Quest Array can vary in size
-        # First is 0x31e; ends with NONE
-
-        
