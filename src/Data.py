@@ -177,37 +177,45 @@ class DATA:
                         data += self.uexp.getInt(key, size=4)
                     else: # EnumProperty, NameProperty
                         data += self.uexp.getInt(self.uasset.getIndex(key), size=8)
-                    for key2, d in table[key].items():
-                        data += self.uexp.getInt(self.uasset.getIndex(key2), size=8)
-                        data += self.uexp.getInt(self.uasset.getIndex(d['type']), size=8) ## ASSUMED FOR NOW
-                        if d['type'] == 'EnumProperty':
-                            data += self.mergeEnumProperty(d['entry'])
-                        elif d['type'] == 'TextProperty':
-                            data += self.mergeTextProperty(d['entry'])
-                        elif d['type'] == 'IntProperty':
-                            data += self.mergeIntProperty(d['entry'])
-                        elif d['type'] == 'ArrayProperty':
-                            data += self.mergeArrayProperty(d['entry'])
-                        elif d['type'] == 'StrProperty':
-                            data += self.mergeStrProperty(d['entry'])
-                        elif d['type'] == 'BoolProperty':
-                            data += self.mergeBoolProperty(d['entry'])
-                        elif d['type'] == 'NameProperty':
-                            data += self.mergeNameProperty(d['entry'])
-                        elif d['type'] == 'StructProperty':
-                            data += self.mergeStructProperty(d['entry'])
-                        elif d['type'] == 'FloatProperty':
-                            data += self.mergeFloatProperty(d['entry'])
-                        elif d['type'] == 'ByteProperty':
-                            data += self.mergeByteProperty(d['entry'])
-                        else:
-                            sys.exit(f"Property {d['type']} not yet included!")
-                            
+                    data += self.buildEntry(table[key])
+                    # for key2, d in table[key].items():
+                    #     data += self.uexp.getInt(self.uasset.getIndex(key2), size=8)
+                    #     data += self.buildEntry(d)
                     data += self.uexp.getInt(self.none, size=8)
         data += self.uexp.getInt(self.none, size=8)
         data += bytearray([0]*4)
         data += bytearray([0xc1, 0x83, 0x2a, 0x9e])
         self.uexp.data = data
+
+    def buildEntry(self, entry):
+        data = bytearray([])
+        for key, d in entry.items():
+            data += self.uexp.getInt(self.uasset.getIndex(key), size=8)
+            data += self.uexp.getInt(self.uasset.getIndex(d['type']), size=8) ## ASSUMED FOR NOW
+            if d['type'] == 'EnumProperty':
+                data += self.mergeEnumProperty(d['entry'])
+            elif d['type'] == 'TextProperty':
+                data += self.mergeTextProperty(d['entry'])
+            elif d['type'] == 'IntProperty':
+                data += self.mergeIntProperty(d['entry'])
+            elif d['type'] == 'ArrayProperty':
+                data += self.mergeArrayProperty(d['entry'])
+            elif d['type'] == 'StrProperty':
+                data += self.mergeStrProperty(d['entry'])
+            elif d['type'] == 'BoolProperty':
+                data += self.mergeBoolProperty(d['entry'])
+            elif d['type'] == 'NameProperty':
+                data += self.mergeNameProperty(d['entry'])
+            elif d['type'] == 'StructProperty':
+                data += self.mergeStructProperty(d['entry'])
+            elif d['type'] == 'FloatProperty':
+                data += self.mergeFloatProperty(d['entry'])
+            elif d['type'] == 'ByteProperty':
+                data += self.mergeByteProperty(d['entry'])
+            else:
+                sys.exit(f"Property {d['type']} not yet included!")
+        return data
+
 
     def loadFloatProperty(self):
         size = self.uexp.readInt(size=8)
@@ -359,7 +367,7 @@ class DATA:
         tmp += entry['struct']
         return tmp    
     
-    def loadArrayProperty(self):
+    def loadArrayProperty(self, name=None):
         size = self.uexp.readInt(size=8)
         prop = self.uasset.getName(self.uexp.readInt(size=8))
         self.uexp.addr += 1
@@ -368,18 +376,39 @@ class DATA:
             arr = []
             for _ in range(num):
                 arr.append(self.uexp.readInt(size=4))
+            return {'size': size, 'prop': prop, 'arr': arr}
         elif prop == 'EnumProperty':
             num = self.uexp.readInt(size=4)
             arr = []
             for _ in range(num):
                 value = self.uasset.getName(self.uexp.readInt(size=8))
                 arr.append(value)
+            return {'size': size, 'prop': prop, 'arr': arr}
+        elif prop == 'StructProperty':
+            num = self.uexp.readInt(size=4)
+            ## Ensure names are the same
+            name2Val = self.uexp.readInt(size=8)
+            name2 = self.uasset.getName(name2Val)
+            assert name2 == name
+            ## Ensure still a struct
+            typeVal = self.uexp.readInt(size=8)
+            typeName = self.uasset.getName(typeVal)
+            assert typeName == 'StructProperty'
+            ## Rest of the prep stuff
+            size2 = self.uexp.readInt(size=8)
+            dataType = self.uasset.getName(self.uexp.readInt(size=8))
+            for _ in range(17):
+                assert self.uexp.readInt(size=1) == 0
+            ## Load the array
+            arr = []
+            for _ in range(num):
+                arr.append(self.loadEntry())
+            return {'size': size, 'size2': size2, 'dataType': dataType, 'prop': prop, 'arr': arr, 'name': name2}
         else:
             sys.exit(f"Load array property does not allow for {prop} types!")    
-        return {'size': size, 'prop': prop, 'arr': arr}
 
     def mergeArrayProperty(self, entry):
-        tmp = bytearray(self.uexp.getInt(entry['size'], size=8)) # Sizes should not get modified!!!
+        tmp = bytearray(self.uexp.getInt(entry['size'], size=8)) # Assumes sizes are not modified!!!
         tmp += self.uexp.getInt(self.uasset.getIndex(entry['prop']), size=8)
         tmp += bytearray([0])
         tmp += self.uexp.getInt(len(entry['arr']), size=4)
@@ -389,9 +418,81 @@ class DATA:
         elif entry['prop'] == 'EnumProperty':
             for ai in entry['arr']:
                 tmp += self.uexp.getInt(self.uasset.getIndex(ai), size=8)
+        elif entry['prop'] == 'StructProperty':
+            tmp += self.uexp.getInt(self.uasset.getIndex(entry['name']), size=8)
+            tmp += self.uexp.getInt(self.uasset.getIndex('StructProperty'), size=8)
+            tmp += self.uexp.getInt(entry['size2'], size=8)
+            tmp += self.uexp.getInt(self.uasset.getIndex(entry['dataType']), size=8)
+            tmp += bytearray([0]*17)
+            for ai in entry['arr']:
+                tmp += self.buildEntry(ai)
+                tmp += self.uexp.getInt(self.none, size=8)
         else:
             sys.exit(f"Load array property does not allow for {prop} types!")
         return tmp
+
+    def loadEntry(self):
+        dic = {}
+        nextValue = self.uexp.readInt(size=8)
+        while nextValue != self.none:
+            key2 = self.uasset.getName(nextValue)
+            prop = self.uasset.getName(self.uexp.readInt(size=8))
+            if prop == 'EnumProperty':
+                dic[key2] = {
+                    'type': prop,
+                    'entry': self.loadEnumProperty(),
+                }
+            elif prop == 'TextProperty':
+                dic[key2] = {
+                    'type': prop,
+                    'entry': self.loadTextProperty(),
+                }
+            elif prop == 'IntProperty':
+                dic[key2] = {
+                    'type': prop,
+                    'entry': self.loadIntProperty(),
+                }
+            elif prop == 'ArrayProperty':
+                dic[key2] = {
+                    'type': prop,
+                    'entry': self.loadArrayProperty(key2),
+                }
+            elif prop == 'StrProperty':
+                dic[key2] = {
+                    'type': prop,
+                    'entry': self.loadStrProperty(),
+                }
+            elif prop == 'BoolProperty':
+                dic[key2] = {
+                    'type': prop,
+                    'entry': self.loadBoolProperty(),
+                }
+            elif prop == 'NameProperty':
+                dic[key2] = {
+                    'type': prop,
+                    'entry': self.loadNameProperty(),
+                }
+            elif prop == 'StructProperty':
+                dic[key2] = {
+                    'type': prop,
+                    'entry': self.loadStructProperty(),
+                }
+            elif prop == 'FloatProperty':
+                dic[key2] = {
+                    'type': prop,
+                    'entry': self.loadFloatProperty(),
+                }
+            elif prop == 'ByteProperty':
+                dic[key2] = {
+                    'type': prop,
+                    'entry': self.loadByteProperty(),
+                }
+            else:
+                sys.exit(f"{prop} not yet included")
+            nextValue = self.uexp.readInt(size=8)
+
+        return dic
+        
 
     def loadTable(self, table):
         nextValue = self.uexp.readInt(size=8)
@@ -404,7 +505,7 @@ class DATA:
             table[name]['prop'] = propName
 
             if propName == 'ArrayProperty':
-                table[name]['data'] = self.loadArrayProperty()
+                table[name]['data'] = self.loadArrayProperty(name)
             elif propName == 'MapProperty':
                 table[name]['size'] = self.uexp.readInt(size=8)
                 type1 = self.uasset.getName(self.uexp.readInt(size=8))
@@ -422,64 +523,7 @@ class DATA:
                         key = self.uexp.readInt(size=4)
                     elif type1 == 'NameProperty':
                         key = self.uasset.getName(self.uexp.readInt(size=8))
-                    table[name]['data'][key] = {}
-                    nextValue = self.uexp.readInt(size=8)
-                    while nextValue != self.none:
-                        key2 = self.uasset.getName(nextValue)
-                        prop = self.uasset.getName(self.uexp.readInt(size=8))
-                        if prop == 'EnumProperty':
-                            table[name]['data'][key][key2] = {
-                                'type': prop,
-                                'entry': self.loadEnumProperty(),
-                            }
-                        elif prop == 'TextProperty':
-                            table[name]['data'][key][key2] = {
-                                'type': prop,
-                                'entry': self.loadTextProperty(),
-                            }
-                        elif prop == 'IntProperty':
-                            table[name]['data'][key][key2] = {
-                                'type': prop,
-                                'entry': self.loadIntProperty(),
-                            }
-                        elif prop == 'ArrayProperty':
-                            table[name]['data'][key][key2] = {
-                                'type': prop,
-                                'entry': self.loadArrayProperty(),
-                            }
-                        elif prop == 'StrProperty':
-                            table[name]['data'][key][key2] = {
-                                'type': prop,
-                                'entry': self.loadStrProperty(),
-                            }
-                        elif prop == 'BoolProperty':
-                            table[name]['data'][key][key2] = {
-                                'type': prop,
-                                'entry': self.loadBoolProperty(),
-                            }
-                        elif prop == 'NameProperty':
-                            table[name]['data'][key][key2] = {
-                                'type': prop,
-                                'entry': self.loadNameProperty(),
-                            }
-                        elif prop == 'StructProperty':
-                            table[name]['data'][key][key2] = {
-                                'type': prop,
-                                'entry': self.loadStructProperty(),
-                            }
-                        elif prop == 'FloatProperty':
-                            table[name]['data'][key][key2] = {
-                                'type': prop,
-                                'entry': self.loadFloatProperty(),
-                            }
-                        elif prop == 'ByteProperty':
-                            table[name]['data'][key][key2] = {
-                                'type': prop,
-                                'entry': self.loadByteProperty(),
-                            }
-                        else:
-                            sys.exit(f"{prop} not yet included")
-                        nextValue = self.uexp.readInt(size=8)
+                    table[name]['data'][key] = self.loadEntry()
             nextValue = self.uexp.readInt(size=8)
         return
 
@@ -496,6 +540,7 @@ class DATA:
         # Patch ROM
         self.rom.patchFile(self.uasset.data, f"{self.fileName}.uasset")
         self.rom.patchFile(self.uexp.data, f"{self.fileName}.uexp")
+
 
 
 
@@ -681,3 +726,13 @@ class TEXT(DATA):
     def getDescription(self, key):
         if self.descKey:
             return self.data[key][self.descKey]['entry']['string']
+
+
+
+class QUESTS(DATA):
+    def __init__(self, rom):
+        super().__init__(rom, 'QuestAsset')
+        # Each entry of Quest Array can vary in size
+        # First is 0x31e; ends with NONE
+
+        
