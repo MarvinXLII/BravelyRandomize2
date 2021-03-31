@@ -30,6 +30,7 @@ class ROM:
 
         # Read entries
         self.files = {}
+        self.fileNames = {}
         while self.file.tell() < self.fileSectionStart + self.fileSectionSize:
             self.readFileEntry()
 
@@ -56,13 +57,19 @@ class ROM:
             self.isPatched[key] = True
 
     def getFullPath(self, fileName):
-        for key in self.files:
-            if key == fileName:
-                return key
-            if os.path.basename(key) == fileName:
-                return key
-            if fileName in key:
-                return key
+        baseName = os.path.basename(fileName)
+        if baseName in self.fileNames:
+            # Filenames are unique most of the time
+            if len(self.fileNames[baseName]) == 1:
+                return self.fileNames[baseName][0]
+            # When they aren't unique, assume the input is more specific.
+            test = [fileName in f for f in self.fileNames[baseName]]
+            if sum(test) == 1:
+                index = test.index(True)
+                return self.fileNames[baseName][index]
+            else:
+                print(self.fileNames[baseName])
+                sys.exit(f"Full file path cannot be uniquely determined from {fileName}!")
                     
     def extractFile(self, fileName):
         key = self.getFullPath(fileName)
@@ -140,6 +147,12 @@ class ROM:
         # Store entry
         self.files[fileName] = f
 
+        # Map baseName to full file path (important when there are MANY files!) 
+        baseName = os.path.basename(fileName)
+        if baseName not in self.fileNames:
+            self.fileNames[baseName] = []
+        self.fileNames[baseName].append(fileName)
+
         address = self.file.tell()
         # assert self.checkSHA(f['pointers'][0][0], f['size'], f['sha1'])
         self.file.seek(address)
@@ -153,11 +166,13 @@ class ROM:
             string = s.decode('utf-8')
         return string[:-1]
 
+    # TODO: Should return size as well
     def pakString(self, string):
+        size = len(string) + 1
         try:
-            return string.encode('utf-8') + bytearray([0])
+            return string.encode('utf-8') + bytearray([0]), size
         except:
-            return string.encode('utf-16')[2:] + bytearray([0]*2)
+            return string.encode('utf-16')[2:] + bytearray([0]*2), -size*2
 
     def readInt(self, size):
         return int.from_bytes(self.file.read(size), byteorder='little', signed=True)
@@ -181,16 +196,17 @@ class ROM:
     def getBaseDir(self):
         fileNames = list(filter(lambda key: self.isPatched[key], self.data.keys()))
         comDir = os.path.dirname(os.path.commonprefix(fileNames))
-        return self.baseDir+comDir+'/', comDir+'/'
+        if not comDir:
+            return self.baseDir, comDir
+        if comDir[-1] != '/':
+            comDir += '/'
+        return self.baseDir+comDir, comDir
     
     def buildPak(self, output):
         pakFile = bytearray([]) # This points to pakData entries
         pakData = bytearray([]) # This will in include comp/decomp data
-        baseDir, comDir = self.getBaseDir() ## EXTREMELY IMPORTANT!!!!! BE AS SPECIFIC AS POSSIBLE TO SPEED UP PATCHING!!!
-        if baseDir[-2:] == '//':
-            baseDir = baseDir[:-1]
-        baseDirBytes = self.pakString(baseDir)
-        size = len(baseDirBytes)
+        baseDir, comDir = self.getBaseDir()
+        baseDirBytes, size = self.pakString(baseDir)
         pakFile += self.pakInt(size)
         pakFile += baseDirBytes
         # Number of files
@@ -202,73 +218,43 @@ class ROM:
                 continue
             base = len(pakData)
             # Filename (relative to the new base directory)
-            tmpDir = key.split(comDir)[-1]
-            fileName = self.pakString(tmpDir)
-            size = len(fileName)
+            if comDir:
+                tmpDir = key.split(comDir)[-1]
+            else:
+                tmpDir = key
+            fileName, size = self.pakString(tmpDir)
             pakFile += self.pakInt(size)
             pakFile += fileName
+            # Pointers
+            pakFile += self.pakInt(base, size=8)
+            pakData += self.pakInt(0, size=8)
             # Compress
+            x = bytearray([])
             if self.files[key]['isComp']:
-                # Pointers
-                pakFile += self.pakInt(base, size=8)
-                pakData += self.pakInt(0, size=8)
                 # Compress data
                 comp, offsets = self.compressFile(data)
-                # Compressed size
-                pakFile += self.pakInt(len(comp), size=8)
-                pakData += self.pakInt(len(comp), size=8)
-                # Decompressed size
-                pakFile += self.pakInt(len(data), size=8)
-                pakData += self.pakInt(len(data), size=8)
-                # Is compressed?
-                pakFile += self.pakInt(1)
-                pakData += self.pakInt(1)
-                # SHA1 of (compressed) data
-                pakFile += self.getSHA(comp)
-                pakData += self.getSHA(comp)
-                # Number of zipped segments
-                pakFile += self.pakInt(len(offsets))
-                pakData += self.pakInt(len(offsets))
-                # Pointers to zipped segments
-                pointer = 0x34 + 8*2*len(offsets) + 5
+                x = self.pakInt(len(comp), size=8)                    # Entry size (compressed)
+                x += self.pakInt(len(data), size=8)                   # Decompressed size
+                x += self.pakInt(1)                                   # Is compressed?
+                x += self.getSHA(comp)                                # SHA1 of (compressed) data
+                x += self.pakInt(len(offsets))                        # Number of zipped segments
+                pointer = 0x34 + 8*2*len(offsets) + 5                 # Offsets to zipped segments
                 for start, end in offsets:
-                    # Start of entry
-                    pakFile += self.pakInt(pointer + start, size=8)
-                    pakData += self.pakInt(pointer + start, size=8)
-                    # End of entry (==start of next entry!)
-                    pakFile += self.pakInt(pointer + end, size=8)
-                    pakData += self.pakInt(pointer + end, size=8)
+                    x += self.pakInt(pointer + start, size=8)         # Start of entry
+                    x += self.pakInt(pointer + end, size=8)           # End of entry (==start of next entry)
                 # Max size of decompressed entry
-                pakFile += self.pakInt(0, size=1)
-                pakData += self.pakInt(0, size=1)
-                if len(offsets) == 1:
-                    pakFile += self.pakInt(len(data))
-                    pakData += self.pakInt(len(data))
-                else:
-                    pakFile += self.pakInt(0x10000)
-                    pakData += self.pakInt(0x10000)
-                pakData += comp
+                x += self.pakInt(0, size=1)
+                x += self.pakInt(min([len(data), 0x10000]))           # Max size of decompressed entry
+                pakFile += x
+                pakData += x + comp
             else:
-                # Pointers
-                pakFile += self.pakInt(base, size=8)
-                pakData += self.pakInt(0, size=8)
-                # Entry size
-                pakFile += self.pakInt(len(data), size=8)
-                pakData += self.pakInt(len(data), size=8)
-                # Decompressed size
-                pakFile += self.pakInt(len(data), size=8)
-                pakData += self.pakInt(len(data), size=8)
-                # Is compressed?
-                pakFile += self.pakInt(0)
-                pakData += self.pakInt(0)
-                # SHA1 of (compressed) data
-                pakFile += self.getSHA(data)
-                pakData += self.getSHA(data)
-                # Data
-                pakData += self.pakInt(0, size=5)
-                pakData += data
-                # Number of zips
-                pakFile += self.pakInt(0, size=5)
+                x += self.pakInt(len(data), size=8)                   # Entry size (decompressed)
+                x += self.pakInt(len(data), size=8)                   # Decompressed size
+                x += self.pakInt(0)                                   # Is compressed?
+                x += self.getSHA(data)                                # SHA1 of (decompressed) data
+                x += self.pakInt(0, size=5)                           # Number of zipped segments
+                pakFile += x
+                pakData += x + data
         # FINISH PAK FILE
         sha = self.getSHA(pakFile)
         fileSize = len(pakFile)
@@ -278,6 +264,7 @@ class ROM:
         pakFile += self.pakInt(fileSize, size=8)
         pakFile += sha
         # Build Pak
-        pak = pakData + pakFile + self.compressionTypes
         with open(output, 'wb') as file:
-            file.write(pak)
+            file.write(pakData)
+            file.write(pakFile)
+            file.write(self.compressionTypes)
