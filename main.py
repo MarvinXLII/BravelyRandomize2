@@ -3,7 +3,7 @@ import hjson
 import sys
 sys.path.append('src')
 from ROM import ROM
-from Data import DATA, QUESTS, JOBS, JOBDATA, MONSTERS, TREASURES, TEXT
+from Data import DATA, QUESTS, JOBS, JOBDATA, MONSTERPARTY, MONSTERS, TREASURES, TEXT
 from Items import shuffleItems
 from Battles import shuffleResistance
 # from World import WORLD
@@ -24,11 +24,13 @@ def main(settings):
     specialText = TEXT(rom, 'L10N/en/DataAsset/Ability/Player/SpecialAbilityTextAsset')
     itemText = TEXT(rom, 'L10N/en/DataAsset/Item/ItemTextAsset')
     locationText = TEXT(rom, 'L10N/en/DataAsset/Field/LocationTextDataAsset')
+    monsterText = TEXT(rom, 'L10N/en/DataAsset/Monster/MonsterTextDataAsset')
 
     ### ASSETS
     job = JOBS(rom)
     jobdata = JOBDATA(rom)
-    monsters = MONSTERS(rom)
+    monsterParty = MONSTERPARTY(rom)
+    monsters = MONSTERS(rom, monsterText, itemText, monsterParty)
     treasures = TREASURES(rom, itemText, locationText)
     quests = QUESTS(rom, itemText, locationText)
 
@@ -57,7 +59,7 @@ def main(settings):
 
     ### ITEM SHUFFLER
     if settings['items']:
-        shuffleItems(treasures, quests)
+        shuffleItems(treasures, quests, monsters)
 
     ### RESISTANCE SHUFFLER
     if settings['resistance']:
@@ -89,6 +91,7 @@ def main(settings):
     print('Done!')
 
     # Print spoilers
+    monsters.spoilers('spoilers_monsters.log')
     quests.spoilers('spoilers_quests.log')
     treasures.spoilers('spoilers_treasures.log')
     treasures.print('treasures.csv')

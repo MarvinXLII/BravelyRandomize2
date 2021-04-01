@@ -619,14 +619,68 @@ class JOBDATA(DATA):
             job['JobTraitId2'] = traits.pop()
         
 
-class MONSTERS(DATA):
+
+class MONSTERPARTY(DATA):
     def __init__(self, rom):
+        super().__init__(rom, 'MonsterPartyAsset')
+        self.data = self.table['MonsterPartyMap']['data']
+        self.levels = {}
+        for party in self.data.values():
+            for i in range(1, 7):
+                Id = party[f"Monster{i}Id"]['entry']['value']
+                Level = party[f"Monster{i}Level"]['entry']['value']
+                if Id < 0: continue
+                if Id not in self.levels:
+                    self.levels[Id] = set()
+                self.levels[Id].add(Level)
+
+    # NOTE: This is a crude estimate of chapter based on the enemy's level!
+    def getChapter(self, Id):
+        try:
+            chapter = int(min(self.levels[Id].difference([1])) / 10)
+            return min(chapter, 7)
+        except:
+            pass
+        if Id == 105506: # Might be part of a boss battle???
+            return 5
+        if Id == 106407: # Might be part of a boss battle???
+            return 2
+
+
+class MONSTERS(DATA):
+    def __init__(self, rom, monster, items, party):
         super().__init__(rom, 'MonsterDataAsset')
         self.data = self.table['MonsterDataMap']['data']
+        self.monster = monster
+        self.items = items
+        self.party = party
+
+        self.steals = {}
+        for d in self.data.values():
+            Id = d['Id']['entry']['value']
+            try:
+                name = self.monster.getName(Id)
+            except:
+                name = ''
+            stealRate = d['StealRate']['entry']['value']
+            stealItem = d['StealItem']['entry']['value']
+            stealRareItem = d['StealRareItem']['entry']['value']
+
+            self.steals[Id] = {
+                'shuffle': name != '' and stealRate != 50, ## INCLUDE IN SWAPPING
+                'chapter': self.party.getChapter(Id), # For grouping by "chapters" (TODO: do this accurately)
+                'steal': {
+                    # I'll probably just shuffle items and rare items separately.....
+                    'StealRate': stealRate,
+                    'StealItem': stealItem,
+                    'StealRareItem': stealRareItem,
+                }
+            }
+
         self.resistance = {}
         for d in self.data.values():
-            ID = d['Id']['entry']['value']
-            self.resistance[ID] = {
+            Id = d['Id']['entry']['value']
+            self.resistance[Id] = {
                 'isBoss': d['MonsterRank']['entry']['value'] == 'EMonsterRankEnum::MRE_Boss',
                 # MAGIC
                 'Magic': {
@@ -675,15 +729,23 @@ class MONSTERS(DATA):
 
     def update(self):
         for d in self.data.values():
-            ID = d['Id']['entry']['value']
-            for key, value in self.resistance[ID]['Magic'].items():
+            Id = d['Id']['entry']['value']
+            for key, value in self.resistance[Id]['Magic'].items():
                 d[key]['entry']['value'] = value
-            for key, value in self.resistance[ID]['Weapon'].items():
+            for key, value in self.resistance[Id]['Weapon'].items():
                 d[key]['entry']['value'] = value
-            for key, (res, level) in self.resistance[ID]['Effects'].items():
+            for key, (res, level) in self.resistance[Id]['Effects'].items():
                 key2 = 'ResistanceLevel' + key[10:]
                 d[key]['entry']['value'] = res
                 d[key2]['entry']['value'] = level
+            try:
+                self.monster.getName(Id)
+                steals = self.steals[Id]['steal']
+            except:
+                # Reuse stealable items (they are kept the same as their predecessor in almost every case)
+                assert steals
+            for key, value in steals.items():
+                d[key]['entry']['value'] = value
 
         super().update()
 
@@ -705,6 +767,31 @@ class MONSTERS(DATA):
         for d in self.data.values():
             jp = int(scale * d['Jp']['entry']['value'])
             d['Jp']['entry']['value'] = min(jp, 9999)
+
+    def spoilers(self, filename):
+        with open(filename, 'w') as sys.stdout:
+            for Id, data in self.data.items():
+                steal = self.steals[Id]['steal']
+                try:
+                    name = self.monster.getName(Id)
+                except:
+                    name = '          '
+                if steal['StealRate'] == 50:
+                    assert steal['StealItem'] == -1
+                    assert steal['StealRareItem'] == -1
+                    print(', '.join([name, str(steal['StealRate']), "NONE", "NONE"]))
+                else:
+                    if steal['StealItem'] > 0:
+                        stealItem = self.items.getName(steal['StealItem'])
+                    else:
+                        stealItem = "NONE"
+                    if steal['StealRareItem'] > 0:
+                        stealRareItem = self.items.getName(steal['StealRareItem'])
+                    else:
+                        stealRareItem = "NONE"
+                    print(', '.join([name, str(self.steals[Id]['chapter']), stealItem, stealRareItem]))
+
+        sys.stdout = sys.__stdout__
 
 
 class QUESTS(DATA):
@@ -747,7 +834,9 @@ class QUESTS(DATA):
             return f"{rewardCount} pg"
         if rewardId > 0:
             item = self.text.getName(rewardId)
-            return f"x{rewardCount} {item}"
+            if rewardCount > 1:
+                item += f" x{rewardCount}"
+            return item
 
     def getChapter(self, questId):
         if questId[:5] == 'SUB_S':
@@ -850,7 +939,9 @@ class TREASURES(DATA):
             return f"{itemCount} pg"
         else:
             item = self.text.getName(itemId)
-            return f"x{itemCount} {item}"
+            if itemCount > 1:
+                item += f" x{itemCount}"
+            return item
 
     # Input TreasureBoxId, e.g.
     #      TW0050_01 --> MAP_TW_0050
