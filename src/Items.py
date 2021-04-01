@@ -5,12 +5,10 @@ def shuffleItems(treasures, quests):
     chapters = {i:[] for i in range(8)}
     for chapter, data in treasures.boxes.items():
         for box in data:
-            if box['ItemId'] == '----': continue
             chapters[chapter].append((box['ItemId'], box['ItemCount']))
     for chapter, data in quests.questRewards.items():
         for reward in data:
-            if reward['RewardID'] == '----': continue
-            chapters[chapter].append((reward['RewardID'], reward['RewardCount']))
+            chapters[chapter].append((reward['RewardId'], reward['RewardCount']))
         
     # Shuffle within chapter
     for slots in chapters.values():
@@ -26,5 +24,5 @@ def shuffleItems(treasures, quests):
 
     for chapter, data in quests.questRewards.items():
         for quest in data:
-            quest['RewardID'], quest['RewardCount'] = chapters[chapter].pop()
-            quest['Swap'] = quests.getReward(quest['RewardID'], quest['RewardCount'])
+            quest['RewardId'], quest['RewardCount'] = chapters[chapter].pop()
+            quest['Swap'] = quests.getReward(quest['RewardId'], quest['RewardCount'])

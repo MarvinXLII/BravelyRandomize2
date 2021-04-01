@@ -178,9 +178,6 @@ class DATA:
                     else: # EnumProperty, NameProperty
                         data += self.uexp.getInt(self.uasset.getIndex(key), size=8)
                     data += self.buildEntry(table[key])
-                    # for key2, d in table[key].items():
-                    #     data += self.uexp.getInt(self.uasset.getIndex(key2), size=8)
-                    #     data += self.buildEntry(d)
                     data += self.uexp.getInt(self.none, size=8)
         data += self.uexp.getInt(self.none, size=8)
         data += bytearray([0]*4)
@@ -231,7 +228,6 @@ class DATA:
         tmp += struct.pack("<f", entry['value'])
         return tmp
 
-
     def loadStrProperty(self):
         size = self.uexp.readInt(size=8)
         self.uexp.addr += 1
@@ -248,7 +244,7 @@ class DATA:
         
     def loadEnumProperty(self):
         size = self.uexp.readInt(size=8)
-        assert size == 8, f"EnumProperty must always have a size of 8. Here size is {size}"
+        assert size == 8, f"EnumProperty must always have a size of 8."
         value0 = self.uasset.getName(self.uexp.readInt(size=8))
         assert self.uexp.readInt(size=1) == 0, f"EnumProperty must have 0 before the full value."
         value = self.uasset.getName(self.uexp.readInt(size=8))
@@ -657,46 +653,44 @@ class QUESTS(DATA):
         self.locations = locations
         self.questArray = self.table['QuestArray']['data']['arr']
 
-        ## Organize data for shuffler
+        ## Organize data for shuffling
         self.questRewards = {i:[] for i in range(8)}
         for i, quest in enumerate(self.questArray[148:]):
-            chapter = self.getChapter(quest['QuestID']['entry']['value'])
-            if chapter == "----": continue
-            self.questRewards[chapter].append({
-                'Index': 148+i,
-                'RewardID': quest['RewardID']['entry']['value'],
-                'RewardCount': quest['RewardCount']['entry']['value'],
-                'Vanilla': self.getReward(quest['RewardID']['entry']['value'], quest['RewardCount']['entry']['value']),
-                'Swap': '',
-            })
-            if self.questRewards[chapter][-1]['Vanilla'] == "----":
-                self.questRewards[chapter].pop()
+            if quest['RewardType']['entry']['value'] != 'EQuestRewardType::None':
+                chapter = self.getChapter(quest['QuestID']['entry']['value'])
+                rewardId = quest['RewardID']['entry']['value']
+                rewardCount = quest['RewardCount']['entry']['value']
+                self.questRewards[chapter].append({
+                    'Index': 148+i,
+                    'RewardId': rewardId,
+                    'RewardCount': rewardCount,
+                    'Vanilla': self.getReward(rewardId, rewardCount),
+                    'Swap': '',
+                })
 
     def update(self):
         for chapterQuests in self.questRewards.values():
             for quest in chapterQuests:
                 i = quest['Index']
-                self.questArray[i]['RewardID']['entry']['value'] = quest['RewardID']
+                self.questArray[i]['RewardID']['entry']['value'] = quest['RewardId']
                 self.questArray[i]['RewardCount']['entry']['value'] = quest['RewardCount']
-                if quest['RewardID'] == -1 and quest['RewardCount'] > 0:
+                if quest['RewardId'] == -1 and quest['RewardCount'] > 0:
                     self.questArray[i]['RewardType']['entry']['value'] = "EQuestRewardType::Money"
                 else:
                     self.questArray[i]['RewardType']['entry']['value'] = "EQuestRewardType::Item"
             
         super().update()
 
-    def getReward(self, rewardID, rewardCount):
-        if rewardID < 0 and rewardCount > 0:
+    def getReward(self, rewardId, rewardCount):
+        if rewardId < 0 and rewardCount > 0:
             return f"{rewardCount} pg"
-        if rewardID > 0:
-            item = self.text.getName(rewardID)
+        if rewardId > 0:
+            item = self.text.getName(rewardId)
             return f"x{rewardCount} {item}"
-        return "----"
             
-    def getChapter(self, questID):
-        if questID[:5] == 'SUB_S':
-            return int(questID.split('_')[-1][1])
-        return "----"
+    def getChapter(self, questId):
+        if questId[:5] == 'SUB_S':
+            return int(questId[5])
 
     def spoilers(self, filename):
         with open(filename, 'w') as sys.stdout:
@@ -724,7 +718,6 @@ class QUESTS(DATA):
                 for quest in self.questRewards[i]:
                     if quest['Vanilla'] == '----': continue
                     print('   ', quest['Vanilla'].ljust(35, ' '), ' <-- ', quest['Swap'].ljust(15, ' '))
-                          
 
         sys.stdout = sys.__stdout__
         
@@ -732,7 +725,10 @@ class QUESTS(DATA):
         with open(fileName, 'w') as sys.stdout:
             for i, q in enumerate(self.questArray):
                 reward = self.getReward(q['RewardID']['entry']['value'], q['RewardCount']['entry']['value'])
-                print(', '.join([str(i), q['QuestID']['entry']['value'], str(q['Chapter']['entry']['value']), str(self.getChapter(q['QuestID']['entry']['value'])), reward]))
+                if reward:
+                    print(', '.join([str(i), q['QuestID']['entry']['value'], str(q['Chapter']['entry']['value']), str(self.getChapter(q['QuestID']['entry']['value'])), reward]))
+                else:
+                    print(', '.join([str(i), q['QuestID']['entry']['value'], str(q['Chapter']['entry']['value']), str(self.getChapter(q['QuestID']['entry']['value'])), "NONE"]))
 
         sys.stdout = sys.__stdout__
         
@@ -745,19 +741,21 @@ class TREASURES(DATA):
 
         self.boxes = {i:[] for i in range(8)}
         for key, value in self.data.items():
-            chapter = self.getChapter(key)
-            if chapter == "----": continue
-            self.boxes[chapter].append({
-                'key': key,
-                'ItemId': value['ItemId']['entry']['value'],
-                'ItemCount': value['ItemCount']['entry']['value'],
-                'EnemyPartyId': value['EnemyPartyId']['entry']['value'],
-                'EventType': value['EventType']['entry']['value'],
-                'Vanilla': self.getContents(value['ItemId']['entry']['value'], value['ItemCount']['entry']['value']),
-                'Swap': '',
-            })
-            if self.boxes[chapter][-1]['Vanilla'] == "----":
-                self.boxes[chapter].pop()
+            if key[:5] == "Field" or key[:4] == "TW00" or key[:3] == "MAP":
+                chapter = self.getChapter(key)
+                itemId = value['ItemId']['entry']['value']
+                itemCount = value['ItemCount']['entry']['value']
+                enemyPartyId = value['EnemyPartyId']['entry']['value']
+                eventType = value['EventType']['entry']['value']
+                self.boxes[chapter].append({
+                    'key': key,
+                    'ItemId': itemId,
+                    'ItemCount': itemCount,
+                    'EnemyPartyId': enemyPartyId,
+                    'EventType': eventType,
+                    'Vanilla': self.getContents(itemId, itemCount),
+                    'Swap': '',
+                })
 
     def update(self):
         for chapterBoxes in self.boxes.values():
@@ -767,7 +765,7 @@ class TREASURES(DATA):
                 data['ItemCount']['entry']['value'] = box['ItemCount']
                 data['EnemyPartyId']['entry']['value'] = box['EnemyPartyId']
                 data['EventType']['entry']['value'] = box['EventType']
-                # NO BATTLES FROM CHESTS IN TOWNS!!!
+                # TEMPORARY TESTING: NO BATTLES FROM CHESTS IN TOWNS!!!
                 if box['key'][:3] == 'MAP' or box['key'][:5] == 'Field':
                     data['EnemyPartyId']['entry']['value'] = 2000
                     data['EventType']['entry']['value'] = 3
@@ -781,19 +779,12 @@ class TREASURES(DATA):
         super().update()
 
     def getChapter(self, mapId):
-        if mapId[:5] == 'TRBOX':
-            return "----"
-        elif mapId[:3] == 'TW_':
-            return "----"
-        elif mapId[:3] == 'ND_':
-            return "----"
-        elif mapId[:3] == 'MAP':
+        if mapId[:3] == 'MAP':
             return int(mapId[3])
         elif mapId[:2] == 'TW':
             return int(mapId[4])
         elif mapId[:5] == 'Field':
             return int(mapId[8])
-        return "----"
 
     def getContents(self, itemId, itemCount):
         if itemId < 0:
@@ -801,7 +792,6 @@ class TREASURES(DATA):
         else:
             item = self.text.getName(itemId)
             return f"x{itemCount} {item}"
-        return "----"
 
     # Input TreasureBoxId, e.g.
     #      TW0050_01 --> MAP_TW_0050
@@ -879,7 +869,6 @@ class TREASURES(DATA):
                     print('')
                 for box in self.boxes[i]:
                     print('   ', box['Vanilla'].ljust(35, ' '), ' <-- ', box['Swap'].ljust(15, ' '))
-                    
 
         sys.stdout = sys.__stdout__
     

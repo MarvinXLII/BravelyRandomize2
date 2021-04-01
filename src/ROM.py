@@ -166,7 +166,6 @@ class ROM:
             string = s.decode('utf-8')
         return string[:-1]
 
-    # TODO: Should return size as well
     def pakString(self, string):
         size = len(string) + 1
         try:
