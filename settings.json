@@ -17,6 +17,12 @@
   // items: false
   items: true
 
+  // resistance: false
+  resistance: true
+
+  // resistance-boss-separately: false
+  resistance-boss-separately: true
+
   qol-scale-exp: 1
   qol-scale-jp: 1
   qol-scale-pg: 1

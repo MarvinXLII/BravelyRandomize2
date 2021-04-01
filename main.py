@@ -5,6 +5,7 @@ sys.path.append('src')
 from ROM import ROM
 from Data import DATA, QUESTS, JOBS, JOBDATA, MONSTERS, TREASURES, TEXT
 from Items import shuffleItems
+from Battles import shuffleResistance
 # from World import WORLD
 # from gui import randomize
 import random
@@ -57,6 +58,10 @@ def main(settings):
     ### ITEM SHUFFLER
     if settings['items']:
         shuffleItems(treasures, quests)
+
+    ### RESISTANCE SHUFFLER
+    if settings['resistance']:
+        shuffleResistance(monsters, settings['resistance-boss-separately'])
 
     ### QOL
     try:

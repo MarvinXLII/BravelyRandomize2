@@ -622,26 +622,87 @@ class JOBDATA(DATA):
 class MONSTERS(DATA):
     def __init__(self, rom):
         super().__init__(rom, 'MonsterDataAsset')
+        self.data = self.table['MonsterDataMap']['data']
+        self.resistance = {}
+        for d in self.data.values():
+            ID = d['Id']['entry']['value']
+            self.resistance[ID] = {
+                'isBoss': d['MonsterRank']['entry']['value'] == 'EMonsterRankEnum::MRE_Boss',
+                # MAGIC
+                'Magic': {
+                    'FireResistance': d['FireResistance']['entry']['value'],
+                    'WaterResistance': d['WaterResistance']['entry']['value'],
+                    'LightningResistance': d['LightningResistance']['entry']['value'],
+                    'EarthResistance': d['EarthResistance']['entry']['value'],
+                    'WindResistance': d['WindResistance']['entry']['value'],
+                    'LightResistance': d['LightResistance']['entry']['value'],
+                    'DarknessResistance': d['DarknessResistance']['entry']['value'],
+                },
+                # WEAPONS
+                'Weapon': {
+                    'ShortSwordResistance': d['ShortSwordResistance']['entry']['value'],
+                    'SwordResistance': d['AxeResistance']['entry']['value'],
+                    'AxeResistance': d['AxeResistance']['entry']['value'],
+                    'SpearResistance': d['SpearResistance']['entry']['value'],
+                    'BowResistance': d['BowResistance']['entry']['value'],
+                    'StaffResistance': d['StaffResistance']['entry']['value'],
+                },
+                # # STATS -- include????
+                # 'BuffDebuffResistance': d['BuffDebuffResistance']['entry']['value'],
+                # STATUS EFFECTS
+                'Effects': {
+                    'ResistancePoison': (d['ResistancePoison']['entry']['value'], d['ResistanceLevelPoison']['entry']['value']),
+                    'ResistanceDark': (d['ResistanceDark']['entry']['value'], d['ResistanceLevelDark']['entry']['value']),
+                    'ResistanceSilence': (d['ResistanceSilence']['entry']['value'], d['ResistanceLevelSilence']['entry']['value']),
+                    'ResistanceSleep': (d['ResistanceSleep']['entry']['value'], d['ResistanceLevelSleep']['entry']['value']),
+                    'ResistanceParalysis': (d['ResistanceParalysis']['entry']['value'], d['ResistanceLevelParalysis']['entry']['value']),
+                    'ResistanceFear': (d['ResistanceFear']['entry']['value'], d['ResistanceLevelFear']['entry']['value']),
+                    'ResistanceBerzerk': (d['ResistanceBerzerk']['entry']['value'], d['ResistanceLevelBerzerk']['entry']['value']),
+                    'ResistanceConfusion': (d['ResistanceConfusion']['entry']['value'], d['ResistanceLevelConfusion']['entry']['value']),
+                    'ResistanceSeduction': (d['ResistanceSeduction']['entry']['value'], d['ResistanceLevelSeduction']['entry']['value']),
+                    'ResistanceInstantDeath': (d['ResistanceInstantDeath']['entry']['value'], d['ResistanceLevelInstantDeath']['entry']['value']),
+                    'ResistanceDeathTimer': (d['ResistanceDeathTimer']['entry']['value'], d['ResistanceLevelDeathTimer']['entry']['value']),
+                    'ResistanceStop': (d['ResistanceStop']['entry']['value'], d['ResistanceLevelStop']['entry']['value']),
+                    'ResistanceFreeze': (d['ResistanceFreeze']['entry']['value'], d['ResistanceLevelFreeze']['entry']['value']),
+                    'ResistanceBattleExclusion': (d['ResistanceBattleExclusion']['entry']['value'], d['ResistanceLevelBattleExclusion']['entry']['value']),
+                    'ResistanceTransparent': (d['ResistanceTransparent']['entry']['value'], d['ResistanceLevelTransparent']['entry']['value']),
+                    'ResistancePaint': (d['ResistancePaint']['entry']['value'], d['ResistanceLevelPaint']['entry']['value']),
+                    'ResistanceEpidemic': (d['ResistanceEpidemic']['entry']['value'], d['ResistanceLevelEpidemic']['entry']['value']),
+                    'ResistanceSlow': (d['ResistanceSlow']['entry']['value'], d['ResistanceLevelSlow']['entry']['value']),
+                    'ResistanceWeakPoint': (d['ResistanceWeakPoint']['entry']['value'], d['ResistanceLevelWeakPoint']['entry']['value']),
+                },
+            }
+
+    def update(self):
+        for d in self.data.values():
+            ID = d['Id']['entry']['value']
+            for key, value in self.resistance[ID]['Magic'].items():
+                d[key]['entry']['value'] = value
+            for key, value in self.resistance[ID]['Weapon'].items():
+                d[key]['entry']['value'] = value
+            for key, (res, level) in self.resistance[ID]['Effects'].items():
+                key2 = 'ResistanceLevel' + key[10:]
+                d[key]['entry']['value'] = res
+                d[key2]['entry']['value'] = level
+
+        super().update()
 
     # "PQ" in the code, "PG" in the game
     def scalePG(self, scale):
         assert scale > 0
-        data = self.table['MonsterDataMap']['data']
-        for d in data.values():
+        for d in self.data.values():
             pg = int(scale * d['pq']['entry']['value'])
             d['pq']['entry']['value'] = min(pg, 99999)
-            
+
     def scaleEXP(self, scale):
         assert scale > 0
-        data = self.table['MonsterDataMap']['data']
-        for d in data.values():
+        for d in self.data.values():
             exp = int(scale * d['Exp']['entry']['value'])
             d['Exp']['entry']['value'] = min(exp, 99999)
-            
+
     def scaleJP(self, scale):
         assert scale > 0
-        data = self.table['MonsterDataMap']['data']
-        for d in data.values():
+        for d in self.data.values():
             jp = int(scale * d['Jp']['entry']['value'])
             d['Jp']['entry']['value'] = min(jp, 9999)
 
@@ -678,7 +739,7 @@ class QUESTS(DATA):
                     self.questArray[i]['RewardType']['entry']['value'] = "EQuestRewardType::Money"
                 else:
                     self.questArray[i]['RewardType']['entry']['value'] = "EQuestRewardType::Item"
-            
+
         super().update()
 
     def getReward(self, rewardId, rewardCount):
@@ -687,7 +748,7 @@ class QUESTS(DATA):
         if rewardId > 0:
             item = self.text.getName(rewardId)
             return f"x{rewardCount} {item}"
-            
+
     def getChapter(self, questId):
         if questId[:5] == 'SUB_S':
             return int(questId[5])
@@ -720,7 +781,7 @@ class QUESTS(DATA):
                     print('   ', quest['Vanilla'].ljust(35, ' '), ' <-- ', quest['Swap'].ljust(15, ' '))
 
         sys.stdout = sys.__stdout__
-        
+
     def print(self, fileName):
         with open(fileName, 'w') as sys.stdout:
             for i, q in enumerate(self.questArray):
@@ -731,7 +792,7 @@ class QUESTS(DATA):
                     print(', '.join([str(i), q['QuestID']['entry']['value'], str(q['Chapter']['entry']['value']), str(self.getChapter(q['QuestID']['entry']['value'])), "NONE"]))
 
         sys.stdout = sys.__stdout__
-        
+
 class TREASURES(DATA):
     def __init__(self, rom, text, locations):
         super().__init__(rom, 'TreasureBoxDataAsset')
@@ -769,8 +830,6 @@ class TREASURES(DATA):
                 if box['key'][:3] == 'MAP' or box['key'][:5] == 'Field':
                     data['EnemyPartyId']['entry']['value'] = 2000
                     data['EventType']['entry']['value'] = 3
-                else:
-                    print(box['key'])
                 # Must update type for money or item
                 if box['ItemId'] == -1 and box['ItemCount'] > 0:
                     data['TreasureType']['entry']['value'] = "ETreasureType::Money"
@@ -815,7 +874,7 @@ class TREASURES(DATA):
         else:
             sys.exit('Not considered!')
         return self.locations.getName(key)
-        
+
     def print(self, fileName):
         keys = list(self.data.keys()) # TW_0010_TN_1
         headers = self.data[keys[0]].keys()
@@ -871,7 +930,7 @@ class TREASURES(DATA):
                     print('   ', box['Vanilla'].ljust(35, ' '), ' <-- ', box['Swap'].ljust(15, ' '))
 
         sys.stdout = sys.__stdout__
-    
+
 
 class TEXT(DATA):
     def __init__(self, rom, baseName):
