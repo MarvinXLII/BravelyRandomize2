@@ -1,0 +1,2024 @@
+{
+  Field0000_01:
+  {
+    Chapter: 0
+    Location: Near Halcyonia
+    Item: Padded Armor
+  }
+  Field0000_02:
+  {
+    Chapter: 0
+    Location: Near Halcyonia
+    Item: Kukri
+  }
+  Field0000_03:
+  {
+    Chapter: 0
+    Location: Near Halcyonia
+    Item: Tent
+  }
+  Field0000_04:
+  {
+    Chapter: 4
+    Location: Near Halcyonia
+    Item: Ether x2
+  }
+  Field0000_05:
+  {
+    Chapter: 4
+    Location: Near Halcyonia
+    Item: Dark Talisman
+  }
+  Field0000_06:
+  {
+    Chapter: 0
+    Location: Near Halcyonia
+    Item: Mini Ether x2
+  }
+  Field0000_07:
+  {
+    Chapter: 0
+    Location: Near Halcyonia
+    Item: 270 pg
+  }
+  Field0000_08:
+  {
+    Chapter: 0
+    Location: Near Halcyonia
+    Item: Wizard's Rod
+  }
+  Field0000_09:
+  {
+    Chapter: 0
+    Location: Near Halcyonia
+    Item: 410 pg
+  }
+  Field0000_10:
+  {
+    Chapter: 0
+    Location: Near Halcyonia
+    Item: Leather Cap
+  }
+  Field0000_11:
+  {
+    Chapter: 0
+    Location: Near Halcyonia
+    Item: Ward Light x2
+  }
+  Field0001_01:
+  {
+    Chapter: 1
+    Location: Near Savalon
+    Item: Flame Talisman
+  }
+  Field0001_02:
+  {
+    Chapter: 1
+    Location: Near Savalon
+    Item: Small Experience Orb
+  }
+  Field0001_03:
+  {
+    Chapter: 1
+    Location: Near Savalon
+    Item: Doublet
+  }
+  Field0001_04:
+  {
+    Chapter: 1
+    Location: Near Savalon
+    Item: Mythril Staff
+  }
+  Field0001_05:
+  {
+    Chapter: 1
+    Location: Near Savalon
+    Item: Bronze Bangle
+  }
+  Field0001_11:
+  {
+    Chapter: 1
+    Location: Near Savalon
+    Item: 390 pg
+  }
+  Field0001_12:
+  {
+    Chapter: 1
+    Location: Near Savalon
+    Item: Tent
+  }
+  Field0001_13:
+  {
+    Chapter: 1
+    Location: Near Savalon
+    Item: Force Armlets
+  }
+  Field0001_14:
+  {
+    Chapter: 1
+    Location: Near Savalon
+    Item: Power Bracers
+  }
+  Field0002_01:
+  {
+    Chapter: 2
+    Location: Near Wiswald
+    Item: Mittens
+  }
+  Field0002_02:
+  {
+    Chapter: 2
+    Location: Near Wiswald
+    Item: Nanosuit
+  }
+  Field0002_03:
+  {
+    Chapter: 2
+    Location: Near Wiswald
+    Item: Wind Talisman
+  }
+  Field0002_04:
+  {
+    Chapter: 2
+    Location: Near Wiswald
+    Item: Mythril Gloves
+  }
+  Field0002_05:
+  {
+    Chapter: 2
+    Location: Near Wiswald
+    Item: Medium Experience Orb
+  }
+  Field0002_06:
+  {
+    Chapter: 2
+    Location: Near Wiswald
+    Item: Earthing Rod
+  }
+  Field0002_07:
+  {
+    Chapter: 2
+    Location: Near Wiswald
+    Item: Ward Light x2
+  }
+  Field0002_08:
+  {
+    Chapter: 2
+    Location: Near Wiswald
+    Item: 1310 pg
+  }
+  Field0002_09:
+  {
+    Chapter: 2
+    Location: Near Wiswald
+    Item: Mythril Shield
+  }
+  Field0003_01:
+  {
+    Chapter: 3
+    Location: Near Rimedhal
+    Item: Power Bracers
+  }
+  Field0003_02:
+  {
+    Chapter: 3
+    Location: Near Rimedhal
+    Item: Alastor
+  }
+  Field0003_03:
+  {
+    Chapter: 3
+    Location: Near Rimedhal
+    Item: Medium JP Orb x3
+  }
+  Field0003_04:
+  {
+    Chapter: 3
+    Location: Near Rimedhal
+    Item: Sands of Time
+  }
+  Field0003_05:
+  {
+    Chapter: 3
+    Location: Near Rimedhal
+    Item: Safety Ring
+  }
+  Field0003_06:
+  {
+    Chapter: 3
+    Location: Near Rimedhal
+    Item: Healing Bloom x2
+  }
+  Field0003_07:
+  {
+    Chapter: 3
+    Location: Near Rimedhal
+    Item: Arctic Wind
+  }
+  Field0003_08:
+  {
+    Chapter: 3
+    Location: Near Rimedhal
+    Item: Great Bow
+  }
+  Field0003_09:
+  {
+    Chapter: 3
+    Location: Near Rimedhal
+    Item: 5480 pg
+  }
+  Field0004_01:
+  {
+    Chapter: 4
+    Location: Near Holograd
+    Item: Gauntlets
+  }
+  Field0004_02:
+  {
+    Chapter: 4
+    Location: Near Holograd
+    Item: X-Potion x4
+  }
+  Field0004_03:
+  {
+    Chapter: 4
+    Location: Near Holograd
+    Item: Insect Nectar
+  }
+  Field0004_04:
+  {
+    Chapter: 4
+    Location: Near Holograd
+    Item: Flame Talisman
+  }
+  Field0004_05:
+  {
+    Chapter: 4
+    Location: Near Halcyonia
+    Item: Large JP Orb
+  }
+  Field0004_06:
+  {
+    Chapter: 4
+    Location: Near Halcyonia
+    Item: Teleport Stone x3
+  }
+  Field0004_07:
+  {
+    Chapter: 4
+    Location: Near Holograd
+    Item: Light Talisman
+  }
+  Field0004_08:
+  {
+    Chapter: 4
+    Location: Near Holograd
+    Item: Medium Experience Orb x2
+  }
+  Field0004_09:
+  {
+    Chapter: 4
+    Location: Near Holograd
+    Item: Bomb Arm x2
+  }
+  Field0004_10:
+  {
+    Chapter: 4
+    Location: Near Holograd
+    Item: 12650 pg
+  }
+  Field0004_11:
+  {
+    Chapter: 4
+    Location: Near Holograd
+    Item: Wildweed x4
+  }
+  Field0004_12:
+  {
+    Chapter: 4
+    Location: Near Holograd
+    Item: Throwing Stick x2
+  }
+  MAP0000_01:
+  {
+    Chapter: 0
+    Location: Vale of Sighs
+    Item: Kukri
+  }
+  MAP0000_02:
+  {
+    Chapter: 0
+    Location: Vale of Sighs
+    Item: Mini Ether x3
+  }
+  MAP0000_03:
+  {
+    Chapter: 0
+    Location: Vale of Sighs
+    Item: Tent
+  }
+  MAP0000_04:
+  {
+    Chapter: 0
+    Location: Vale of Sighs
+    Item: Throwing Knife x4
+  }
+  MAP0000_05:
+  {
+    Chapter: 0
+    Location: Vale of Sighs
+    Item: 660 pg
+  }
+  MAP0010_01:
+  {
+    Chapter: 0
+    Location: Outlaw’s Hideout – Level 1
+    Item: Mini Ether x2
+  }
+  MAP0010_02:
+  {
+    Chapter: 0
+    Location: Outlaw’s Hideout – Level 1
+    Item: 320 pg
+  }
+  MAP0010_03:
+  {
+    Chapter: 0
+    Location: Outlaw’s Hideout – Level 1
+    Item: Teleport Stone
+  }
+  MAP0011_01:
+  {
+    Chapter: 0
+    Location: Outlaw’s Hideout – Level 2
+    Item: Tent
+  }
+  MAP0011_02:
+  {
+    Chapter: 0
+    Location: Outlaw’s Hideout – Level 2
+    Item: Long Sword
+  }
+  MAP0012_01:
+  {
+    Chapter: 0
+    Location: Outlaw’s Hideout – Basement Level 1
+    Item: 570 pg
+  }
+  MAP0012_02:
+  {
+    Chapter: 0
+    Location: Outlaw’s Hideout – Basement Level 1
+    Item: Francisca
+  }
+  MAP0012_03:
+  {
+    Chapter: 0
+    Location: Outlaw’s Hideout – Basement Level 1
+    Item: Dart
+  }
+  MAP0012_04:
+  {
+    Chapter: 0
+    Location: Outlaw’s Hideout – Basement Level 1
+    Item: Round Shield
+  }
+  MAP0020_01:
+  {
+    Chapter: 0
+    Location: Hydrangea Hills
+    Item: Hi-Potion
+  }
+  MAP0020_02:
+  {
+    Chapter: 0
+    Location: Hydrangea Hills
+    Item: Magnifying Glass x4
+  }
+  MAP0021_01:
+  {
+    Chapter: 0
+    Location: Hydrangea Hills
+    Item: Teleport Stone
+  }
+  MAP0021_02:
+  {
+    Chapter: 0
+    Location: Hydrangea Hills
+    Item: 410 pg
+  }
+  MAP0021_03:
+  {
+    Chapter: 0
+    Location: Hydrangea Hills
+    Item: Star Pendant
+  }
+  MAP0021_04:
+  {
+    Chapter: 0
+    Location: Hydrangea Hills
+    Item: Tent
+  }
+  MAP0022_01:
+  {
+    Chapter: 0
+    Location: Hydrangea Hills
+    Item: Magnifying Glass
+  }
+  MAP0022_02:
+  {
+    Chapter: 0
+    Location: Hydrangea Hills
+    Item: Bomb Fragment x3
+  }
+  MAP0022_03:
+  {
+    Chapter: 2
+    Location: Hydrangea Hills
+    Item: Oak Staff
+  }
+  MAP0022_04:
+  {
+    Chapter: 0
+    Location: Hydrangea Hills
+    Item: Zeus's Wrath x2
+  }
+  MAP0022_05:
+  {
+    Chapter: 0
+    Location: Hydrangea Hills
+    Item: Wizard's Rod
+  }
+  MAP1000_01:
+  {
+    Chapter: 1
+    Location: Sandswept Ruins
+    Item: Glaive
+  }
+  MAP1000_02:
+  {
+    Chapter: 1
+    Location: Sandswept Ruins
+    Item: Antidote x5
+  }
+  MAP1000_03:
+  {
+    Chapter: 1
+    Location: Sandswept Ruins
+    Item: Mythril Sword
+  }
+  MAP1000_04:
+  {
+    Chapter: 1
+    Location: Sandswept Ruins
+    Item: 1180 pg
+  }
+  MAP1000_05:
+  {
+    Chapter: 1
+    Location: Sandswept Ruins
+    Item: Gaia Shield
+  }
+  MAP1000_06:
+  {
+    Chapter: 1
+    Location: Sandswept Ruins
+    Item: Mini Ether x3
+  }
+  MAP1000_07:
+  {
+    Chapter: 1
+    Location: Sandswept Ruins
+    Item: Clothespin
+  }
+  MAP1100_01:
+  {
+    Chapter: 1
+    Location: Underground Reservoir
+    Item: 1340 pg
+  }
+  MAP1100_02:
+  {
+    Chapter: 1
+    Location: Underground Reservoir
+    Item: Echo Herbs x5
+  }
+  MAP1100_03:
+  {
+    Chapter: 1
+    Location: Underground Reservoir
+    Item: Iron Bangle
+  }
+  MAP1100_04:
+  {
+    Chapter: 1
+    Location: Underground Reservoir
+    Item: Pitchfork
+  }
+  MAP1100_05:
+  {
+    Chapter: 1
+    Location: Underground Reservoir
+    Item: Antarctic Wind x3
+  }
+  MAP1100_06:
+  {
+    Chapter: 1
+    Location: Underground Reservoir
+    Item: Bulwark Blade
+  }
+  MAP1100_07:
+  {
+    Chapter: 1
+    Location: Underground Reservoir
+    Item: Ice Talisman
+  }
+  MAP1100_08:
+  {
+    Chapter: 1
+    Location: Underground Reservoir
+    Item: Ether x2
+  }
+  MAP1100_09:
+  {
+    Chapter: 1
+    Location: Underground Reservoir
+    Item: Teleport Stone
+  }
+  MAP1200_01:
+  {
+    Chapter: 1
+    Location: Dungeons – Level 1
+    Item: Well-Worn Muleta
+  }
+  MAP1200_02:
+  {
+    Chapter: 1
+    Location: Dungeons – Level 1
+    Item: Mini Ether x4
+  }
+  MAP1200_03:
+  {
+    Chapter: 1
+    Location: Dungeons – Level 1
+    Item: Phoenix Down x3
+  }
+  MAP1301_01:
+  {
+    Chapter: 1
+    Location: Abandoned Mansion – Level 1
+    Item: Lü Bu's Spear
+  }
+  MAP1301_02:
+  {
+    Chapter: 1
+    Location: Abandoned Mansion – Level 1
+    Item: Remedy x4
+  }
+  MAP1302_01:
+  {
+    Chapter: 1
+    Location: Abandoned Mansion – Level 2
+    Item: Staff of Life
+  }
+  MAP1302_02:
+  {
+    Chapter: 1
+    Location: Abandoned Mansion – Level 2
+    Item: Hi-Potion x3
+  }
+  MAP1303_01:
+  {
+    Chapter: 1
+    Location: Abandoned Mansion – Level 3
+    Item: Star Corslet
+  }
+  MAP1303_02:
+  {
+    Chapter: 1
+    Location: Abandoned Mansion – Level 3
+    Item: 950 pg
+  }
+  MAP1303_03:
+  {
+    Chapter: 1
+    Location: Abandoned Mansion – Level 3
+    Item: Mythril Shield
+  }
+  MAP1400_01:
+  {
+    Chapter: 1
+    Location: Bernard’s Mansion
+    Item: Bad Bone
+  }
+  MAP1400_02:
+  {
+    Chapter: 1
+    Location: Bernard’s Mansion
+    Item: Legion Helm
+  }
+  MAP1400_03:
+  {
+    Chapter: 1
+    Location: Bernard’s Mansion
+    Item: Stab & Grab
+  }
+  MAP1401_01:
+  {
+    Chapter: 1
+    Location: Bernard’s Mansion – Basement
+    Item: Tent
+  }
+  MAP1401_02:
+  {
+    Chapter: 1
+    Location: Bernard’s Mansion – Basement
+    Item: Remedy x2
+  }
+  MAP1401_03:
+  {
+    Chapter: 1
+    Location: Bernard’s Mansion – Basement
+    Item: Medium JP Orb
+  }
+  MAP1401_04:
+  {
+    Chapter: 1
+    Location: Bernard’s Mansion – Basement
+    Item: 3000 pg
+  }
+  MAP1401_05:
+  {
+    Chapter: 1
+    Location: Bernard’s Mansion – Basement
+    Item: Holy Mitre
+  }
+  MAP1401_06:
+  {
+    Chapter: 1
+    Location: Bernard’s Mansion – Basement
+    Item: Iron Bangle
+  }
+  MAP1401_07:
+  {
+    Chapter: 1
+    Location: Bernard’s Mansion – Basement
+    Item: Teleport Stone
+  }
+  MAP1401_08:
+  {
+    Chapter: 1
+    Location: Bernard’s Mansion – Basement
+    Item: Hawkeye
+  }
+  MAP2000_01:
+  {
+    Chapter: 2
+    Location: Wiswald Woods
+    Item: Mini Ether x4
+  }
+  MAP2000_02:
+  {
+    Chapter: 2
+    Location: Wiswald Woods
+    Item: Hawkeye
+  }
+  MAP2000_03:
+  {
+    Chapter: 2
+    Location: Wiswald Woods
+    Item: 1760 pg
+  }
+  MAP2000_04:
+  {
+    Chapter: 2
+    Location: Wiswald Woods
+    Item: Throwing Axe x5
+  }
+  MAP2000_05:
+  {
+    Chapter: 2
+    Location: Wiswald Woods
+    Item: Medium JP Orb
+  }
+  MAP2000_06:
+  {
+    Chapter: 2
+    Location: Wiswald Woods
+    Item: Mythril Bangle
+  }
+  MAP2000_07:
+  {
+    Chapter: 2
+    Location: Wiswald Woods
+    Item: Plant Food x3
+  }
+  MAP2000_08:
+  {
+    Chapter: 2
+    Location: Wiswald Woods
+    Item: Rune Staff
+  }
+  MAP2000_09:
+  {
+    Chapter: 2
+    Location: Wiswald Woods
+    Item: Ether x4
+  }
+  MAP2100_01:
+  {
+    Chapter: 2
+    Location: Sewars
+    Item: Medium JP Orb
+  }
+  MAP2100_02:
+  {
+    Chapter: 2
+    Location: Sewars
+    Item: Animator x4
+  }
+  MAP2100_03:
+  {
+    Chapter: 2
+    Location: Sewars
+    Item: Orichal Dagger
+  }
+  MAP2100_04:
+  {
+    Chapter: 2
+    Location: Sewars
+    Item: Teleport Stone x2
+  }
+  MAP2101_01:
+  {
+    Chapter: 2
+    Location: Institute – East Wing – Level 1
+    Item: Rod of Fire
+  }
+  MAP2101_02:
+  {
+    Chapter: 2
+    Location: Institute – East Wing – Level 1
+    Item: Mortarboard
+  }
+  MAP2101_03:
+  {
+    Chapter: 2
+    Location: Institute – East Wing – Level 1
+    Item: Mini Ether x5
+  }
+  MAP2101_04:
+  {
+    Chapter: 2
+    Location: Institute – East Wing – Level 1
+    Item: 1330 pg
+  }
+  MAP2102_01:
+  {
+    Chapter: 2
+    Location: Institute – East Wing – Level 2
+    Item: Dark Drops x3
+  }
+  MAP2103_01:
+  {
+    Chapter: 2
+    Location: Institute – East Wing – Level 3
+    Item: Devil's Delight x4
+  }
+  MAP2103_02:
+  {
+    Chapter: 2
+    Location: Institute – East Wing – Level 3
+    Item: Academy Gown
+  }
+  MAP2103_03:
+  {
+    Chapter: 2
+    Location: Institute – East Wing – Level 3
+    Item: Earthing Rod
+  }
+  MAP2103_04:
+  {
+    Chapter: 2
+    Location: Institute – East Wing – Level 3
+    Item: 1840 pg
+  }
+  MAP2103_05:
+  {
+    Chapter: 2
+    Location: Institute – East Wing – Level 3
+    Item: Mirage Vest
+  }
+  MAP2103_06:
+  {
+    Chapter: 2
+    Location: Institute – East Wing – Level 3
+    Item: Courage Ring
+  }
+  MAP2200_01:
+  {
+    Chapter: 2
+    Location: Treetop Tower – Level 1
+    Item: 2520 pg
+  }
+  MAP2201_01:
+  {
+    Chapter: 2
+    Location: Treetop Tower – Level 2
+    Item: Teleport Stone
+  }
+  MAP2201_02:
+  {
+    Chapter: 2
+    Location: Treetop Tower – Level 2
+    Item: Earthbreaker
+  }
+  MAP2202_01:
+  {
+    Chapter: 2
+    Location: Treetop Tower – Level 3
+    Item: Typhoon Shield
+  }
+  MAP2202_02:
+  {
+    Chapter: 2
+    Location: Treetop Tower – Level 3
+    Item: Ether x3
+  }
+  MAP2202_03:
+  {
+    Chapter: 2
+    Location: Treetop Tower – Level 3
+    Item: Phoenix Down x4
+  }
+  MAP2203_01:
+  {
+    Chapter: 2
+    Location: Treetop Tower – Level 4
+    Item: Adamant Helm
+  }
+  MAP2205_01:
+  {
+    Chapter: 2
+    Location: Treetop Tower – Level 6
+    Item: Medium JP Orb
+  }
+  MAP2205_02:
+  {
+    Chapter: 2
+    Location: Treetop Tower – Level 6
+    Item: Courage Ring
+  }
+  MAP2205_03:
+  {
+    Chapter: 2
+    Location: Treetop Tower – Level 6
+    Item: Longinus
+  }
+  MAP2205_04:
+  {
+    Chapter: 2
+    Location: Treetop Tower – Level 6
+    Item: Mini Ether x7
+  }
+  MAP2300_01:
+  {
+    Chapter: 2
+    Location: Wrecked Institute
+    Item: 14700 pg
+  }
+  MAP2300_02:
+  {
+    Chapter: 2
+    Location: Wrecked Institute
+    Item: Large JP Orb
+  }
+  MAP2300_03:
+  {
+    Chapter: 2
+    Location: Wrecked Institute
+    Item: Fluted Armour
+  }
+  MAP2300_04:
+  {
+    Chapter: 2
+    Location: Wrecked Institute
+    Item: Hammer Mace
+  }
+  MAP2300_05:
+  {
+    Chapter: 2
+    Location: Wrecked Institute
+    Item: Giant's Helmet
+  }
+  MAP2300_06:
+  {
+    Chapter: 2
+    Location: Wrecked Institute
+    Item: Medium JP Orb x2
+  }
+  MAP2300_07:
+  {
+    Chapter: 2
+    Location: Wrecked Institute
+    Item: Hyper Bracers
+  }
+  MAP2400_01:
+  {
+    Chapter: 2
+    Location: Secret Studio
+    Item: Dragonfly Wing x2
+  }
+  MAP2400_02:
+  {
+    Chapter: 2
+    Location: Secret Studio
+    Item: Rod of Ice
+  }
+  MAP2400_03:
+  {
+    Chapter: 2
+    Location: Secret Studio
+    Item: Wailflower
+  }
+  MAP2400_04:
+  {
+    Chapter: 2
+    Location: Secret Studio
+    Item: Shako
+  }
+  MAP2500_01:
+  {
+    Chapter: 2
+    Location: Miasma Woods
+    Item: 3410 pg
+  }
+  MAP2500_02:
+  {
+    Chapter: 2
+    Location: Miasma Woods
+    Item: Tent
+  }
+  MAP2500_03:
+  {
+    Chapter: 2
+    Location: Miasma Woods
+    Item: Beast Flesh x3
+  }
+  MAP2500_04:
+  {
+    Chapter: 2
+    Location: Miasma Woods
+    Item: Heavy Axe
+  }
+  MAP2501_01:
+  {
+    Chapter: 2
+    Location: Miasma Woods
+    Item: Eisenhut
+  }
+  MAP2501_02:
+  {
+    Chapter: 2
+    Location: Miasma Woods
+    Item: Aka-Ito-Odoshi
+  }
+  MAP2501_03:
+  {
+    Chapter: 2
+    Location: Miasma Woods
+    Item: Mini Ether x6
+  }
+  MAP2502_01:
+  {
+    Chapter: 2
+    Location: Miasma Woods
+    Item: Remedy x3
+  }
+  MAP2502_02:
+  {
+    Chapter: 2
+    Location: Miasma Woods
+    Item: Courage Ring
+  }
+  MAP2502_03:
+  {
+    Chapter: 2
+    Location: Miasma Woods
+    Item: Oak Staff
+  }
+  MAP3000_01:
+  {
+    Chapter: 3
+    Location: Serpent’s Grotto
+    Item: Soul Food x4
+  }
+  MAP3000_02:
+  {
+    Chapter: 3
+    Location: Serpent’s Grotto
+    Item: X-Potion x2
+  }
+  MAP3000_03:
+  {
+    Chapter: 3
+    Location: Serpent’s Grotto
+    Item: Meteorite x3
+  }
+  MAP3000_04:
+  {
+    Chapter: 3
+    Location: Serpent’s Grotto
+    Item: Gaia Rod
+  }
+  MAP3000_05:
+  {
+    Chapter: 3
+    Location: Serpent’s Grotto
+    Item: Tent
+  }
+  MAP3000_06:
+  {
+    Chapter: 3
+    Location: Serpent’s Grotto
+    Item: Icefire Shield
+  }
+  MAP3000_07:
+  {
+    Chapter: 3
+    Location: Serpent’s Grotto
+    Item: Mini Ether x5
+  }
+  MAP3000_08:
+  {
+    Chapter: 3
+    Location: Serpent’s Grotto
+    Item: Lamia's Tiara
+  }
+  MAP3000_09:
+  {
+    Chapter: 3
+    Location: Serpent’s Grotto
+    Item: Ether x4
+  }
+  MAP3100_01:
+  {
+    Chapter: 2
+    Location: Wayward Woods
+    Item: Ancient Bow
+  }
+  MAP3100_02:
+  {
+    Chapter: 2
+    Location: Wayward Woods
+    Item: Self-Portrait
+  }
+  MAP3101_01:
+  {
+    Chapter: 2
+    Location: Wayward Woods
+    Item: Tactician's Hat
+  }
+  MAP3101_02:
+  {
+    Chapter: 2
+    Location: Wayward Woods
+    Item: Academy Gown
+  }
+  MAP3101_03:
+  {
+    Chapter: 2
+    Location: Wayward Woods
+    Item: Hinderlance
+  }
+  MAP3102_01:
+  {
+    Chapter: 2
+    Location: Wayward Woods
+    Item: Medium JP Orb x2
+  }
+  MAP3200_01:
+  {
+    Chapter: 3
+    Location: Hall of High Holies – Level 1
+    Item: Witch's Whisper x3
+  }
+  MAP3200_02:
+  {
+    Chapter: 3
+    Location: Hall of High Holies – Level 1
+    Item: 7400 pg
+  }
+  MAP3200_03:
+  {
+    Chapter: 3
+    Location: Hall of High Holies – Level 1
+    Item: Artisan Gloves
+  }
+  MAP3200_04:
+  {
+    Chapter: 3
+    Location: Hall of High Holies – Level 1
+    Item: Remedy x2
+  }
+  MAP3201_01:
+  {
+    Chapter: 3
+    Location: Hall of High Holies – Level 2
+    Item: Acorn Hat
+  }
+  MAP3201_02:
+  {
+    Chapter: 3
+    Location: Hall of High Holies – Level 2
+    Item: Cuirass
+  }
+  MAP3201_03:
+  {
+    Chapter: 3
+    Location: Hall of High Holies – Level 2
+    Item: Tengu Yawn x2
+  }
+  MAP3201_04:
+  {
+    Chapter: 3
+    Location: Hall of High Holies – Level 2
+    Item: Large JP Orb
+  }
+  MAP3201_05:
+  {
+    Chapter: 3
+    Location: Hall of High Holies – Level 2
+    Item: 13400 pg
+  }
+  MAP3203_01:
+  {
+    Chapter: 3
+    Location: Hall of High Holies – Level 4
+    Item: Dreadstool x3
+  }
+  MAP3203_02:
+  {
+    Chapter: 3
+    Location: Hall of High Holies – Level 4
+    Item: Heart Ring
+  }
+  MAP3203_03:
+  {
+    Chapter: 3
+    Location: Hall of High Holies – Level 4
+    Item: Sands of Time
+  }
+  MAP3203_04:
+  {
+    Chapter: 3
+    Location: Hall of High Holies – Level 4
+    Item: Summoner's Axe
+  }
+  MAP3203_05:
+  {
+    Chapter: 3
+    Location: Hall of High Holies – Level 4
+    Item: Hush Pollen x5
+  }
+  MAP3203_06:
+  {
+    Chapter: 3
+    Location: Hall of High Holies – Level 4
+    Item: Mini Ether x8
+  }
+  MAP3300_01:
+  {
+    Chapter: 3
+    Location: Jaws of Judgement
+    Item: Dart x4
+  }
+  MAP3300_02:
+  {
+    Chapter: 3
+    Location: Jaws of Judgement
+    Item: Medium JP Orb
+  }
+  MAP3301_01:
+  {
+    Chapter: 3
+    Location: Jaws of Judgement
+    Item: 8780 pg
+  }
+  MAP3302_01:
+  {
+    Chapter: 3
+    Location: Jaws of Judgement
+    Item: Ninja Garb
+  }
+  MAP3303_01:
+  {
+    Chapter: 3
+    Location: Jaws of Judgement
+    Item: Defender
+  }
+  MAP3304_01:
+  {
+    Chapter: 3
+    Location: Jaws of Judgement
+    Item: Carving Knife
+  }
+  MAP3304_02:
+  {
+    Chapter: 3
+    Location: Jaws of Judgement
+    Item: Dark Deluge x2
+  }
+  MAP3304_03:
+  {
+    Chapter: 3
+    Location: Jaws of Judgement
+    Item: Mage Shell
+  }
+  MAP3305_01:
+  {
+    Chapter: 3
+    Location: Jaws of Judgement
+    Item: Full-Face Helm
+  }
+  MAP3305_02:
+  {
+    Chapter: 3
+    Location: Jaws of Judgement
+    Item: Dark Talisman
+  }
+  MAP3400_01:
+  {
+    Chapter: 3
+    Location: Frosty Forest
+    Item: Fresh Fish x4
+  }
+  MAP3400_02:
+  {
+    Chapter: 3
+    Location: Frosty Forest
+    Item: Healing Bloom x3
+  }
+  MAP3400_03:
+  {
+    Chapter: 3
+    Location: Frosty Forest
+    Item: Ascetic's Cap
+  }
+  MAP3400_04:
+  {
+    Chapter: 3
+    Location: Frosty Forest
+    Item: Poison Dagger
+  }
+  MAP3400_05:
+  {
+    Chapter: 3
+    Location: Frosty Forest
+    Item: Kalasiris
+  }
+  MAP3400_06:
+  {
+    Chapter: 3
+    Location: Frosty Forest
+    Item: Golden Egg
+  }
+  MAP3400_07:
+  {
+    Chapter: 3
+    Location: Frosty Forest
+    Item: Hyper Bracers
+  }
+  MAP3500_01:
+  {
+    Chapter: 3
+    Location: Crystalclap Mountain
+    Item: Adamant Bangle
+  }
+  MAP3500_02:
+  {
+    Chapter: 3
+    Location: Crystalclap Mountain
+    Item: Valkyrie's Coat
+  }
+  MAP3500_03:
+  {
+    Chapter: 3
+    Location: Crystalclap Mountain
+    Item: Chronos Glaive
+  }
+  MAP3500_04:
+  {
+    Chapter: 3
+    Location: Crystalclap Mountain
+    Item: Ether x5
+  }
+  MAP3500_05:
+  {
+    Chapter: 3
+    Location: Crystalclap Mountain
+    Item: Vaccine
+  }
+  MAP4000_01:
+  {
+    Chapter: 4
+    Location: Magma Mountain
+    Item: Bomb Arm x5
+  }
+  MAP4000_02:
+  {
+    Chapter: 4
+    Location: Magma Mountain
+    Item: Lambent Hat
+  }
+  MAP4000_03:
+  {
+    Chapter: 4
+    Location: Magma Mountain
+    Item: Teleport Stone
+  }
+  MAP4000_04:
+  {
+    Chapter: 4
+    Location: Magma Mountain
+    Item: Wizard's Robes
+  }
+  MAP4000_05:
+  {
+    Chapter: 4
+    Location: Magma Mountain
+    Item: Phoenix Down x8
+  }
+  MAP4000_06:
+  {
+    Chapter: 4
+    Location: Magma Mountain
+    Item: Teleport Stone
+  }
+  MAP4000_07:
+  {
+    Chapter: 4
+    Location: Magma Mountain
+    Item: Gambanteinn
+  }
+  MAP4000_08:
+  {
+    Chapter: 4
+    Location: Magma Mountain
+    Item: Remedy x3
+  }
+  MAP4000_09:
+  {
+    Chapter: 4
+    Location: Magma Mountain
+    Item: Large JP Orb
+  }
+  MAP4100_01:
+  {
+    Chapter: 4
+    Location: Holograd Army HQ – Level 1
+    Item: Artemis's Bow
+  }
+  MAP4100_02:
+  {
+    Chapter: 4
+    Location: Holograd Army HQ – Level 1
+    Item: Throwing Stick x2
+  }
+  MAP4101_01:
+  {
+    Chapter: 4
+    Location: Holograd Army HQ – Level 2
+    Item: Gáe Bulg
+  }
+  MAP4102_01:
+  {
+    Chapter: 4
+    Location: Holograd Army HQ – Level 3
+    Item: Healing Bloom x3
+  }
+  MAP4102_02:
+  {
+    Chapter: 4
+    Location: Holograd Army HQ – Level 3
+    Item: Large JP Orb
+  }
+  MAP4102_03:
+  {
+    Chapter: 4
+    Location: Holograd Army HQ – Level 3
+    Item: 5540 pg
+  }
+  MAP4103_01:
+  {
+    Chapter: 4
+    Location: Holograd Army HQ – Basement Level 1
+    Item: Courage Ring
+  }
+  MAP4103_02:
+  {
+    Chapter: 4
+    Location: Holograd Army HQ – Basement Level 1
+    Item: Saffron Robes
+  }
+  MAP4103_03:
+  {
+    Chapter: 4
+    Location: Holograd Army HQ – Basement Level 1
+    Item: Spellblossom x4
+  }
+  MAP4200_01:
+  {
+    Chapter: 4
+    Location: Flying Fortress
+    Item: Bomb Arm x2
+  }
+  MAP4200_02:
+  {
+    Chapter: 4
+    Location: Flying Fortress
+    Item: 6240 pg
+  }
+  MAP4200_03:
+  {
+    Chapter: 4
+    Location: Flying Fortress
+    Item: Remedy x3
+  }
+  MAP4201_01:
+  {
+    Chapter: 4
+    Location: Flying Fortress – Living Quarters
+    Item: Ripper
+  }
+  MAP4201_02:
+  {
+    Chapter: 4
+    Location: Flying Fortress – Living Quarters
+    Item: X-Potion x2
+  }
+  MAP4201_03:
+  {
+    Chapter: 4
+    Location: Flying Fortress – Living Quarters
+    Item: Demon's Rod
+  }
+  MAP4201_04:
+  {
+    Chapter: 4
+    Location: Flying Fortress – Living Quarters
+    Item: Tengu Sneeze
+  }
+  MAP4201_05:
+  {
+    Chapter: 4
+    Location: Flying Fortress – Living Quarters
+    Item: Black Belt
+  }
+  MAP4202_01:
+  {
+    Chapter: 4
+    Location: Flying Fortress – Grand Hall
+    Item: Spellblossom x5
+  }
+  MAP4202_02:
+  {
+    Chapter: 4
+    Location: Flying Fortress – Grand Hall
+    Item: Soul Food x2
+  }
+  MAP4203_01:
+  {
+    Chapter: 4
+    Location: Flying Fortress – Ducts
+    Item: Spiked Shield
+  }
+  MAP4203_02:
+  {
+    Chapter: 4
+    Location: Flying Fortress – Ducts
+    Item: Earth Mallet x2
+  }
+  MAP4205_01:
+  {
+    Chapter: 4
+    Location: Flying Fortress – Central Concourse
+    Item: Ether x2
+  }
+  MAP4205_02:
+  {
+    Chapter: 4
+    Location: Flying Fortress – Central Concourse
+    Item: Shuriken x3
+  }
+  MAP4205_03:
+  {
+    Chapter: 4
+    Location: Flying Fortress – Central Concourse
+    Item: Teleport Stone
+  }
+  MAP4205_04:
+  {
+    Chapter: 4
+    Location: Flying Fortress – Central Concourse
+    Item: Phoenix Down x3
+  }
+  MAP4206_01:
+  {
+    Chapter: 4
+    Location: Flying Fortress – Ducts
+    Item: Gauntlets
+  }
+  MAP4206_02:
+  {
+    Chapter: 4
+    Location: Flying Fortress – Ducts
+    Item: 7690 pg
+  }
+  MAP4206_03:
+  {
+    Chapter: 4
+    Location: Flying Fortress – Ducts
+    Item: Dragonscale Armour
+  }
+  MAP4206_04:
+  {
+    Chapter: 4
+    Location: Flying Fortress – Ducts
+    Item: Magic Herb x2
+  }
+  MAP4206_05:
+  {
+    Chapter: 4
+    Location: Flying Fortress – Ducts
+    Item: Black Cowl
+  }
+  MAP4300_01:
+  {
+    Chapter: 4
+    Location: Chromatite Mines
+    Item: Divine Rod
+  }
+  MAP4300_02:
+  {
+    Chapter: 4
+    Location: Chromatite Mines
+    Item: Light Talisman
+  }
+  MAP4300_03:
+  {
+    Chapter: 4
+    Location: Chromatite Mines
+    Item: Red Cap
+  }
+  MAP4300_04:
+  {
+    Chapter: 4
+    Location: Chromatite Mines
+    Item: Pathogen x4
+  }
+  MAP4300_05:
+  {
+    Chapter: 4
+    Location: Chromatite Mines
+    Item: Medium JP Orb x3
+  }
+  MAP4300_06:
+  {
+    Chapter: 4
+    Location: Chromatite Mines
+    Item: Brave Suit
+  }
+  MAP4300_07:
+  {
+    Chapter: 4
+    Location: Chromatite Mines
+    Item: Assassin Dagger
+  }
+  MAP5000_01:
+  {
+    Chapter: 5
+    Location: Waterfall Path
+    Item: Remedy x2
+  }
+  MAP5000_02:
+  {
+    Chapter: 5
+    Location: Waterfall Path
+    Item: 5440 pg
+  }
+  MAP5000_03:
+  {
+    Chapter: 5
+    Location: Waterfall Path
+    Item: Elf Cape
+  }
+  MAP5000_04:
+  {
+    Chapter: 5
+    Location: Waterfall Path
+    Item: Meteorite x3
+  }
+  MAP5000_05:
+  {
+    Chapter: 5
+    Location: Waterfall Path
+    Item: Moonbeam Shield
+  }
+  MAP5101_01:
+  {
+    Chapter: 5
+    Location: Crystal’s Resting Place – Wind Room
+    Item: Tengu Sneeze x6
+  }
+  MAP5101_02:
+  {
+    Chapter: 5
+    Location: Crystal’s Resting Place – Wind Room
+    Item: Giant Axe
+  }
+  MAP5101_03:
+  {
+    Chapter: 5
+    Location: Crystal’s Resting Place – Wind Room
+    Item: Ghoulash x3
+  }
+  MAP5101_04:
+  {
+    Chapter: 5
+    Location: Crystal’s Resting Place – Wind Room
+    Item: X-Potion x4
+  }
+  MAP5101_05:
+  {
+    Chapter: 5
+    Location: Crystal’s Resting Place – Wind Room
+    Item: Healing Bloom x5
+  }
+  MAP5102_01:
+  {
+    Chapter: 5
+    Location: Crystal’s Resting Place – Fire Room
+    Item: Safety Ring
+  }
+  MAP5102_02:
+  {
+    Chapter: 5
+    Location: Crystal’s Resting Place – Fire Room
+    Item: Red Cap
+  }
+  MAP5102_03:
+  {
+    Chapter: 5
+    Location: Crystal’s Resting Place – Fire Room
+    Item: Elixir x2
+  }
+  MAP5103_01:
+  {
+    Chapter: 5
+    Location: Crystal’s Resting Place – Water Room
+    Item: Smiley Badge
+  }
+  MAP5103_02:
+  {
+    Chapter: 5
+    Location: Crystal’s Resting Place – Water Room
+    Item: Dragonskin Headscarf
+  }
+  MAP5103_03:
+  {
+    Chapter: 5
+    Location: Crystal’s Resting Place – Water Room
+    Item: Life Ring
+  }
+  MAP5103_04:
+  {
+    Chapter: 5
+    Location: Crystal’s Resting Place – Water Room
+    Item: 11770 pg
+  }
+  MAP5103_05:
+  {
+    Chapter: 5
+    Location: Crystal’s Resting Place – Water Room
+    Item: Ink x6
+  }
+  MAP5104_01:
+  {
+    Chapter: 5
+    Location: Crystal’s Resting Place – Earth Room
+    Item: Snappy Sash
+  }
+  MAP5104_02:
+  {
+    Chapter: 5
+    Location: Crystal’s Resting Place – Earth Room
+    Item: Soul of Thamasa
+  }
+  MAP5104_03:
+  {
+    Chapter: 5
+    Location: Crystal’s Resting Place – Earth Room
+    Item: Giant's Gloves
+  }
+  MAP5104_04:
+  {
+    Chapter: 5
+    Location: Crystal’s Resting Place – Earth Room
+    Item: 6210 pg
+  }
+  MAP5104_05:
+  {
+    Chapter: 5
+    Location: Crystal’s Resting Place – Earth Room
+    Item: Hush Pollen x4
+  }
+  MAP5104_06:
+  {
+    Chapter: 5
+    Location: Crystal’s Resting Place – Earth Room
+    Item: Large JP Orb
+  }
+  MAP5200_01:
+  {
+    Chapter: 6
+    Location: Fount of Knowledge
+    Item: Self-Portrait
+  }
+  MAP5200_02:
+  {
+    Chapter: 6
+    Location: Fount of Knowledge
+    Item: Dalmatica
+  }
+  MAP5200_03:
+  {
+    Chapter: 6
+    Location: Fount of Knowledge
+    Item: Witch's Whisper x4
+  }
+  MAP5200_04:
+  {
+    Chapter: 6
+    Location: Fount of Knowledge
+    Item: Bloody Shield
+  }
+  MAP5200_05:
+  {
+    Chapter: 6
+    Location: Fount of Knowledge
+    Item: 21890 pg
+  }
+  MAP5200_06:
+  {
+    Chapter: 6
+    Location: Fount of Knowledge
+    Item: Catastrophe
+  }
+  MAP5200_07:
+  {
+    Chapter: 6
+    Location: Fount of Knowledge
+    Item: Sensei's Belt
+  }
+  MAP5300_01:
+  {
+    Chapter: 7
+    Location: Isle of Nothingness
+    Item: Smart Cravat
+  }
+  MAP5300_02:
+  {
+    Chapter: 7
+    Location: Isle of Nothingness
+    Item: Mjöllnir
+  }
+  MAP5300_03:
+  {
+    Chapter: 7
+    Location: Isle of Nothingness
+    Item: Diamond Chestplate
+  }
+  MAP5300_04:
+  {
+    Chapter: 7
+    Location: Isle of Nothingness
+    Item: Bloody Shield
+  }
+  MAP5300_05:
+  {
+    Chapter: 7
+    Location: Isle of Nothingness
+    Item: Gold Hairpin
+  }
+  MAP5300_06:
+  {
+    Chapter: 7
+    Location: Isle of Nothingness
+    Item: Spellblossom x3
+  }
+  MAP7000_01:
+  {
+    Chapter: 6
+    Location: Halls of Tribulation I
+    Item: Lordly Robes
+  }
+  MAP7001_01:
+  {
+    Chapter: 6
+    Location: Halls of Tribulation II
+    Item: Diamond Chestplate
+  }
+  MAP7002_01:
+  {
+    Chapter: 6
+    Location: Halls of Tribulation III
+    Item: Hypnos Crown
+  }
+  MAP7003_01:
+  {
+    Chapter: 6
+    Location: Halls of Tribulation IV
+    Item: Crystal Vest
+  }
+  MAP7004_01:
+  {
+    Chapter: 6
+    Location: Halls of Tribulation V
+    Item: Hellplate
+  }
+  MAP7005_01:
+  {
+    Chapter: 6
+    Location: Halls of Tribulation VI
+    Item: Maximillian
+  }
+  MAP7006_01:
+  {
+    Chapter: 6
+    Location: Halls of Tribulation VII
+    Item: Circlet
+  }
+  TW0001_01:
+  {
+    Chapter: 0
+    Location: Halcyonia
+    Item: Buckler
+  }
+  TW0001_02:
+  {
+    Chapter: 0
+    Location: Halcyonia
+    Item: Phoenix Down x2
+  }
+  TW0002_01:
+  {
+    Chapter: 0
+    Location: Halcyonia – Palace
+    Item: Pilgrim's Hat
+  }
+  TW0010_01:
+  {
+    Chapter: 1
+    Location: Savalon
+    Item: Clothespin
+  }
+  TW0010_02:
+  {
+    Chapter: 1
+    Location: Savalon
+    Item: Spear
+  }
+  TW0010_03:
+  {
+    Chapter: 1
+    Location: Savalon
+    Item: Feather Hat
+  }
+  TW0011_01:
+  {
+    Chapter: 1
+    Location: Savalon – Palace
+    Item: Antidote x3
+  }
+  TW0012_01:
+  {
+    Chapter: 1
+    Location: Gaming Hall
+    Item: 740 pg
+  }
+  TW0020_01:
+  {
+    Chapter: 2
+    Location: Wiswald
+    Item: 2360 pg
+  }
+  TW0020_02:
+  {
+    Chapter: 2
+    Location: Wiswald
+    Item: Justacorps
+  }
+  TW0020_03:
+  {
+    Chapter: 2
+    Location: Wiswald
+    Item: Insect Nectar x4
+  }
+  TW0021_01:
+  {
+    Chapter: 2
+    Location: Institute of Magical Inquiry
+    Item: Teleport Stone
+  }
+  TW0021_02:
+  {
+    Chapter: 2
+    Location: Institute of Magical Inquiry
+    Item: Mythril Bow
+  }
+  TW0021_03:
+  {
+    Chapter: 2
+    Location: Institute of Magical Inquiry
+    Item: Oak Staff
+  }
+  TW0022_01:
+  {
+    Chapter: 2
+    Location: Great Tree Hollow
+    Item: Earth Mallet
+  }
+  TW0030_01:
+  {
+    Chapter: 3
+    Location: Rimedhal
+    Item: Mage Shell
+  }
+  TW0030_02:
+  {
+    Chapter: 3
+    Location: Rimedhal
+    Item: Snug Scarf
+  }
+  TW0030_03:
+  {
+    Chapter: 3
+    Location: Rimedhal
+    Item: Light Talisman
+  }
+  TW0031_01:
+  {
+    Chapter: 3
+    Location: Hal of High Holies
+    Item: Jade Crosier
+  }
+  TW0033_01:
+  {
+    Chapter: 3
+    Location: Enderno
+    Item: Ether x2
+  }
+  TW0040_01:
+  {
+    Chapter: 4
+    Location: Holograd
+    Item: Crimson Vest
+  }
+  TW0040_02:
+  {
+    Chapter: 4
+    Location: Holograd
+    Item: Amulet
+  }
+  TW0040_03:
+  {
+    Chapter: 4
+    Location: Holograd
+    Item: Black Belt
+  }
+  TW0050_01:
+  {
+    Chapter: 5
+    Location: Musa
+    Item: Falcon Knife
+  }
+  TW0052_01:
+  {
+    Chapter: 6
+    Location: Mag Mell
+    Item: Giant Experience Orb
+  }
+  TW0052_02:
+  {
+    Chapter: 6
+    Location: Mag Mell
+    Item: Barrier Shroud
+  }
+  TW0052_03:
+  {
+    Chapter: 6
+    Location: Mag Mell
+    Item: Diamond Gloves
+  }
+}

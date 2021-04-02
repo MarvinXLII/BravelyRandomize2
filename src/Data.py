@@ -871,7 +871,7 @@ class QUESTS(DATA):
                     print('---------')
                 print('')
                 for quest in self.questRewards[i]:
-                    print('   ', quest['SubQuestID'].ljust(5, ' '), quest['Location'].ljust(20, ' '), quest['Name'].ljust(35, ' '), quest['Vanilla'].ljust(35, ' '), ' <-- ', quest['Swap'].ljust(15, ' '))
+                    print('   ', quest['SubQuestID'].ljust(5, ' '), quest['Location'].ljust(20, ' '), quest['Name'].ljust(35, ' '), quest['Vanilla'].ljust(35, ' '), ' <-- ', quest['Swap'].ljust(35, ' '))
 
         sys.stdout = sys.__stdout__
 
@@ -892,11 +892,13 @@ class TREASURES(DATA):
         self.text = text
         self.locations = locations
         self.data = list(self.table.values())[0]['data']
+        with open('json/treasures.json','r') as file:
+            self.json = hjson.load(file)
 
         self.boxes = {i:[] for i in range(8)}
         for key, value in self.data.items():
-            if key[:5] == "Field" or key[:4] == "TW00" or key[:3] == "MAP":
-                chapter = self.getChapter(key)
+            if key in self.json:
+                chapter = self.json[key]['Chapter']
                 itemId = value['ItemId']['entry']['value']
                 itemCount = value['ItemCount']['entry']['value']
                 enemyPartyId = value['EnemyPartyId']['entry']['value']
@@ -909,7 +911,11 @@ class TREASURES(DATA):
                     'EventType': eventType,
                     'Vanilla': self.getContents(itemId, itemCount),
                     'Swap': '',
+                    'Location': self.json[key]['Location'],
                 })
+        # Sort by location
+        for boxes in self.boxes.values():
+            boxes.sort(key=lambda x: x['Location'])
 
     def update(self):
         for chapterBoxes in self.boxes.values():
@@ -930,14 +936,6 @@ class TREASURES(DATA):
                     data['TreasureType']['entry']['value'] = "ETreasureType::Item"
         super().update()
 
-    def getChapter(self, mapId):
-        if mapId[:3] == 'MAP':
-            return int(mapId[3])
-        elif mapId[:2] == 'TW':
-            return int(mapId[4])
-        elif mapId[:5] == 'Field':
-            return int(mapId[8])
-
     def getContents(self, itemId, itemCount):
         if itemId < 0:
             return f"{itemCount} pg"
@@ -946,29 +944,6 @@ class TREASURES(DATA):
             if itemCount > 1:
                 item += f" x{itemCount}"
             return item
-
-    # Input TreasureBoxId, e.g.
-    #      TW0050_01 --> MAP_TW_0050
-    #      MAP0012_04 --> MAP_ND_0012
-    def getLocation(self, boxId):
-        box = boxId.split('_')
-        if len(box) != 2:
-            return ''
-        else:
-            box = box[0]
-
-        if box[:2] == 'TW':
-            value = box[2:]
-            key = f'MAP_TW_{value}'
-        elif box[:3] == 'MAP':
-            value = box[3:]
-            key = f'MAP_ND_{value}'
-        elif box[:5] == 'Field':
-            value = box[-1]
-            key = f'Field_Chapter{value}'
-        else:
-            sys.exit('Not considered!')
-        return self.locations.getName(key)
 
     def print(self, fileName):
         keys = list(self.data.keys()) # TW_0010_TN_1
@@ -1001,28 +976,21 @@ class TREASURES(DATA):
     def spoilers(self, filename):
         with open(filename, 'w') as sys.stdout:
             for i in range(8):
-                if i < 6:
-                    if i == 0:
-                        print('')
-                        print('')
-                        print('--------')
-                        print('Prologue')
-                        print('--------')
-                    elif i < 5:
-                        print('')
-                        print('')
-                        print('----------')
-                        print(f'Chapter {i}')
-                        print('----------')
-                    else:
-                        print('')
-                        print('')
-                        print('----------')
-                        print('Chapter 5+')
-                        print('----------')
+                if i == 0:
                     print('')
+                    print('')
+                    print('--------')
+                    print('Prologue')
+                    print('--------')
+                else:
+                    print('')
+                    print('')
+                    print('----------')
+                    print(f'Chapter {i}')
+                    print('----------')
+                print('')
                 for box in self.boxes[i]:
-                    print('   ', box['Vanilla'].ljust(35, ' '), ' <-- ', box['Swap'].ljust(15, ' '))
+                    print('   ', box['Location'].ljust(40, ' '), box['Vanilla'].ljust(35, ' '), ' <-- ', box['Swap'].ljust(35, ' '))
 
         sys.stdout = sys.__stdout__
 
