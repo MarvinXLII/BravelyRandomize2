@@ -287,11 +287,11 @@ class DATA:
 
     def mergeTextProperty(self, entry):
         tmp = bytearray([0]*4)
-        if entry['string'] == "":
+        if not entry['string']:
             tmp += bytearray([0xff]+[0]*4)
             return self.uexp.getInt(9, size=8) + bytearray([0]) + tmp
-        else:
-            tmp += bytearray([0])
+
+        tmp += bytearray([0])
         x = self.uexp.getString(entry['namespace'])
         tmp += self.uexp.getInt(len(x), size=4)
         tmp += x
@@ -367,21 +367,21 @@ class DATA:
         size = self.uexp.readInt(size=8)
         prop = self.uasset.getName(self.uexp.readInt(size=8))
         self.uexp.addr += 1
+        num = self.uexp.readInt(size=4)
+        arr = []
+
         if prop == 'IntProperty':
-            num = self.uexp.readInt(size=4)
-            arr = []
             for _ in range(num):
                 arr.append(self.uexp.readInt(size=4))
             return {'size': size, 'prop': prop, 'arr': arr}
-        elif prop == 'EnumProperty':
-            num = self.uexp.readInt(size=4)
-            arr = []
+
+        if prop == 'EnumProperty':
             for _ in range(num):
                 value = self.uasset.getName(self.uexp.readInt(size=8))
                 arr.append(value)
             return {'size': size, 'prop': prop, 'arr': arr}
-        elif prop == 'StructProperty':
-            num = self.uexp.readInt(size=4)
+
+        if prop == 'StructProperty':
             ## Ensure names are the same
             name2Val = self.uexp.readInt(size=8)
             name2 = self.uasset.getName(name2Val)
@@ -396,12 +396,11 @@ class DATA:
             for _ in range(17):
                 assert self.uexp.readInt(size=1) == 0
             ## Load the array
-            arr = []
             for _ in range(num):
                 arr.append(self.loadEntry())
             return {'size': size, 'size2': size2, 'dataType': dataType, 'prop': prop, 'arr': arr, 'name': name2}
-        else:
-            sys.exit(f"Load array property does not allow for {prop} types!")    
+
+        sys.exit(f"Load array property does not allow for {prop} types!")    
 
     def mergeArrayProperty(self, entry):
         tmp = bytearray(self.uexp.getInt(entry['size'], size=8)) # Assumes sizes are not modified!!!
@@ -604,7 +603,7 @@ class JOBDATA(DATA):
         for job in jobs:
             action = data[job]['ActionAbilityArray']['entry']['arr']
             support = data[job]['SupportAbilityArray']['entry']['arr']
-            for i in range(len(action)):
+            for i, _ in enumerate(action):
                 action[i], support[i] = pairs.pop()
 
     def shuffleTraits(self):
@@ -617,7 +616,6 @@ class JOBDATA(DATA):
         for job in data.values():
             job['JobTraitId1'] = traits.pop()
             job['JobTraitId2'] = traits.pop()
-        
 
 
 class MONSTERPARTY(DATA):
@@ -629,22 +627,23 @@ class MONSTERPARTY(DATA):
             for i in range(1, 7):
                 Id = party[f"Monster{i}Id"]['entry']['value']
                 Level = party[f"Monster{i}Level"]['entry']['value']
-                if Id < 0: continue
+                if Id < 0:
+                    continue
                 if Id not in self.levels:
                     self.levels[Id] = set()
                 self.levels[Id].add(Level)
 
     # NOTE: This is a crude estimate of chapter based on the enemy's level!
     def getChapter(self, Id):
-        try:
-            chapter = int(min(self.levels[Id].difference([1])) / 10)
-            return min(chapter, 7)
-        except:
-            pass
-        if Id == 105506: # Might be part of a boss battle???
-            return 5
-        if Id == 106407: # Might be part of a boss battle???
-            return 2
+        if Id not in self.levels:
+            return
+
+        levels = self.levels[Id].difference([1])
+        if levels == set():
+            return
+
+        chapter = int(min(levels) / 10)
+        return min(chapter, 7)
 
 
 class MONSTERS(DATA):
@@ -658,16 +657,20 @@ class MONSTERS(DATA):
         self.steals = {}
         for d in self.data.values():
             Id = d['Id']['entry']['value']
-            try:
-                name = self.monster.getName(Id)
-            except:
-                name = ''
+            # Skip monster with no distinguishable chapter (i.e. level)
+            chapter = self.party.getChapter(Id)
+            if not chapter:
+                continue
+            # Skip monster without a name
+            name = self.monster.getName(Id)
+            if not name:
+                continue
+
             stealRate = d['StealRate']['entry']['value']
             stealItem = d['StealItem']['entry']['value']
             stealRareItem = d['StealRareItem']['entry']['value']
-
             self.steals[Id] = {
-                'shuffle': name != '' and stealRate != 50, ## INCLUDE IN SWAPPING
+                'shuffle': stealRate != 50, ## INCLUDE IN SWAPPING
                 'chapter': self.party.getChapter(Id), # For grouping by "chapters" (TODO: do this accurately)
                 'steal': {
                     # I'll probably just shuffle items and rare items separately.....
@@ -730,6 +733,7 @@ class MONSTERS(DATA):
     def update(self):
         for d in self.data.values():
             Id = d['Id']['entry']['value']
+            # Stats and weaknesses
             for key, value in self.resistance[Id]['Magic'].items():
                 d[key]['entry']['value'] = value
             for key, value in self.resistance[Id]['Weapon'].items():
@@ -738,14 +742,11 @@ class MONSTERS(DATA):
                 key2 = 'ResistanceLevel' + key[10:]
                 d[key]['entry']['value'] = res
                 d[key2]['entry']['value'] = level
-            try:
-                self.monster.getName(Id)
+            # Stealable items
+            if Id in self.steals:
                 steals = self.steals[Id]['steal']
-            except:
-                # Reuse stealable items (they are kept the same as their predecessor in almost every case)
-                assert steals
-            for key, value in steals.items():
-                d[key]['entry']['value'] = value
+                for key, value in steals.items():
+                    d[key]['entry']['value'] = value
 
         super().update()
 
@@ -771,11 +772,13 @@ class MONSTERS(DATA):
     def spoilers(self, filename):
         with open(filename, 'w') as sys.stdout:
             for Id, data in self.data.items():
+                if Id not in self.steals:
+                    continue
+
                 steal = self.steals[Id]['steal']
-                try:
-                    name = self.monster.getName(Id)
-                except:
-                    name = '          '
+                name = self.monster.getName(Id)
+                assert name
+
                 if steal['StealRate'] == 50:
                     assert steal['StealItem'] == -1
                     assert steal['StealRareItem'] == -1
@@ -783,10 +786,12 @@ class MONSTERS(DATA):
                 else:
                     if steal['StealItem'] > 0:
                         stealItem = self.items.getName(steal['StealItem'])
+                        assert stealItem
                     else:
                         stealItem = "NONE"
                     if steal['StealRareItem'] > 0:
                         stealRareItem = self.items.getName(steal['StealRareItem'])
+                        assert stealRareItem
                     else:
                         stealRareItem = "NONE"
                     print(', '.join([name, str(self.steals[Id]['chapter']), stealItem, stealRareItem]))
@@ -843,6 +848,7 @@ class QUESTS(DATA):
             return f"{rewardCount} pg"
         if rewardId > 0:
             item = self.text.getName(rewardId)
+            assert item
             if rewardCount > 1:
                 item += f" x{rewardCount}"
             return item
@@ -929,11 +935,12 @@ class TREASURES(DATA):
     def getContents(self, itemId, itemCount):
         if itemId < 0:
             return f"{itemCount} pg"
-        else:
-            item = self.text.getName(itemId)
-            if itemCount > 1:
-                item += f" x{itemCount}"
-            return item
+
+        item = self.text.getName(itemId)
+        assert item
+        if itemCount > 1:
+            item += f" x{itemCount}"
+        return item
 
     def spoilers(self, filename):
         with open(filename, 'w') as sys.stdout:
@@ -969,11 +976,9 @@ class TEXT(DATA):
             self.descKey = None
 
     def getName(self, key):
-        return self.data[key][self.nameKey]['entry']['string']
+        if key in self.data:
+            return self.data[key][self.nameKey]['entry']['string']
 
     def getDescription(self, key):
         if self.descKey:
             return self.data[key][self.descKey]['entry']['string']
-
-
-
