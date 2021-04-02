@@ -800,21 +800,30 @@ class QUESTS(DATA):
         self.text = text
         self.locations = locations
         self.questArray = self.table['QuestArray']['data']['arr']
+        with open('json/quests.json','r') as file:
+            self.json = hjson.load(file)
 
         ## Organize data for shuffling
         self.questRewards = {i:[] for i in range(8)}
         for i, quest in enumerate(self.questArray[148:]):
             if quest['RewardType']['entry']['value'] != 'EQuestRewardType::None':
-                chapter = self.getChapter(quest['QuestID']['entry']['value'])
                 rewardId = quest['RewardID']['entry']['value']
                 rewardCount = quest['RewardCount']['entry']['value']
+                subQuestIndex = quest['SubQuestIndex']['entry']['value']
+                chapter = self.getChapter(quest['SubQuestIndex']['entry']['value'])
                 self.questRewards[chapter].append({
                     'Index': 148+i,
                     'RewardId': rewardId,
                     'RewardCount': rewardCount,
                     'Vanilla': self.getReward(rewardId, rewardCount),
                     'Swap': '',
+                    'SubQuestID': str(subQuestIndex).zfill(3),
+                    'Location': self.getLocation(subQuestIndex),
+                    'Name': self.getName(subQuestIndex),
                 })
+        # Sort chapters (mainly for printouts)
+        for i in range(8):
+            self.questRewards[i] = sorted(self.questRewards[i], key=lambda x: x['SubQuestID'])
 
     def update(self):
         for chapterQuests in self.questRewards.values():
@@ -838,36 +847,31 @@ class QUESTS(DATA):
                 item += f" x{rewardCount}"
             return item
 
-    def getChapter(self, questId):
-        if questId[:5] == 'SUB_S':
-            return int(questId[5])
+    def getChapter(self, index):
+        return self.json[str(index)]['Chapter']
+
+    def getLocation(self, index):
+        return self.json[str(index)]['Location']
+
+    def getName(self, index):
+        return self.json[str(index)]['Name']
 
     def spoilers(self, filename):
         with open(filename, 'w') as sys.stdout:
-            for i in range(8):
-                if i < 6:
-                    if i == 0:
-                        print('')
-                        print('')
-                        print('--------')
-                        print('Prologue')
-                        print('--------')
-                    elif i < 5:
-                        print('')
-                        print('')
-                        print('----------')
-                        print(f'Chapter {i}')
-                        print('----------')
-                    else:
-                        print('')
-                        print('')
-                        print('----------')
-                        print('Chapter 5+')
-                        print('----------')
-                    print('')
+            for i in range(7):
+                print('')
+                print('')
+                if i == 0:
+                    print('--------')
+                    print('Prologue')
+                    print('--------')
+                else:
+                    print('---------')
+                    print(f'Chapter {i}')
+                    print('---------')
+                print('')
                 for quest in self.questRewards[i]:
-                    if quest['Vanilla'] == '----': continue
-                    print('   ', quest['Vanilla'].ljust(35, ' '), ' <-- ', quest['Swap'].ljust(15, ' '))
+                    print('   ', quest['SubQuestID'].ljust(5, ' '), quest['Location'].ljust(20, ' '), quest['Name'].ljust(35, ' '), quest['Vanilla'].ljust(35, ' '), ' <-- ', quest['Swap'].ljust(15, ' '))
 
         sys.stdout = sys.__stdout__
 

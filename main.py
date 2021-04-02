@@ -94,8 +94,6 @@ def main(settings):
     monsters.spoilers('spoilers_monsters.log')
     quests.spoilers('spoilers_quests.log')
     treasures.spoilers('spoilers_treasures.log')
-    treasures.print('treasures.csv')
-    quests.print('quests.csv')
 
 
 if __name__=='__main__':

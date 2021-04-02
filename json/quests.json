@@ -1,0 +1,709 @@
+{
+  0:
+  {
+    Chapter: 4
+    Location: Halcyonia
+    Item: Glintstone
+    Name: Getting Hold of a Glintstone
+  }
+  1:
+  {
+    Chapter: 0
+    Location: Halcyonia
+    Item: Teleport Stone x2
+    Name: Borrowing the Boat
+  }
+  2:
+  {
+    Chapter: 0
+    Location: Halcyonia
+    Item: Dart x3
+    Name: A Knife to Remember
+  }
+  3:
+  {
+    Chapter: 0
+    Location: Near Halcyonia
+    Item: Small Experience Orb x2
+    Name: Human's Best Friend: Part I
+  }
+  4:
+  {
+    Chapter: 0
+    Location: Near Halcyonia
+    Item: Mini Ether x4
+    Name: You-Know-What
+  }
+  5:
+  {
+    Chapter: 0
+    Location: Halcyonia
+    Item: Echo Herbs x3
+    Name: One Boy's Quest
+  }
+  6:
+  {
+    Chapter: 0
+    Location: Halcyonia
+    Item: 470 pg
+    Name: Business to Be Getting on With
+  }
+  7:
+  {
+    Chapter: 0
+    Location: Halcyonia
+    Item: Fresh Fish x2
+    Name: Dish of the Day
+  }
+  8:
+  {
+    Chapter: 0
+    Location: Halcyonia
+    Item: Small JP Orb x3
+    Name: Presentation Is Everything
+  }
+  9:
+  {
+    Chapter: 0
+    Location: Halcyonia
+    Item: Booster Bun (Evasion) x2
+    Name: Double Dare
+  }
+  10:
+  {
+    Chapter: 0
+    Location: Near Halcyonia
+    Item: Mythril Staff
+    Name: A Grizzly Conundrum
+  }
+  11:
+  {
+    Chapter: 0
+    Location: Halcyonia
+    Item: Ward Light x2
+    Name: Hear the Wind Blow
+  }
+  12:
+  {
+    Chapter: 1
+    Location: Halcyonia
+    Item: Wind Talisman
+    Name: Always by Your Side
+  }
+  13:
+  {
+    Chapter: 1
+    Location: Halcyonia
+    Item: 1300 pg
+    Name: Gold in the Grass
+  }
+  14:
+  {
+    Chapter: 1
+    Location: Near Halcyonia
+    Item: Booster Bun (Physical Defence) x2
+    Name: In the Dark
+  }
+  15:
+  {
+    Chapter: 1
+    Location: Halcyonia
+    Item: Feather Hat
+    Name: Belle of the Ball
+  }
+  16:
+  {
+    Chapter: 1
+    Location: Savalon
+    Item: 680 pg
+    Name: The Harbinger of Calamity
+  }
+  17:
+  {
+    Chapter: 1
+    Location: Savalon
+    Item: 520 pg
+    Name: Say It with Shells
+  }
+  18:
+  {
+    Chapter: 1
+    Location: Savalon
+    Item: Iron Bow
+    Name: Target Practice
+  }
+  19:
+  {
+    Chapter: 1
+    Location: Savalon
+    Item: Silver Glasses x2
+    Name: Book Smarts
+  }
+  20:
+  {
+    Chapter: 1
+    Location: Savalon
+    Item: Large JP Orb
+    Name: A Long Lunch
+  }
+  21:
+  {
+    Chapter: 1
+    Location: Savalon
+    Item: Snug Scarf
+    Name: Heart and Sole
+  }
+  22:
+  {
+    Chapter: 1
+    Location: Savalon
+    Item: Teleport Stone x5
+    Name: Add Some Sparkle
+  }
+  23:
+  {
+    Chapter: 1
+    Location: Savalon
+    Item: Peace Ring
+    Name: Bond of Brothers
+  }
+  24:
+  {
+    Chapter: 1
+    Location: Savalon
+    Item: Medium JP Orb x2
+    Name: Taking a Gamble
+  }
+  25:
+  {
+    Chapter: 1
+    Location: Savalon
+    Item: Booster Bun (Magical Attack) x2
+    Name: A Fragrant Lie
+  }
+  26:
+  {
+    Chapter: 1
+    Location: Savalon
+    Item: Mythril Shield
+    Name: A Fluttery Stomach
+  }
+  27:
+  {
+    Chapter: 1
+    Location: Savalon
+    Item: Small JP Orb x5
+    Name: Rich Pickings
+  }
+  28:
+  {
+    Chapter: 1
+    Location: Savalon
+    Item: Medium Experience Orb x2
+    Name: Human's Best Friend: Part II
+  }
+  29:
+  {
+    Chapter: 2
+    Location: Savalon
+    Item: Sands of Time
+    Name: Uneasy Friends
+  }
+  30:
+  {
+    Chapter: 2
+    Location: Savalon
+    Item: Medium JP Orb x2
+    Name: Tools of the Trade
+  }
+  31:
+  {
+    Chapter: 2
+    Location: Savalon
+    Item: Booster Bun (Physical Defence) x2
+    Name: One Swanky Shell
+  }
+  32:
+  {
+    Chapter: 2
+    Location: Wiswald
+    Item: Teleport Stone x7
+    Name: Pedal to the Medal
+  }
+  33:
+  {
+    Chapter: 2
+    Location: Wiswald
+    Item: Courage Ring
+    Name: Hopping Mad
+  }
+  34:
+  {
+    Chapter: 2
+    Location: Wiswald
+    Item: Booster Bun (HP) x2
+    Name: Make Do and Mend
+  }
+  35:
+  {
+    Chapter: 2
+    Location: Wiswald
+    Item: Booster Bun (MP) x2
+    Name: The Tea of Teas
+  }
+  36:
+  {
+    Chapter: 2
+    Location: Wiswald
+    Item: 2100 pg
+    Name: An Exquisite Drop
+  }
+  37:
+  {
+    Chapter: 2
+    Location: Near Wiswald
+    Item: Main-Gauche
+    Name: Seek Out That Weakness!
+  }
+  38:
+  {
+    Chapter: 2
+    Location: Near Wiswald
+    Item: Flametongue
+    Name: Seek Out That Weakness...Again!
+  }
+  39:
+  {
+    Chapter: 2
+    Location: Wiswald
+    Item: Direct Sunlight x3
+    Name: The Road Home
+  }
+  40:
+  {
+    Chapter: 2
+    Location: Wiswald
+    Item: Medium Experience Orb x3
+    Name: A Helping Hand
+  }
+  41:
+  {
+    Chapter: 2
+    Location: Wiswald
+    Item: Amulet
+    Name: Like Teacher, Like Student
+  }
+  42:
+  {
+    Chapter: 2
+    Location: Savalon
+    Item: Light Talisman
+    Name: Scales in the Sand
+  }
+  43:
+  {
+    Chapter: 2
+    Location: Wiswald
+    Item: Small JP Orb x10
+    Name: Blinded by Beauty
+  }
+  44:
+  {
+    Chapter: 2
+    Location: Wiswald
+    Item: Booster Bun (Speed) x2
+    Name: For the Sake of the Kids
+  }
+  45:
+  {
+    Chapter: 3
+    Location: Wiswald
+    Item: Bomb Arm x4
+    Name: Taste Test
+  }
+  46:
+  {
+    Chapter: 3
+    Location: Wiswald
+    Item: Ikaboshi Kabuto
+    Name: Test Your Strength
+  }
+  47:
+  {
+    Chapter: 3
+    Location: Enderno
+    Item: Large Experience Orb
+    Name: In Dreams
+  }
+  48:
+  {
+    Chapter: 3
+    Location: Enderno
+    Item: Large Experience Orb
+    Name: Human's Best Friend: Part III
+  }
+  49:
+  {
+    Chapter: 3
+    Location: Wiswald
+    Item: Heart Ring
+    Name: Leading by Example
+  }
+  50:
+  {
+    Chapter: 3
+    Location: Rimedhal
+    Item: 11500 pg
+    Name: The Wayward Merchant
+  }
+  51:
+  {
+    Chapter: 3
+    Location: Rimedhal
+    Item: Booster Bun (Aim) x2
+    Name: Mysteries of the Heart
+  }
+  52:
+  {
+    Chapter: 3
+    Location: Rimedhal
+    Item: 7700 pg
+    Name: The Joys of Spring
+  }
+  53:
+  {
+    Chapter: 3
+    Location: Rimedhal
+    Item: Adamant Bangle
+    Name: Gone Fishing
+  }
+  54:
+  {
+    Chapter: 3
+    Location: Near Rimedhal
+    Item: Carving Knife
+    Name: The Ultimate Stew
+  }
+  55:
+  {
+    Chapter: 3
+    Location: Rimedhal
+    Item: Remedy x2
+    Name: Pen Pals
+  }
+  56:
+  {
+    Chapter: 3
+    Location: Rimedhal
+    Item: Monstrous Medley x2
+    Name: That's the Spirit!
+  }
+  57:
+  {
+    Chapter: 3
+    Location: Enderno
+    Item: Large JP Orb
+    Name: Cool Customer
+  }
+  58:
+  {
+    Chapter: 6
+    Location: Rimedhal
+    Item: Booster Bun (Critical Chance) x2
+    Name: A Frosty Fable
+  }
+  59:
+  {
+    Chapter: 4
+    Location: Rimedhal
+    Item: Spellblossom x8
+    Name: The Big Brush-Off
+  }
+  60:
+  {
+    Chapter: 4
+    Location: Rimedhal
+    Item: Arctic Wind x6
+    Name: The Mystery Couple
+  }
+  61:
+  {
+    Chapter: 4
+    Location: Rimedhal
+    Item: Mark of the Void x4
+    Name: A Time to Forgive
+  }
+  62:
+  {
+    Chapter: 4
+    Location: Rimedhal
+    Item: Mal Meadworth
+    Name: Stormin' Jörmun
+  }
+  63:
+  {
+    Chapter: 4
+    Location: Enderno
+    Item: Heiji's Jitte
+    Name: Jewellery Heist
+  }
+  64:
+  {
+    Chapter: 6
+    Location: Rimedhal
+    Item: Artemis's Bow
+    Name: The Cold Soldier
+  }
+  65:
+  {
+    Chapter: 6
+    Location: Savalon
+    Item: Brave Suit
+    Name: Ant-Ipathy
+  }
+  66:
+  {
+    Chapter: 4
+    Location: Savalon
+    Item: Demon's Rod
+    Name: The Power of Flowers
+  }
+  67:
+  {
+    Chapter: 4
+    Location: Wiswald
+    Item: Medium Experience Orb x2
+    Name: A Forgotten Sound
+  }
+  68:
+  {
+    Chapter: 4
+    Location: Wiswald
+    Item: Heiji's Jitte
+    Name: Undead and Unwelcome
+  }
+  69:
+  {
+    Chapter: 5
+    Location: Halcyonia
+    Item: Assassin Dagger
+    Name: Mine Sweeping
+  }
+  70:
+  {
+    Chapter: 5
+    Location: Halcyonia
+    Item: Icebrand
+    Name: An Explosive Plan
+  }
+  71:
+  {
+    Chapter: 5
+    Location: Savalon
+    Item: Giant's Armour
+    Name: To Be a King
+  }
+  72:
+  {
+    Chapter: 5
+    Location: Wiswald
+    Item: Floral Robe
+    Name: A Scaly Tale
+  }
+  73:
+  {
+    Chapter: 6
+    Location: Savalon
+    Item: Holy Dagger
+    Name: A Message from the Shadows
+  }
+  74:
+  {
+    Chapter: 5
+    Location: Wiswald
+    Item: Divine Rod
+    Name: Keep Your Feet on the Ground
+  }
+  75:
+  {
+    Chapter: 5
+    Location: Rimedhal
+    Item: Life Ring
+    Name: The Price of Defeat
+  }
+  76:
+  {
+    Chapter: 5
+    Location: Holograd
+    Item: 10000 pg
+    Name: Fingers in the Fruit Bowl
+  }
+  77:
+  {
+    Chapter: 5
+    Location: Holograd
+    Item: Big Brush
+    Name: A Comic Episode
+  }
+  78:
+  {
+    Chapter: 5
+    Location: Holograd
+    Item: Apollo's Bow
+    Name: For the Common Good
+  }
+  79:
+  {
+    Chapter: 5
+    Location: Chromitate Mines
+    Item: Medium JP Orb x3
+    Name: The Good Son
+  }
+  80:
+  {
+    Chapter: 5
+    Location: Holograd
+    Item: Minerva Bustier
+    Name: Old Friends
+  }
+  81:
+  {
+    Chapter: 5
+    Location: Halcyonia
+    Item: Wavesong Necklace
+    Name: The Sound of the Sea
+  }
+  82:
+  {
+    Chapter: 5
+    Location: Wiswald
+    Item: Fairyglow Charm
+    Name: Tree's a Crowd
+  }
+  83:
+  {
+    Chapter: 6
+    Location: Holograd
+    Item: Genji Armour
+    Name: Let Your Light Shine
+  }
+  84:
+  {
+    Chapter: 6
+    Location: Halcyonia
+    Item: Large JP Orb x2
+    Name: Clearing the Wreckage
+  }
+  85:
+  {
+    Chapter: 6
+    Location: Halcyonia
+    Item: Chaos Blade
+    Name: The God of Trees
+  }
+  86:
+  {
+    Chapter: 6
+    Location: Wiswald
+    Item: Blood Blade
+    Name: To Kill a King
+  }
+  87:
+  {
+    Chapter: 6
+    Location: Enderno
+    Item: Wizard's Robes
+    Name: Emergency Measures
+  }
+  88:
+  {
+    Chapter: 6
+    Location: Near Enderno
+    Item: Dalmatica
+    Name: A Divine Duel
+  }
+  89:
+  {
+    Chapter: 6
+    Location: Near Holograd
+    Item: Yoichi's Bow
+    Name: To Arms!
+  }
+  90:
+  {
+    Chapter: 6
+    Location: Holograd
+    Item: Star of the Abyss x4
+    Name: New Horizons
+  }
+  91:
+  {
+    Chapter: 6
+    Location: Savalon
+    Item: Normalizer
+    Name: The Bard and the Beastmaster
+  }
+  92:
+  {
+    Chapter: 6
+    Location: Serpent’s Grotto
+    Item: Growth Egg x2
+    Name: Doctor's Orders
+  }
+  93:
+  {
+    Chapter: 6
+    Location: Musa
+    Item: Small Experience Orb x2
+    Name: Dry Thy Tears
+  }
+  94:
+  {
+    Chapter: 6
+    Location: Mag Mell
+    Item: Smart Cravat
+    Name: A World in Bloom
+  }
+  95:
+  {
+    Chapter: 6
+    Location: Mag Mell
+    Item: Giant JP Orb
+    Name: The Snowman
+  }
+  96:
+  {
+    Chapter: 6
+    Location: Mag Mell
+    Item: Blessing
+    Name: A Fairy's Blessing
+  }
+  97:
+  {
+    Chapter: 6
+    Location: Mag Mell
+    Item: Reflect Ring
+    Name: Feline Free
+  }
+  98:
+  {
+    Chapter: 6
+    Location: Holograd
+    Item: Giant JP Orb
+    Name: Memory Loss
+  }
+  99:
+  {
+    Chapter: 6
+    Location: Musa
+    Item: Genji Gloves
+    Name: Around the World
+  }
+  100:
+  {
+    Chapter: 6
+    Location: Mag Mell
+    Item: Growth Egg x2
+    Name: The Collector
+  }
+}
