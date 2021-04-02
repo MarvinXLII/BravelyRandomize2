@@ -520,7 +520,6 @@ class DATA:
                         key = self.uasset.getName(self.uexp.readInt(size=8))
                     table[name]['data'][key] = self.loadEntry()
             nextValue = self.uexp.readInt(size=8)
-        return
 
 
     def update(self):
@@ -970,9 +969,10 @@ class TEXT(DATA):
         self.data = list(self.table.values())[0]['data']
         keys = list(self.data[next(iter(self.data))].keys())
         self.nameKey = list(filter(lambda key: 'Name' in key, keys))[0]
-        try:
-            self.descKey = list(filter(lambda key: 'Description' in key, keys))[0]
-        except:
+        descKey = self.nameKey.replace('Name', 'Description')
+        if descKey in keys:
+            self.descKey = descKey
+        else:
             self.descKey = None
 
     def getName(self, key):

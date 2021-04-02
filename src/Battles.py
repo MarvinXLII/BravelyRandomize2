@@ -6,17 +6,20 @@ def shuffleResistance(monsters, separate):
 
     def shuffle(weights):
         for i, key in enumerate(keys):
-            if not weights[i]: continue
+            if not weights[i]:
+                continue
             key2 = random.choices(keys[i:], weights[i:])[0]
             assert weights[keys.index(key2)]
             monsters.resistance[key]['Magic'], monsters.resistance[key2]['Magic'] = monsters.resistance[key2]['Magic'], monsters.resistance[key]['Magic']
         for i, key in enumerate(keys):
-            if not weights[i]: continue
+            if not weights[i]:
+                continue
             keys2 = random.choices(keys[i:], weights[i:])[0]
             assert weights[keys.index(key2)]
             monsters.resistance[key]['Weapon'], monsters.resistance[key2]['Weapon'] = monsters.resistance[key2]['Weapon'], monsters.resistance[key]['Weapon']
         for i, key in enumerate(keys):
-            if not weights[i]: continue
+            if not weights[i]:
+                continue
             keys2 = random.choices(keys[i:], weights[i:])[0]
             assert weights[keys.index(key2)]
             monsters.resistance[key]['Effects'], monsters.resistance[key2]['Effects'] = monsters.resistance[key2]['Effects'], monsters.resistance[key]['Effects']

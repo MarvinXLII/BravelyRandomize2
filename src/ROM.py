@@ -67,13 +67,13 @@ class ROM:
             if sum(test) == 1:
                 index = test.index(True)
                 return self.fileNames[baseName][index]
-            else:
-                print(self.fileNames[baseName])
-                sys.exit(f"Full file path cannot be uniquely determined from {fileName}!")
+            print(self.fileNames[baseName])
+            sys.exit(f"Full file path cannot be uniquely determined from {fileName}!")
                     
     def extractFile(self, fileName):
         key = self.getFullPath(fileName)
-        if not key: return
+        if not key:
+            return
 
         # Check most recent patches first!
         data = None
@@ -93,7 +93,7 @@ class ROM:
                     tmp = self.readBytes(size)
                     try:
                         data += zstandard.decompress(tmp)
-                    except:
+                    except zstandard.ZstdError:
                         data += zlib.decompress(tmp)
             else:
                 pointer = f['base'] + 8*3 + 4 + 20 + 5
@@ -160,18 +160,18 @@ class ROM:
     def readString(self, size):
         if size < 0:
             s = self.readBytes(-size*2)
-            string = s.decode('utf-16')
-        else:
-            s = self.readBytes(size)
-            string = s.decode('utf-8')
-        return string[:-1]
+            return s.decode('utf-16')[:-1]
+        s = self.readBytes(size)
+        return s.decode('utf-8')[:-1]
 
     def pakString(self, string):
         size = len(string) + 1
-        try:
-            return string.encode('utf-8') + bytearray([0]), size
-        except:
-            return string.encode('utf-16')[2:] + bytearray([0]*2), -size*2
+        utf8 = string.encode('utf-8') + bytearray([0])
+        # Not sure if utf8 will always work. Return utf16 as needed.
+        for c in utf8:
+            if c & 0x80:
+                return string.encode('utf-16')[2:] + bytearray([0]*2), -size*2
+        return utf8, size
 
     def readInt(self, size):
         return int.from_bytes(self.file.read(size), byteorder='little', signed=True)
