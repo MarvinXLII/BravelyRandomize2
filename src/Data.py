@@ -875,16 +875,6 @@ class QUESTS(DATA):
 
         sys.stdout = sys.__stdout__
 
-    def print(self, fileName):
-        with open(fileName, 'w') as sys.stdout:
-            for i, q in enumerate(self.questArray):
-                reward = self.getReward(q['RewardID']['entry']['value'], q['RewardCount']['entry']['value'])
-                if reward:
-                    print(', '.join([str(i), q['QuestID']['entry']['value'], str(q['Chapter']['entry']['value']), str(self.getChapter(q['QuestID']['entry']['value'])), reward]))
-                else:
-                    print(', '.join([str(i), q['QuestID']['entry']['value'], str(q['Chapter']['entry']['value']), str(self.getChapter(q['QuestID']['entry']['value'])), "NONE"]))
-
-        sys.stdout = sys.__stdout__
 
 class TREASURES(DATA):
     def __init__(self, rom, text, locations):
@@ -944,34 +934,6 @@ class TREASURES(DATA):
             if itemCount > 1:
                 item += f" x{itemCount}"
             return item
-
-    def print(self, fileName):
-        keys = list(self.data.keys()) # TW_0010_TN_1
-        headers = self.data[keys[0]].keys()
-        with open(fileName, 'w') as sys.stdout:
-            print(',,'+','.join(headers))
-            for key in keys:
-                t = []
-                for hi in headers:
-                    t.append(self.data[key][hi]['entry']['value'])
-                t = list(map(str, t))
-                try:
-                    count = self.data[key]['ItemCount']['entry']['value']
-                    if self.data[key]['TreasureType']['entry']['value'] == 'ETreasureType::Item':
-                        item = self.text.getName(self.data[key]['ItemId']['entry']['value'])
-                        if count > 1:
-                            item = f"{count}x {item}"
-                    elif self.data[key]['TreasureType']['entry']['value'] == 'ETreasureType::Money':
-                        item = f"{count} pg"
-                except:
-                    item = ''
-                try:
-                    location = self.getLocation(key)
-                except:
-                    location = ''
-                print(location + ',' + item + ',' + ','.join(t))
-
-        sys.stdout = sys.__stdout__
 
     def spoilers(self, filename):
         with open(filename, 'w') as sys.stdout:
