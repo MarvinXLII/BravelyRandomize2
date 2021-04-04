@@ -8,8 +8,8 @@ class FILE:
         self.data = data
         self.addr = 0
 
-    def readInt(self, size=4):
-        value = int.from_bytes(self.data[self.addr:self.addr+size], byteorder='little', signed=True)
+    def readInt(self, size=4, signed=True):
+        value = int.from_bytes(self.data[self.addr:self.addr+size], byteorder='little', signed=signed)
         self.addr += size
         return value
 
@@ -195,6 +195,8 @@ class DATA:
                 data += self.mergeTextProperty(d['entry'])
             elif d['type'] == 'IntProperty':
                 data += self.mergeIntProperty(d['entry'])
+            elif d['type'] == 'UInt32Property':
+                data += self.mergeUInt32Property(d['entry'])
             elif d['type'] == 'ArrayProperty':
                 data += self.mergeArrayProperty(d['entry'])
             elif d['type'] == 'StrProperty':
@@ -332,6 +334,19 @@ class DATA:
         tmp += self.uexp.getInt(entry['value'], size=entry['size'])
         return tmp
 
+    def loadUInt32Property(self):
+        size = self.uexp.readInt(size=8)
+        assert size == 4
+        self.uexp.addr += 1
+        value = self.uexp.readInt(size, signed=False)
+        return {'size': size, 'value': value}
+
+    def mergeUInt32Property(self, entry):
+        tmp = self.uexp.getInt(entry['size'], size=8)
+        tmp += bytearray([0])
+        tmp += self.uexp.getInt(entry['value'], size=entry['size'], signed=False)
+        return tmp
+
     def loadByteProperty(self):
         size = self.uexp.readInt(size=8)
         assert size == 1
@@ -447,6 +462,11 @@ class DATA:
                     'type': prop,
                     'entry': self.loadIntProperty(),
                 }
+            elif prop == 'UInt32Property':
+                dic[key2] = {
+                    'type': prop,
+                    'entry': self.loadUInt32Property(),
+                }
             elif prop == 'ArrayProperty':
                 dic[key2] = {
                     'type': prop,
@@ -536,6 +556,50 @@ class DATA:
         self.rom.patchFile(self.uexp.data, f"{self.fileName}.uexp")
 
 
+
+class ACTIONS(DATA):
+    def __init__(self, rom, text):
+        super().__init__(rom, 'ActionAbilityAsset')
+        self.data = self.table['ActionAbilityDataMap']['data']
+        self.text = text # ABILITY TEXT
+
+        self.skills = {}
+        for Id, skill in self.data.items():
+            name = self.text.getName(Id)
+            if not name:
+                continue
+            description = self.text.getDescription(Id)
+            job = skill['JobId']['entry']['value']
+            cost = skill['Cost']['entry']['value']
+            costValue = skill['CostValue']['entry']['value']
+            costType = skill['CostType']['entry']['value']
+            self.skills[Id] = {
+                'Job': job,
+                'Cost': cost,
+                'CostValue': costValue,
+                'CostType': costType,
+                'Name': name,
+                'Description': description,
+            }
+
+class SUPPORT(DATA):
+    def __init__(self, rom, text):
+        super().__init__(rom, 'SupportAbilityAsset')
+        self.data = self.table['SupportAbilityDataMap']['data']
+        self.text = text
+
+        self.skills = {}
+        for Id, skill in self.data.items():
+            name = self.text.getName(Id)
+            if not name:
+                continue
+            description = self.text.getDescription(Id)
+            cost = skill['AbilityCost']['entry']['value']
+            self.skills[Id] = {
+                'AbilityCost': cost,
+                'Name': name,
+                'Description': description,
+            }
 
 
 class JOBS(DATA):
