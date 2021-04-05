@@ -3,6 +3,9 @@ import random
 ## TODO
 # - Should Benediction be included with healing? NO if it works with items!
 # - does Freehand work for all abilities???
+# - does Magic Critical only affect spells or also physical attacks with an element? e.g. Sky Slicer of thief
+# - weapon lores should probably end up on jobs with weapon-specific attacks
+# - should job sampling for weapon-based attacks be biased towards jobs with strong weapons affinities (S, A, .. maybe B?)
 
 
 def shuffleJobAbilities(data):
@@ -19,6 +22,7 @@ def shuffleJobAbilities(data):
     # Job names
     names = list(data.job.keys())
 
+    # GROUP OF SKILLS up to slot 15
     def fillGroup(skills):
 
         # Pick a job
@@ -42,10 +46,35 @@ def shuffleJobAbilities(data):
         # Remove skills from candidates
         candidates['skills'] = list(filter(lambda x: x not in skills, candidates['skills']))
 
-    def fillSkills(skills, targets):
+    # GROUP OF SUPPORT up to slot 17 (includes traits!)
+    def fillSupport(skills):
+
+        # Pick a job
+        i = random.randint(0, 23)
+        while sum(vacant[i][:17]) < len(skills): # Ensures enough room for skills
+            i = random.randint(0, 23)
+
+        # Setup slots for the remaining skills
+        slots = []
+        for _ in enumerate(skills):
+            j = random.choices(range(17), vacant[i][:17])[0]
+            vacant[i][j] = False
+            slots.append(j)
+        slots.sort()
+
+        # Assign skills to the slots
+        for slot, skill in zip(slots, skills):
+            data.job[names[i]][slot] = skill
+            assignments[skill] = i
+
+        # Remove skills from candidates
+        candidates['support'] = list(filter(lambda x: x not in skills, candidates['support']))
+
+    def addSkills(skills, targets):
         random.shuffle(skills) # Order not required for these!
-        
-        i = assignments[targets[0]]
+
+        target = random.sample(targets, 1)[0]
+        i = assignments[target]
         if sum(vacant[i]) < len(skills):
             return False
 
@@ -60,10 +89,11 @@ def shuffleJobAbilities(data):
         return True
         
 
-    def fillSupport(supports, targets):
+    def addSupport(supports, targets):
         random.shuffle(supports) # Order not required for these!
         
-        i = assignments[targets[0]]
+        target = random.sample(targets, 1)[0]
+        i = assignments[target]
         if sum(vacant[i]) < len(supports):
             return False
 
@@ -80,117 +110,190 @@ def shuffleJobAbilities(data):
 
     #### FIRST: FILL ALL GROUPINGS
 
-    # MONK SKILLS & SUPPORT
-    skills = data.pickIds(1, "Inner Alchemy", "Invigorate", "Mindfulness")
-    fillGroup(skills)
-    supports = data.getIds("Concentration")
-    assert fillSupport(supports, skills)
+    # MONK SKILLS
+    monk = data.pickIds(1, "Inner Alchemy", "Invigorate", "Mindfulness")
+    fillGroup(monk)
     
-    # WHITE MAGE SUPPORT
-    # HOW WILL I ADD THE OTHER GROUPS? MAYBE JUST ADD GROUPS, THEN PICK A JOB TO ADD HOLISTIC MEDICINE TO?
-    skills = [
-        data.getIds("Cure", "Cura", "Curaga"),
-    ]
-    for skillSet in skills:
-        fillGroup(skillSet)
-    supports = data.getIds("Holistic Medicine")
-    assert fillSupport(supports, random.sample(skills, 1)[0])
+    # Healing spells
+    wm_cure = data.getIds("Cure", "Cura", "Curaga")
+    fillGroup(wm_cure)
 
     # WHITE MAGE -- revives
-    skills = data.getIds("Raise", "Arise", "Raise All")
-    fillGroup(skills)
+    wm_raise = data.getIds("Raise", "Arise", "Raise All")
+    fillGroup(wm_raise)
 
     # WHITE MAGE -- statuses
-    skills = data.getIds("Basuna", "Esuna")
-    fillGroup(skills)
+    wm_basuna = data.getIds("Basuna", "Esuna")
+    fillGroup(wm_basuna)
 
-    # DARK MAGE
-    skills = data.getIds("Fire", "Fira", "Firaga", "Flare")
-    fillGroup(skills)
+    # BLACK MAGE
+    bm_fire = data.getIds("Fire", "Fira", "Firaga", "Flare")
+    fillGroup(bm_fire)
     
-    skills = data.getIds("Blizzard", "Blizzara", "Blizzaga", "Freeze")
-    fillGroup(skills)
+    bm_blizzard = data.getIds("Blizzard", "Blizzara", "Blizzaga", "Freeze")
+    fillGroup(bm_blizzard)
     
-    skills = data.getIds("Thunder", "Thundara", "Thundaga", "Burst")
-    fillGroup(skills)
+    bm_thunder = data.getIds("Thunder", "Thundara", "Thundaga", "Burst")
+    fillGroup(bm_thunder)
 
     # VANGUARD
-    skills = data.getIds("Aggravate", "Infuriate")
-    fillGroup(skills)
+    vg_target = data.getIds("Aggravate", "Infuriate")
+    fillGroup(vg_target)
 
-    skills = data.getIds("Sword of Stone", "Quake Blade")
-    fillGroup(skills)
+    vg_earth = data.getIds("Sword of Stone", "Quake Blade")
+    fillGroup(vg_earth)
 
-    skills = data.getIds("Shield Bash", "Ultimatum")
-    fillGroup(skills)
-    supports = data.getIds("Attention Seeker")
-    assert fillSupport(supports, skills)
+    vg_delay = data.getIds("Shield Bash", "Ultimatum")
+    fillGroup(vg_delay)
 
     # TROUBADOR -- Born Entertainor support also works for Artist skills
-    troubador = data.pickIds(4, "Don't Let 'Em Get To You", "Don't Let 'Em Trick You", "Step into the Spotlight",
+    bard = data.pickIds(4, "Don't Let 'Em Get To You", "Don't Let 'Em Trick You", "Step into the Spotlight",
                           "(Won't) Be Missing You", "Right Through Your Fingers", "Hurts So Bad",
                           "Work Your Magic", "All Killer No Filler")
-    fillGroup(troubador)
-    supports = data.getIds("Encore", "Extended Outro")
-    assert fillSupport(supports, troubador)
+    fillGroup(bard)
 
     # PICTOMANCER
     pictomancer = data.pickIds(3, "Disarming Scarlet", "Disenchanting Mauve", "Incurable Coral", "Indefensible Teal", "Zappable Chartreuse", )
     fillGroup(pictomancer)
-    skills = data.getIds("Mass Production")
-    assert fillSkills(skills, pictomancer)
-    supports = data.getIds("Self-Expression")
-    assert fillSupport(supports, pictomancer)
-
-    # BORN ENTERTAINOR (TROUBADOR + PICTOMANCER)
-    supports = data.getIds("Born Entertainer")
-    skills = random.sample([troubador, pictomancer], 1)[0]
-    assert fillSupport(supports, skills)
 
     # TAMER
-    skills = data.getIds("Capture", "Off the Leash", "Off the Chain")
-    fillGroup(skills)
-    supports = data.getIds("Beast Whisperer", "Animal Rescue", "Creature Comforts")
-    assert fillSupport(supports, skills)
-
+    tamer = data.getIds("Capture", "Off the Leash", "Off the Chain")
+    fillGroup(tamer)
 
     # THIEF
-    skills = data.getIds("Steal")
-    fillGroup(skills)
-    supports = data.getIds("Mug", "Magpie", "Rob Blind")
-    assert fillSupport(supports, skills)
+    thief_steal_items = data.getIds("Steal")
+    fillGroup(thief_steal_items)
 
-    skills = data.pickIds(1, "Steal Breath", "Steal Spirit", "Steal Courage")
-    fillGroup(skills)
-    supports = data.getIds("Sleight of Hand", "Up to No Good")
-    assert fillSupport(supports, skills)
+    thief_steal_other = data.pickIds(1, "Steal Breath", "Steal Spirit", "Steal Courage")
+    fillGroup(thief_steal_other)
 
-    skills = data.getIds("Sky Slicer", "Tornado's Edge")
-    fillGroup(skills)
+    thief_wind = data.getIds("Sky Slicer", "Tornado's Edge")
+    fillGroup(thief_wind)
 
     # GAMBLER
-    elementals = data.getIds("Elemental Wheel", "Real Elemental Wheel")
-    fillGroup(elementals)
-    wheels = data.pickIds(3, "Odds or Evens", "Life or Death", "Spin the Wheel", "Triples", "Bold Gambit", "Unlucky Eight")
-    fillGroup(wheels)
-    skills = random.sample([elementals, wheels], 1)[0]
-    supports = data.getIds("Born Lucky")
-    assert fillSupport(supports, skills)
+    gambler_elem = data.getIds("Elemental Wheel", "Real Elemental Wheel")
+    fillGroup(gambler_elem)
 
-    # BERZERK
-    skills = data.getIds("Vent Fury")
-    fillGroup(skills)
-    supports = data.getIds("Rage and Reason", "Free-for-All")
-    assert fillSupport(supports, skills)
+    gambler_wheels = data.pickIds(3, "Odds or Evens", "Life or Death", "Spin the Wheel", "Triples", "Bold Gambit", "Unlucky Eight")
+    fillGroup(gambler_wheels)
 
-    skills = data.getIds("Crescent Moon", "Level Slash", "Death's Door")
-    fillGroup(skills)
-    skills = data.getIds("Double Damage", "Amped Strike")
-    fillGroup(skills)
-    skills = data.getIds("Water Damage", "Flood Damage")
-    fillGroup(skills)
+    # BERZERKER
+    berz_berzerk = data.getIds("Vent Fury")
+    fillGroup(berz_berzerk)
+
+    berz_attack_all = data.getIds("Crescent Moon", "Level Slash", "Death's Door")
+    fillGroup(berz_attack_all)
+
+    berz_attack_one = data.getIds("Double Damage", "Amped Strike")
+    fillGroup(berz_attack_one)
+
+    berz_water_attack = data.getIds("Water Damage", "Flood Damage")
+    fillGroup(berz_water_attack)
 
     # RED MAGE
+    rm_earth = data.getIds("Stone", "Stonera", "Stonega", "Quake")
+    rm_wind = data.getIds("Aero", "Aerora", "Aeroga", "Tornado")
+    if random.random() > 0.5:
+        rm_earth += data.getIds("Disaster")
+    else:
+        rm_wind += data.getIds("Disaster")
+    fillGroup(rm_earth)
+    fillGroup(rm_wind)
+
+    rm_heal = data.getIds("Heal", "Healara", "Healaga")
+    fillGroup(rm_heal)
+
+    # HUNTER
+    hunter_random = data.getIds("Quickfire Flurry", "Grand Barrage")
+    fillGroup(hunter_random)
+
+    # SHIELDMASTER
+    shield = data.getIds("Bodyguard", "Defender of the People")
+    fillGroup(shield)
+
+    shield_protect = data.getIds("Protect Ally")
+    fillSupport(shield_protect)
+
+    shield_hitter = data.getIds("Heavy Hitter", "Super Heavy Hitter")
+    fillGroup(shield_hitter)
+
+    shield_reprisal = data.getIds("Reprisal", "Harsh Reprisal")
+    fillGroup(shield_reprisal)
+
+    
+    assert len(candidates['support']) + len(candidates['skills']) == sum([sum(v) for v in vacant])
+
+
+    ##########
+    # SKILLS #
+    ##########
+
+    # Pictomancer
+    skills = data.getIds("Mass Production")
+    assert addSkills(skills, pictomancer)
+
+    ###########
+    # SUPPORT #
+    ###########
+
+    # Monk
+    supports = data.getIds("Concentration")
+    assert addSupport(supports, monk)
+
+    # Healing Spells
+    supports = data.getIds("Holistic Medicine")
+    assert addSupport(supports, wm_cure + rm_heal)
+
+    # Vanguard -- attack and crit rate scale with target chance
+    supports = data.getIds("Attention Seeker")
+    assert addSupport(supports, vg_target)
+
+    # Bard -- singing-specific supports
+    supports = data.getIds("Encore", "Extended Outro")
+    assert addSupport(supports, bard)
+
+    # Pictomancer
+    supports = data.getIds("Self-Expression")
+    assert addSupport(supports, pictomancer)
+
+    # Bard + Pictomancer
+    supports = data.getIds("Born Entertainer")
+    assert addSupport(supports, bard + pictomancer)
+
+    # Tamer
+    supports = data.getIds("Beast Whisperer", "Animal Rescue", "Creature Comforts")
+    assert addSupport(supports, tamer)
+
+    # Thief
+    supports = data.getIds("Mug", "Magpie", "Rob Blind")
+    assert addSupport(supports, thief_steal_items)
+
+    supports = data.getIds("Sleight of Hand", "Up to No Good")
+    assert addSupport(supports, thief_steal_other)
+
+    # Gambler
+    supports = data.getIds("Born Lucky")
+    assert addSupport(supports, gambler_elem + gambler_wheels)
+
+    # Berzerker
+    supports = data.getIds("Rage and Reason", "Free-for-All")
+    assert addSupport(supports, berz_berzerk)
+
+    # Red Mage -- attacking magic
+    supports = data.getIds("Magic Critical")
+    assert addSupport(supports, bm_fire + bm_blizzard + bm_thunder + rm_earth + rm_wind) # INCLUDE ATTACKS? e.g. Sky Slicer (thief_wind)
+
+    supports = data.getIds("Nuisance")
+    assert addSupport(supports, bm_fire + bm_blizzard + bm_thunder + rm_earth + rm_wind) # INCLUDE ATTACKS? e.g. Sky Slicer (thief_wind)
+
+    # Reg Mage -- magic spells
+    supports = data.getIds("Chainspell")
+    assert addSupport(supports, bm_fire + bm_blizzard + bm_thunder + rm_earth + rm_wind
+                       + rm_heal + wm_cure) # INCLUDE ATTACKS? e.g. Sky Slicer (thief_wind)
+    
+    # Shieldmaster -- protect
+    supports = data.getIds("Chivalrous Spirit")
+    assert addSupport(supports, shield + shield_protect)
     
     assert len(candidates['support']) + len(candidates['skills']) == sum([sum(v) for v in vacant])
 
