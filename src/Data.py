@@ -663,6 +663,10 @@ class JOBDATA(DATA):
         count = random.randint(num, len(names))
         return [self.nameToId[n] for n in random.sample(names, count)]
 
+    def pickGroup(self, groups):
+        group = random.sample(groups, 1)[0]
+        return self.getIds(*group)
+
     def update(self):
         for name, data in self.data.items():
             data['ActionAbilityArray']['entry']['arr'] = [s if s < 200000 else -1 for s in self.job[name][:15]]
