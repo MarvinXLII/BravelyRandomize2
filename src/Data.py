@@ -602,83 +602,74 @@ class SUPPORT(DATA):
             }
 
 
-class JOBS(DATA):
+class JOBSTATS(DATA):
     def __init__(self, rom):
         super().__init__(rom, 'JobCorrectionAsset')
+        self.data = self.table['JobLevelMap']['data']
 
     # Shuffles jobs
     def shuffleStats(self):
-        data = self.table['JobLevelMap']['data']
-        keys = list(data.keys())
-        for i, ki in enumerate(data):
+        keys = list(self.data.keys())
+        for i, ki in enumerate(self.data):
             kj = random.sample(keys[i:], 1)[0]
-            data[ki], data[kj] = data[kj], data[ki]
-            data[ki]['_id'], data[kj]['_id'] = data[kj]['_id'], data[ki]['_id'] # SWAP ID BACK
+            self.data[ki], self.data[kj] = self.data[kj], self.data[ki]
+            self.data[ki]['_id'], self.data[kj]['_id'] = self.data[kj]['_id'], self.data[ki]['_id'] # SWAP ID BACK
 
     # Unbiased shuffling
     def randomStats(self):
-        data = self.table['JobLevelMap']['data']
-        stats = list(data['EJobEnum::JE_Sobriety'].keys())[1:] # omit _id
-        keys = list(data.keys())
+        stats = list(self.data['EJobEnum::JE_Sobriety'].keys())[1:] # omit _id
+        keys = list(self.data.keys())
         for stat in stats: # HP, MP, ...
-            for i, ki in enumerate(data): # Freelancer, ...
+            for i, ki in enumerate(self.data): # Freelancer, ...
                 kj = random.sample(keys[i:], 1)[0]
-                data[ki][stat], data[kj][stat] = data[kj][stat], data[ki][stat]
+                self.data[ki][stat], self.data[kj][stat] = self.data[kj][stat], self.data[ki][stat]
 
 
 class JOBDATA(DATA):
-    def __init__(self, rom):
+    def __init__(self, rom, actionText, supportText):
         super().__init__(rom, 'JobDataAsset')
+        self.data = self.table['JobDataMap']['data']
+        self.job = {}
+        self.skills = []
+        self.support = []
+        for name, data in self.data.items():
+            skills = data['ActionAbilityArray']['entry']['arr']
+            support = data['SupportAbilityArray']['entry']['arr']
+            jobTraitId1 = data['JobTraitId1']['entry']['value']
+            jobTraitId2 = data['JobTraitId2']['entry']['value']
+            self.job[name] = [k if k > 0 else u for k,u in zip(skills, support)]
+            self.job[name] += [jobTraitId1, jobTraitId2]
+            self.skills += list(filter(lambda x: x > 0, skills))
+            self.support += list(filter(lambda x: x > 0, support))
+            self.support += [jobTraitId1, jobTraitId2]
 
-    def shuffleSupport(self):
-        data = self.table['JobDataMap']['data']
-        jobs = data.keys()
-        support = []
-        for job in jobs:
-            support += list(filter(lambda x: x > 0, data[job]['SupportAbilityArray']['entry']['arr']))
-        random.shuffle(support)
-        for job in jobs:
-            array = data[job]['SupportAbilityArray']['entry']['arr']
-            for i, a in enumerate(array):
-                if a > 0:
-                    array[i] = support.pop()
+        self.nameToId = {}
+        for skill in self.skills:
+            name = actionText.getName(skill)
+            assert name
+            assert name not in self.nameToId
+            self.nameToId[name] = skill
+        for support in self.support:
+            name = supportText.getName(support)
+            assert name
+            assert name not in self.nameToId
+            self.nameToId[name] = support
 
-    def shuffleSkills(self):
-        data = self.table['JobDataMap']['data']
-        jobs = data.keys()
-        action = []
-        for job in jobs:
-            action += list(filter(lambda x: x > 0, data[job]['ActionAbilityArray']['entry']['arr']))
-        random.shuffle(action)
-        for job in jobs:
-            array = data[job]['ActionAbilityArray']['entry']['arr']
-            for i, a in enumerate(array):
-                if a > 0:
-                    array[i] = action.pop()
+    def getIds(self, *names):
+        return [self.nameToId[n] for n in names]
 
-    def shuffleAll(self):
-        data = self.table['JobDataMap']['data']
-        jobs = data.keys()
-        pairs = []
-        for job in jobs:
-            pairs += list(zip(data[job]['ActionAbilityArray']['entry']['arr'], data[job]['SupportAbilityArray']['entry']['arr']))
-        random.shuffle(pairs)
-        for job in jobs:
-            action = data[job]['ActionAbilityArray']['entry']['arr']
-            support = data[job]['SupportAbilityArray']['entry']['arr']
-            for i, _ in enumerate(action):
-                action[i], support[i] = pairs.pop()
+    def pickIds(self, num, *names):
+        assert num <= len(names)
+        count = random.randint(num, len(names))
+        return [self.nameToId[n] for n in random.sample(names, count)]
 
-    def shuffleTraits(self):
-        data = self.table['JobDataMap']['data']
-        traits = []
-        for job in data.values():
-            traits.append(job['JobTraitId1'])
-            traits.append(job['JobTraitId2'])
-        random.shuffle(traits)
-        for job in data.values():
-            job['JobTraitId1'] = traits.pop()
-            job['JobTraitId2'] = traits.pop()
+    def update(self):
+        for name, data in self.data.items():
+            data['ActionAbilityArray']['entry']['arr'] = [s if s < 200000 else -1 for s in self.job[name][:15]]
+            data['SupportAbilityArray']['entry']['arr'] = [s if s >= 200000 else -1 for s in self.job[name][:15]]
+            data['JobTraitId1']['entry']['value'] = self.job[name][15]
+            data['JobTraitId2']['entry']['value'] = self.job[name][16]
+        super().update()
 
 
 class MONSTERPARTY(DATA):

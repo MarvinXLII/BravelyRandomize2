@@ -3,9 +3,10 @@ import hjson
 import sys
 sys.path.append('src')
 from ROM import ROM
-from Data import DATA, QUESTS, JOBS, JOBDATA, MONSTERPARTY, MONSTERS, TREASURES, TEXT
+from Data import DATA, QUESTS, JOBSTATS, JOBDATA, MONSTERPARTY, MONSTERS, TREASURES, TEXT
 from Items import shuffleItems
 from Battles import shuffleResistance
+from Jobs import shuffleJobAbilities
 # from World import WORLD
 # from gui import randomize
 import random
@@ -27,8 +28,8 @@ def main(settings):
     monsterText = TEXT(rom, 'L10N/en/DataAsset/Monster/MonsterTextDataAsset')
 
     ### ASSETS
-    job = JOBS(rom)
-    jobdata = JOBDATA(rom)
+    jobstats = JOBSTATS(rom)
+    jobdata = JOBDATA(rom, actionText, supportText)
     monsterParty = MONSTERPARTY(rom)
     monsters = MONSTERS(rom, monsterText, itemText, monsterParty)
     treasures = TREASURES(rom, itemText, locationText)
@@ -36,26 +37,28 @@ def main(settings):
 
     ### STATS
     if settings['job-stats'] == 'swap':
-        job.shuffleStats()
+        jobstats.shuffleStats()
     elif settings['job-stats'] == 'random':
-        job.randomStats()
+        jobstats.randomStats()
     else:
         print('Skipping the job stats randomizer.')
 
     ### SKILLS AND ABILITIES
-    if settings['job-abilities'] == 'separately':
-        jobdata.shuffleSupport()
-        jobdata.shuffleSkills()
-    elif settings['job-abilities'] == 'all':
-        jobdata.shuffleAll()
-    else:
-        print('Skipping the action and support ability randomizer.')
+    # if settings['job-abilities'] == 'separately':
+    #     jobdata.shuffleSupport()
+    #     jobdata.shuffleSkills()
+    # elif settings['job-abilities'] == 'all':
+    #     jobdata.shuffleAll()
+    # else:
+    #     print('Skipping the action and support ability randomizer.')
 
     ### JOB TRAITS
-    if settings['job-traits']:
-        jobdata.shuffleTraits()
-    else:
-        print('Skipping the job traits randomizer.')
+    # if settings['job-traits']:
+    #     jobdata.shuffleTraits()
+    # else:
+    #     print('Skipping the job traits randomizer.')
+    if settings['job-abilities'] == 'all':
+        shuffleJobAbilities(jobdata)
 
     ### ITEM SHUFFLER
     if settings['items']:
@@ -76,7 +79,7 @@ def main(settings):
         sys.exit('Terminating program!')
 
     ### UPDATE SHUFFLED TABLES
-    job.update()
+    jobstats.update()
     jobdata.update()
     monsters.update()
     actionText.update()
