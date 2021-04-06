@@ -6,6 +6,7 @@ import random
 # - does Magic Critical only affect spells or also physical attacks with an element? e.g. Sky Slicer of thief
 # - weapon lores should probably end up on jobs with weapon-specific attacks
 # - should job sampling for weapon-based attacks be biased towards jobs with strong weapons affinities (S, A, .. maybe B?)
+# - How does "In One's Element" work if spell cost become BP or HP? 
 
 
 def shuffleJobAbilities(data):
@@ -147,7 +148,7 @@ def shuffleJobAbilities(data):
     fillGroup(vg_delay)
 
     # TROUBADOR -- Born Entertainor support also works for Artist skills
-    bard = data.pickIds(4, "Don't Let 'Em Get To You", "Don't Let 'Em Trick You", "Step into the Spotlight",
+    bard = data.pickIds(4, "Don't Let 'Em Get to You", "Don't Let 'Em Trick You", "Step into the Spotlight",
                           "(Won't) Be Missing You", "Right Through Your Fingers", "Hurts So Bad",
                           "Work Your Magic", "All Killer No Filler")
     fillGroup(bard)
@@ -220,7 +221,95 @@ def shuffleJobAbilities(data):
     shield_reprisal = data.getIds("Reprisal", "Harsh Reprisal")
     fillGroup(shield_reprisal)
 
-    
+    # DRAGOON WARRIOR
+    dragoon_jump = data.getIds("Jump", "Super Jump", "Soul Jump")
+    fillGroup(dragoon_jump)
+
+    dragoon_lightning = data.getIds("Thunder Thrust", "Bolt Blast")
+    fillGroup(dragoon_lightning)
+
+    # SPIRITMASTER
+    spm_spirits = data.getIds("Healthbringer", "Basunabringer", "Spiritbringer", "Lifebringer", "Bravebringer", "Purebringer")
+    random.shuffle(spm_spirits)
+    fillGroup(spm_spirits)
+
+    spm_light = data.getIds("Banish", "Banishra", "Banishga", "Holy")
+    fillGroup(spm_light)
+
+    spm_regen = data.getIds("Regeneration", "Reraise")
+    fillGroup(spm_regen)
+
+    # SWORDMASTER
+    swm_flurry = data.getIds("Fourfold Flurry", "Ninefold Flurry")
+    fillGroup(swm_flurry)
+
+    swm_stance1 = data.getIds("Fluid Stance", "Solid Stance")
+    swm_stance2 = data.getIds("Solid Right Style", "Fluid Left Style", "Solid Slash", "Fluid Flow", "Solid Smash", "Fluid Frenzy")
+    random.shuffle(swm_stance1)
+    random.shuffle(swm_stance2)
+    fillGroup(swm_stance1 + swm_stance2)
+
+    # ORACLE
+    oracle_quick = data.getIds("Quick", "Quickga")
+    fillGroup(oracle_quick)
+
+    oracle_slow = data.getIds("Slow", "Slowga")
+    fillGroup(oracle_slow)
+
+    oracle_haste = data.getIds("Haste", "Hastega")
+    fillGroup(oracle_haste)
+
+    oracle_triple = data.getIds("Triple", "Triplara", "Triplaga")
+    fillGroup(oracle_triple)
+
+    # SALVE-MAKER
+    svm_survey = data.getIds("Survey", "Analysis")
+    fillGroup(svm_survey)
+
+    svm_tonic = data.getIds("BP Tonic", "Double BP Tonic")
+    fillGroup(svm_tonic)
+
+    svm_philtre = data.getIds("Philtre", "Heartbreak")
+    fillGroup(svm_philtre)
+
+    svm_compounding = data.getIds("Compounding", "Advanced Compounding")
+    fillGroup(svm_compounding)
+
+    # ARCANIST
+    arc_dark = data.getIds("Dark", "Darkra", "Darkga", "Doomsday")
+    fillGroup(arc_dark)
+
+    arc_comet = data.getIds("Comet", "Meteor")
+    fillGroup(arc_comet)
+
+    arc_pairs1 = data.getIds("Ardour", "Electon")
+    arc_pairs2 = data.getIds("Meltdown", "Apocalypse")
+    arc_pairs = arc_pairs1 + arc_pairs2
+    fillGroup(arc_pairs)
+
+    # Bastion
+    bast_light = data.getIds("Light of Justice", "Holy Light")
+    fillGroup(bast_light)
+
+    # Phantom
+    phan_shroud = data.getIds("Shroud", "Burial Shroud")
+    fillGroup(phan_shroud)
+
+    phan_nightmare = data.getIds("Recurring Nightmare", "Never-Ending Nightmare")
+    fillGroup(phan_nightmare)
+
+    # Hellblade
+    hell_dread = data.getIds("Dread Blade", "Terrorise")
+    fillGroup(hell_dread)
+
+    # Brave
+    brave_gravity = data.getIds("Supergravity", "Hypergravity", "Gigagravity")
+    fillGroup(brave_gravity)
+
+    brave_bp = data.getIds("Wall of Woe", "Dawn of Odyssey")
+    random.shuffle(brave_bp)
+    fillGroup(brave_bp)
+
     assert len(candidates['support']) + len(candidates['skills']) == sum([sum(v) for v in vacant])
 
 
@@ -228,72 +317,108 @@ def shuffleJobAbilities(data):
     # SKILLS #
     ##########
 
+    check = True
+    
     # Pictomancer
     skills = data.getIds("Mass Production")
-    assert addSkills(skills, pictomancer)
+    check *= addSkills(skills, pictomancer)
+
+    if not check:
+        return False
 
     ###########
     # SUPPORT #
     ###########
 
+    check = True
+    
     # Monk
     supports = data.getIds("Concentration")
-    assert addSupport(supports, monk)
+    check *=  addSupport(supports, monk)
 
     # Healing Spells
     supports = data.getIds("Holistic Medicine")
-    assert addSupport(supports, wm_cure + rm_heal)
+    check *= addSupport(supports, wm_cure + rm_heal)
 
     # Vanguard -- attack and crit rate scale with target chance
     supports = data.getIds("Attention Seeker")
-    assert addSupport(supports, vg_target)
+    check *= addSupport(supports, vg_target)
 
     # Bard -- singing-specific supports
     supports = data.getIds("Encore", "Extended Outro")
-    assert addSupport(supports, bard)
+    check *= addSupport(supports, bard)
 
     # Pictomancer
     supports = data.getIds("Self-Expression")
-    assert addSupport(supports, pictomancer)
+    check *= addSupport(supports, pictomancer)
 
     # Bard + Pictomancer
     supports = data.getIds("Born Entertainer")
-    assert addSupport(supports, bard + pictomancer)
+    check *= addSupport(supports, bard + pictomancer)
 
     # Tamer
     supports = data.getIds("Beast Whisperer", "Animal Rescue", "Creature Comforts")
-    assert addSupport(supports, tamer)
+    check *= addSupport(supports, tamer)
 
     # Thief
     supports = data.getIds("Mug", "Magpie", "Rob Blind")
-    assert addSupport(supports, thief_steal_items)
+    check *= addSupport(supports, thief_steal_items)
 
     supports = data.getIds("Sleight of Hand", "Up to No Good")
-    assert addSupport(supports, thief_steal_other)
+    check *= addSupport(supports, thief_steal_other)
 
     # Gambler
     supports = data.getIds("Born Lucky")
-    assert addSupport(supports, gambler_elem + gambler_wheels)
+    check *= addSupport(supports, gambler_elem + gambler_wheels)
 
     # Berzerker
     supports = data.getIds("Rage and Reason", "Free-for-All")
-    assert addSupport(supports, berz_berzerk)
+    check *= addSupport(supports, berz_berzerk)
 
     # Red Mage -- attacking magic
     supports = data.getIds("Magic Critical")
-    assert addSupport(supports, bm_fire + bm_blizzard + bm_thunder + rm_earth + rm_wind) # INCLUDE ATTACKS? e.g. Sky Slicer (thief_wind)
+    check *= addSupport(supports, bm_fire + bm_blizzard + bm_thunder + rm_earth + rm_wind + arc_pairs + arc_dark + arc_comet + oracle_triple + spm_light) # INCLUDE ATTACKS? e.g. Sky Slicer (thief_wind)
 
     supports = data.getIds("Nuisance")
-    assert addSupport(supports, bm_fire + bm_blizzard + bm_thunder + rm_earth + rm_wind) # INCLUDE ATTACKS? e.g. Sky Slicer (thief_wind)
+    check *= addSupport(supports, bm_fire + bm_blizzard + bm_thunder + rm_earth + rm_wind + arc_pairs + arc_dark + arc_comet + oracle_triple + spm_light) # INCLUDE ATTACKS? e.g. Sky Slicer (thief_wind)
 
     # Reg Mage -- magic spells
     supports = data.getIds("Chainspell")
-    assert addSupport(supports, bm_fire + bm_blizzard + bm_thunder + rm_earth + rm_wind
+    check *= addSupport(supports, bm_fire + bm_blizzard + bm_thunder + rm_earth + rm_wind + arc_pairs + arc_dark + arc_comet + oracle_triple + spm_light
                        + rm_heal + wm_cure) # INCLUDE ATTACKS? e.g. Sky Slicer (thief_wind)
     
     # Shieldmaster -- protect
     supports = data.getIds("Chivalrous Spirit")
-    assert addSupport(supports, shield + shield_protect)
+    check *= addSupport(supports, shield + shield_protect)
+
+    # Dragoon Warrior
+    supports = data.getIds("Momentum", "Highwind")
+    check *= addSupport(supports, dragoon_jump)
+
+    # Spiritmaster
+    supports = data.getIds("Spirited Defence", "There in Spirit")
+    check *= addSupport(supports, spm_spirits)
+
+    # Swordmaster
+    supports = data.getIds("Redoubled Effort")
+    check *= addSupport(supports, swm_stance1)
+
+    # Salve Maker
+    supports = data.getIds("Master Medic")
+    check *= addSupport(supports, svm_compounding)
+
+    # Arcanist
+    supports = data.getIds("All In")
+    check *= addSupport(supports, bm_fire + bm_blizzard + bm_thunder + rm_earth + rm_wind + arc_pairs + arc_dark + arc_comet + oracle_triple + spm_light) # INCLUDE ATTACKS? e.g. Sky Slicer (thief_wind)
+
+    supports = data.getIds("Wild Wizardry")
+    check *= addSupport(supports, bm_fire + bm_blizzard + bm_thunder + rm_earth + rm_wind + arc_pairs + arc_dark + arc_comet + oracle_triple + spm_light) # INCLUDE ATTACKS? e.g. Sky Slicer (thief_wind)
+
+    supports = data.getIds("Magic Amp")
+    check *= addSupport(supports, bm_fire + bm_blizzard + bm_thunder + rm_earth + rm_wind + arc_pairs + arc_dark + arc_comet + oracle_triple + spm_light) # INCLUDE ATTACKS? e.g. Sky Slicer (thief_wind)
+
+    if not check:
+        return check
     
     assert len(candidates['support']) + len(candidates['skills']) == sum([sum(v) for v in vacant])
 
@@ -316,5 +441,8 @@ def shuffleJobAbilities(data):
                 data.job[names[i]][j] = remaining.pop()
                 vacant[i][j] = False
 
+    check = True
     for v in vacant:
-        assert not sum(v)
+        check *= not sum(v)
+
+    return check

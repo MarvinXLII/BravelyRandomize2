@@ -13,7 +13,10 @@ import random
 
 def main(settings):
     # Set seed
-    random.seed(settings['seed'])
+    x = random.randint(0, 1e9)
+    random.seed(x)
+    print("seed = ", x)
+    # random.seed(settings['seed'])
     
     # Load ROM
     pak = settings['rom']
@@ -58,7 +61,10 @@ def main(settings):
     # else:
     #     print('Skipping the job traits randomizer.')
     if settings['job-abilities'] == 'all':
-        shuffleJobAbilities(jobdata)
+        count = 0
+        while not shuffleJobAbilities(jobdata):
+            count += 1
+        print("Shuffling abilities took ", count, " attempts!")
 
     ### ITEM SHUFFLER
     if settings['items']:
