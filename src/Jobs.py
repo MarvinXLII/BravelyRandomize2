@@ -2,11 +2,18 @@ import random
 
 ## TODO
 # - Should Benediction be included with healing? NO if it works with items!
-# - does Freehand work for all abilities???
+#   --> White mage cures only!!!!
 # - does Magic Critical only affect spells or also physical attacks with an element? e.g. Sky Slicer of thief
-# - weapon lores should probably end up on jobs with weapon-specific attacks
+#   --> These attack can get critical without Magic Critical (allows magic crits)
+# - weapon lores should probably end up on jobs with weapon-specific attacks???
 # - should job sampling for weapon-based attacks be biased towards jobs with strong weapons affinities (S, A, .. maybe B?)
-# - How does "In One's Element" work if spell cost become BP or HP? 
+# - How does "In One's Element" work if spell cost become BP or HP?
+# - Do Supports work properly as Traits? (and vice versa?)
+# - Do bosses fight the same way with skills and support swapped? (presumably)
+
+# OFFTOPIC
+# - Test swapping cutscenes for asterisks earned.
+# - How about items collected, eg. map, stones?
 
 
 def shuffleJobAbilities(data):
@@ -319,6 +326,10 @@ def shuffleJobAbilities(data):
 
     check = True
     
+    # White Mage
+    skills = data.getIds("Benediction") # Only works with Cure!
+    check *= addSkills(skills, wm_cure)
+
     # Pictomancer
     skills = data.getIds("Mass Production")
     check *= addSkills(skills, pictomancer)
