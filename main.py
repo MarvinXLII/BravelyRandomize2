@@ -3,7 +3,7 @@ import hjson
 import sys
 sys.path.append('src')
 from ROM import ROM
-from Data import DATA, QUESTS, JOBSTATS, JOBDATA, MONSTERPARTY, MONSTERS, TREASURES, TEXT
+from Data import DATA, QUESTS, JOBSTATS, JOBDATA, MONSTERPARTY, MONSTERS, TREASURES, TEXT, FLAGS
 from Items import shuffleItems
 from Battles import shuffleResistance
 from Jobs import shuffleJobAbilities
@@ -18,6 +18,8 @@ def main(settings):
     # Load ROM
     pak = settings['rom']
     rom = ROM(pak)
+
+    flags = FLAGS(rom)
 
     ### TEXT FILES
     actionText = TEXT(rom, 'L10N/en/DataAsset/Ability/Player/ActionAbilityTextAsset')
@@ -91,6 +93,9 @@ def main(settings):
     itemText.update()
     treasures.update()
     quests.update()
+
+    ## TESTING
+    flags.update()
 
     # Dump pak
     rom.buildPak('Sunrise-E-Switch_2_P.pak')

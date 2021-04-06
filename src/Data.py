@@ -555,7 +555,52 @@ class DATA:
         self.rom.patchFile(self.uasset.data, f"{self.fileName}.uasset")
         self.rom.patchFile(self.uexp.data, f"{self.fileName}.uexp")
 
+class FLAGS(DATA):
+    def __init__(self, rom):
+        super().__init__(rom, 'FlagDataAsset')
+        self.bools = self.table['BoolFlagDataArray']['data']['arr']
+        self.ints = self.table['IntegerFlagDataArray']['data']['arr']
 
+        self.boolsDict = {}
+        for entry in self.bools:
+            f = entry['FlagID']['entry']['value']
+            v = entry['InitialValue']['entry']['value']
+            self.boolsDict[f] = v
+
+        self.intsDict = {}
+        for entry in self.ints:
+            f = entry['FlagID']['entry']['value']
+            v = entry['InitialValue']['entry']['value']
+            self.intsDict[f] = v
+
+    def update(self):
+        ### DON'T SEEM TO DO ANYTHING
+        # self.boolsDict['LIMITATION_TELEPO'] = True
+        # self.boolsDict['RELEASE_FASTTRAVEL'] = True
+        # self.boolsDict['NPC_JBS01_J00_ON'] = True
+        # self.boolsDict['BF_EV00_TUTORIAL_01_END'] = True
+        # self.boolsDict['BF_EV00_TUTORIAL_02_END'] = True
+        # self.boolsDict['BF_EV00_TUTORIAL_03_END'] = True
+        # self.boolsDict['BF_EX_TUTORIAL_END'] = True
+        # self.boolsDict['EX01_VICTORY'] = True
+        # self.boolsDict['EX02_VICTORY'] = True
+        # self.boolsDict['EX03_VICTORY'] = True
+        # self.boolsDict['EX04_VICTORY'] = True
+        # self.boolsDict['EX05_VICTORY'] = True
+        # self.boolsDict['EX06_VICTORY'] = True
+        # self.boolsDict['EX07_VICTORY'] = True
+        # self.intsDict['ASTERISK_NUMBER'] = 2
+        # self.intsDict['INT_CHAPTER_NUMBER'] = 5
+        # self.intsDict['RELEASE_MENU_JOBABI'] = 1
+        
+        for i, value in enumerate(self.boolsDict.values()):
+            self.bools[i]['InitialValue']['entry']['value'] = value
+        
+        for i, value in enumerate(self.intsDict.values()):
+            self.ints[i]['InitialValue']['entry']['value'] = value
+
+        super().update()
+            
 
 class ACTIONS(DATA):
     def __init__(self, rom, text):
@@ -702,6 +747,20 @@ class MONSTERPARTY(DATA):
 
         chapter = int(min(levels) / 10)
         return min(chapter, 7)
+
+    def update(self):
+        # 300201 Selene
+        # 300401 Dag
+        # 300101 Horten
+        # self.data[700001]['Monster1Id']['entry']['value'] = 300101
+
+        # Originally "EV30_0110" for Selene & Dag
+        # Messed with cutscene (Killed Selene; custscene with her started AFTER)
+        # self.data[700001]['BattleEventId']['entry']['value'] = "EV30_0210"
+
+
+        
+        super().update()
 
 
 class MONSTERS(DATA):
@@ -898,6 +957,16 @@ class QUESTS(DATA):
                     self.questArray[i]['RewardType']['entry']['value'] = "EQuestRewardType::Money"
                 else:
                     self.questArray[i]['RewardType']['entry']['value'] = "EQuestRewardType::Item"
+
+        # ### TEMPORARY: ONLY SEEMS TO UPDATE THE TRACKER ICON, NOT ACTUALLY SKIPPING SCENES
+        # questID = []
+        # for i, quest in enumerate(self.questArray):
+        #     questID.append(quest['QuestID']['entry']['value'])
+
+        # index = 0
+        # for quest in self.questArray:
+        #     # quest['NextQuestID']['entry']['value'] = questID[index]
+        #     quest['NextQuestID']['entry']['value'] = "MAIN_S020610"
 
         super().update()
 
