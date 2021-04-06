@@ -215,6 +215,10 @@ def shuffleJobAbilities(data):
     hunter_random = data.getIds("Quickfire Flurry", "Grand Barrage")
     fillGroup(hunter_random)
 
+    hunter_slayer = data.pickIds(4,"Bug Slayer","Plant Slayer","Beast Slayer","Aquatic Slayer","Humanoid Slayer","Undead Slayer","Demon Slayer","Spirit Slayer")
+    random.shuffle(hunter_slayer)
+    fillGroup(hunter_slayer)
+
     # SHIELDMASTER
     shield = data.getIds("Bodyguard", "Defender of the People")
     fillGroup(shield)
@@ -397,6 +401,10 @@ def shuffleJobAbilities(data):
     supports = data.getIds("Chainspell")
     check *= addSupport(supports, bm_fire + bm_blizzard + bm_thunder + rm_earth + rm_wind + arc_pairs + arc_dark + arc_comet + oracle_triple + spm_light
                        + rm_heal + wm_cure) # INCLUDE ATTACKS? e.g. Sky Slicer (thief_wind)
+
+    # Hunter
+    supports = data.getIds("Apex Predator")
+    check *= addSupport(supports, hunter_slayer)
     
     # Shieldmaster -- protect
     supports = data.getIds("Chivalrous Spirit")

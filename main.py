@@ -13,10 +13,7 @@ import random
 
 def main(settings):
     # Set seed
-    x = random.randint(0, 1e9)
-    random.seed(x)
-    print("seed = ", x)
-    # random.seed(settings['seed'])
+    random.seed(settings['seed'])
     
     # Load ROM
     pak = settings['rom']
