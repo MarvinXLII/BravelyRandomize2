@@ -9,11 +9,17 @@ import random
 # - should job sampling for weapon-based attacks be biased towards jobs with strong weapons affinities (S, A, .. maybe B?)
 # - How does "In One's Element" work if spell cost become BP or HP?
 # - Do Supports work properly as Traits? (and vice versa?)
+#   --> Yes, they seem to work just fine! (though not each and every one tested)
 # - Do bosses fight the same way with skills and support swapped? (presumably)
+#   --> Yes, it seems like Dag uses its vanilla skills
 
 # OFFTOPIC
 # - Test swapping cutscenes for asterisks earned.
 # - How about items collected, eg. map, stones?
+# - Healing in the main menu
+#   --> Didn't work a while back but works fine now. Not sure what the issue was before.
+
+# What if a job is all supports?
 
 
 def shuffleJobAbilities(data):
