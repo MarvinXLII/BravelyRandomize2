@@ -796,7 +796,7 @@ class MONSTERS(DATA):
             stealRareItem = d['StealRareItem']['entry']['value']
             self.stealsRare[Id] = {
                 'shuffle': stealRareItem != -1,
-                'chapter': self.party.getChapter(Id), # For grouping by "chapters" (TODO: do this accurately)
+                'chapter': self.party.getChapter(Id),
                 'item': stealRareItem,
             }
 
@@ -864,7 +864,18 @@ class MONSTERS(DATA):
                 },
             }
 
+        # Store vanilla sword resistance for early bosses
+        self.selene = self.resistance[300201]['Weapon']['SwordResistance']
+        self.dag = self.resistance[300401]['Weapon']['SwordResistance']
+        self.horten = self.resistance[300101]['Weapon']['SwordResistance']
+
     def update(self):
+
+        # Ensure vanilla weakness to Sir Sloan's attack, just a safety precaution
+        self.resistance[300201]['Weapon']['SwordResistance'] = self.selene
+        self.resistance[300401]['Weapon']['SwordResistance'] = self.dag
+        self.resistance[300101]['Weapon']['SwordResistance'] = self.horten
+
         for d in self.data.values():
             Id = d['Id']['entry']['value']
             # Stats and weaknesses
