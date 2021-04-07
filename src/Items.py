@@ -14,15 +14,38 @@ def shuffleItems(treasures, quests, monsters):
             chapters[c].append((reward['RewardId'], reward['RewardCount']))
     for steal in monsters.steals.values():
         if steal['shuffle']:
-            items = steal['steal']
+            item = steal['item']
+            if item == -1:
+                print('here')
             c = min(steal['chapter'], 5)
             count = random.choices([1,2,3], [0.85,0.10,0.05])[0]
-            chapters[c].append((items['StealItem'], count))
-            chapters[c].append((items['StealRareItem'], 1))
+            chapters[c].append((item, count))
+    for stealRare in monsters.stealsRare.values():
+        if stealRare['shuffle']:
+            item = stealRare['item']
+            if item == -1:
+                print('here')
+            c = min(stealRare['chapter'], 5)
+            chapters[c].append((item, 1))
+    for drops in monsters.drops.values():
+        if drops['shuffle']:
+            item = drops['item']
+            if item == -1:
+                print('here')
+            c = min(drops['chapter'], 5)
+            count = random.choices([1,2,3], [0.85,0.10,0.05])[0]
+            chapters[c].append((item, count))
+    for dropsRare in monsters.dropsRare.values():
+        if dropsRare['shuffle']:
+            item = dropsRare['item']
+            if item == -1:
+                print('here')
+            c = min(dropsRare['chapter'], 5)
+            chapters[c].append((item, 1))
 
-    ##################
-    # SHUFFLE STEALS #
-    ##################
+    ############################
+    # SHUFFLE STEALS AND DROPS #
+    ############################
 
     for slots in chapters.values():
         random.shuffle(slots)
@@ -33,10 +56,31 @@ def shuffleItems(treasures, quests, monsters):
             idx = 0
             while chapters[c][idx][0] == -1:
                 idx += 1
-            steal['steal']['StealItem'], _ = chapters[c].pop(idx)
+            steal['item'], _ = chapters[c].pop(idx)
+
+    for stealRare in monsters.stealsRare.values():
+        if stealRare['shuffle']:
+            c = min(stealRare['chapter'], 5)
+            idx = 0
             while chapters[c][idx][0] == -1:
                 idx += 1
-            steal['steal']['StealRareItem'], _ = chapters[c].pop(idx)
+            stealRare['item'], _ = chapters[c].pop(idx)
+
+    for drops in monsters.drops.values():
+        if drops['shuffle']:
+            c = min(drops['chapter'], 5)
+            idx = 0
+            while chapters[c][idx][0] == -1:
+                idx += 1
+            drops['item'], _ = chapters[c].pop(idx)
+
+    for dropsRare in monsters.dropsRare.values():
+        if dropsRare['shuffle']:
+            c = min(dropsRare['chapter'], 5)
+            idx = 0
+            while chapters[c][idx][0] == -1:
+                idx += 1
+            dropsRare['item'], _ = chapters[c].pop(idx)
 
     #####################
     # CHESTS AND QUESTS #

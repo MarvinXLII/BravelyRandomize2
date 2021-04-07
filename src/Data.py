@@ -772,6 +772,9 @@ class MONSTERS(DATA):
         self.party = party
 
         self.steals = {}
+        self.stealsRare = {}
+        self.drops = {}
+        self.dropsRare = {}
         for d in self.data.values():
             Id = d['Id']['entry']['value']
             # Skip monster with no distinguishable chapter (i.e. level)
@@ -783,18 +786,32 @@ class MONSTERS(DATA):
             if not name:
                 continue
 
-            stealRate = d['StealRate']['entry']['value']
             stealItem = d['StealItem']['entry']['value']
-            stealRareItem = d['StealRareItem']['entry']['value']
             self.steals[Id] = {
-                'shuffle': stealRate != 50, ## INCLUDE IN SWAPPING
+                'shuffle': stealItem != -1,
                 'chapter': self.party.getChapter(Id), # For grouping by "chapters" (TODO: do this accurately)
-                'steal': {
-                    # I'll probably just shuffle items and rare items separately.....
-                    'StealRate': stealRate,
-                    'StealItem': stealItem,
-                    'StealRareItem': stealRareItem,
-                }
+                'item': stealItem,
+            }
+
+            stealRareItem = d['StealRareItem']['entry']['value']
+            self.stealsRare[Id] = {
+                'shuffle': stealRareItem != -1,
+                'chapter': self.party.getChapter(Id), # For grouping by "chapters" (TODO: do this accurately)
+                'item': stealRareItem,
+            }
+
+            dropItem = d['DropItemId']['entry']['value']
+            self.drops[Id] = {
+                'shuffle': dropItem != -1,
+                'chapter': self.party.getChapter(Id),
+                'item': dropItem,
+            }
+
+            dropRareItem = d['DropRareItemId']['entry']['value']
+            self.dropsRare[Id] = {
+                'shuffle': dropRareItem != -1,
+                'chapter': self.party.getChapter(Id),
+                'item': dropRareItem,
             }
 
         self.resistance = {}
@@ -861,9 +878,14 @@ class MONSTERS(DATA):
                 d[key2]['entry']['value'] = level
             # Stealable items
             if Id in self.steals:
-                steals = self.steals[Id]['steal']
-                for key, value in steals.items():
-                    d[key]['entry']['value'] = value
+                d['StealItem']['entry']['value'] = self.steals[Id]['item']
+            if Id in self.stealsRare:
+                d['StealItem']['entry']['value'] = self.steals[Id]['item']
+            # Dropped items
+            if Id in self.drops:
+                d['DropItemId']['entry']['value'] = self.drops[Id]['item']
+            if Id in self.dropsRare:
+                d['DropRareItemId']['entry']['value'] = self.dropsRare[Id]['item']
 
         super().update()
 
@@ -889,29 +911,45 @@ class MONSTERS(DATA):
     def spoilers(self, filename):
         with open(filename, 'w') as sys.stdout:
             for Id, data in self.data.items():
-                if Id not in self.steals:
+                if Id in self.steals or Id in self.stealsRare or Id in self.drops or Id in self.dropsRare:
+                    name = self.monster.getName(Id)
+                    assert name
+                else:
                     continue
 
-                steal = self.steals[Id]['steal']
-                name = self.monster.getName(Id)
-                assert name
+                if name == "Bandit A":
+                    print('here')
+                items = []
 
-                if steal['StealRate'] == 50:
-                    assert steal['StealItem'] == -1
-                    assert steal['StealRareItem'] == -1
-                    print(', '.join([name, str(steal['StealRate']), "NONE", "NONE"]))
+                item = self.drops[Id]['item']
+                if item > 0:
+                    items.append(self.items.getName(self.drops[Id]['item']))
+                    chapter = self.drops[Id]['chapter']
                 else:
-                    if steal['StealItem'] > 0:
-                        stealItem = self.items.getName(steal['StealItem'])
-                        assert stealItem
-                    else:
-                        stealItem = "NONE"
-                    if steal['StealRareItem'] > 0:
-                        stealRareItem = self.items.getName(steal['StealRareItem'])
-                        assert stealRareItem
-                    else:
-                        stealRareItem = "NONE"
-                    print(', '.join([name, str(self.steals[Id]['chapter']), stealItem, stealRareItem]))
+                    items.append("NONE")
+
+                item = self.dropsRare[Id]['item']
+                if item > 0:
+                    items.append(self.items.getName(self.dropsRare[Id]['item']))
+                    chapter = self.dropsRare[Id]['chapter']
+                else:
+                    items.append("NONE")
+
+                item = self.steals[Id]['item']
+                if item > 0:
+                    items.append(self.items.getName(self.steals[Id]['item']))
+                    chapter = self.steals[Id]['chapter']
+                else:
+                    items.append("NONE")
+
+                item = self.stealsRare[Id]['item']
+                if item > 0:
+                    items.append(self.items.getName(self.stealsRare[Id]['item']))
+                    chapter = self.stealsRare[Id]['chapter']
+                else:
+                    items.append("NONE")
+
+                print(', '.join([name, str(chapter)] + items))
 
         sys.stdout = sys.__stdout__
 
