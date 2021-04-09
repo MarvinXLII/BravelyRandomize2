@@ -1098,9 +1098,9 @@ class TREASURES(DATA):
                 data['EnemyPartyId']['entry']['value'] = box['EnemyPartyId']
                 data['EventType']['entry']['value'] = box['EventType']
                 # TEMPORARY TESTING: NO BATTLES FROM CHESTS IN TOWNS!!!
-                if box['key'][:3] == 'MAP' or box['key'][:5] == 'Field':
-                    data['EnemyPartyId']['entry']['value'] = 2000
-                    data['EventType']['entry']['value'] = 3
+                # if box['key'][:3] == 'MAP' or box['key'][:5] == 'Field':
+                #     data['EnemyPartyId']['entry']['value'] = 2000
+                #     data['EventType']['entry']['value'] = 3
                 # Must update type for money or item
                 if box['ItemId'] == -1 and box['ItemCount'] > 0:
                     data['TreasureType']['entry']['value'] = "ETreasureType::Money"
