@@ -832,7 +832,7 @@ class MONSTERS(DATA):
                 # WEAPONS
                 'Weapon': {
                     'ShortSwordResistance': d['ShortSwordResistance']['entry']['value'],
-                    'SwordResistance': d['AxeResistance']['entry']['value'],
+                    'SwordResistance': d['SwordResistance']['entry']['value'],
                     'AxeResistance': d['AxeResistance']['entry']['value'],
                     'SpearResistance': d['SpearResistance']['entry']['value'],
                     'BowResistance': d['BowResistance']['entry']['value'],
