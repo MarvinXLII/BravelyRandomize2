@@ -235,57 +235,64 @@ class FLAGS(DATA):
 
         super().update()
             
-####################
-# DON'T DELETE YET #
-####################
-# # Not used currently; worth keeping for randomizing costs
-# class ACTIONS(DATA):
-#     def __init__(self, rom, text):
-#         super().__init__(rom, 'ActionAbilityAsset')
-#         self.data = self.table['ActionAbilityDataMap']['data']
-#         self.text = text # ABILITY TEXT
 
-#         self.skills = {}
-#         for Id, skill in self.data.items():
-#             name = self.text.getName(Id)
-#             if not name:
-#                 continue
-#             description = self.text.getDescription(Id)
-#             job = skill['JobId']['value']
-#             cost = skill['Cost']['value']
-#             costValue = skill['CostValue']
-#             costType = skill['CostType']['value']
-#             self.skills[Id] = {
-#                 'Job': job,
-#                 'Cost': cost,
-#                 'CostValue': costValue,
-#                 'CostType': costType,
-#                 'Name': name,
-#                 'Description': description,
-#             }
+class ACTIONS(DATA):
+    def __init__(self, rom, text):
+        super().__init__(rom, 'ActionAbilityAsset')
+        self.data = self.table['ActionAbilityDataMap']['data']
+        self.text = text
 
-####################
-# DON'T DELETE YET #
-####################
-# # Not used currently; worth keeping for any edits to ability cost
-# class SUPPORT(DATA):
-#     def __init__(self, rom, text):
-#         super().__init__(rom, 'SupportAbilityAsset')
-#         self.data = self.table['SupportAbilityDataMap']['data']
-#         self.text = text
+        self.skills = {}
+        for Id, skill in self.data.items():
+            name = self.text.getName(Id)
+            if not name:
+                continue
+            description = self.text.getDescription(Id)
+            job = skill['JobId'].value
+            cost = skill['Cost'].value
+            costValue = skill['CostValue'].value
+            costType = skill['CostType'].value
+            self.skills[Id] = {
+                'Job': job,
+                'Cost': cost,
+                'CostValue': costValue,
+                'CostType': costType,
+                'Name': name,
+                'Description': description,
+            }
 
-#         self.skills = {}
-#         for Id, skill in self.data.items():
-#             name = self.text.getName(Id)
-#             if not name:
-#                 continue
-#             description = self.text.getDescription(Id)
-#             cost = skill['AbilityCost']
-#             self.skills[Id] = {
-#                 'AbilityCost': cost,
-#                 'Name': name,
-#                 'Description': description,
-#             }
+    def update(self):
+        for Id, skill in self.skills.items():
+            self.data[Id]['JobId'].value = skill['Job']
+            self.data[Id]['Cost'].value = skill['Cost']
+            self.data[Id]['CostValue'].value = skill['CostValue']
+            self.data[Id]['CostType'].value = skill['CostType']
+        super().update()
+
+
+class SUPPORT(DATA):
+    def __init__(self, rom, text):
+        super().__init__(rom, 'SupportAbilityAsset')
+        self.data = self.table['SupportAbilityDataMap']['data']
+        self.text = text
+
+        self.skills = {}
+        for Id, skill in self.data.items():
+            name = self.text.getName(Id)
+            if not name:
+                continue
+            description = self.text.getDescription(Id)
+            cost = skill['AbilityCost'].value
+            self.skills[Id] = {
+                'AbilityCost': cost,
+                'Name': name,
+                'Description': description,
+            }
+
+    def update(self):
+        for Id, skill in self.skills.items():
+            self.data[Id]['AbilityCost'].value = skill['AbilityCost']
+        super().update()
 
 
 class JOBSTATS(DATA):

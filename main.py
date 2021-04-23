@@ -3,7 +3,7 @@ import hjson
 import sys
 sys.path.append('src')
 from ROM import ROM
-from Data import DATA, QUESTS, JOBSTATS, JOBDATA, MONSTERPARTY, MONSTERS, TREASURES, TEXT, FLAGS
+from Data import DATA, QUESTS, JOBSTATS, JOBDATA, MONSTERPARTY, MONSTERS, TREASURES, TEXT, FLAGS, ACTIONS, SUPPORT
 from Items import shuffleItems
 from Battles import shuffleResistance
 from Jobs import shuffleJobAbilities
@@ -36,6 +36,8 @@ def main(settings):
     monsters = MONSTERS(rom, monsterText, itemText, monsterParty)
     treasures = TREASURES(rom, itemText, locationText)
     quests = QUESTS(rom, itemText, locationText)
+    actions = ACTIONS(rom, actionText)
+    support = SUPPORT(rom, supportText)
 
     ### STATS
     if settings['job-stats'] == 'swap':
@@ -93,6 +95,8 @@ def main(settings):
     itemText.update()
     treasures.update()
     quests.update()
+    actions.update()
+    support.update()
 
     ## TESTING
     flags.update()

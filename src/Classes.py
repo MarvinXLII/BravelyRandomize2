@@ -171,7 +171,7 @@ class UInt32Property(TYPE):
         self.dataType = 'UInt32Property'
         assert file.readInt64() == 4
         file.data.seek(1, 1)
-        self.value = self.readUInt32()
+        self.value = file.readUInt32()
 
     def build(self):
         tmp = self.getInt64(4)
