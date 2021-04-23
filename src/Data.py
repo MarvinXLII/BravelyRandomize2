@@ -5,7 +5,7 @@ import struct
 import io
 import hashlib
 from functools import partial
-from Classes import *
+from Classes import TYPE, FILE, FloatProperty, StrProperty, EnumProperty, BoolProperty, NameProperty, IntProperty, UInt32Property, ByteProperty, StructProperty, TextProperty, ArrayProperty
 
 class UASSET(FILE):
     def __init__(self, data):

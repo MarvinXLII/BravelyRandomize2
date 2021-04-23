@@ -304,5 +304,3 @@ class ArrayProperty(TYPE):
                 tmp += self.callbackBuild(ai)
                 tmp += self.getInt64(self.none)
         return tmp
-
-
