@@ -2,6 +2,7 @@ import sys
 import struct
 import io
 import hashlib
+from functools import partial
 
 class TYPE:
     def getInt8(self, value):
@@ -304,3 +305,186 @@ class ArrayProperty(TYPE):
                 tmp += self.callbackBuild(ai)
                 tmp += self.getInt64(self.none)
         return tmp
+
+
+
+class UASSET(FILE):
+    def __init__(self, data):
+        super().__init__(data)
+        self.load()
+        
+    def load(self):
+        self.entries = {}
+        self.idxToName = {}
+        self.nameToIdx = {}
+
+        self.data.seek(0x75)
+        count = self.readInt32()
+        self.data.seek(0xbd)
+        addrUexp = self.readInt32() - 0x54
+        # Store header
+        self.data.seek(0)
+        self.header = bytearray(self.data.read(0xc1))
+        # Load names
+        self.data.seek(0xc1)
+        for i in range(count):
+            base = self.data.tell()
+            size = self.readInt32()
+            name = self.readString(size)
+            key = self.readInt32()
+            self.nameToIdx[name] = i
+            self.idxToName[i] = name
+            # Store chunk of data 
+            size = self.data.tell() - base
+            self.data.seek(base)
+            self.entries[name] = bytearray(self.data.read(size))
+        # Store footers (not sure what they're used for)
+        self.addrUexp = addrUexp - self.data.tell()
+        self.footer = bytearray(self.data.read())
+
+    def build(self, sizeUEXP=None):
+        # Update size of uexp if needed
+        if sizeUEXP:
+            self.footer[self.addrUexp:self.addrUexp+8] = self.getUInt64(sizeUEXP-4)
+        # Build uasset
+        data = bytearray([])
+        for entry in self.entries.values():
+            data += entry
+        return self.header + data + self.footer
+
+    def getName(self, index):
+        name = self.idxToName[index & 0xFFFFFFFF]
+        index >>= 32
+        if index:
+            return f"{name}_{index-1}"
+        return name    
+        
+    def getIndex(self, name):
+        if name in self.nameToIdx:
+            return self.nameToIdx[name]
+        nameBase = '_'.join(name.split('_')[:-1])
+        if nameBase not in self.nameToIdx:
+            sys.exit(f"{nameBase} does not exist in this uasset")
+        value = int(name.split('_')[-1]) + 1
+        value <<= 32
+        value += self.nameToIdx[nameBase]
+        return value
+
+
+# NB: This is written specifically for the files used.
+class DATA:
+    def __init__(self, rom, fileName):
+        self.rom = rom
+        self.fileName = fileName
+        print(f'Loading data from {fileName}')
+        # Load data
+        self.uasset = UASSET(self.rom.extractFile(f"{self.fileName}.uasset"))
+        self.uexp = FILE(self.rom.extractFile(f"{self.fileName}.uexp"))
+        # Store none index
+        self.none = self.uasset.getIndex('None')
+        # Organize/"parse" uexp data
+        self.switcher = { ## REPLACE WITH MATCH IN py3.10????
+            'EnumProperty': partial(EnumProperty, self.uexp, self.uasset),
+            'TextProperty': partial(TextProperty, self.uexp),
+            'IntProperty': partial(IntProperty, self.uexp),
+            'UInt32Property': partial(UInt32Property, self.uexp),
+            'ArrayProperty': partial(ArrayProperty, self.uexp, self.uasset, self.loadEntry, self.buildEntry),
+            'StrProperty': partial(StrProperty, self.uexp),
+            'BoolProperty': partial(BoolProperty, self.uexp),
+            'NameProperty': partial(NameProperty, self.uexp, self.uasset),
+            'StructProperty': partial(StructProperty, self.uexp),
+            'FloatProperty': partial(FloatProperty, self.uexp),
+            'ByteProperty': partial(ByteProperty, self.uexp),
+        }
+        self.loadTable()
+
+    def buildTable(self):
+        data = bytearray([])
+        for name in self.table:
+            index = self.uasset.getIndex(name)
+            data += self.uexp.getInt64(index)
+            prop = self.table[name]['prop']
+            data += self.uexp.getInt64(self.uasset.getIndex(prop))
+            if prop == 'ArrayProperty':
+                data += self.table[name]['data'].build()
+            elif prop == 'MapProperty':
+                size = self.table[name]['size']
+                data += self.uexp.getInt64(size)
+                data += self.uexp.getInt64(self.uasset.getIndex(self.table[name]['type']))
+                data += self.uexp.getInt64(self.uasset.getIndex('StructProperty'))
+                data += bytearray([0]*5)
+                table = self.table[name]['data']
+                data += self.uexp.getInt32(len(table))
+                for key in table: # For JOB in table
+                    if self.table[name]['type'] == 'IntProperty':
+                        data += self.uexp.getInt32(key)
+                    else: # EnumProperty, NameProperty
+                        data += self.uexp.getInt64(self.uasset.getIndex(key))
+                    data += self.buildEntry(table[key])
+                    data += self.uexp.getInt64(self.none)
+        data += self.uexp.getInt64(self.none)
+        data += bytearray([0]*4)
+        data += bytearray([0xc1, 0x83, 0x2a, 0x9e])
+        return data
+
+    def buildEntry(self, entry):
+        data = bytearray([])
+        for key, d in entry.items():
+            data += self.uexp.getInt64(self.uasset.getIndex(key))
+            data += self.uexp.getInt64(self.uasset.getIndex(d.dataType))
+            data += d.build()
+        return data
+
+    def loadEntry(self):
+        dic = {}
+        nextValue = self.uexp.readInt64()
+        while nextValue != self.none:
+            key = self.uasset.getName(nextValue)
+            prop = self.uasset.getName(self.uexp.readInt64())
+            try:
+                dic[key] = self.switcher[prop]()
+            except KeyError:
+                sys.exit(f"{prop} not yet included")
+            nextValue = self.uexp.readInt64()
+        return dic
+
+    def loadTable(self):
+        self.table = {}
+        nextValue = self.uexp.readInt64()
+        while nextValue != self.none:
+            name = self.uasset.getName(nextValue)
+            self.table[name] = {}
+            
+            propVal = self.uexp.readInt64()
+            propName = self.uasset.getName(propVal)
+            self.table[name]['prop'] = propName
+
+            if propName == 'ArrayProperty':
+                self.table[name]['data'] = ArrayProperty(self.uexp, self.uasset, self.loadEntry, self.buildEntry)
+            elif propName == 'MapProperty':
+                self.table[name]['size'] = self.uexp.readInt64()
+                dataType = self.uasset.getName(self.uexp.readInt64())
+                assert dataType == 'EnumProperty' or dataType == 'IntProperty' or dataType == 'NameProperty'
+                assert self.uasset.getName(self.uexp.readInt64()) == 'StructProperty'
+                self.table[name]['type'] = dataType
+                self.uexp.data.seek(5, 1)
+                numEntries = self.uexp.readInt32()
+                self.table[name]['data'] = {}
+                for _ in range(numEntries): # one entry per job
+                    if dataType == 'EnumProperty':
+                        key = self.uasset.getName(self.uexp.readInt64())
+                    elif dataType == 'IntProperty':
+                        key = self.uexp.readInt32()
+                    elif dataType == 'NameProperty':
+                        key = self.uasset.getName(self.uexp.readInt64())
+                    self.table[name]['data'][key] = self.loadEntry()
+            nextValue = self.uexp.readInt64()
+
+    def update(self):
+        # Build uexp
+        dataUEXP = self.buildTable()
+        self.rom.patchFile(dataUEXP, f"{self.fileName}.uexp")
+        # Build uasset
+        size = len(dataUEXP)
+        dataUASSET = self.uasset.build(sizeUEXP=size)
+        self.rom.patchFile(dataUASSET, f"{self.fileName}.uasset")    

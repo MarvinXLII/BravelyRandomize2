@@ -1,0 +1,281 @@
+{
+  "monk":  [
+    "Inner Alchemy",
+    "Invigorate",
+    "Mindfulness"
+  ],
+  "cure":  [
+    "Cure",
+    "Cura",
+    "Curaga"
+  ],
+  "raise":  [
+    "Raise",
+    "Arise",
+    "Raise All"    
+  ],
+  "basuna":  [
+    "Basuna",
+    "Esuna"
+  ],
+  "fire": [
+    "Fire",
+    "Fira",
+    "Firaga",
+    "Flare"    
+  ] ,
+  "blizzard":  [
+    "Blizzard",
+    "Blizzara",
+    "Blizzaga",
+    "Freeze"
+  ],
+  "thunder": [
+    "Thunder",
+    "Thundara",
+    "Thundaga",
+    "Burst"
+  ],
+  "target": [
+    "Aggravate",
+    "Infuriate"    
+  ],
+  "earth": [
+    "Sword of Stone",
+    "Quake Blade"
+  ],
+  "delay": [
+    "Shield Bash",
+    "Ultimatum"
+  ],
+  "bard": [
+    "Don't Let 'Em Get to You",
+    "Don't Let 'Em Trick You",
+    "Step into the Spotlight",
+    "(Won't) Be Missing You",
+    "Right Through Your Fingers",
+    "Hurts So Bad",
+    "Work Your Magic",
+    "All Killer No Filler"
+  ],
+  "pictomancer": [
+    "Disarming Scarlet",
+    "Disenchanting Mauve",
+    "Incurable Coral",
+    "Indefensible Teal",
+    "Zappable Chartreuse"
+  ],
+  "tamer": [
+    "Capture",
+    "Off the Leash",
+    "Off the Chain"
+  ],
+  "steal_items": [
+    "Steal"
+  ],
+  "steal_other": [
+    "Steal Breath",
+    "Steal Spirit",
+    "Steal Courage"
+  ],
+  "wind": [
+    "Sky Slicer",
+    "Tornado's Edge"
+  ],
+  "gambler": [
+    "Elemental Wheel",
+    "Real Elemental Wheel"
+  ],
+  "wheels": [
+    "Odds or Evens",
+    "Life or Death",
+    "Spin the Wheel",
+    "Triples",
+    "Bold Gambit",
+    "Unlucky Eight"
+  ],
+  "berzerk": [
+    "Vent Fury"
+  ],
+  "berz_all": [
+    "Crescent Moon",
+    "Level Slash",
+    "Death's Door"    
+  ],
+  "berz_one": [
+    "Double Damage",
+    "Amped Strike"
+  ],
+  "water": [
+    "Water Damage",
+    "Flood Damage"
+  ],
+  "stone": [
+    "Stone",
+    "Stonera",
+    "Stonega",
+    "Quake",
+  ],
+  "aero": [
+    "Aero",
+    "Aerora",
+    "Aeroga",
+    "Tornado",
+  ],
+  "disaster": [
+    "Disaster"
+  ],
+  "heal": [
+    "Heal",
+    "Healara",
+    "Healaga"
+  ],
+  "hunter": [
+    "Quickfire Flurry",
+    "Grand Barrage"
+  ],
+  "slayer": [
+    "Bug Slayer",
+    "Plant Slayer",
+    "Beast Slayer",
+    "Aquatic Slayer",
+    "Humanoid Slayer",
+    "Undead Slayer",
+    "Demon Slayer",
+    "Spirit Slayer"
+  ],
+  "shield": [
+    "Bodyguard",
+    "Defender of the People"
+  ],
+  "protect": [
+    "Protect Ally"
+  ],
+  "hitter": [
+    "Heavy Hitter",
+    "Super Heavy Hitter"
+  ],
+  "reprisal": [
+    "Reprisal",
+    "Harsh Reprisal"
+  ],
+  "jump": [
+    "Jump",
+    "Super Jump",
+    "Soul Jump"
+  ],
+  "lightning": [
+    "Thunder Thrust",
+    "Bolt Blast"
+  ],
+  "spirits": [
+    "Healthbringer",
+    "Basunabringer",
+    "Spiritbringer",
+    "Lifebringer",
+    "Bravebringer",
+    "Purebringer"
+  ],
+  "light": [
+    "Banish",
+    "Banishra",
+    "Banishga",
+    "Holy"
+  ],
+  "regen": [
+    "Regeneration",
+    "Reraise"
+  ],
+  "flurry": [
+    "Fourfold Flurry",
+    "Ninefold Flurry"
+  ],
+  "stance1": [
+    "Fluid Stance",
+    "Solid Stance"
+  ],
+  "stance2": [
+    "Solid Right Style",
+    "Fluid Left Style",
+    "Solid Slash",
+    "Fluid Flow",
+    "Solid Smash",
+    "Fluid Frenzy"
+  ],
+  "quick": [
+    "Quick",
+    "Quickga"
+  ],
+  "slow": [
+    "Slow",
+    "Slowga"
+  ],
+  "haste": [
+    "Haste",
+    "Hastega"
+  ],
+  "triple": [
+    "Triple",
+    "Triplara",
+    "Triplaga"
+  ],
+  "survey": [
+    "Survey",
+    "Analysis"
+  ],
+  "tonic": [
+    "BP Tonic",
+    "Double BP Tonic"
+  ],
+  "philtre": [
+    "Philtre",
+    "Heartbreak"
+  ],
+  "compounding": [
+    "Compounding",
+    "Advanced Compounding"
+  ],
+  "dark": [
+    "Dark",
+    "Darkra",
+    "Darkga",
+    "Doomsday"
+  ],
+  "comet": [
+    "Comet",
+    "Meteor"
+  ],
+  "ardour": [
+    "Ardour",
+    "Electon"
+  ],
+  "meltdown": [
+    "Meltdown",
+    "Apocalypse"
+  ],
+  "bastion": [
+    "Light of Justice",
+    "Holy Light"
+  ],
+  "shroud": [
+    "Shroud",
+    "Burial Shroud"
+  ],
+  "nightmare": [
+    "Recurring Nightmare",
+    "Never-Ending Nightmare"
+  ],
+  "dread": [
+    "Dread Blade",
+    "Terrorise"
+  ],
+  "gravity": [
+    "Supergravity",
+    "Hypergravity",
+    "Gigagravity"
+  ],
+  "brave": [
+    "Wall of Woe",
+    "Dawn of Odyssey"
+  ]
+}

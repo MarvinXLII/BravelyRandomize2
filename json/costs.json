@@ -1,0 +1,2066 @@
+{
+  Treat:
+  {
+    Default: ECommandCostEnum::CCE_MP
+    "ECommandCostEnum::CCE_MP": 20
+    "ECommandCostEnum::CCE_HP": 5
+    "ECommandCostEnum::CCE_BP": 1
+    "ECommandCostEnum::CCE_pq": 0
+  }
+  "Lucky Charm":
+  {
+    Default: ECommandCostEnum::CCE_MP
+    "ECommandCostEnum::CCE_MP": 15
+    "ECommandCostEnum::CCE_HP": 5
+    "ECommandCostEnum::CCE_BP": 0
+    "ECommandCostEnum::CCE_pq": 0
+  }
+  "Square One":
+  {
+    Default: ECommandCostEnum::CCE_MP
+    "ECommandCostEnum::CCE_MP": 28
+    "ECommandCostEnum::CCE_HP": 10
+    "ECommandCostEnum::CCE_BP": 1
+    "ECommandCostEnum::CCE_pq": 0
+  }
+  "Body Slam":
+  {
+    Default: ECommandCostEnum::CCE_BP
+    "ECommandCostEnum::CCE_MP": 40
+    "ECommandCostEnum::CCE_HP": 15
+    "ECommandCostEnum::CCE_BP": 1
+    "ECommandCostEnum::CCE_pq": 0
+  }
+  "Wish Upon a Star":
+  {
+    Default: ECommandCostEnum::CCE_MP
+    "ECommandCostEnum::CCE_MP": 42
+    "ECommandCostEnum::CCE_HP": 15
+    "ECommandCostEnum::CCE_BP": 1
+    "ECommandCostEnum::CCE_pq": 0
+  }
+  Purge:
+  {
+    Default: ECommandCostEnum::CCE_MP
+    "ECommandCostEnum::CCE_MP": 20
+    "ECommandCostEnum::CCE_HP": 5
+    "ECommandCostEnum::CCE_BP": 1
+    "ECommandCostEnum::CCE_pq": 0
+  }
+  "Strong Strike":
+  {
+    Default: ECommandCostEnum::CCE_HP
+    "ECommandCostEnum::CCE_MP": 40
+    "ECommandCostEnum::CCE_HP": 18
+    "ECommandCostEnum::CCE_BP": 1
+    "ECommandCostEnum::CCE_pq": 0
+  }
+  "Tortoise Kick":
+  {
+    Default: ECommandCostEnum::CCE_HP
+    "ECommandCostEnum::CCE_MP": 40
+    "ECommandCostEnum::CCE_HP": 10
+    "ECommandCostEnum::CCE_BP": 1
+    "ECommandCostEnum::CCE_pq": 0
+  }
+  "Inner Alchemy":
+  {
+    Default: ECommandCostEnum::CCE_MP
+    "ECommandCostEnum::CCE_MP": 20
+    "ECommandCostEnum::CCE_HP": 5
+    "ECommandCostEnum::CCE_BP": 1
+    "ECommandCostEnum::CCE_pq": 0
+  }
+  Firebird:
+  {
+    Default: ECommandCostEnum::CCE_HP
+    "ECommandCostEnum::CCE_MP": 40
+    "ECommandCostEnum::CCE_HP": 15
+    "ECommandCostEnum::CCE_BP": 1
+    "ECommandCostEnum::CCE_pq": 0
+  }
+  Invigorate:
+  {
+    Default: ECommandCostEnum::CCE_MP
+    "ECommandCostEnum::CCE_MP": 20
+    "ECommandCostEnum::CCE_HP": 10
+    "ECommandCostEnum::CCE_BP": 1
+    "ECommandCostEnum::CCE_pq": 0
+  }
+  "Qigong Wave":
+  {
+    Default: ECommandCostEnum::CCE_HP
+    "ECommandCostEnum::CCE_MP": 80
+    "ECommandCostEnum::CCE_HP": 20
+    "ECommandCostEnum::CCE_BP": 2
+    "ECommandCostEnum::CCE_pq": 0
+  }
+  Mindfulness:
+  {
+    Default: ECommandCostEnum::CCE_BP
+    "ECommandCostEnum::CCE_MP": 40
+    "ECommandCostEnum::CCE_HP": 15
+    "ECommandCostEnum::CCE_BP": 1
+    "ECommandCostEnum::CCE_pq": 0
+  }
+  "Flying Heel Drop":
+  {
+    Default: ECommandCostEnum::CCE_HP
+    "ECommandCostEnum::CCE_MP": 65
+    "ECommandCostEnum::CCE_HP": 30
+    "ECommandCostEnum::CCE_BP": 2
+    "ECommandCostEnum::CCE_pq": 0
+  }
+  "Pressure Point":
+  {
+    Default: ECommandCostEnum::CCE_BP
+    "ECommandCostEnum::CCE_MP": 40
+    "ECommandCostEnum::CCE_HP": 15
+    "ECommandCostEnum::CCE_BP": 1
+    "ECommandCostEnum::CCE_pq": 0
+  }
+  "Phoenix Flight":
+  {
+    Default: ECommandCostEnum::CCE_BP
+    "ECommandCostEnum::CCE_MP": 80
+    "ECommandCostEnum::CCE_HP": 0
+    "ECommandCostEnum::CCE_BP": 2
+    "ECommandCostEnum::CCE_pq": 0
+  }
+  "Flames of War":
+  {
+    Default: ECommandCostEnum::CCE_HP
+    "ECommandCostEnum::CCE_MP": 120
+    "ECommandCostEnum::CCE_HP": 35
+    "ECommandCostEnum::CCE_BP": 3
+    "ECommandCostEnum::CCE_pq": 0
+  }
+  "Focal Blast":
+  {
+    Default: ECommandCostEnum::CCE_MP
+    "ECommandCostEnum::CCE_MP": 99
+    "ECommandCostEnum::CCE_HP": 25
+    "ECommandCostEnum::CCE_BP": 2
+    "ECommandCostEnum::CCE_pq": 0
+  }
+  Cure:
+  {
+    Default: ECommandCostEnum::CCE_MP
+    "ECommandCostEnum::CCE_MP": 8
+    "ECommandCostEnum::CCE_HP": 5
+    "ECommandCostEnum::CCE_BP": 0
+    "ECommandCostEnum::CCE_pq": 0
+  }
+  Protect:
+  {
+    Default: ECommandCostEnum::CCE_MP
+    "ECommandCostEnum::CCE_MP": 11
+    "ECommandCostEnum::CCE_HP": 5
+    "ECommandCostEnum::CCE_BP": 0
+    "ECommandCostEnum::CCE_pq": 0
+  }
+  Shell:
+  {
+    Default: ECommandCostEnum::CCE_MP
+    "ECommandCostEnum::CCE_MP": 13
+    "ECommandCostEnum::CCE_HP": 5
+    "ECommandCostEnum::CCE_BP": 0
+    "ECommandCostEnum::CCE_pq": 0
+  }
+  Cura:
+  {
+    Default: ECommandCostEnum::CCE_MP
+    "ECommandCostEnum::CCE_MP": 28
+    "ECommandCostEnum::CCE_HP": 15
+    "ECommandCostEnum::CCE_BP": 1
+    "ECommandCostEnum::CCE_pq": 0
+  }
+  Raise:
+  {
+    Default: ECommandCostEnum::CCE_MP
+    "ECommandCostEnum::CCE_MP": 25
+    "ECommandCostEnum::CCE_HP": 10
+    "ECommandCostEnum::CCE_BP": 1
+    "ECommandCostEnum::CCE_pq": 0
+  }
+  Esuna:
+  {
+    Default: ECommandCostEnum::CCE_MP
+    "ECommandCostEnum::CCE_MP": 45
+    "ECommandCostEnum::CCE_HP": 10
+    "ECommandCostEnum::CCE_BP": 1
+    "ECommandCostEnum::CCE_pq": 0
+  }
+  Curaga:
+  {
+    Default: ECommandCostEnum::CCE_MP
+    "ECommandCostEnum::CCE_MP": 60
+    "ECommandCostEnum::CCE_HP": 25
+    "ECommandCostEnum::CCE_BP": 2
+    "ECommandCostEnum::CCE_pq": 0
+  }
+  Arise:
+  {
+    Default: ECommandCostEnum::CCE_MP
+    "ECommandCostEnum::CCE_MP": 95
+    "ECommandCostEnum::CCE_HP": 20
+    "ECommandCostEnum::CCE_BP": 2
+    "ECommandCostEnum::CCE_pq": 0
+  }
+  Benediction:
+  {
+    Default: ECommandCostEnum::CCE_HP
+    "ECommandCostEnum::CCE_MP": 40
+    "ECommandCostEnum::CCE_HP": 15
+    "ECommandCostEnum::CCE_BP": 1
+    "ECommandCostEnum::CCE_pq": 0
+  }
+  "Raise All":
+  {
+    Default: ECommandCostEnum::CCE_MP
+    "ECommandCostEnum::CCE_MP": 110
+    "ECommandCostEnum::CCE_HP": 35
+    "ECommandCostEnum::CCE_BP": 3
+    "ECommandCostEnum::CCE_pq": 0
+  }
+  Basuna:
+  {
+    Default: ECommandCostEnum::CCE_MP
+    "ECommandCostEnum::CCE_MP": 22
+    "ECommandCostEnum::CCE_HP": 10
+    "ECommandCostEnum::CCE_BP": 1
+    "ECommandCostEnum::CCE_pq": 0
+  }
+  Fire:
+  {
+    Default: ECommandCostEnum::CCE_MP
+    "ECommandCostEnum::CCE_MP": 15
+    "ECommandCostEnum::CCE_HP": 5
+    "ECommandCostEnum::CCE_BP": 0
+    "ECommandCostEnum::CCE_pq": 0
+  }
+  Blizzard:
+  {
+    Default: ECommandCostEnum::CCE_MP
+    "ECommandCostEnum::CCE_MP": 15
+    "ECommandCostEnum::CCE_HP": 5
+    "ECommandCostEnum::CCE_BP": 0
+    "ECommandCostEnum::CCE_pq": 0
+  }
+  Thunder:
+  {
+    Default: ECommandCostEnum::CCE_MP
+    "ECommandCostEnum::CCE_MP": 15
+    "ECommandCostEnum::CCE_HP": 5
+    "ECommandCostEnum::CCE_BP": 0
+    "ECommandCostEnum::CCE_pq": 0
+  }
+  Poison:
+  {
+    Default: ECommandCostEnum::CCE_MP
+    "ECommandCostEnum::CCE_MP": 18
+    "ECommandCostEnum::CCE_HP": 5
+    "ECommandCostEnum::CCE_BP": 0
+    "ECommandCostEnum::CCE_pq": 0
+  }
+  Fira:
+  {
+    Default: ECommandCostEnum::CCE_MP
+    "ECommandCostEnum::CCE_MP": 38
+    "ECommandCostEnum::CCE_HP": 15
+    "ECommandCostEnum::CCE_BP": 1
+    "ECommandCostEnum::CCE_pq": 0
+  }
+  Blizzara:
+  {
+    Default: ECommandCostEnum::CCE_MP
+    "ECommandCostEnum::CCE_MP": 38
+    "ECommandCostEnum::CCE_HP": 15
+    "ECommandCostEnum::CCE_BP": 1
+    "ECommandCostEnum::CCE_pq": 0
+  }
+  Thundara:
+  {
+    Default: ECommandCostEnum::CCE_MP
+    "ECommandCostEnum::CCE_MP": 38
+    "ECommandCostEnum::CCE_HP": 15
+    "ECommandCostEnum::CCE_BP": 1
+    "ECommandCostEnum::CCE_pq": 0
+  }
+  Firaga:
+  {
+    Default: ECommandCostEnum::CCE_MP
+    "ECommandCostEnum::CCE_MP": 66
+    "ECommandCostEnum::CCE_HP": 25
+    "ECommandCostEnum::CCE_BP": 2
+    "ECommandCostEnum::CCE_pq": 0
+  }
+  Blizzaga:
+  {
+    Default: ECommandCostEnum::CCE_MP
+    "ECommandCostEnum::CCE_MP": 66
+    "ECommandCostEnum::CCE_HP": 25
+    "ECommandCostEnum::CCE_BP": 2
+    "ECommandCostEnum::CCE_pq": 0
+  }
+  Thundaga:
+  {
+    Default: ECommandCostEnum::CCE_MP
+    "ECommandCostEnum::CCE_MP": 66
+    "ECommandCostEnum::CCE_HP": 25
+    "ECommandCostEnum::CCE_BP": 2
+    "ECommandCostEnum::CCE_pq": 0
+  }
+  Flare:
+  {
+    Default: ECommandCostEnum::CCE_MP
+    "ECommandCostEnum::CCE_MP": 80
+    "ECommandCostEnum::CCE_HP": 30
+    "ECommandCostEnum::CCE_BP": 3
+    "ECommandCostEnum::CCE_pq": 0
+  }
+  Freeze:
+  {
+    Default: ECommandCostEnum::CCE_MP
+    "ECommandCostEnum::CCE_MP": 80
+    "ECommandCostEnum::CCE_HP": 30
+    "ECommandCostEnum::CCE_BP": 3
+    "ECommandCostEnum::CCE_pq": 0
+  }
+  Burst:
+  {
+    Default: ECommandCostEnum::CCE_MP
+    "ECommandCostEnum::CCE_MP": 80
+    "ECommandCostEnum::CCE_HP": 30
+    "ECommandCostEnum::CCE_BP": 3
+    "ECommandCostEnum::CCE_pq": 0
+  }
+  "Cross Cut":
+  {
+    Default: ECommandCostEnum::CCE_MP
+    "ECommandCostEnum::CCE_MP": 18
+    "ECommandCostEnum::CCE_HP": 15
+    "ECommandCostEnum::CCE_BP": 1
+    "ECommandCostEnum::CCE_pq": 0
+  }
+  "Shield Bash":
+  {
+    Default: ECommandCostEnum::CCE_HP
+    "ECommandCostEnum::CCE_MP": 40
+    "ECommandCostEnum::CCE_HP": 10
+    "ECommandCostEnum::CCE_BP": 1
+    "ECommandCostEnum::CCE_pq": 0
+  }
+  "Sword of Stone":
+  {
+    Default: ECommandCostEnum::CCE_MP
+    "ECommandCostEnum::CCE_MP": 26
+    "ECommandCostEnum::CCE_HP": 15
+    "ECommandCostEnum::CCE_BP": 1
+    "ECommandCostEnum::CCE_pq": 0
+  }
+  Defang:
+  {
+    Default: ECommandCostEnum::CCE_MP
+    "ECommandCostEnum::CCE_MP": 12
+    "ECommandCostEnum::CCE_HP": 5
+    "ECommandCostEnum::CCE_BP": 0
+    "ECommandCostEnum::CCE_pq": 0
+  }
+  "Skull Bash":
+  {
+    Default: ECommandCostEnum::CCE_MP
+    "ECommandCostEnum::CCE_MP": 12
+    "ECommandCostEnum::CCE_HP": 5
+    "ECommandCostEnum::CCE_BP": 0
+    "ECommandCostEnum::CCE_pq": 0
+  }
+  Enrage:
+  {
+    Default: ECommandCostEnum::CCE_MP
+    "ECommandCostEnum::CCE_MP": 24
+    "ECommandCostEnum::CCE_HP": 10
+    "ECommandCostEnum::CCE_BP": 1
+    "ECommandCostEnum::CCE_pq": 0
+  }
+  "Neo Cross Slash":
+  {
+    Default: ECommandCostEnum::CCE_MP
+    "ECommandCostEnum::CCE_MP": 54
+    "ECommandCostEnum::CCE_HP": 18
+    "ECommandCostEnum::CCE_BP": 1
+    "ECommandCostEnum::CCE_pq": 0
+  }
+  Infuriate:
+  {
+    Default: ECommandCostEnum::CCE_MP
+    "ECommandCostEnum::CCE_MP": 40
+    "ECommandCostEnum::CCE_HP": 15
+    "ECommandCostEnum::CCE_BP": 1
+    "ECommandCostEnum::CCE_pq": 0
+  }
+  "Quake Blade":
+  {
+    Default: ECommandCostEnum::CCE_MP
+    "ECommandCostEnum::CCE_MP": 70
+    "ECommandCostEnum::CCE_HP": 25
+    "ECommandCostEnum::CCE_BP": 2
+    "ECommandCostEnum::CCE_pq": 0
+  }
+  Ultimatum:
+  {
+    Default: ECommandCostEnum::CCE_BP
+    "ECommandCostEnum::CCE_MP": 40
+    "ECommandCostEnum::CCE_HP": 18
+    "ECommandCostEnum::CCE_BP": 1
+    "ECommandCostEnum::CCE_pq": 0
+  }
+  "Shield Stun":
+  {
+    Default: ECommandCostEnum::CCE_HP
+    "ECommandCostEnum::CCE_MP": 80
+    "ECommandCostEnum::CCE_HP": 25
+    "ECommandCostEnum::CCE_BP": 2
+    "ECommandCostEnum::CCE_pq": 0
+  }
+  "The Gift of Courage":
+  {
+    Default: ECommandCostEnum::CCE_BP
+    "ECommandCostEnum::CCE_MP": 40
+    "ECommandCostEnum::CCE_HP": 15
+    "ECommandCostEnum::CCE_BP": 1
+    "ECommandCostEnum::CCE_pq": 0
+  }
+  "Don't Let 'Em Get to You":
+  {
+    Default: ECommandCostEnum::CCE_MP
+    "ECommandCostEnum::CCE_MP": 20
+    "ECommandCostEnum::CCE_HP": 10
+    "ECommandCostEnum::CCE_BP": 1
+    "ECommandCostEnum::CCE_pq": 0
+  }
+  "Don't Let 'Em Trick You":
+  {
+    Default: ECommandCostEnum::CCE_MP
+    "ECommandCostEnum::CCE_MP": 20
+    "ECommandCostEnum::CCE_HP": 10
+    "ECommandCostEnum::CCE_BP": 1
+    "ECommandCostEnum::CCE_pq": 0
+  }
+  "Step into the Spotlight":
+  {
+    Default: ECommandCostEnum::CCE_MP
+    "ECommandCostEnum::CCE_MP": 20
+    "ECommandCostEnum::CCE_HP": 10
+    "ECommandCostEnum::CCE_BP": 1
+    "ECommandCostEnum::CCE_pq": 0
+  }
+  "(Won't) Be Missing You":
+  {
+    Default: ECommandCostEnum::CCE_MP
+    "ECommandCostEnum::CCE_MP": 18
+    "ECommandCostEnum::CCE_HP": 5
+    "ECommandCostEnum::CCE_BP": 0
+    "ECommandCostEnum::CCE_pq": 0
+  }
+  "Right Through Your Fingers":
+  {
+    Default: ECommandCostEnum::CCE_MP
+    "ECommandCostEnum::CCE_MP": 18
+    "ECommandCostEnum::CCE_HP": 5
+    "ECommandCostEnum::CCE_BP": 0
+    "ECommandCostEnum::CCE_pq": 0
+  }
+  "Close Those Tired Eyes":
+  {
+    Default: ECommandCostEnum::CCE_MP
+    "ECommandCostEnum::CCE_MP": 12
+    "ECommandCostEnum::CCE_HP": 5
+    "ECommandCostEnum::CCE_BP": 0
+    "ECommandCostEnum::CCE_pq": 0
+  }
+  "Hurts So Bad":
+  {
+    Default: ECommandCostEnum::CCE_MP
+    "ECommandCostEnum::CCE_MP": 38
+    "ECommandCostEnum::CCE_HP": 15
+    "ECommandCostEnum::CCE_BP": 1
+    "ECommandCostEnum::CCE_pq": 0
+  }
+  "Work Your Magic":
+  {
+    Default: ECommandCostEnum::CCE_MP
+    "ECommandCostEnum::CCE_MP": 38
+    "ECommandCostEnum::CCE_HP": 15
+    "ECommandCostEnum::CCE_BP": 1
+    "ECommandCostEnum::CCE_pq": 0
+  }
+  "Screamin' It Out":
+  {
+    Default: ECommandCostEnum::CCE_MP
+    "ECommandCostEnum::CCE_MP": 54
+    "ECommandCostEnum::CCE_HP": 25
+    "ECommandCostEnum::CCE_BP": 1
+    "ECommandCostEnum::CCE_pq": 0
+  }
+  "All Killer No Filler":
+  {
+    Default: ECommandCostEnum::CCE_MP
+    "ECommandCostEnum::CCE_MP": 60
+    "ECommandCostEnum::CCE_HP": 20
+    "ECommandCostEnum::CCE_BP": 1
+    "ECommandCostEnum::CCE_pq": 0
+  }
+  "More! Mooore!":
+  {
+    Default: ECommandCostEnum::CCE_BP
+    "ECommandCostEnum::CCE_MP": 40
+    "ECommandCostEnum::CCE_HP": 15
+    "ECommandCostEnum::CCE_BP": 1
+    "ECommandCostEnum::CCE_pq": 0
+  }
+  "Shut Up and Dance":
+  {
+    Default: ECommandCostEnum::CCE_MP
+    "ECommandCostEnum::CCE_MP": 194
+    "ECommandCostEnum::CCE_HP": 35
+    "ECommandCostEnum::CCE_BP": 3
+    "ECommandCostEnum::CCE_pq": 0
+  }
+  "\"Thank You":
+  {
+    Default: ECommandCostEnum::CCE_MP
+    "ECommandCostEnum::CCE_MP": 66
+    "ECommandCostEnum::CCE_HP": 25
+    "ECommandCostEnum::CCE_BP": 2
+    "ECommandCostEnum::CCE_pq": 0
+  }
+  "Staggering Swipe":
+  {
+    Default: ECommandCostEnum::CCE_MP
+    "ECommandCostEnum::CCE_MP": 19
+    "ECommandCostEnum::CCE_HP": 15
+    "ECommandCostEnum::CCE_BP": 1
+    "ECommandCostEnum::CCE_pq": 0
+  }
+  "Mercy Strike":
+  {
+    Default: ECommandCostEnum::CCE_MP
+    "ECommandCostEnum::CCE_MP": 11
+    "ECommandCostEnum::CCE_HP": 5
+    "ECommandCostEnum::CCE_BP": 0
+    "ECommandCostEnum::CCE_pq": 0
+  }
+  Muzzle:
+  {
+    Default: ECommandCostEnum::CCE_MP
+    "ECommandCostEnum::CCE_MP": 12
+    "ECommandCostEnum::CCE_HP": 5
+    "ECommandCostEnum::CCE_BP": 0
+    "ECommandCostEnum::CCE_pq": 0
+  }
+  "Mercy Smash":
+  {
+    Default: ECommandCostEnum::CCE_MP
+    "ECommandCostEnum::CCE_MP": 35
+    "ECommandCostEnum::CCE_HP": 15
+    "ECommandCostEnum::CCE_BP": 1
+    "ECommandCostEnum::CCE_pq": 0
+  }
+  "Mow Down":
+  {
+    Default: ECommandCostEnum::CCE_MP
+    "ECommandCostEnum::CCE_MP": 21
+    "ECommandCostEnum::CCE_HP": 15
+    "ECommandCostEnum::CCE_BP": 1
+    "ECommandCostEnum::CCE_pq": 0
+  }
+  "Off the Chain":
+  {
+    Default: ECommandCostEnum::CCE_BP
+    "ECommandCostEnum::CCE_MP": 80
+    "ECommandCostEnum::CCE_HP": 25
+    "ECommandCostEnum::CCE_BP": 2
+    "ECommandCostEnum::CCE_pq": 0
+  }
+  "Nature's Blessing":
+  {
+    Default: ECommandCostEnum::CCE_BP
+    "ECommandCostEnum::CCE_MP": 40
+    "ECommandCostEnum::CCE_HP": 15
+    "ECommandCostEnum::CCE_BP": 1
+    "ECommandCostEnum::CCE_pq": 0
+  }
+  "Muzzling Maelstrom":
+  {
+    Default: ECommandCostEnum::CCE_MP
+    "ECommandCostEnum::CCE_MP": 115
+    "ECommandCostEnum::CCE_HP": 35
+    "ECommandCostEnum::CCE_BP": 3
+    "ECommandCostEnum::CCE_pq": 0
+  }
+  "Steal Breath":
+  {
+    Default: ECommandCostEnum::CCE_MP
+    "ECommandCostEnum::CCE_MP": 27
+    "ECommandCostEnum::CCE_HP": 5
+    "ECommandCostEnum::CCE_BP": 1
+    "ECommandCostEnum::CCE_pq": 0
+  }
+  Flee:
+  {
+    Default: ECommandCostEnum::CCE_MP
+    "ECommandCostEnum::CCE_MP": 20
+    "ECommandCostEnum::CCE_HP": 10
+    "ECommandCostEnum::CCE_BP": 1
+    "ECommandCostEnum::CCE_pq": 0
+  }
+  "Sky Slicer":
+  {
+    Default: ECommandCostEnum::CCE_BP
+    "ECommandCostEnum::CCE_MP": 40
+    "ECommandCostEnum::CCE_HP": 15
+    "ECommandCostEnum::CCE_BP": 1
+    "ECommandCostEnum::CCE_pq": 0
+  }
+  "Steal Spirit":
+  {
+    Default: ECommandCostEnum::CCE_HP
+    "ECommandCostEnum::CCE_MP": 10
+    "ECommandCostEnum::CCE_HP": 15
+    "ECommandCostEnum::CCE_BP": 1
+    "ECommandCostEnum::CCE_pq": 0
+  }
+  "Godspeed Strike":
+  {
+    Default: ECommandCostEnum::CCE_MP
+    "ECommandCostEnum::CCE_MP": 95
+    "ECommandCostEnum::CCE_HP": 25
+    "ECommandCostEnum::CCE_BP": 2
+    "ECommandCostEnum::CCE_pq": 0
+  }
+  "Tornado's Edge":
+  {
+    Default: ECommandCostEnum::CCE_MP
+    "ECommandCostEnum::CCE_MP": 70
+    "ECommandCostEnum::CCE_HP": 25
+    "ECommandCostEnum::CCE_BP": 2
+    "ECommandCostEnum::CCE_pq": 0
+  }
+  "Steal Courage":
+  {
+    Default: ECommandCostEnum::CCE_BP
+    "ECommandCostEnum::CCE_MP": 40
+    "ECommandCostEnum::CCE_HP": 15
+    "ECommandCostEnum::CCE_BP": 2
+    "ECommandCostEnum::CCE_pq": 0
+  }
+  "\"You Snooze":
+  {
+    Default: ECommandCostEnum::CCE_BP
+    "ECommandCostEnum::CCE_MP": 80
+    "ECommandCostEnum::CCE_HP": 20
+    "ECommandCostEnum::CCE_BP": 2
+    "ECommandCostEnum::CCE_pq": 0
+  }
+  "Odds or Evens":
+  {
+    Default: ECommandCostEnum::CCE_pq
+    "ECommandCostEnum::CCE_MP": 40
+    "ECommandCostEnum::CCE_HP": 15
+    "ECommandCostEnum::CCE_BP": 1
+    "ECommandCostEnum::CCE_pq": 200
+  }
+  "Life or Death":
+  {
+    Default: ECommandCostEnum::CCE_pq
+    "ECommandCostEnum::CCE_MP": 40
+    "ECommandCostEnum::CCE_HP": 15
+    "ECommandCostEnum::CCE_BP": 1
+    "ECommandCostEnum::CCE_pq": 666
+  }
+  "Spin the Wheel":
+  {
+    Default: ECommandCostEnum::CCE_BP
+    "ECommandCostEnum::CCE_MP": 40
+    "ECommandCostEnum::CCE_HP": 10
+    "ECommandCostEnum::CCE_BP": 1
+    "ECommandCostEnum::CCE_pq": 0
+  }
+  "Elemental Wheel":
+  {
+    Default: ECommandCostEnum::CCE_pq
+    "ECommandCostEnum::CCE_MP": 40
+    "ECommandCostEnum::CCE_HP": 15
+    "ECommandCostEnum::CCE_BP": 1
+    "ECommandCostEnum::CCE_pq": 300
+  }
+  Triples:
+  {
+    Default: ECommandCostEnum::CCE_pq
+    "ECommandCostEnum::CCE_MP": 40
+    "ECommandCostEnum::CCE_HP": 15
+    "ECommandCostEnum::CCE_BP": 1
+    "ECommandCostEnum::CCE_pq": 500
+  }
+  "Bold Gambit":
+  {
+    Default: ECommandCostEnum::CCE_pq
+    "ECommandCostEnum::CCE_MP": 40
+    "ECommandCostEnum::CCE_HP": 15
+    "ECommandCostEnum::CCE_BP": 1
+    "ECommandCostEnum::CCE_pq": 777
+  }
+  "High Roller":
+  {
+    Default: ECommandCostEnum::CCE_pq
+    "ECommandCostEnum::CCE_MP": 100
+    "ECommandCostEnum::CCE_HP": 35
+    "ECommandCostEnum::CCE_BP": 3
+    "ECommandCostEnum::CCE_pq": 10000
+  }
+  "Dealer's Choice":
+  {
+    Default: ECommandCostEnum::CCE_BP
+    "ECommandCostEnum::CCE_MP": 40
+    "ECommandCostEnum::CCE_HP": 15
+    "ECommandCostEnum::CCE_BP": 1
+    "ECommandCostEnum::CCE_pq": 0
+  }
+  "Real Elemental Wheel":
+  {
+    Default: ECommandCostEnum::CCE_pq
+    "ECommandCostEnum::CCE_MP": 40
+    "ECommandCostEnum::CCE_HP": 15
+    "ECommandCostEnum::CCE_BP": 1
+    "ECommandCostEnum::CCE_pq": 700
+  }
+  "Unlucky Eight":
+  {
+    Default: ECommandCostEnum::CCE_pq
+    "ECommandCostEnum::CCE_MP": 40
+    "ECommandCostEnum::CCE_HP": 15
+    "ECommandCostEnum::CCE_BP": 1
+    "ECommandCostEnum::CCE_pq": 800
+  }
+  "Crescent Moon":
+  {
+    Default: ECommandCostEnum::CCE_BP
+    "ECommandCostEnum::CCE_MP": 40
+    "ECommandCostEnum::CCE_HP": 15
+    "ECommandCostEnum::CCE_BP": 1
+    "ECommandCostEnum::CCE_pq": 0
+  }
+  "Vent Fury":
+  {
+    Default: ECommandCostEnum::CCE_MP
+    "ECommandCostEnum::CCE_MP": 18
+    "ECommandCostEnum::CCE_HP": 5
+    "ECommandCostEnum::CCE_BP": 0
+    "ECommandCostEnum::CCE_pq": 0
+  }
+  "Double Damage":
+  {
+    Default: ECommandCostEnum::CCE_MP
+    "ECommandCostEnum::CCE_MP": 55
+    "ECommandCostEnum::CCE_HP": 15
+    "ECommandCostEnum::CCE_BP": 1
+    "ECommandCostEnum::CCE_pq": 0
+  }
+  "Water Damage":
+  {
+    Default: ECommandCostEnum::CCE_MP
+    "ECommandCostEnum::CCE_MP": 32
+    "ECommandCostEnum::CCE_HP": 15
+    "ECommandCostEnum::CCE_BP": 1
+    "ECommandCostEnum::CCE_pq": 0
+  }
+  "Shell Split":
+  {
+    Default: ECommandCostEnum::CCE_MP
+    "ECommandCostEnum::CCE_MP": 16
+    "ECommandCostEnum::CCE_HP": 5
+    "ECommandCostEnum::CCE_BP": 0
+    "ECommandCostEnum::CCE_pq": 0
+  }
+  "Scale Strip":
+  {
+    Default: ECommandCostEnum::CCE_MP
+    "ECommandCostEnum::CCE_MP": 18
+    "ECommandCostEnum::CCE_HP": 5
+    "ECommandCostEnum::CCE_BP": 0
+    "ECommandCostEnum::CCE_pq": 0
+  }
+  "Level Slash":
+  {
+    Default: ECommandCostEnum::CCE_HP
+    "ECommandCostEnum::CCE_MP": 80
+    "ECommandCostEnum::CCE_HP": 30
+    "ECommandCostEnum::CCE_BP": 2
+    "ECommandCostEnum::CCE_pq": 0
+  }
+  "Amped Strike":
+  {
+    Default: ECommandCostEnum::CCE_MP
+    "ECommandCostEnum::CCE_MP": 120
+    "ECommandCostEnum::CCE_HP": 35
+    "ECommandCostEnum::CCE_BP": 3
+    "ECommandCostEnum::CCE_pq": 0
+  }
+  "Flood Damage":
+  {
+    Default: ECommandCostEnum::CCE_MP
+    "ECommandCostEnum::CCE_MP": 80
+    "ECommandCostEnum::CCE_HP": 25
+    "ECommandCostEnum::CCE_BP": 2
+    "ECommandCostEnum::CCE_pq": 0
+  }
+  "Death's Door":
+  {
+    Default: ECommandCostEnum::CCE_MP
+    "ECommandCostEnum::CCE_MP": 200
+    "ECommandCostEnum::CCE_HP": 35
+    "ECommandCostEnum::CCE_BP": 3
+    "ECommandCostEnum::CCE_pq": 0
+  }
+  Stone:
+  {
+    Default: ECommandCostEnum::CCE_MP
+    "ECommandCostEnum::CCE_MP": 15
+    "ECommandCostEnum::CCE_HP": 5
+    "ECommandCostEnum::CCE_BP": 0
+    "ECommandCostEnum::CCE_pq": 0
+  }
+  Aero:
+  {
+    Default: ECommandCostEnum::CCE_MP
+    "ECommandCostEnum::CCE_MP": 15
+    "ECommandCostEnum::CCE_HP": 5
+    "ECommandCostEnum::CCE_BP": 0
+    "ECommandCostEnum::CCE_pq": 0
+  }
+  Heal:
+  {
+    Default: ECommandCostEnum::CCE_MP
+    "ECommandCostEnum::CCE_MP": 14
+    "ECommandCostEnum::CCE_HP": 5
+    "ECommandCostEnum::CCE_BP": 0
+    "ECommandCostEnum::CCE_pq": 0
+  }
+  Stonera:
+  {
+    Default: ECommandCostEnum::CCE_MP
+    "ECommandCostEnum::CCE_MP": 38
+    "ECommandCostEnum::CCE_HP": 15
+    "ECommandCostEnum::CCE_BP": 1
+    "ECommandCostEnum::CCE_pq": 0
+  }
+  Aerora:
+  {
+    Default: ECommandCostEnum::CCE_MP
+    "ECommandCostEnum::CCE_MP": 38
+    "ECommandCostEnum::CCE_HP": 15
+    "ECommandCostEnum::CCE_BP": 1
+    "ECommandCostEnum::CCE_pq": 0
+  }
+  Healara:
+  {
+    Default: ECommandCostEnum::CCE_MP
+    "ECommandCostEnum::CCE_MP": 36
+    "ECommandCostEnum::CCE_HP": 15
+    "ECommandCostEnum::CCE_BP": 1
+    "ECommandCostEnum::CCE_pq": 0
+  }
+  Stonega:
+  {
+    Default: ECommandCostEnum::CCE_MP
+    "ECommandCostEnum::CCE_MP": 66
+    "ECommandCostEnum::CCE_HP": 25
+    "ECommandCostEnum::CCE_BP": 2
+    "ECommandCostEnum::CCE_pq": 0
+  }
+  Aeroga:
+  {
+    Default: ECommandCostEnum::CCE_MP
+    "ECommandCostEnum::CCE_MP": 66
+    "ECommandCostEnum::CCE_HP": 25
+    "ECommandCostEnum::CCE_BP": 2
+    "ECommandCostEnum::CCE_pq": 0
+  }
+  Healaga:
+  {
+    Default: ECommandCostEnum::CCE_MP
+    "ECommandCostEnum::CCE_MP": 49
+    "ECommandCostEnum::CCE_HP": 25
+    "ECommandCostEnum::CCE_BP": 2
+    "ECommandCostEnum::CCE_pq": 0
+  }
+  Quake:
+  {
+    Default: ECommandCostEnum::CCE_MP
+    "ECommandCostEnum::CCE_MP": 80
+    "ECommandCostEnum::CCE_HP": 30
+    "ECommandCostEnum::CCE_BP": 3
+    "ECommandCostEnum::CCE_pq": 0
+  }
+  Tornado:
+  {
+    Default: ECommandCostEnum::CCE_MP
+    "ECommandCostEnum::CCE_MP": 80
+    "ECommandCostEnum::CCE_HP": 30
+    "ECommandCostEnum::CCE_BP": 3
+    "ECommandCostEnum::CCE_pq": 0
+  }
+  Disaster:
+  {
+    Default: ECommandCostEnum::CCE_MP
+    "ECommandCostEnum::CCE_MP": 100
+    "ECommandCostEnum::CCE_HP": 35
+    "ECommandCostEnum::CCE_BP": 3
+    "ECommandCostEnum::CCE_pq": 0
+  }
+  "Bug Slayer":
+  {
+    Default: ECommandCostEnum::CCE_MP
+    "ECommandCostEnum::CCE_MP": 28
+    "ECommandCostEnum::CCE_HP": 12
+    "ECommandCostEnum::CCE_BP": 1
+    "ECommandCostEnum::CCE_pq": 0
+  }
+  "Plant Slayer":
+  {
+    Default: ECommandCostEnum::CCE_MP
+    "ECommandCostEnum::CCE_MP": 28
+    "ECommandCostEnum::CCE_HP": 12
+    "ECommandCostEnum::CCE_BP": 1
+    "ECommandCostEnum::CCE_pq": 0
+  }
+  "Beast Slayer":
+  {
+    Default: ECommandCostEnum::CCE_MP
+    "ECommandCostEnum::CCE_MP": 28
+    "ECommandCostEnum::CCE_HP": 12
+    "ECommandCostEnum::CCE_BP": 1
+    "ECommandCostEnum::CCE_pq": 0
+  }
+  Shadowbind:
+  {
+    Default: ECommandCostEnum::CCE_MP
+    "ECommandCostEnum::CCE_MP": 14
+    "ECommandCostEnum::CCE_HP": 5
+    "ECommandCostEnum::CCE_BP": 0
+    "ECommandCostEnum::CCE_pq": 0
+  }
+  "Aquatic Slayer":
+  {
+    Default: ECommandCostEnum::CCE_MP
+    "ECommandCostEnum::CCE_MP": 28
+    "ECommandCostEnum::CCE_HP": 12
+    "ECommandCostEnum::CCE_BP": 1
+    "ECommandCostEnum::CCE_pq": 0
+  }
+  "Humanoid Slayer":
+  {
+    Default: ECommandCostEnum::CCE_MP
+    "ECommandCostEnum::CCE_MP": 66
+    "ECommandCostEnum::CCE_HP": 20
+    "ECommandCostEnum::CCE_BP": 2
+    "ECommandCostEnum::CCE_pq": 0
+  }
+  "Quickfire Flurry":
+  {
+    Default: ECommandCostEnum::CCE_HP
+    "ECommandCostEnum::CCE_MP": 40
+    "ECommandCostEnum::CCE_HP": 7
+    "ECommandCostEnum::CCE_BP": 1
+    "ECommandCostEnum::CCE_pq": 0
+  }
+  "Undead Slayer":
+  {
+    Default: ECommandCostEnum::CCE_MP
+    "ECommandCostEnum::CCE_MP": 38
+    "ECommandCostEnum::CCE_HP": 15
+    "ECommandCostEnum::CCE_BP": 1
+    "ECommandCostEnum::CCE_pq": 0
+  }
+  "Demon Slayer":
+  {
+    Default: ECommandCostEnum::CCE_MP
+    "ECommandCostEnum::CCE_MP": 38
+    "ECommandCostEnum::CCE_HP": 15
+    "ECommandCostEnum::CCE_BP": 1
+    "ECommandCostEnum::CCE_pq": 0
+  }
+  "Spirit Slayer":
+  {
+    Default: ECommandCostEnum::CCE_MP
+    "ECommandCostEnum::CCE_MP": 48
+    "ECommandCostEnum::CCE_HP": 18
+    "ECommandCostEnum::CCE_BP": 1
+    "ECommandCostEnum::CCE_pq": 0
+  }
+  "Grand Barrage":
+  {
+    Default: ECommandCostEnum::CCE_HP
+    "ECommandCostEnum::CCE_MP": 0
+    "ECommandCostEnum::CCE_HP": 15
+    "ECommandCostEnum::CCE_BP": 2
+    "ECommandCostEnum::CCE_pq": 0
+  }
+  "Sloth Hunter":
+  {
+    Default: ECommandCostEnum::CCE_MP
+    "ECommandCostEnum::CCE_MP": 42
+    "ECommandCostEnum::CCE_HP": 18
+    "ECommandCostEnum::CCE_BP": 1
+    "ECommandCostEnum::CCE_pq": 0
+  }
+  "Heavy Hitter":
+  {
+    Default: ECommandCostEnum::CCE_BP
+    "ECommandCostEnum::CCE_MP": 40
+    "ECommandCostEnum::CCE_HP": 15
+    "ECommandCostEnum::CCE_BP": 1
+    "ECommandCostEnum::CCE_pq": 0
+  }
+  "Blinding Flash":
+  {
+    Default: ECommandCostEnum::CCE_MP
+    "ECommandCostEnum::CCE_MP": 14
+    "ECommandCostEnum::CCE_HP": 5
+    "ECommandCostEnum::CCE_BP": 0
+    "ECommandCostEnum::CCE_pq": 0
+  }
+  Reprisal:
+  {
+    Default: ECommandCostEnum::CCE_MP
+    "ECommandCostEnum::CCE_MP": 40
+    "ECommandCostEnum::CCE_HP": 15
+    "ECommandCostEnum::CCE_BP": 1
+    "ECommandCostEnum::CCE_pq": 0
+  }
+  "Super Heavy Hitter":
+  {
+    Default: ECommandCostEnum::CCE_BP
+    "ECommandCostEnum::CCE_MP": 80
+    "ECommandCostEnum::CCE_HP": 25
+    "ECommandCostEnum::CCE_BP": 2
+    "ECommandCostEnum::CCE_pq": 0
+  }
+  "Harsh Reprisal":
+  {
+    Default: ECommandCostEnum::CCE_MP
+    "ECommandCostEnum::CCE_MP": 68
+    "ECommandCostEnum::CCE_HP": 28
+    "ECommandCostEnum::CCE_BP": 2
+    "ECommandCostEnum::CCE_pq": 0
+  }
+  "Crushed Ice":
+  {
+    Default: ECommandCostEnum::CCE_MP
+    "ECommandCostEnum::CCE_MP": 44
+    "ECommandCostEnum::CCE_HP": 15
+    "ECommandCostEnum::CCE_BP": 1
+    "ECommandCostEnum::CCE_pq": 0
+  }
+  Bumblewhacker:
+  {
+    Default: ECommandCostEnum::CCE_MP
+    "ECommandCostEnum::CCE_MP": 44
+    "ECommandCostEnum::CCE_HP": 15
+    "ECommandCostEnum::CCE_BP": 1
+    "ECommandCostEnum::CCE_pq": 0
+  }
+  "Firmly Grounded":
+  {
+    Default: ECommandCostEnum::CCE_HP
+    "ECommandCostEnum::CCE_MP": 40
+    "ECommandCostEnum::CCE_HP": 20
+    "ECommandCostEnum::CCE_BP": 1
+    "ECommandCostEnum::CCE_pq": 0
+  }
+  "Disarming Scarlet":
+  {
+    Default: ECommandCostEnum::CCE_MP
+    "ECommandCostEnum::CCE_MP": 23
+    "ECommandCostEnum::CCE_HP": 12
+    "ECommandCostEnum::CCE_BP": 1
+    "ECommandCostEnum::CCE_pq": 0
+  }
+  "Disenchanting Mauve":
+  {
+    Default: ECommandCostEnum::CCE_MP
+    "ECommandCostEnum::CCE_MP": 23
+    "ECommandCostEnum::CCE_HP": 12
+    "ECommandCostEnum::CCE_BP": 1
+    "ECommandCostEnum::CCE_pq": 0
+  }
+  Purify:
+  {
+    Default: ECommandCostEnum::CCE_MP
+    "ECommandCostEnum::CCE_MP": 28
+    "ECommandCostEnum::CCE_HP": 15
+    "ECommandCostEnum::CCE_BP": 1
+    "ECommandCostEnum::CCE_pq": 0
+  }
+  "Incurable Coral":
+  {
+    Default: ECommandCostEnum::CCE_MP
+    "ECommandCostEnum::CCE_MP": 16
+    "ECommandCostEnum::CCE_HP": 12
+    "ECommandCostEnum::CCE_BP": 1
+    "ECommandCostEnum::CCE_pq": 0
+  }
+  "Indefensible Teal":
+  {
+    Default: ECommandCostEnum::CCE_MP
+    "ECommandCostEnum::CCE_MP": 30
+    "ECommandCostEnum::CCE_HP": 15
+    "ECommandCostEnum::CCE_BP": 1
+    "ECommandCostEnum::CCE_pq": 0
+  }
+  "Zappable Chartreuse":
+  {
+    Default: ECommandCostEnum::CCE_MP
+    "ECommandCostEnum::CCE_MP": 34
+    "ECommandCostEnum::CCE_HP": 18
+    "ECommandCostEnum::CCE_BP": 1
+    "ECommandCostEnum::CCE_pq": 0
+  }
+  Splatter:
+  {
+    Default: ECommandCostEnum::CCE_MP
+    "ECommandCostEnum::CCE_MP": 45
+    "ECommandCostEnum::CCE_HP": 18
+    "ECommandCostEnum::CCE_BP": 1
+    "ECommandCostEnum::CCE_pq": 0
+  }
+  Chiaro:
+  {
+    Default: ECommandCostEnum::CCE_MP
+    "ECommandCostEnum::CCE_MP": 60
+    "ECommandCostEnum::CCE_HP": 25
+    "ECommandCostEnum::CCE_BP": 2
+    "ECommandCostEnum::CCE_pq": 0
+  }
+  Scuro:
+  {
+    Default: ECommandCostEnum::CCE_MP
+    "ECommandCostEnum::CCE_MP": 60
+    "ECommandCostEnum::CCE_HP": 25
+    "ECommandCostEnum::CCE_BP": 2
+    "ECommandCostEnum::CCE_pq": 0
+  }
+  "Mass Production":
+  {
+    Default: ECommandCostEnum::CCE_MP
+    "ECommandCostEnum::CCE_MP": 70
+    "ECommandCostEnum::CCE_HP": 25
+    "ECommandCostEnum::CCE_BP": 2
+    "ECommandCostEnum::CCE_pq": 0
+  }
+  Freehand:
+  {
+    Default: ECommandCostEnum::CCE_MP
+    "ECommandCostEnum::CCE_MP": 30
+    "ECommandCostEnum::CCE_HP": 15
+    "ECommandCostEnum::CCE_BP": 1
+    "ECommandCostEnum::CCE_pq": 0
+  }
+  "Brush with Death":
+  {
+    Default: ECommandCostEnum::CCE_MP
+    "ECommandCostEnum::CCE_MP": 23
+    "ECommandCostEnum::CCE_HP": 15
+    "ECommandCostEnum::CCE_BP": 1
+    "ECommandCostEnum::CCE_pq": 0
+  }
+  Jump:
+  {
+    Default: ECommandCostEnum::CCE_BP
+    "ECommandCostEnum::CCE_MP": 40
+    "ECommandCostEnum::CCE_HP": 15
+    "ECommandCostEnum::CCE_BP": 1
+    "ECommandCostEnum::CCE_pq": 0
+  }
+  "Sonic Thrust":
+  {
+    Default: ECommandCostEnum::CCE_MP
+    "ECommandCostEnum::CCE_MP": 27
+    "ECommandCostEnum::CCE_HP": 15
+    "ECommandCostEnum::CCE_BP": 1
+    "ECommandCostEnum::CCE_pq": 0
+  }
+  "Thunder Thrust":
+  {
+    Default: ECommandCostEnum::CCE_MP
+    "ECommandCostEnum::CCE_MP": 40
+    "ECommandCostEnum::CCE_HP": 15
+    "ECommandCostEnum::CCE_BP": 1
+    "ECommandCostEnum::CCE_pq": 0
+  }
+  "Spirit Surge":
+  {
+    Default: ECommandCostEnum::CCE_MP
+    "ECommandCostEnum::CCE_MP": 44
+    "ECommandCostEnum::CCE_HP": 15
+    "ECommandCostEnum::CCE_BP": 1
+    "ECommandCostEnum::CCE_pq": 0
+  }
+  Angon:
+  {
+    Default: ECommandCostEnum::CCE_MP
+    "ECommandCostEnum::CCE_MP": 52
+    "ECommandCostEnum::CCE_HP": 18
+    "ECommandCostEnum::CCE_BP": 1
+    "ECommandCostEnum::CCE_pq": 0
+  }
+  "Bolt Blast":
+  {
+    Default: ECommandCostEnum::CCE_MP
+    "ECommandCostEnum::CCE_MP": 90
+    "ECommandCostEnum::CCE_HP": 25
+    "ECommandCostEnum::CCE_BP": 2
+    "ECommandCostEnum::CCE_pq": 0
+  }
+  "Super Jump":
+  {
+    Default: ECommandCostEnum::CCE_BP
+    "ECommandCostEnum::CCE_MP": 120
+    "ECommandCostEnum::CCE_HP": 35
+    "ECommandCostEnum::CCE_BP": 3
+    "ECommandCostEnum::CCE_pq": 0
+  }
+  "Soul Jump":
+  {
+    Default: ECommandCostEnum::CCE_BP
+    "ECommandCostEnum::CCE_MP": 120
+    "ECommandCostEnum::CCE_HP": 35
+    "ECommandCostEnum::CCE_BP": 3
+    "ECommandCostEnum::CCE_pq": 0
+  }
+  "Suffer in Silence":
+  {
+    Default: ECommandCostEnum::CCE_MP
+    "ECommandCostEnum::CCE_MP": 30
+    "ECommandCostEnum::CCE_HP": 15
+    "ECommandCostEnum::CCE_BP": 1
+    "ECommandCostEnum::CCE_pq": 0
+  }
+  Spirit-Crusher:
+  {
+    Default: ECommandCostEnum::CCE_BP
+    "ECommandCostEnum::CCE_MP": 80
+    "ECommandCostEnum::CCE_HP": 25
+    "ECommandCostEnum::CCE_BP": 2
+    "ECommandCostEnum::CCE_pq": 0
+  }
+  Healthbringer:
+  {
+    Default: ECommandCostEnum::CCE_MP
+    "ECommandCostEnum::CCE_MP": 22
+    "ECommandCostEnum::CCE_HP": 12
+    "ECommandCostEnum::CCE_BP": 1
+    "ECommandCostEnum::CCE_pq": 0
+  }
+  Banish:
+  {
+    Default: ECommandCostEnum::CCE_MP
+    "ECommandCostEnum::CCE_MP": 10
+    "ECommandCostEnum::CCE_HP": 5
+    "ECommandCostEnum::CCE_BP": 0
+    "ECommandCostEnum::CCE_pq": 0
+  }
+  Devotion:
+  {
+    Default: ECommandCostEnum::CCE_BP
+    "ECommandCostEnum::CCE_MP": 40
+    "ECommandCostEnum::CCE_HP": 15
+    "ECommandCostEnum::CCE_BP": 1
+    "ECommandCostEnum::CCE_pq": 0
+  }
+  Basunabringer:
+  {
+    Default: ECommandCostEnum::CCE_MP
+    "ECommandCostEnum::CCE_MP": 33
+    "ECommandCostEnum::CCE_HP": 15
+    "ECommandCostEnum::CCE_BP": 1
+    "ECommandCostEnum::CCE_pq": 0
+  }
+  Banishra:
+  {
+    Default: ECommandCostEnum::CCE_MP
+    "ECommandCostEnum::CCE_MP": 38
+    "ECommandCostEnum::CCE_HP": 18
+    "ECommandCostEnum::CCE_BP": 1
+    "ECommandCostEnum::CCE_pq": 0
+  }
+  Regeneration:
+  {
+    Default: ECommandCostEnum::CCE_MP
+    "ECommandCostEnum::CCE_MP": 30
+    "ECommandCostEnum::CCE_HP": 0
+    "ECommandCostEnum::CCE_BP": 0
+    "ECommandCostEnum::CCE_pq": 0
+  }
+  Banishga:
+  {
+    Default: ECommandCostEnum::CCE_MP
+    "ECommandCostEnum::CCE_MP": 66
+    "ECommandCostEnum::CCE_HP": 25
+    "ECommandCostEnum::CCE_BP": 2
+    "ECommandCostEnum::CCE_pq": 0
+  }
+  Spiritbringer:
+  {
+    Default: ECommandCostEnum::CCE_MP
+    "ECommandCostEnum::CCE_MP": 55
+    "ECommandCostEnum::CCE_HP": 22
+    "ECommandCostEnum::CCE_BP": 1
+    "ECommandCostEnum::CCE_pq": 0
+  }
+  Lifebringer:
+  {
+    Default: ECommandCostEnum::CCE_BP
+    "ECommandCostEnum::CCE_MP": 80
+    "ECommandCostEnum::CCE_HP": 25
+    "ECommandCostEnum::CCE_BP": 2
+    "ECommandCostEnum::CCE_pq": 0
+  }
+  Holy:
+  {
+    Default: ECommandCostEnum::CCE_MP
+    "ECommandCostEnum::CCE_MP": 80
+    "ECommandCostEnum::CCE_HP": 28
+    "ECommandCostEnum::CCE_BP": 2
+    "ECommandCostEnum::CCE_pq": 0
+  }
+  Reraise:
+  {
+    Default: ECommandCostEnum::CCE_MP
+    "ECommandCostEnum::CCE_MP": 80
+    "ECommandCostEnum::CCE_HP": 28
+    "ECommandCostEnum::CCE_BP": 2
+    "ECommandCostEnum::CCE_pq": 0
+  }
+  Bravebringer:
+  {
+    Default: ECommandCostEnum::CCE_BP
+    "ECommandCostEnum::CCE_MP": 80
+    "ECommandCostEnum::CCE_HP": 25
+    "ECommandCostEnum::CCE_BP": 2
+    "ECommandCostEnum::CCE_pq": 0
+  }
+  Purebringer:
+  {
+    Default: ECommandCostEnum::CCE_MP
+    "ECommandCostEnum::CCE_MP": 77
+    "ECommandCostEnum::CCE_HP": 25
+    "ECommandCostEnum::CCE_BP": 2
+    "ECommandCostEnum::CCE_pq": 0
+  }
+  "Solid Right Style":
+  {
+    Default: ECommandCostEnum::CCE_MP
+    "ECommandCostEnum::CCE_MP": 22
+    "ECommandCostEnum::CCE_HP": 15
+    "ECommandCostEnum::CCE_BP": 1
+    "ECommandCostEnum::CCE_pq": 0
+  }
+  "Fluid Left Style":
+  {
+    Default: ECommandCostEnum::CCE_MP
+    "ECommandCostEnum::CCE_MP": 20
+    "ECommandCostEnum::CCE_HP": 15
+    "ECommandCostEnum::CCE_BP": 1
+    "ECommandCostEnum::CCE_pq": 0
+  }
+  "Solid Slash":
+  {
+    Default: ECommandCostEnum::CCE_MP
+    "ECommandCostEnum::CCE_MP": 27
+    "ECommandCostEnum::CCE_HP": 15
+    "ECommandCostEnum::CCE_BP": 1
+    "ECommandCostEnum::CCE_pq": 0
+  }
+  "Fluid Flow":
+  {
+    Default: ECommandCostEnum::CCE_MP
+    "ECommandCostEnum::CCE_MP": 36
+    "ECommandCostEnum::CCE_HP": 15
+    "ECommandCostEnum::CCE_BP": 1
+    "ECommandCostEnum::CCE_pq": 0
+  }
+  "Fourfold Flurry":
+  {
+    Default: ECommandCostEnum::CCE_MP
+    "ECommandCostEnum::CCE_MP": 48
+    "ECommandCostEnum::CCE_HP": 15
+    "ECommandCostEnum::CCE_BP": 1
+    "ECommandCostEnum::CCE_pq": 0
+  }
+  "Solid Smash":
+  {
+    Default: ECommandCostEnum::CCE_MP
+    "ECommandCostEnum::CCE_MP": 90
+    "ECommandCostEnum::CCE_HP": 25
+    "ECommandCostEnum::CCE_BP": 2
+    "ECommandCostEnum::CCE_pq": 0
+  }
+  "Fluid Frenzy":
+  {
+    Default: ECommandCostEnum::CCE_MP
+    "ECommandCostEnum::CCE_MP": 72
+    "ECommandCostEnum::CCE_HP": 22
+    "ECommandCostEnum::CCE_BP": 2
+    "ECommandCostEnum::CCE_pq": 0
+  }
+  "Divide Attention":
+  {
+    Default: ECommandCostEnum::CCE_MP
+    "ECommandCostEnum::CCE_MP": 17
+    "ECommandCostEnum::CCE_HP": 5
+    "ECommandCostEnum::CCE_BP": 0
+    "ECommandCostEnum::CCE_pq": 0
+  }
+  "Ninefold Flurry":
+  {
+    Default: ECommandCostEnum::CCE_MP
+    "ECommandCostEnum::CCE_MP": 99
+    "ECommandCostEnum::CCE_HP": 28
+    "ECommandCostEnum::CCE_BP": 2
+    "ECommandCostEnum::CCE_pq": 0
+  }
+  Quick:
+  {
+    Default: ECommandCostEnum::CCE_MP
+    "ECommandCostEnum::CCE_MP": 21
+    "ECommandCostEnum::CCE_HP": 5
+    "ECommandCostEnum::CCE_BP": 0
+    "ECommandCostEnum::CCE_pq": 0
+  }
+  Slow:
+  {
+    Default: ECommandCostEnum::CCE_MP
+    "ECommandCostEnum::CCE_MP": 26
+    "ECommandCostEnum::CCE_HP": 5
+    "ECommandCostEnum::CCE_BP": 0
+    "ECommandCostEnum::CCE_pq": 0
+  }
+  "Elemental Ward":
+  {
+    Default: ECommandCostEnum::CCE_MP
+    "ECommandCostEnum::CCE_MP": 32
+    "ECommandCostEnum::CCE_HP": 15
+    "ECommandCostEnum::CCE_BP": 1
+    "ECommandCostEnum::CCE_pq": 0
+  }
+  Haste:
+  {
+    Default: ECommandCostEnum::CCE_MP
+    "ECommandCostEnum::CCE_MP": 42
+    "ECommandCostEnum::CCE_HP": 15
+    "ECommandCostEnum::CCE_BP": 1
+    "ECommandCostEnum::CCE_pq": 0
+  }
+  "Elemental Supplement":
+  {
+    Default: ECommandCostEnum::CCE_MP
+    "ECommandCostEnum::CCE_MP": 46
+    "ECommandCostEnum::CCE_HP": 15
+    "ECommandCostEnum::CCE_BP": 1
+    "ECommandCostEnum::CCE_pq": 0
+  }
+  Reflect:
+  {
+    Default: ECommandCostEnum::CCE_MP
+    "ECommandCostEnum::CCE_MP": 36
+    "ECommandCostEnum::CCE_HP": 15
+    "ECommandCostEnum::CCE_BP": 1
+    "ECommandCostEnum::CCE_pq": 0
+  }
+  Stop:
+  {
+    Default: ECommandCostEnum::CCE_MP
+    "ECommandCostEnum::CCE_MP": 44
+    "ECommandCostEnum::CCE_HP": 15
+    "ECommandCostEnum::CCE_BP": 1
+    "ECommandCostEnum::CCE_pq": 0
+  }
+  "Elemental Impairment":
+  {
+    Default: ECommandCostEnum::CCE_MP
+    "ECommandCostEnum::CCE_MP": 55
+    "ECommandCostEnum::CCE_HP": 15
+    "ECommandCostEnum::CCE_BP": 1
+    "ECommandCostEnum::CCE_pq": 0
+  }
+  Quickga:
+  {
+    Default: ECommandCostEnum::CCE_MP
+    "ECommandCostEnum::CCE_MP": 32
+    "ECommandCostEnum::CCE_HP": 15
+    "ECommandCostEnum::CCE_BP": 1
+    "ECommandCostEnum::CCE_pq": 0
+  }
+  Hastega:
+  {
+    Default: ECommandCostEnum::CCE_MP
+    "ECommandCostEnum::CCE_MP": 70
+    "ECommandCostEnum::CCE_HP": 25
+    "ECommandCostEnum::CCE_BP": 2
+    "ECommandCostEnum::CCE_pq": 0
+  }
+  Slowga:
+  {
+    Default: ECommandCostEnum::CCE_MP
+    "ECommandCostEnum::CCE_MP": 62
+    "ECommandCostEnum::CCE_HP": 25
+    "ECommandCostEnum::CCE_BP": 2
+    "ECommandCostEnum::CCE_pq": 0
+  }
+  Triple:
+  {
+    Default: ECommandCostEnum::CCE_MP
+    "ECommandCostEnum::CCE_MP": 20
+    "ECommandCostEnum::CCE_HP": 15
+    "ECommandCostEnum::CCE_BP": 1
+    "ECommandCostEnum::CCE_pq": 0
+  }
+  Triplara:
+  {
+    Default: ECommandCostEnum::CCE_MP
+    "ECommandCostEnum::CCE_MP": 55
+    "ECommandCostEnum::CCE_HP": 25
+    "ECommandCostEnum::CCE_BP": 2
+    "ECommandCostEnum::CCE_pq": 0
+  }
+  Triplaga:
+  {
+    Default: ECommandCostEnum::CCE_MP
+    "ECommandCostEnum::CCE_MP": 110
+    "ECommandCostEnum::CCE_HP": 35
+    "ECommandCostEnum::CCE_BP": 3
+    "ECommandCostEnum::CCE_pq": 0
+  }
+  Survey:
+  {
+    Default: ECommandCostEnum::CCE_MP
+    "ECommandCostEnum::CCE_MP": 32
+    "ECommandCostEnum::CCE_HP": 10
+    "ECommandCostEnum::CCE_BP": 1
+    "ECommandCostEnum::CCE_pq": 0
+  }
+  "Widen Area":
+  {
+    Default: ECommandCostEnum::CCE_MP
+    "ECommandCostEnum::CCE_MP": 55
+    "ECommandCostEnum::CCE_HP": 18
+    "ECommandCostEnum::CCE_BP": 1
+    "ECommandCostEnum::CCE_pq": 0
+  }
+  "BP Tonic":
+  {
+    Default: ECommandCostEnum::CCE_pq
+    "ECommandCostEnum::CCE_MP": 110
+    "ECommandCostEnum::CCE_HP": 30
+    "ECommandCostEnum::CCE_BP": 3
+    "ECommandCostEnum::CCE_pq": 7500
+  }
+  Philtre:
+  {
+    Default: ECommandCostEnum::CCE_MP
+    "ECommandCostEnum::CCE_MP": 22
+    "ECommandCostEnum::CCE_HP": 5
+    "ECommandCostEnum::CCE_BP": 0
+    "ECommandCostEnum::CCE_pq": 0
+  }
+  Revive:
+  {
+    Default: ECommandCostEnum::CCE_HP
+    "ECommandCostEnum::CCE_MP": 40
+    "ECommandCostEnum::CCE_HP": 25
+    "ECommandCostEnum::CCE_BP": 1
+    "ECommandCostEnum::CCE_pq": 0
+  }
+  "BP Depleter":
+  {
+    Default: ECommandCostEnum::CCE_pq
+    "ECommandCostEnum::CCE_MP": 120
+    "ECommandCostEnum::CCE_HP": 35
+    "ECommandCostEnum::CCE_BP": 3
+    "ECommandCostEnum::CCE_pq": 9000
+  }
+  "Double BP Tonic":
+  {
+    Default: ECommandCostEnum::CCE_pq
+    "ECommandCostEnum::CCE_MP": 140
+    "ECommandCostEnum::CCE_HP": 35
+    "ECommandCostEnum::CCE_BP": 3
+    "ECommandCostEnum::CCE_pq": 15000
+  }
+  Heartbreak:
+  {
+    Default: ECommandCostEnum::CCE_BP
+    "ECommandCostEnum::CCE_MP": 40
+    "ECommandCostEnum::CCE_HP": 15
+    "ECommandCostEnum::CCE_BP": 1
+    "ECommandCostEnum::CCE_pq": 0
+  }
+  Analysis:
+  {
+    Default: ECommandCostEnum::CCE_MP
+    "ECommandCostEnum::CCE_MP": 30
+    "ECommandCostEnum::CCE_HP": 15
+    "ECommandCostEnum::CCE_BP": 1
+    "ECommandCostEnum::CCE_pq": 0
+  }
+  Dark:
+  {
+    Default: ECommandCostEnum::CCE_MP
+    "ECommandCostEnum::CCE_MP": 15
+    "ECommandCostEnum::CCE_HP": 5
+    "ECommandCostEnum::CCE_BP": 0
+    "ECommandCostEnum::CCE_pq": 0
+  }
+  Ardour:
+  {
+    Default: ECommandCostEnum::CCE_MP
+    "ECommandCostEnum::CCE_MP": 36
+    "ECommandCostEnum::CCE_HP": 15
+    "ECommandCostEnum::CCE_BP": 1
+    "ECommandCostEnum::CCE_pq": 0
+  }
+  Drain:
+  {
+    Default: ECommandCostEnum::CCE_MP
+    "ECommandCostEnum::CCE_MP": 30
+    "ECommandCostEnum::CCE_HP": 15
+    "ECommandCostEnum::CCE_BP": 1
+    "ECommandCostEnum::CCE_pq": 0
+  }
+  Darkra:
+  {
+    Default: ECommandCostEnum::CCE_MP
+    "ECommandCostEnum::CCE_MP": 38
+    "ECommandCostEnum::CCE_HP": 15
+    "ECommandCostEnum::CCE_BP": 1
+    "ECommandCostEnum::CCE_pq": 0
+  }
+  Electon:
+  {
+    Default: ECommandCostEnum::CCE_MP
+    "ECommandCostEnum::CCE_MP": 50
+    "ECommandCostEnum::CCE_HP": 20
+    "ECommandCostEnum::CCE_BP": 1
+    "ECommandCostEnum::CCE_pq": 0
+  }
+  Darkga:
+  {
+    Default: ECommandCostEnum::CCE_MP
+    "ECommandCostEnum::CCE_MP": 66
+    "ECommandCostEnum::CCE_HP": 25
+    "ECommandCostEnum::CCE_BP": 2
+    "ECommandCostEnum::CCE_pq": 0
+  }
+  Aspir:
+  {
+    Default: ECommandCostEnum::CCE_HP
+    "ECommandCostEnum::CCE_MP": 10
+    "ECommandCostEnum::CCE_HP": 20
+    "ECommandCostEnum::CCE_BP": 1
+    "ECommandCostEnum::CCE_pq": 0
+  }
+  Meltdown:
+  {
+    Default: ECommandCostEnum::CCE_MP
+    "ECommandCostEnum::CCE_MP": 70
+    "ECommandCostEnum::CCE_HP": 25
+    "ECommandCostEnum::CCE_BP": 2
+    "ECommandCostEnum::CCE_pq": 0
+  }
+  Comet:
+  {
+    Default: ECommandCostEnum::CCE_MP
+    "ECommandCostEnum::CCE_MP": 45
+    "ECommandCostEnum::CCE_HP": 0
+    "ECommandCostEnum::CCE_BP": 1
+    "ECommandCostEnum::CCE_pq": 0
+  }
+  Doomsday:
+  {
+    Default: ECommandCostEnum::CCE_MP
+    "ECommandCostEnum::CCE_MP": 80
+    "ECommandCostEnum::CCE_HP": 25
+    "ECommandCostEnum::CCE_BP": 2
+    "ECommandCostEnum::CCE_pq": 0
+  }
+  Death:
+  {
+    Default: ECommandCostEnum::CCE_MP
+    "ECommandCostEnum::CCE_MP": 25
+    "ECommandCostEnum::CCE_HP": 15
+    "ECommandCostEnum::CCE_BP": 1
+    "ECommandCostEnum::CCE_pq": 0
+  }
+  Apocalypse:
+  {
+    Default: ECommandCostEnum::CCE_MP
+    "ECommandCostEnum::CCE_MP": 110
+    "ECommandCostEnum::CCE_HP": 35
+    "ECommandCostEnum::CCE_BP": 3
+    "ECommandCostEnum::CCE_pq": 0
+  }
+  Meteor:
+  {
+    Default: ECommandCostEnum::CCE_MP
+    "ECommandCostEnum::CCE_MP": 136
+    "ECommandCostEnum::CCE_HP": 35
+    "ECommandCostEnum::CCE_BP": 3
+    "ECommandCostEnum::CCE_pq": 0
+  }
+  Bulwark:
+  {
+    Default: ECommandCostEnum::CCE_MP
+    "ECommandCostEnum::CCE_MP": 12
+    "ECommandCostEnum::CCE_HP": 5
+    "ECommandCostEnum::CCE_BP": 0
+    "ECommandCostEnum::CCE_pq": 0
+  }
+  Phalanx:
+  {
+    Default: ECommandCostEnum::CCE_MP
+    "ECommandCostEnum::CCE_MP": 12
+    "ECommandCostEnum::CCE_HP": 5
+    "ECommandCostEnum::CCE_BP": 0
+    "ECommandCostEnum::CCE_pq": 0
+  }
+  Rampart:
+  {
+    Default: ECommandCostEnum::CCE_HP
+    "ECommandCostEnum::CCE_MP": 80
+    "ECommandCostEnum::CCE_HP": 30
+    "ECommandCostEnum::CCE_BP": 2
+    "ECommandCostEnum::CCE_pq": 0
+  }
+  Vallation:
+  {
+    Default: ECommandCostEnum::CCE_HP
+    "ECommandCostEnum::CCE_MP": 80
+    "ECommandCostEnum::CCE_HP": 25
+    "ECommandCostEnum::CCE_BP": 2
+    "ECommandCostEnum::CCE_pq": 0
+  }
+  "Light of Justice":
+  {
+    Default: ECommandCostEnum::CCE_MP
+    "ECommandCostEnum::CCE_MP": 47
+    "ECommandCostEnum::CCE_HP": 15
+    "ECommandCostEnum::CCE_BP": 1
+    "ECommandCostEnum::CCE_pq": 0
+  }
+  Wall:
+  {
+    Default: ECommandCostEnum::CCE_MP
+    "ECommandCostEnum::CCE_MP": 38
+    "ECommandCostEnum::CCE_HP": 12
+    "ECommandCostEnum::CCE_BP": 1
+    "ECommandCostEnum::CCE_pq": 0
+  }
+  "Corporal Punishment":
+  {
+    Default: ECommandCostEnum::CCE_BP
+    "ECommandCostEnum::CCE_MP": 40
+    "ECommandCostEnum::CCE_HP": 15
+    "ECommandCostEnum::CCE_BP": 1
+    "ECommandCostEnum::CCE_pq": 0
+  }
+  "Double Default":
+  {
+    Default: ECommandCostEnum::CCE_HP
+    "ECommandCostEnum::CCE_MP": 0
+    "ECommandCostEnum::CCE_HP": 35
+    "ECommandCostEnum::CCE_BP": 1
+    "ECommandCostEnum::CCE_pq": 0
+  }
+  Sanctuary:
+  {
+    Default: ECommandCostEnum::CCE_BP
+    "ECommandCostEnum::CCE_MP": 40
+    "ECommandCostEnum::CCE_HP": 15
+    "ECommandCostEnum::CCE_BP": 1
+    "ECommandCostEnum::CCE_pq": 0
+  }
+  "Holy Light":
+  {
+    Default: ECommandCostEnum::CCE_MP
+    "ECommandCostEnum::CCE_MP": 90
+    "ECommandCostEnum::CCE_HP": 28
+    "ECommandCostEnum::CCE_BP": 2
+    "ECommandCostEnum::CCE_pq": 0
+  }
+  Blindsider:
+  {
+    Default: ECommandCostEnum::CCE_MP
+    "ECommandCostEnum::CCE_MP": 44
+    "ECommandCostEnum::CCE_HP": 15
+    "ECommandCostEnum::CCE_BP": 1
+    "ECommandCostEnum::CCE_pq": 0
+  }
+  "Become the Lightning":
+  {
+    Default: ECommandCostEnum::CCE_HP
+    "ECommandCostEnum::CCE_MP": 0
+    "ECommandCostEnum::CCE_HP": 20
+    "ECommandCostEnum::CCE_BP": 1
+    "ECommandCostEnum::CCE_pq": 0
+  }
+  "Dream Within a Dream":
+  {
+    Default: ECommandCostEnum::CCE_MP
+    "ECommandCostEnum::CCE_MP": 36
+    "ECommandCostEnum::CCE_HP": 10
+    "ECommandCostEnum::CCE_BP": 1
+    "ECommandCostEnum::CCE_pq": 0
+  }
+  Shroud:
+  {
+    Default: ECommandCostEnum::CCE_MP
+    "ECommandCostEnum::CCE_MP": 46
+    "ECommandCostEnum::CCE_HP": 15
+    "ECommandCostEnum::CCE_BP": 1
+    "ECommandCostEnum::CCE_pq": 0
+  }
+  Flit:
+  {
+    Default: ECommandCostEnum::CCE_HP
+    "ECommandCostEnum::CCE_MP": 0
+    "ECommandCostEnum::CCE_HP": 15
+    "ECommandCostEnum::CCE_BP": 1
+    "ECommandCostEnum::CCE_pq": 0
+  }
+  "Recurring Nightmare":
+  {
+    Default: ECommandCostEnum::CCE_MP
+    "ECommandCostEnum::CCE_MP": 36
+    "ECommandCostEnum::CCE_HP": 15
+    "ECommandCostEnum::CCE_BP": 1
+    "ECommandCostEnum::CCE_pq": 0
+  }
+  "Burial Shroud":
+  {
+    Default: ECommandCostEnum::CCE_MP
+    "ECommandCostEnum::CCE_MP": 96
+    "ECommandCostEnum::CCE_HP": 20
+    "ECommandCostEnum::CCE_BP": 2
+    "ECommandCostEnum::CCE_pq": 0
+  }
+  "Ethereal Edge":
+  {
+    Default: ECommandCostEnum::CCE_MP
+    "ECommandCostEnum::CCE_MP": 66
+    "ECommandCostEnum::CCE_HP": 20
+    "ECommandCostEnum::CCE_BP": 2
+    "ECommandCostEnum::CCE_pq": 0
+  }
+  "Never-Ending Nightmare":
+  {
+    Default: ECommandCostEnum::CCE_MP
+    "ECommandCostEnum::CCE_MP": 106
+    "ECommandCostEnum::CCE_HP": 35
+    "ECommandCostEnum::CCE_BP": 3
+    "ECommandCostEnum::CCE_pq": 0
+  }
+  "Milk Poison":
+  {
+    Default: ECommandCostEnum::CCE_MP
+    "ECommandCostEnum::CCE_MP": 46
+    "ECommandCostEnum::CCE_HP": 15
+    "ECommandCostEnum::CCE_BP": 1
+    "ECommandCostEnum::CCE_pq": 0
+  }
+  "Sick Twist":
+  {
+    Default: ECommandCostEnum::CCE_MP
+    "ECommandCostEnum::CCE_MP": 46
+    "ECommandCostEnum::CCE_HP": 15
+    "ECommandCostEnum::CCE_BP": 1
+    "ECommandCostEnum::CCE_pq": 0
+  }
+  "Ruby Blades":
+  {
+    Default: ECommandCostEnum::CCE_HP
+    "ECommandCostEnum::CCE_MP": 60
+    "ECommandCostEnum::CCE_HP": 25
+    "ECommandCostEnum::CCE_BP": 1
+    "ECommandCostEnum::CCE_pq": 0
+  }
+  "Sapphire Blades":
+  {
+    Default: ECommandCostEnum::CCE_HP
+    "ECommandCostEnum::CCE_MP": 60
+    "ECommandCostEnum::CCE_HP": 25
+    "ECommandCostEnum::CCE_BP": 1
+    "ECommandCostEnum::CCE_pq": 0
+  }
+  "Dread Blade":
+  {
+    Default: ECommandCostEnum::CCE_MP
+    "ECommandCostEnum::CCE_MP": 44
+    "ECommandCostEnum::CCE_HP": 8
+    "ECommandCostEnum::CCE_BP": 1
+    "ECommandCostEnum::CCE_pq": 0
+  }
+  "Diamond Blades":
+  {
+    Default: ECommandCostEnum::CCE_HP
+    "ECommandCostEnum::CCE_MP": 60
+    "ECommandCostEnum::CCE_HP": 25
+    "ECommandCostEnum::CCE_BP": 1
+    "ECommandCostEnum::CCE_pq": 0
+  }
+  "Minus Strike":
+  {
+    Default: ECommandCostEnum::CCE_BP
+    "ECommandCostEnum::CCE_MP": 40
+    "ECommandCostEnum::CCE_HP": 15
+    "ECommandCostEnum::CCE_BP": 1
+    "ECommandCostEnum::CCE_pq": 0
+  }
+  "Carnelian Blades":
+  {
+    Default: ECommandCostEnum::CCE_HP
+    "ECommandCostEnum::CCE_MP": 60
+    "ECommandCostEnum::CCE_HP": 25
+    "ECommandCostEnum::CCE_BP": 1
+    "ECommandCostEnum::CCE_pq": 0
+  }
+  "Emerald Blades":
+  {
+    Default: ECommandCostEnum::CCE_HP
+    "ECommandCostEnum::CCE_MP": 60
+    "ECommandCostEnum::CCE_HP": 25
+    "ECommandCostEnum::CCE_BP": 1
+    "ECommandCostEnum::CCE_pq": 0
+  }
+  "Death Throes":
+  {
+    Default: ECommandCostEnum::CCE_MP
+    "ECommandCostEnum::CCE_MP": 10
+    "ECommandCostEnum::CCE_HP": 5
+    "ECommandCostEnum::CCE_BP": 1
+    "ECommandCostEnum::CCE_pq": 0
+  }
+  "Quartz Blades":
+  {
+    Default: ECommandCostEnum::CCE_HP
+    "ECommandCostEnum::CCE_MP": 60
+    "ECommandCostEnum::CCE_HP": 25
+    "ECommandCostEnum::CCE_BP": 1
+    "ECommandCostEnum::CCE_pq": 0
+  }
+  "Onyx Blades":
+  {
+    Default: ECommandCostEnum::CCE_HP
+    "ECommandCostEnum::CCE_MP": 60
+    "ECommandCostEnum::CCE_HP": 25
+    "ECommandCostEnum::CCE_BP": 1
+    "ECommandCostEnum::CCE_pq": 0
+  }
+  Terrorise:
+  {
+    Default: ECommandCostEnum::CCE_MP
+    "ECommandCostEnum::CCE_MP": 44
+    "ECommandCostEnum::CCE_HP": 15
+    "ECommandCostEnum::CCE_BP": 1
+    "ECommandCostEnum::CCE_pq": 0
+  }
+  Supergravity:
+  {
+    Default: ECommandCostEnum::CCE_MP
+    "ECommandCostEnum::CCE_MP": 36
+    "ECommandCostEnum::CCE_HP": 15
+    "ECommandCostEnum::CCE_BP": 1
+    "ECommandCostEnum::CCE_pq": 0
+  }
+  "Wall of Woe":
+  {
+    Default: ECommandCostEnum::CCE_MP
+    "ECommandCostEnum::CCE_MP": 84
+    "ECommandCostEnum::CCE_HP": 25
+    "ECommandCostEnum::CCE_BP": 2
+    "ECommandCostEnum::CCE_pq": 0
+  }
+  "Practice Makes Perfect":
+  {
+    Default: ECommandCostEnum::CCE_BP
+    "ECommandCostEnum::CCE_MP": 80
+    "ECommandCostEnum::CCE_HP": 25
+    "ECommandCostEnum::CCE_BP": 2
+    "ECommandCostEnum::CCE_pq": 0
+  }
+  "Dawn of Odyssey":
+  {
+    Default: ECommandCostEnum::CCE_MP
+    "ECommandCostEnum::CCE_MP": 58
+    "ECommandCostEnum::CCE_HP": 25
+    "ECommandCostEnum::CCE_BP": 2
+    "ECommandCostEnum::CCE_pq": 0
+  }
+  Hypergravity:
+  {
+    Default: ECommandCostEnum::CCE_MP
+    "ECommandCostEnum::CCE_MP": 80
+    "ECommandCostEnum::CCE_HP": 25
+    "ECommandCostEnum::CCE_BP": 2
+    "ECommandCostEnum::CCE_pq": 0
+  }
+  Equaliser:
+  {
+    Default: ECommandCostEnum::CCE_MP
+    "ECommandCostEnum::CCE_MP": 32
+    "ECommandCostEnum::CCE_HP": 15
+    "ECommandCostEnum::CCE_BP": 1
+    "ECommandCostEnum::CCE_pq": 0
+  }
+  "Victory Smite":
+  {
+    Default: ECommandCostEnum::CCE_HP
+    "ECommandCostEnum::CCE_MP": 70
+    "ECommandCostEnum::CCE_HP": 25
+    "ECommandCostEnum::CCE_BP": 2
+    "ECommandCostEnum::CCE_pq": 0
+  }
+  Gigagravity:
+  {
+    Default: ECommandCostEnum::CCE_MP
+    "ECommandCostEnum::CCE_MP": 125
+    "ECommandCostEnum::CCE_HP": 35
+    "ECommandCostEnum::CCE_BP": 3
+    "ECommandCostEnum::CCE_pq": 0
+  }
+  "Best Practice":
+  {
+    Default: ECommandCostEnum::CCE_BP
+    "ECommandCostEnum::CCE_MP": 120
+    "ECommandCostEnum::CCE_HP": 30
+    "ECommandCostEnum::CCE_BP": 3
+    "ECommandCostEnum::CCE_pq": 0
+  }
+  "BP Bump":
+  {
+    Default: ECommandCostEnum::CCE_BP
+    "ECommandCostEnum::CCE_MP": 80
+    "ECommandCostEnum::CCE_HP": 25
+    "ECommandCostEnum::CCE_BP": 2
+    "ECommandCostEnum::CCE_pq": 0
+  }
+  "Victory Double":
+  {
+    Default: ECommandCostEnum::CCE_BP
+    "ECommandCostEnum::CCE_MP": 120
+    "ECommandCostEnum::CCE_HP": 30
+    "ECommandCostEnum::CCE_BP": 3
+    "ECommandCostEnum::CCE_pq": 0
+  }
+}

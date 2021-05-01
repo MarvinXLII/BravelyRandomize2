@@ -20,9 +20,6 @@
   // resistance: false
   resistance: true
 
-  // resistance-boss-separately: false
-  resistance-boss-separately: true
-
   qol-scale-exp: 2
   qol-scale-jp: 2
   qol-scale-pg: 2

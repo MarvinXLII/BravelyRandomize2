@@ -2,104 +2,68 @@ import random
 
 def shuffleItems(treasures, quests, monsters):
 
-    # Group by chapter
-    chapters = {i:[] for i in range(8)}
-    for c, data in treasures.boxes.items():
-        c = min(c, 5)
-        for box in data:
-            chapters[c].append((box['ItemId'], box['ItemCount']))
-    for c, data in quests.questRewards.items():
-        c = min(c, 5)
-        for reward in data:
-            chapters[c].append((reward['RewardId'], reward['RewardCount']))
-    for steal in monsters.steals.values():
-        if steal['shuffle']:
-            item = steal['item']
-            if item == -1:
-                print('here')
-            c = min(steal['chapter'], 5)
-            count = random.choices([1,2,3], [0.85,0.10,0.05])[0]
-            chapters[c].append((item, count))
-    for stealRare in monsters.stealsRare.values():
-        if stealRare['shuffle']:
-            item = stealRare['item']
-            if item == -1:
-                print('here')
-            c = min(stealRare['chapter'], 5)
-            chapters[c].append((item, 1))
-    for drops in monsters.drops.values():
-        if drops['shuffle']:
-            item = drops['item']
-            if item == -1:
-                print('here')
-            c = min(drops['chapter'], 5)
-            count = random.choices([1,2,3], [0.85,0.10,0.05])[0]
-            chapters[c].append((item, count))
-    for dropsRare in monsters.dropsRare.values():
-        if dropsRare['shuffle']:
-            item = dropsRare['item']
-            if item == -1:
-                print('here')
-            c = min(dropsRare['chapter'], 5)
-            chapters[c].append((item, 1))
+    # Group all items by chapter
+    chapters = {i:[] for i in range(6)}
+    for enemy in monsters.steals.values():
+        c = min(5, enemy.Chapter)
+        chapters[c].append( enemy.Item.getItem() )
+        chapters[c].append( enemy.RareItem.getItem() )
+    for enemy in monsters.drops.values():
+        c = min(5, enemy.Chapter)
+        chapters[c].append( enemy.Item.getItem() )
+        chapters[c].append( enemy.RareItem.getItem() )
 
-    ############################
-    # SHUFFLE STEALS AND DROPS #
-    ############################
+    for candidates in chapters.values():
+        random.shuffle(candidates)
+        
+    for chapter, rewards in quests.questRewards.items():
+        c = min(5, chapter)
+        for reward in rewards:
+            chapters[c].append( reward.Item.getItem() )
+    for chapter, chests in treasures.chests.items():
+        c = min(5, chapter)
+        for chest in chests:
+            chapters[c].append( chest.Item.getItem() )
 
-    for slots in chapters.values():
-        random.shuffle(slots)
+    # Weights for item-only shuffling
+    weights = {i:[] for i in range(6)}
+    for c, candidates in chapters.items():
+        for item in candidates:
+            weights[c].append( item.canShuffle() and not item.isMoney() )
 
-    for steal in monsters.steals.values():
-        if steal['shuffle']:
-            c = min(steal['chapter'], 5)
-            idx = 0
-            while chapters[c][idx][0] == -1:
-                idx += 1
-            steal['item'], _ = chapters[c].pop(idx)
+    # Fisher-Yates shuffling
+    for c in range(6):
+        # Get sizes
+        total = len(chapters[c])
+        n = total - len(quests.questRewards[c]) - len(treasures.chests[c])
 
-    for stealRare in monsters.stealsRare.values():
-        if stealRare['shuffle']:
-            c = min(stealRare['chapter'], 5)
-            idx = 0
-            while chapters[c][idx][0] == -1:
-                idx += 1
-            stealRare['item'], _ = chapters[c].pop(idx)
+        # Shuffle drops and steals -- items only!
+        for i in range(n):
+            if weights[c][i]: # Skip if item obj cannot be shuffled
+                j = random.choices(range(i, total), weights[c][i:])[0]
+                chapters[c][i], chapters[c][j] = chapters[c][j], chapters[c][i]
 
-    for drops in monsters.drops.values():
-        if drops['shuffle']:
-            c = min(drops['chapter'], 5)
-            idx = 0
-            while chapters[c][idx][0] == -1:
-                idx += 1
-            drops['item'], _ = chapters[c].pop(idx)
+        # Shuffle quest and treasure items
+        for i in range(n, total):
+            j = random.choices(range(i, total))[0]
+            chapters[c][i], chapters[c][j] = chapters[c][j], chapters[c][i]
 
-    for dropsRare in monsters.dropsRare.values():
-        if dropsRare['shuffle']:
-            c = min(dropsRare['chapter'], 5)
-            idx = 0
-            while chapters[c][idx][0] == -1:
-                idx += 1
-            dropsRare['item'], _ = chapters[c].pop(idx)
-
-    #####################
-    # CHESTS AND QUESTS #
-    #####################
-
-    # Ensure first slots aren't biased towards money!
-    for slots in chapters.values():
-        random.shuffle(slots)
-
-    # Chests
-    for c, data in treasures.boxes.items():
-        c = min(c, 5)
-        for box in data:
-            box['ItemId'], box['ItemCount'] = chapters[c].pop()
-            box['Swap'] = treasures.getContents(box['ItemId'], box['ItemCount'])
-
-    # Quests
-    for c, data in quests.questRewards.items():
-        c = min(c, 5)
-        for quest in data:
-            quest['RewardId'], quest['RewardCount'] = chapters[c].pop()
-            quest['Swap'] = quests.getReward(quest['RewardId'], quest['RewardCount'])
+    # Copy items back
+    for enemy in monsters.steals.values():
+        c = min(5, enemy.Chapter)
+        enemy.Item.setItem( chapters[c].pop(0) )
+        enemy.RareItem.setItem( chapters[c].pop(0) )
+    for enemy in monsters.drops.values():
+        c = min(5, enemy.Chapter)
+        enemy.Item.setItem( chapters[c].pop(0) )
+        enemy.RareItem.setItem( chapters[c].pop(0) )
+    for chapter, rewards in quests.questRewards.items():
+        c = min(5, chapter)
+        for i in range(len(rewards)):
+            assert chapters[c][0].canShuffle() # Ensures all quests will have a reward
+            rewards[i].Item.setItem( chapters[c].pop(0) )
+    for chapter, chests in treasures.chests.items():
+        c = min(5, chapter)
+        for i in range(len(chests)):
+            assert chapters[c][0].canShuffle() # Ensures no chest is empty
+            chests[i].Item.setItem( chapters[c].pop(0) )

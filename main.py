@@ -3,10 +3,10 @@ import hjson
 import sys
 sys.path.append('src')
 from ROM import ROM
-from Data import DATA, QUESTS, JOBSTATS, JOBDATA, MONSTERPARTY, MONSTERS, TREASURES, TEXT, FLAGS, ACTIONS, SUPPORT
+from Data import DATA, QUESTS, JOBSTATS, JOBDATA, MONSTERPARTY, MONSTERS, TREASURES, TEXT, ACTIONS, SUPPORT
 from Items import shuffleItems
 from Battles import shuffleResistance
-from Jobs import shuffleJobAbilities
+from Jobs import shuffleJobAbilities, randomActionCosts
 # from World import WORLD
 # from gui import randomize
 import random
@@ -19,23 +19,24 @@ def main(settings):
     pak = settings['rom']
     rom = ROM(pak)
 
-    flags = FLAGS(rom)
-
     ### TEXT FILES
     actionText = TEXT(rom, 'L10N/en/DataAsset/Ability/Player/ActionAbilityTextAsset')
     supportText = TEXT(rom, 'L10N/en/DataAsset/Ability/Player/SupportAbilityTextAsset')
     specialText = TEXT(rom, 'L10N/en/DataAsset/Ability/Player/SpecialAbilityTextAsset')
     itemText = TEXT(rom, 'L10N/en/DataAsset/Item/ItemTextAsset')
-    locationText = TEXT(rom, 'L10N/en/DataAsset/Field/LocationTextDataAsset')
+    # locationText = TEXT(rom, 'L10N/en/DataAsset/Field/LocationTextDataAsset')
     monsterText = TEXT(rom, 'L10N/en/DataAsset/Monster/MonsterTextDataAsset')
+
+    support = SUPPORT(rom, supportText)
+    actions = ACTIONS(rom, actionText)
 
     ### ASSETS
     jobstats = JOBSTATS(rom)
-    jobdata = JOBDATA(rom, actionText, supportText)
+    jobdata = JOBDATA(rom, actions, support)
     monsterParty = MONSTERPARTY(rom)
     monsters = MONSTERS(rom, monsterText, itemText, monsterParty)
-    treasures = TREASURES(rom, itemText, locationText)
-    quests = QUESTS(rom, itemText, locationText)
+    treasures = TREASURES(rom, itemText)
+    quests = QUESTS(rom, itemText)
     actions = ACTIONS(rom, actionText)
     support = SUPPORT(rom, supportText)
 
@@ -67,13 +68,15 @@ def main(settings):
             count += 1
         print("Shuffling abilities took ", count, " attempts!")
 
+    randomActionCosts(jobdata)
+
     ### ITEM SHUFFLER
     if settings['items']:
         shuffleItems(treasures, quests, monsters)
 
     ### RESISTANCE SHUFFLER
     if settings['resistance']:
-        shuffleResistance(monsters, settings['resistance-boss-separately'])
+        shuffleResistance(monsters)
 
     ### QOL
     try:
@@ -89,17 +92,14 @@ def main(settings):
     jobstats.update()
     jobdata.update()
     monsters.update()
-    actionText.update()
-    supportText.update()
-    specialText.update()
-    itemText.update()
+    # actionText.update()
+    # supportText.update()
+    # specialText.update()
+    # itemText.update()
     treasures.update()
     quests.update()
-    actions.update()
+    actions.update() # action costs
     support.update()
-
-    ## TESTING
-    flags.update()
 
     # Dump pak
     rom.buildPak('Sunrise-E-Switch_2_P.pak')
