@@ -4,29 +4,6 @@ import sys
 sys.path.append("..")
 
 
-## TODO
-# - Should Benediction be included with healing? NO if it works with items!
-#   --> White mage cures only!!!!
-# - does Magic Critical only affect spells or also physical attacks with an element? e.g. Sky Slicer of thief
-#   --> These attack can get critical without Magic Critical (allows magic crits)
-# - weapon lores should probably end up on jobs with weapon-specific attacks???
-# - should job sampling for weapon-based attacks be biased towards jobs with strong weapons affinities (S, A, .. maybe B?)
-# - How does "In One's Element" work if spell cost become BP or HP?
-# - Do Supports work properly as Traits? (and vice versa?)
-#   --> Yes, they seem to work just fine! (though not each and every one tested)
-# - Do bosses fight the same way with skills and support swapped? (presumably)
-#   --> Yes, it seems like Dag uses its vanilla skills
-
-# OFFTOPIC
-# - Test swapping cutscenes for asterisks earned.
-# - How about items collected, eg. map, stones?
-# - Healing in the main menu
-#   --> Didn't work a while back but works fine now. Not sure what the issue was before.
-
-# What if a job is all supports?
-# Is there a max number of supports allowed?
-
-
 def randomActionCosts(jobData):
 
     actionDict = {a.Name:a for a in jobData.actionsDict.values()}
@@ -138,21 +115,6 @@ def shuffleJobAbilities(jobData):
             assignments[skill] = i
             actions.remove(skill)
 
-    # def fillSupport(skills):
-    #     # Pick a job
-    #     i = random.randint(0, 23)
-    #     while jobs[i].vacantSupportSlots() < len(skills):
-    #         i = random.randint(0, 23)
-
-    #     # Fill slots
-    #     objs = [jobData.supportDict[Id] for Id in skills]
-    #     jobs[i].fillSupportSlots(objs)
-
-    #     # Filter candidates and fill assignments
-    #     for skill in skills:
-    #         assignments[skill] = i
-    #         support.remove(skill)
-
     def addActions(skills, targets):
         random.shuffle(skills) # Order doesn't matter!
         random.shuffle(targets)
@@ -181,198 +143,93 @@ def shuffleJobAbilities(jobData):
                 return True
         return False
         
+    ###################################
+    #### FIRST: FILL ALL GROUPINGS ####
+    ###################################
 
-    
-
-            
-
-
-# def shuffleJobAbilities(data):
-#     candidates = {
-#         'skills': list(data.skills),
-#         'support': list(data.support),
-#     }
-#     assignments = {} # Skill/Support ID -> Job ID
-    
-#     ## Build weights to keep track of slots
-#     # 15 skills/supports + trait1 + trait2
-#     vacant = [[True]*17 for i in range(24)]
-
-#     # Job names
-#     names = list(data.job.keys())
-
-#     # GROUP OF SKILLS up to slot 15
-#     def fillGroup(skills):
-
-#         # Pick a job
-#         i = random.randint(0, 23)
-#         while sum(vacant[i][:15]) < len(skills): # Ensures enough room for skills
-#             i = random.randint(0, 23)
-
-#         # Setup slots for the remaining skills
-#         slots = []
-#         for _ in enumerate(skills):
-#             j = random.choices(range(15), vacant[i][:15])[0]
-#             vacant[i][j] = False
-#             slots.append(j)
-#         slots.sort()
-
-#         # Assign skills to the slots
-#         for slot, skill in zip(slots, skills):
-#             data.job[names[i]][slot] = skill
-#             assignments[skill] = i
-
-#         # Remove skills from candidates
-#         candidates['skills'] = list(filter(lambda x: x not in skills, candidates['skills']))
-
-#     # GROUP OF SUPPORT up to slot 17 (includes traits!)
-#     def fillSupport(skills):
-
-#         # Pick a job
-#         i = random.randint(0, 23)
-#         while sum(vacant[i][:17]) < len(skills): # Ensures enough room for skills
-#             i = random.randint(0, 23)
-
-#         # Setup slots for the remaining skills
-#         slots = []
-#         for _ in enumerate(skills):
-#             j = random.choices(range(17), vacant[i][:17])[0]
-#             vacant[i][j] = False
-#             slots.append(j)
-#         slots.sort()
-
-#         # Assign skills to the slots
-#         for slot, skill in zip(slots, skills):
-#             data.job[names[i]][slot] = skill
-#             assignments[skill] = i
-
-#         # Remove skills from candidates
-#         candidates['support'] = list(filter(lambda x: x not in skills, candidates['support']))
-
-#     def addSkills(skills, targets):
-#         random.shuffle(skills) # Order not required for these!
-
-#         target = random.sample(targets, 1)[0]
-#         i = assignments[target]
-#         if sum(vacant[i]) < len(skills):
-#             return False
-
-#         for s in skills:
-#             j = random.choices(range(17), vacant[i])[0]
-#             vacant[i][j] = False
-#             data.job[names[i]][j] = s
-
-#         # Remove skills from candidates
-#         candidates['skills'] = list(filter(lambda x: x not in skills, candidates['skills']))
-
-#         return True
-        
-
-#     def addSupport(supports, targets):
-#         random.shuffle(supports) # Order not required for these!
-        
-#         target = random.sample(targets, 1)[0]
-#         i = assignments[target]
-#         if sum(vacant[i]) < len(supports):
-#             return False
-
-#         for s in supports:
-#             j = random.choices(range(17), vacant[i])[0]
-#             vacant[i][j] = False
-#             data.job[names[i]][j] = s
-
-#         # Remove support skills from candidates
-#         candidates['support'] = list(filter(lambda x: x not in supports, candidates['support']))
-
-#         return True
-        
-
-    #### FIRST: FILL ALL GROUPINGS
     groups = hjson.load(open("json/groups.json", 'r'))
 
     # MONK SKILLS
-    monk = jobData.pickIds(1, groups['monk']) #"Inner Alchemy", "Invigorate", "Mindfulness")
+    monk = jobData.pickIds(1, groups['monk'])
     fillGroup(monk)
     
     # Healing spells
-    wm_cure = jobData.getIds(groups['cure']) #"Cure", "Cura", "Curaga")
+    wm_cure = jobData.getIds(groups['cure'])
     fillGroup(wm_cure)
 
     # WHITE MAGE -- revives
-    wm_raise = jobData.getIds(groups['raise']) #"Raise", "Arise", "Raise All")
+    wm_raise = jobData.getIds(groups['raise'])
     fillGroup(wm_raise)
 
     # WHITE MAGE -- statuses
-    wm_basuna = jobData.getIds(groups['basuna']) #"Basuna", "Esuna")
+    wm_basuna = jobData.getIds(groups['basuna'])
     fillGroup(wm_basuna)
 
     # BLACK MAGE
-    bm_fire = jobData.getIds(groups['fire']) #"Fire", "Fira", "Firaga", "Flare")
+    bm_fire = jobData.getIds(groups['fire'])
     fillGroup(bm_fire)
     
-    bm_blizzard = jobData.getIds(groups['blizzard']) #"Blizzard", "Blizzara", "Blizzaga", "Freeze")
+    bm_blizzard = jobData.getIds(groups['blizzard'])
     fillGroup(bm_blizzard)
     
-    bm_thunder = jobData.getIds(groups['thunder']) #"Thunder", "Thundara", "Thundaga", "Burst")
+    bm_thunder = jobData.getIds(groups['thunder'])
     fillGroup(bm_thunder)
 
     # VANGUARD
-    vg_target = jobData.getIds(groups['target']) #"Aggravate", "Infuriate")
+    vg_target = jobData.getIds(groups['target'])
     fillGroup(vg_target)
 
-    vg_earth = jobData.getIds(groups['earth']) #"Sword of Stone", "Quake Blade")
+    vg_earth = jobData.getIds(groups['earth'])
     fillGroup(vg_earth)
 
-    vg_delay = jobData.getIds(groups['delay']) #"Shield Bash", "Ultimatum")
+    vg_delay = jobData.getIds(groups['delay'])
     fillGroup(vg_delay)
 
     # TROUBADOR -- Born Entertainor support also works for Artist skills
-    bard = jobData.pickIds(4, groups['bard']) #"Don't Let 'Em Get to You", "Don't Let 'Em Trick You", "Step into the Spotlight",
-                          #"(Won't) Be Missing You", "Right Through Your Fingers", "Hurts So Bad",
-                          #"Work Your Magic", "All Killer No Filler")
+    bard = jobData.pickIds(4, groups['bard'])
     fillGroup(bard)
 
     # PICTOMANCER
-    pictomancer = jobData.pickIds(3, groups['pictomancer']) #"Disarming Scarlet", "Disenchanting Mauve", "Incurable Coral", "Indefensible Teal", "Zappable Chartreuse", )
+    pictomancer = jobData.pickIds(3, groups['pictomancer'])
     fillGroup(pictomancer)
 
     # TAMER
-    tamer = jobData.getIds(groups['tamer']) #"Capture", "Off the Leash", "Off the Chain")
+    tamer = jobData.getIds(groups['tamer'])
     fillGroup(tamer)
 
     # THIEF
-    thief_steal_items = jobData.getIds(groups['steal_items'])#"Steal")
+    thief_steal_items = jobData.getIds(groups['steal_items'])
     fillGroup(thief_steal_items)
 
-    thief_steal_other = jobData.pickIds(1, groups['steal_other'])#"Steal Breath", "Steal Spirit", "Steal Courage")
+    thief_steal_other = jobData.pickIds(1, groups['steal_other'])
     fillGroup(thief_steal_other)
 
-    thief_wind = jobData.getIds(groups['wind'])#"Sky Slicer", "Tornado's Edge")
+    thief_wind = jobData.getIds(groups['wind'])
     fillGroup(thief_wind)
 
     # GAMBLER
-    gambler_elem = jobData.getIds(groups['gambler'])#"Elemental Wheel", "Real Elemental Wheel")
+    gambler_elem = jobData.getIds(groups['gambler'])
     fillGroup(gambler_elem)
 
-    gambler_wheels = jobData.pickIds(3, groups['wheels'])#"Odds or Evens", "Life or Death", "Spin the Wheel", "Triples", "Bold Gambit", "Unlucky Eight")
+    gambler_wheels = jobData.pickIds(3, groups['wheels'])
     fillGroup(gambler_wheels)
 
     # BERZERKER
-    berz_berzerk = jobData.getIds(groups['berzerk'])#"Vent Fury")
+    berz_berzerk = jobData.getIds(groups['berzerk'])
     fillGroup(berz_berzerk)
 
-    berz_attack_all = jobData.getIds(groups['berz_all'])#"Crescent Moon", "Level Slash", "Death's Door")
+    berz_attack_all = jobData.getIds(groups['berz_all'])
     fillGroup(berz_attack_all)
 
-    berz_attack_one = jobData.getIds(groups['berz_one'])#"Double Damage", "Amped Strike")
+    berz_attack_one = jobData.getIds(groups['berz_one'])
     fillGroup(berz_attack_one)
 
-    berz_water_attack = jobData.getIds(groups['water'])#"Water Damage", "Flood Damage")
+    berz_water_attack = jobData.getIds(groups['water'])
     fillGroup(berz_water_attack)
 
     # RED MAGE
-    rm_earth = jobData.getIds(groups['stone'])#"Stone", "Stonera", "Stonega", "Quake", "Disaster")
-    rm_wind = jobData.getIds(groups['aero'])#"Aero", "Aerora", "Aeroga", "Tornado", "Disaster")
+    rm_earth = jobData.getIds(groups['stone'])
+    rm_wind = jobData.getIds(groups['aero'])
     if random.random() > 0.5:
         rm_earth.append(jobData.getIds(groups["disaster"])[0])
     else:
@@ -380,113 +237,113 @@ def shuffleJobAbilities(jobData):
     fillGroup(rm_earth)
     fillGroup(rm_wind)
 
-    rm_heal = jobData.getIds(groups['heal'])#"Heal", "Healara", "Healaga")
+    rm_heal = jobData.getIds(groups['heal'])
     fillGroup(rm_heal)
 
     # HUNTER
-    hunter_random = jobData.getIds(groups['hunter'])#"Quickfire Flurry", "Grand Barrage")
+    hunter_random = jobData.getIds(groups['hunter'])
     fillGroup(hunter_random)
 
-    hunter_slayer = jobData.pickIds(4, groups['slayer'])#"Bug Slayer","Plant Slayer","Beast Slayer","Aquatic Slayer","Humanoid Slayer","Undead Slayer","Demon Slayer","Spirit Slayer")
+    hunter_slayer = jobData.pickIds(4, groups['slayer'])
     random.shuffle(hunter_slayer)
     fillGroup(hunter_slayer)
 
     # SHIELDMASTER
-    shield = jobData.getIds(groups['shield'])#"Bodyguard", "Defender of the People")
+    shield = jobData.getIds(groups['shield'])
     fillGroup(shield)
 
-    shield_hitter = jobData.getIds(groups['hitter'])#"Heavy Hitter", "Super Heavy Hitter")
+    shield_hitter = jobData.getIds(groups['hitter'])
     fillGroup(shield_hitter)
 
-    shield_reprisal = jobData.getIds(groups['reprisal'])#"Reprisal", "Harsh Reprisal")
+    shield_reprisal = jobData.getIds(groups['reprisal'])
     fillGroup(shield_reprisal)
 
     # DRAGOON WARRIOR
-    dragoon_jump = jobData.getIds(groups['jump'])#"Jump", "Super Jump", "Soul Jump")
+    dragoon_jump = jobData.getIds(groups['jump'])
     fillGroup(dragoon_jump)
 
-    dragoon_lightning = jobData.getIds(groups['lightning'])#"Thunder Thrust", "Bolt Blast")
+    dragoon_lightning = jobData.getIds(groups['lightning'])
     fillGroup(dragoon_lightning)
 
     # SPIRITMASTER
-    spm_spirits = jobData.getIds(groups['spirits'])#"Healthbringer", "Basunabringer", "Spiritbringer", "Lifebringer", "Bravebringer", "Purebringer")
+    spm_spirits = jobData.getIds(groups['spirits'])
     random.shuffle(spm_spirits)
     fillGroup(spm_spirits)
 
-    spm_light = jobData.getIds(groups['light'])#"Banish", "Banishra", "Banishga", "Holy")
+    spm_light = jobData.getIds(groups['light'])
     fillGroup(spm_light)
 
-    spm_regen = jobData.getIds(groups['regen'])#"Regeneration", "Reraise")
+    spm_regen = jobData.getIds(groups['regen'])
     fillGroup(spm_regen)
 
     # SWORDMASTER
-    swm_flurry = jobData.getIds(groups['flurry'])#"Fourfold Flurry", "Ninefold Flurry")
+    swm_flurry = jobData.getIds(groups['flurry'])
     fillGroup(swm_flurry)
 
-    swm_stance1 = jobData.getIds(groups['stance1'])#"Fluid Stance", "Solid Stance")
-    swm_stance2 = jobData.getIds(groups['stance2'])#"Solid Right Style", "Fluid Left Style", "Solid Slash", "Fluid Flow", "Solid Smash", "Fluid Frenzy")
+    swm_stance1 = jobData.getIds(groups['stance1'])
+    swm_stance2 = jobData.getIds(groups['stance2'])
     random.shuffle(swm_stance1)
     random.shuffle(swm_stance2)
     fillGroup(swm_stance1 + swm_stance2)
 
     # ORACLE
-    oracle_quick = jobData.getIds(groups['quick'])#"Quick", "Quickga")
+    oracle_quick = jobData.getIds(groups['quick'])
     fillGroup(oracle_quick)
 
-    oracle_slow = jobData.getIds(groups['slow'])#"Slow", "Slowga")
+    oracle_slow = jobData.getIds(groups['slow'])
     fillGroup(oracle_slow)
 
-    oracle_haste = jobData.getIds(groups['haste'])#"Haste", "Hastega")
+    oracle_haste = jobData.getIds(groups['haste'])
     fillGroup(oracle_haste)
 
-    oracle_triple = jobData.getIds(groups['triple'])#"Triple", "Triplara", "Triplaga")
+    oracle_triple = jobData.getIds(groups['triple'])
     fillGroup(oracle_triple)
 
     # SALVE-MAKER
-    svm_survey = jobData.getIds(groups['survey'])#"Survey", "Analysis")
+    svm_survey = jobData.getIds(groups['survey'])
     fillGroup(svm_survey)
 
-    svm_tonic = jobData.getIds(groups['tonic'])#"BP Tonic", "Double BP Tonic")
+    svm_tonic = jobData.getIds(groups['tonic'])
     fillGroup(svm_tonic)
 
-    svm_philtre = jobData.getIds(groups['philtre'])#"Philtre", "Heartbreak")
+    svm_philtre = jobData.getIds(groups['philtre'])
     fillGroup(svm_philtre)
 
-    svm_compounding = jobData.getIds(groups['compounding'])#"Compounding", "Advanced Compounding")
+    svm_compounding = jobData.getIds(groups['compounding'])
     fillGroup(svm_compounding)
 
     # ARCANIST
-    arc_dark = jobData.getIds(groups['dark'])#"Dark", "Darkra", "Darkga", "Doomsday")
+    arc_dark = jobData.getIds(groups['dark'])
     fillGroup(arc_dark)
 
-    arc_comet = jobData.getIds(groups['comet'])#"Comet", "Meteor")
+    arc_comet = jobData.getIds(groups['comet'])
     fillGroup(arc_comet)
 
-    arc_pairs1 = jobData.getIds(groups['ardour'])#"Ardour", "Electon")
-    arc_pairs2 = jobData.getIds(groups['meltdown'])#"Meltdown", "Apocalypse")
+    arc_pairs1 = jobData.getIds(groups['ardour'])
+    arc_pairs2 = jobData.getIds(groups['meltdown'])
     arc_pairs = arc_pairs1 + arc_pairs2
     fillGroup(arc_pairs)
 
     # Bastion
-    bast_light = jobData.getIds(groups['bastion'])#"Light of Justice", "Holy Light")
+    bast_light = jobData.getIds(groups['bastion'])
     fillGroup(bast_light)
 
     # Phantom
-    phan_shroud = jobData.getIds(groups['shroud'])#"Shroud", "Burial Shroud")
+    phan_shroud = jobData.getIds(groups['shroud'])
     fillGroup(phan_shroud)
 
-    phan_nightmare = jobData.getIds(groups['nightmare'])#"Recurring Nightmare", "Never-Ending Nightmare")
+    phan_nightmare = jobData.getIds(groups['nightmare'])
     fillGroup(phan_nightmare)
 
     # Hellblade
-    hell_dread = jobData.getIds(groups['dread'])#"Dread Blade", "Terrorise")
+    hell_dread = jobData.getIds(groups['dread'])
     fillGroup(hell_dread)
 
     # Brave
-    brave_gravity = jobData.getIds(groups['gravity'])#"Supergravity", "Hypergravity", "Gigagravity")
+    brave_gravity = jobData.getIds(groups['gravity'])
     fillGroup(brave_gravity)
 
-    brave_bp = jobData.getIds(groups['brave'])#"Wall of Woe", "Dawn of Odyssey")
+    brave_bp = jobData.getIds(groups['brave'])
     random.shuffle(brave_bp)
     fillGroup(brave_bp)
 
@@ -558,18 +415,6 @@ def shuffleJobAbilities(jobData):
     sup = jobData.getIds(["Rage and Reason", "Free-for-All"])
     check *= addSupport(sup, berz_berzerk)
 
-    # Red Mage -- attacking magic
-    sup = jobData.getIds(["Magic Critical"])
-    check *= addSupport(sup, bm_fire + bm_blizzard + bm_thunder + rm_earth + rm_wind + arc_pairs + arc_dark + arc_comet + oracle_triple + spm_light) # INCLUDE ATTACKS? e.g. Sky Slicer (thief_wind)
-
-    sup = jobData.getIds(["Nuisance"])
-    check *= addSupport(sup, bm_fire + bm_blizzard + bm_thunder + rm_earth + rm_wind + arc_pairs + arc_dark + arc_comet + oracle_triple + spm_light) # INCLUDE ATTACKS? e.g. Sky Slicer (thief_wind)
-
-    # Reg Mage -- magic spells
-    sup = jobData.getIds(["Chainspell"])
-    check *= addSupport(sup, bm_fire + bm_blizzard + bm_thunder + rm_earth + rm_wind + arc_pairs + arc_dark + arc_comet + oracle_triple + spm_light
-                       + rm_heal + wm_cure) # INCLUDE ATTACKS? e.g. Sky Slicer (thief_wind)
-
     # Hunter
     sup = jobData.getIds(["Apex Predator"])
     check *= addSupport(sup, hunter_slayer)
@@ -595,21 +440,37 @@ def shuffleJobAbilities(jobData):
     check *= addSupport(sup, svm_compounding)
 
     # Arcanist
+    abilities = bm_fire + bm_blizzard + bm_thunder + rm_earth + rm_wind + arc_pairs + arc_dark + arc_comet + oracle_triple + spm_light
+
     sup = jobData.getIds(["All In"])
-    check *= addSupport(sup, bm_fire + bm_blizzard + bm_thunder + rm_earth + rm_wind + arc_pairs + arc_dark + arc_comet + oracle_triple + spm_light) # INCLUDE ATTACKS? e.g. Sky Slicer (thief_wind)
+    check *= addSupport(sup, abilities)
 
     sup = jobData.getIds(["Wild Wizardry"])
-    check *= addSupport(sup, bm_fire + bm_blizzard + bm_thunder + rm_earth + rm_wind + arc_pairs + arc_dark + arc_comet + oracle_triple + spm_light) # INCLUDE ATTACKS? e.g. Sky Slicer (thief_wind)
+    check *= addSupport(sup, abilities)
 
     sup = jobData.getIds(["Magic Amp"])
-    check *= addSupport(sup, bm_fire + bm_blizzard + bm_thunder + rm_earth + rm_wind + arc_pairs + arc_dark + arc_comet + oracle_triple + spm_light) # INCLUDE ATTACKS? e.g. Sky Slicer (thief_wind)
+    check *= addSupport(sup, abilities)
+
+    # Red Mage -- attacking magic
+    sup = jobData.getIds(["Magic Critical"])
+    check *= addSupport(sup, abilities)
+
+    sup = jobData.getIds(["Nuisance"])
+    check *= addSupport(sup, abilities)
+
+    # Reg Mage -- magic spells
+    sup = jobData.getIds(["Chainspell"])
+    check *= addSupport(sup, abilities + rm_heal + wm_cure)
 
     if not check:
         return check
     
     assert len(support) + len(actions) == sum([job.vacantSupportSlots() for job in jobs])
 
-    #### SECOND: FILL ALL TRAITS
+    #################################
+    #### SECOND: FILL ALL TRAITS ####
+    #################################
+
     random.shuffle(support)
     for i in range(24):
         if jobs[i].isTrait1Empty():
@@ -619,7 +480,10 @@ def shuffleJobAbilities(jobData):
             obj = jobData.supportDict[support.pop()]
             jobs[i].setTrait2(obj)
 
-    #### THIRD: Finish filling with supports
+    #############################################
+    #### THIRD: Finish filling with supports ####
+    #############################################
+
     w = [job.roomForSupport() for job in jobs]
     r = list(range(len(w)))
     c = sum(w)
@@ -633,7 +497,10 @@ def shuffleJobAbilities(jobData):
             w[i] = False
             c -= 1
 
-    #### FOURTH: Finish filling actions
+    ########################################
+    #### FOURTH: Finish filling actions ####
+    ########################################
+
     random.shuffle(actions)
     w = [job.roomForAction() for job in jobs]
     r = list(range(len(w)))
