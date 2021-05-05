@@ -5,6 +5,7 @@ import struct
 import io
 from Classes import DATA
 from ClassData import ITEMASSET, ACTIONSKILL, SUPPORTSKILL, ITEM, ITEMENEMY, CHEST, QUESTREWARD, DROP, STEAL, MAGIC, WEAPONS, EFFECTS, JOB
+from Utilities import get_filename
 
 
 class ITEMDATA(DATA):
@@ -473,8 +474,7 @@ class QUESTS(DATA):
         super().__init__(rom, 'QuestAsset')
         self.text = text
         self.questArray = self.table['QuestArray']['data'].array
-        with open('json/quests.json','r') as file:
-            # self.json = hjson.load(file)
+        with open(get_filename('json/quests.json'),'r') as file:
             self.json = {int(key):value for key, value in hjson.load(file).items()}
 
         ## Organize data for shuffling
@@ -541,7 +541,7 @@ class TREASURES(DATA):
         super().__init__(rom, 'TreasureBoxDataAsset')
         self.text = text
         self.data = list(self.table.values())[0]['data']
-        with open('json/treasures.json','r') as file:
+        with open(get_filename('json/treasures.json'),'r') as file:
             self.json = hjson.load(file)
 
         self.chests = {i:[] for i in range(8)}
