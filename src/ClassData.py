@@ -170,18 +170,31 @@ class DROP:
     Item: ITEMENEMY
     RareItem: ITEMENEMY
     Name: str
+    QuestItem: bool
+    QuestRareItem: bool
 
     def getString(self):
         itemString = self.Item.getString()
         if not itemString:
             itemString = '-'*5
+        elif self.hasQuestItem():
+            itemString = '**' + itemString
         rareItemString = self.RareItem.getString()
         if not rareItemString:
             rareItemString = '-'*5
+        elif self.hasQuestRareItem():
+            rareItemString = '**' + rareItemString
         return ' '.join([
             itemString.ljust(35, ' '),
             rareItemString.ljust(35, ' '),
         ])
+
+    def hasQuestItem(self):
+        return self.QuestItem
+
+    def hasQuestRareItem(self):
+        return self.QuestRareItem
+
 
 @dataclass
 class STEAL:

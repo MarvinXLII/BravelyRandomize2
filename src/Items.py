@@ -10,8 +10,10 @@ def shuffleItems(treasures, quests, monsters):
         chapters[c].append( enemy.RareItem.getItem() )
     for enemy in monsters.drops.values():
         c = min(5, enemy.Chapter)
-        chapters[c].append( enemy.Item.getItem() )
-        chapters[c].append( enemy.RareItem.getItem() )
+        if not enemy.hasQuestItem():
+            chapters[c].append( enemy.Item.getItem() )
+        if not enemy.hasQuestRareItem():
+            chapters[c].append( enemy.RareItem.getItem() )
 
     for candidates in chapters.values():
         random.shuffle(candidates)
@@ -55,8 +57,10 @@ def shuffleItems(treasures, quests, monsters):
         enemy.RareItem.setItem( chapters[c].pop(0) )
     for enemy in monsters.drops.values():
         c = min(5, enemy.Chapter)
-        enemy.Item.setItem( chapters[c].pop(0) )
-        enemy.RareItem.setItem( chapters[c].pop(0) )
+        if not enemy.hasQuestItem():
+            enemy.Item.setItem( chapters[c].pop(0) )
+        if not enemy.hasQuestRareItem():
+            enemy.RareItem.setItem( chapters[c].pop(0) )
     for chapter, rewards in quests.questRewards.items():
         c = min(5, chapter)
         for i in range(len(rewards)):

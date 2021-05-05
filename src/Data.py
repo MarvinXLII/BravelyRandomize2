@@ -189,12 +189,18 @@ class MONSTERS(DATA):
 
         self.steals = {}
         self.drops = {}
+        dontdrop = set([
+            102182, # Oberon Gem
+            101940, # Spellblossom
+            101420, # Bomb Arm
+            102380, # Soul Food
+        ])
         for d in self.data.values():
             Id = d['Id'].value
 
             # Skip monster with no distinguishable chapter (i.e. level)
             chapter = self.party.getChapter(Id)
-            if not chapter:
+            if chapter is None:
                 continue
 
             # Skip monster without a name
@@ -224,6 +230,8 @@ class MONSTERS(DATA):
                 ITEMENEMY(itemId, Name=itemName),
                 ITEMENEMY(rareItemId, Name=rareItemName),
                 name,
+                itemId in dontdrop,
+                rareItemId in dontdrop,
             )
                 
         # Group subsets of the resistance data together for shuffling
