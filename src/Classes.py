@@ -196,6 +196,20 @@ class ByteProperty(TYPE):
         tmp += self.getInt8(self.value)
         return tmp
 
+class SoftObjectProperty(TYPE):
+    def __init__(self, file):
+        self.dataType = 'SoftObjectProperty'
+        assert file.readInt64() == 0xc
+        file.data.seek(1, 1)
+        self.asset = file.data.read(0xc)
+
+    def build(self):
+        tmp = self.getInt64(0xc)
+        tmp += bytearray([0])
+        tmp += self.asset
+        return tmp
+        
+
 # MonsterDataAsset: Include a bunch of floats I won't need to modify.
 # Just lost struct as a bytearray
 class StructProperty(TYPE):
@@ -395,6 +409,7 @@ class DATA:
             'StructProperty': partial(StructProperty, self.uexp),
             'FloatProperty': partial(FloatProperty, self.uexp),
             'ByteProperty': partial(ByteProperty, self.uexp),
+            'SoftObjectProperty': partial(SoftObjectProperty, self.uexp),
         }
         self.loadTable()
 

@@ -4,7 +4,38 @@ import random
 import struct
 import io
 from Classes import DATA
-from ClassData import ACTIONSKILL, SUPPORTSKILL, ITEM, ITEMENEMY, CHEST, QUESTREWARD, DROP, STEAL, MAGIC, WEAPONS, EFFECTS, JOB
+from ClassData import ITEMASSET, ACTIONSKILL, SUPPORTSKILL, ITEM, ITEMENEMY, CHEST, QUESTREWARD, DROP, STEAL, MAGIC, WEAPONS, EFFECTS, JOB
+
+
+class ITEMDATA(DATA):
+    def __init__(self, rom, text):
+        super().__init__(rom, 'ItemDataAsset')
+        self.data = self.table['ConsumeItemDataMap']['data']
+        self.text = text
+
+        self.items = {}
+        for Id, item in self.data.items():
+            name = self.text.getName(Id)
+            if not name:
+                continue
+            if name in self.items:
+                print('Repeated name!')
+                sys.exit()
+            self.items[name] = ITEMASSET(
+                Id,
+                name,
+                item['PurchasePrice'].value,
+                item['SellingPrice'].value,
+            )
+
+    def zeroCost(self, name):
+        self.items[name].PurchasePrice = 0
+        self.items[name].SellingPrice = 0
+
+    def update(self):
+        for item in self.items.values():
+            self.data[item.Id]['PurchasePrice'].value = item.PurchasePrice
+            self.data[item.Id]['SellingPrice'].value = item.SellingPrice
 
 
 class ACTIONS(DATA):

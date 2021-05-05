@@ -5,6 +5,13 @@ import random
 from copy import deepcopy
 
 @dataclass
+class ITEMASSET:
+    Id: int
+    Name: str
+    PurchasePrice: int
+    SellingPrice: int
+
+@dataclass
 class ACTIONSKILL:
     Id: int
     Job: int

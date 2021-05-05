@@ -3,7 +3,7 @@ import hjson
 import sys
 sys.path.append('src')
 from ROM import ROM
-from Data import DATA, QUESTS, JOBSTATS, JOBDATA, MONSTERPARTY, MONSTERS, TREASURES, TEXT, ACTIONS, SUPPORT
+from Data import DATA, QUESTS, ITEMDATA, JOBSTATS, JOBDATA, MONSTERPARTY, MONSTERS, TREASURES, TEXT, ACTIONS, SUPPORT
 from Items import shuffleItems
 from Battles import shuffleResistance
 from Jobs import shuffleJobAbilities, randomActionCosts
@@ -31,6 +31,7 @@ def main(settings):
     actions = ACTIONS(rom, actionText)
 
     ### ASSETS
+    items = ITEMDATA(rom, itemText)
     jobstats = JOBSTATS(rom)
     jobdata = JOBDATA(rom, actions, support)
     monsterParty = MONSTERPARTY(rom)
@@ -88,7 +89,15 @@ def main(settings):
         print('Scales must be numbers!')
         sys.exit('Terminating program!')
 
+    # ITEM COSTS
+    if settings['teleport-stone-costs']:
+        items.zeroCost('Teleport Stone')
+    if settings['magnifying-glass-costs']:
+        items.zeroCost('Magnifying Glass')
+        
+
     ### UPDATE SHUFFLED TABLES
+    items.update()
     jobstats.update()
     jobdata.update()
     monsters.update()

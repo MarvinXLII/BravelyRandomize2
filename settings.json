@@ -23,4 +23,7 @@
   qol-scale-exp: 2
   qol-scale-jp: 2
   qol-scale-pg: 2
+
+  magnifying-glass-costs: true
+  teleport-stone-costs: true
 }
