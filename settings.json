@@ -26,4 +26,5 @@
 
   magnifying-glass-costs: true
   teleport-stone-costs: true
+  early-access: true
 }

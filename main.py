@@ -3,7 +3,7 @@ import hjson
 import sys
 sys.path.append('src')
 from ROM import ROM
-from Data import DATA, QUESTS, ITEMDATA, JOBSTATS, JOBDATA, MONSTERPARTY, MONSTERS, TREASURES, TEXT, ACTIONS, SUPPORT
+from Data import DATA, QUESTS, ITEMDATA, SHOPDATA, JOBSTATS, JOBDATA, MONSTERPARTY, MONSTERS, TREASURES, TEXT, ACTIONS, SUPPORT
 from Items import shuffleItems
 from Battles import shuffleResistance
 from Jobs import shuffleJobAbilities, randomActionCosts
@@ -31,6 +31,7 @@ def main(settings):
     actions = ACTIONS(rom, actionText)
 
     ### ASSETS
+    shops = SHOPDATA(rom, itemText)
     items = ITEMDATA(rom, itemText)
     jobstats = JOBSTATS(rom)
     jobdata = JOBDATA(rom, actions, support)
@@ -94,9 +95,15 @@ def main(settings):
         items.zeroCost('Teleport Stone')
     if settings['magnifying-glass-costs']:
         items.zeroCost('Magnifying Glass')
+
+    # ITEM AVAILABILITY
+    if settings['early-access']:
+        shops.earlyAccess('Hi-Potion')
+        shops.earlyAccess('Ether')
         
 
     ### UPDATE SHUFFLED TABLES
+    shops.update()
     items.update()
     jobstats.update()
     jobdata.update()

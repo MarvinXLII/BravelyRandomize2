@@ -36,6 +36,33 @@ class ITEMDATA(DATA):
         for item in self.items.values():
             self.data[item.Id]['PurchasePrice'].value = item.PurchasePrice
             self.data[item.Id]['SellingPrice'].value = item.SellingPrice
+        super().update()
+
+
+class SHOPDATA:
+    def __init__(self, rom, text):
+        # Currently limited only to shops with hi-potions and ethers
+        self.indices = ['001', '101', '111', '121', '131', '141', '151', '201']
+        self.data = {}
+        self.shops = {}
+        for index in self.indices:
+            fileName = f'ShopSalesListDataAsset_{index}'
+            self.data[index] = DATA(rom, fileName)
+            self.shops[index] = {}
+            for item in self.data[index].table['ShopSalesListDataMap']['data'].values():
+                name = text.getName(item['ItemId'].value)
+                if name is None:
+                    continue
+                self.shops[index][name] = item
+
+    def earlyAccess(self, name):
+        for shop in self.shops.values():
+            if name in shop:
+                shop[name]['Progress'].value = 0
+
+    def update(self):
+        for data in self.data.values():
+            data.update()
 
 
 class ACTIONS(DATA):
