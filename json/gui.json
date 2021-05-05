@@ -1,0 +1,111 @@
+{
+  "Settings": {
+    Jobs: [
+      {
+	name: job-abilities
+	label: Shuffle skills
+	type: checkbutton
+	help: "Shuffles both action ans support skills among jobs. Groups of spells will (mostly) be kept together, e.g. Fire/Fira/Firaga/Flare"
+	indent: [
+	    {
+	      name: late-godspeed-strike
+              label: "Godspeed Strike late game only"
+	      type: checkbutton
+	      help: "Forces Godspeed Strike to be in the 15th slot of a job's skills."
+            }
+	]
+      }
+      {      
+	name: job-costs
+	label: Randomize action skill costs types
+	type: checkbutton
+	help: "Randomly shuffles cost types (i.e. MP, HP, BP, PG) among job skills. The actual costs are adjusted accordingly."
+      }
+      {
+	name: job-stats
+	label: Shuffle stats
+	type: radiobutton
+	help: "Shuffles stats among jobs."
+	indent: [
+	    {
+              label: "Swap"
+	      value: swap
+	      help: "E.g. the Freelancer could inherit the the stats of the White Mage."
+            }
+	    {
+              label: "Random"
+	      value: random
+	      help: "E.g. the Freelance could inherit HP skills of the White Mage, MP skills of the Black Mage, ...."
+            }
+	]
+      }
+    ]
+    Items: [
+      {
+	name: items
+	label: Shuffle items
+	type: checkbutton
+	help: "Shuffle items among chests, quests, enemy drops and enemy steals. Items dropped by enemies for quests will be kept on the same enemy."
+      }
+      {
+	name: magnifying-glass-costs
+	label: "Free Magnifying Glasses"
+	type: checkbutton
+	help: "Buy Magnifying Glasses for free from shops."
+      }
+      {
+	name: teleport-stone-costs
+	label: "Free Teleport Stone"
+	type: checkbutton
+	help: "Buy Teleport Stones for free from shops."
+      }
+      {
+	name: early-access
+	label: "Early Hi-Potions and Ethers"
+	type: checkbutton
+	help: "All shops in the early game can sell Hi-Poitions and Ethers."
+      }
+    ]
+    Battles: [
+      {
+	name: resistance
+	label: "Shuffle enemy resistances/status effects."
+	type: checkbutton
+	help: "Bosses and enemies are shuffled separately."
+      }
+      {
+	name: qol-scale-exp
+	label: "Scale experience"
+	type: spinbox
+	help: "Scales experience earned from battles."
+	spinbox: {
+	  default: 1,
+	  min: 1,
+	  max: 10
+	}
+      }
+      {
+	name: qol-scale-jp
+	label: "Scale JP"
+	type: spinbox
+	help: "Scales job points earned from battles."
+	spinbox: {
+	  default: 1,
+	  min: 1,
+	  max: 10
+	}
+      }
+      {
+	name: qol-scale-pg
+	label: "Scale PG"
+	type: spinbox
+	help: "Scales PG earned from battles."
+	spinbox: {
+	  default: 1,
+	  min: 1,
+	  max: 10
+	}
+      }
+    ]
+  }
+}

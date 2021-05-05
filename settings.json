@@ -1,18 +1,15 @@
 {
   release: 0.0.1a
-  rom: 'Sunrise-E-Switch.pak'
+  rom: /path/to/Sunrise-E/Content/Paks
   seed: 28
 
-  // job-stats: 'none'
-  // job-stats: 'swap'
-  job-stats: 'random'
+  job-stats: true
+  // job-stats-option: 'swap'
+  job-stats-option: 'random'
 
   job-abilities: true
-  job-costs: true
   late-godspeed-strike: true
-
-  // job-traits: false
-  job-traits: true
+  job-costs: true
 
   // items: false
   items: true
