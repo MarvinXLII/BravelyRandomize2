@@ -7,9 +7,10 @@
   // job-stats: 'swap'
   job-stats: 'random'
 
-  // job-abilities: 'none'
+  job-abilities: 'none'
   // job-abilities: 'separately'
-  job-abilities: 'all'
+  // job-abilities: 'all'
+  late-godspeed-strike: true
 
   // job-traits: false
   job-traits: true

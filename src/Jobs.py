@@ -85,7 +85,7 @@ def randomActionCosts(jobData):
 
 
 ## INPUT DATA COMES FROM THE JOBDATA OBJECT
-def shuffleJobAbilities(jobData):
+def shuffleJobAbilities(jobData, lateGodspeedStrike):
     # Job skills objects
     jobs = jobData.jobs
     
@@ -509,10 +509,27 @@ def shuffleJobAbilities(jobData):
         if c == 0:
             return False
         i = random.choices(r, w)[0]
-        obj = jobData.actionsDict[actions.pop()]
+        skill = actions.pop()
+        assignments[skill] = i
+        obj = jobData.actionsDict[skill]
         jobs[i].fillActionSlots([obj])
         if not jobs[i].roomForAction():
             w[i] = False
             c -= 1
+
+    ################################
+    #### GODSPEED STRIKE OPTION ####
+    ################################
+
+    if lateGodspeedStrike:
+        num = jobData.getIds(['Godspeed Strike'])[0]
+        job = jobs[assignments[num]]
+        for idx, a in enumerate(job.Actions):
+            if a and a.Id == num:
+                break
+        action = job.Actions.pop(idx)
+        job.Actions.append(action)
+        job.Support.pop(idx)
+        job.Support.insert(14, None)
         
     return True

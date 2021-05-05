@@ -21,12 +21,34 @@ class ACTIONSKILL:
     Name: str
     Description: str
 
+    def getString(self):
+        cost = ''
+        if self.CostType.split('_')[-1] == 'Remaining':
+            cost += 'Remaining MP'
+        elif self.CostType.split('_')[-1] == 'Level':
+            assert self.Cost.split('_')[-1] == 'pq'
+            cost += f"{self.CostValue} x Level PG"
+        elif self.Cost.split('_')[-1] == 'MP':
+            cost += f"{self.CostValue} MP"
+        elif self.Cost.split('_')[-1] == 'HP':
+            cost += f"{self.CostValue}% HP"
+        elif self.Cost.split('_')[-1] == 'BP':
+            cost += f"{self.CostValue} BP"
+        elif self.Cost.split('_')[-1] == 'pq':
+            cost += f"{self.CostValue} PG"
+        else:
+            cost = ''
+        return self.Name.ljust(30, ' ') + cost
+
 @dataclass
 class SUPPORTSKILL:
     Id: int
     Cost: int
     Name: str
     Description: str
+
+    def getString(self):
+        return self.Name.ljust(30, ' ') + f"{self.Cost} SP"
 
 @dataclass
 class MAGIC:

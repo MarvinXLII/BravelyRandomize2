@@ -183,6 +183,63 @@ class JOBDATA:
     def pickGroup(self, groups):
         group = random.sample(groups, 1)[0]
         return self.getActionIds(*group)
+
+    def spoilers(self, filename):
+        jobNames= {
+            'EJobEnum::JE_Sobriety': 'Freelancer',
+            'EJobEnum::JE_Monk': 'Monk',
+            'EJobEnum::JE_White_Mage': 'White Mage',
+            'EJobEnum::JE_Black_Mage': 'Black Mage',
+            'EJobEnum::JE_Vanguard': 'Vanguard',
+            'EJobEnum::JE_Troubadour': 'Bard',
+            'EJobEnum::JE_Tamer': 'Beastmaster',
+            'EJobEnum::JE_Thief': 'Thief',
+            'EJobEnum::JE_Gambler': 'Gambler',
+            'EJobEnum::JE_Berzerk': 'Berserker',
+            'EJobEnum::JE_Red_Mage': 'Red Mage',
+            'EJobEnum::JE_Hunter': 'Ranger',
+            'EJobEnum::JE_Shield_Master': 'Shieldmaster',
+            'EJobEnum::JE_Pictomancer': 'Pictomancer',
+            'EJobEnum::JE_Dragoon_Warrior': 'Dragoon',
+            'EJobEnum::JE_Master': 'Spiritmaster',
+            'EJobEnum::JE_Sword_Master': 'Swordmaster',
+            'EJobEnum::JE_Oracle': 'Oracle',
+            'EJobEnum::JE_Doctor': 'Salve-Maker',
+            'EJobEnum::JE_Demon': 'Arcanist',
+            'EJobEnum::JE_Judgement': 'Bastion',
+            'EJobEnum::JE_Phantom': 'Phantom',
+            'EJobEnum::JE_Cursed_Sword': 'Hellblade',
+            'EJobEnum::JE_Brave': 'Bravebearer',
+        }
+        
+        with open(filename, 'w') as sys.stdout:
+            print('')
+            print('')
+            for job in self.jobs:
+                name = jobNames[job.Name]
+                print(name)
+                print('-'*len(name))
+                print('')
+                for action, support in zip(job.Actions, job.Support):
+                    if action:
+                        print('   ', action.getString())
+                    else:
+                        print('   ', support.getString())
+                print('')
+                print('')
+
+            
+            # print('Name'.ljust(24, ' '), 'Steal Item'.ljust(35, ' '), 'Steal Rare Item'.ljust(35, ' '), 'Drop Item'.ljust(35, ' '), 'Drop Rare Item'.ljust(35, ' '))
+            # print('-'*24, '-'*35, '-'*35, '-'*35, '-'*35)
+            # print('')
+            # for es in steals:
+            #     ed = self.drops[es.EnemyId]
+            #     assert es.Name == ed.Name
+            #     print(es.Name.ljust(24, ' '), es.getString(), ed.getString())
+        
+        sys.stdout = sys.__stdout__
+
+    
         
 
 class JOBSTATS(DATA):

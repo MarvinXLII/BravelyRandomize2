@@ -39,8 +39,6 @@ def main(settings):
     monsters = MONSTERS(rom, monsterText, itemText, monsterParty)
     treasures = TREASURES(rom, itemText)
     quests = QUESTS(rom, itemText)
-    actions = ACTIONS(rom, actionText)
-    support = SUPPORT(rom, supportText)
 
     ### STATS
     if settings['job-stats'] == 'swap':
@@ -66,7 +64,7 @@ def main(settings):
     #     print('Skipping the job traits randomizer.')
     if settings['job-abilities'] == 'all':
         count = 0
-        while not shuffleJobAbilities(jobdata):
+        while not shuffleJobAbilities(jobdata, settings['late-godspeed-strike']):
             count += 1
         print("Shuffling abilities took ", count, " attempts!")
 
@@ -125,6 +123,7 @@ def main(settings):
     monsters.spoilers('spoilers_monsters.log')
     quests.spoilers('spoilers_quests.log')
     treasures.spoilers('spoilers_treasures.log')
+    jobdata.spoilers('spoilers_jobs.log')
 
 
 if __name__=='__main__':
