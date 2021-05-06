@@ -277,7 +277,7 @@ class JOBSTATS(DATA):
         jobs = list(dic.keys())
         for i,ji in enumerate(dic.keys()):
             jk = random.choices(jobs[i:])[0]
-            dic[ji], dic[jk] = dic[ji], dic[jk]
+            dic[ji], dic[jk] = dic[jk], dic[ji]
 
     def _random(self, dic):
         jobs = list(dic.keys())
