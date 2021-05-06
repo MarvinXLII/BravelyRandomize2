@@ -40,7 +40,7 @@ def randomActionCosts(jobData):
         # Update cost
         actionDict[action].Cost = t
         if t == 'ECommandCostEnum::CCE_pq':
-            actionDict[action].CostValue = 10 * costData[action]['ECommandCostEnum::CCE_MP'] * costData[action]['ECommandCostEnum::CCE_BP']
+            actionDict[action].CostValue = max(50, 10 * costData[action]['ECommandCostEnum::CCE_MP'] * costData[action]['ECommandCostEnum::CCE_BP'])
         else:
             actionDict[action].CostValue = costData[action][t]
 
