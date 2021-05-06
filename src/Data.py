@@ -4,9 +4,36 @@ import random
 import struct
 import io
 from Classes import DATA
-from ClassData import ITEMASSET, ACTIONSKILL, SUPPORTSKILL, ITEM, ITEMENEMY, CHEST, QUESTREWARD, DROP, STEAL, MAGIC, WEAPONS, EFFECTS, JOB
+from ClassData import ITEMASSET, ACTIONSKILL, SUPPORTSKILL, ITEM, ITEMENEMY, CHEST, QUESTREWARD, DROP, STEAL, MAGIC, WEAPONS, EFFECTS, JOB, STATS, AFFINITY
 from Utilities import get_filename
 
+
+jobNames= {
+    'EJobEnum::JE_Sobriety': 'Freelancer',
+    'EJobEnum::JE_Black_Mage': 'Black Mage',
+    'EJobEnum::JE_White_Mage': 'White Mage',
+    'EJobEnum::JE_Vanguard': 'Vanguard',
+    'EJobEnum::JE_Monk': 'Monk',
+    'EJobEnum::JE_Troubadour': 'Bard',
+    'EJobEnum::JE_Tamer': 'Beastmaster',
+    'EJobEnum::JE_Thief': 'Thief',
+    'EJobEnum::JE_Gambler': 'Gambler',
+    'EJobEnum::JE_Berzerk': 'Berserker',
+    'EJobEnum::JE_Red_Mage': 'Red Mage',
+    'EJobEnum::JE_Hunter': 'Ranger',
+    'EJobEnum::JE_Shield_Master': 'Shieldmaster',
+    'EJobEnum::JE_Pictomancer': 'Pictomancer',
+    'EJobEnum::JE_Dragoon_Warrior': 'Dragoon',
+    'EJobEnum::JE_Master': 'Spiritmaster',
+    'EJobEnum::JE_Sword_Master': 'Swordmaster',
+    'EJobEnum::JE_Oracle': 'Oracle',
+    'EJobEnum::JE_Doctor': 'Salve-Maker',
+    'EJobEnum::JE_Demon': 'Arcanist',
+    'EJobEnum::JE_Judgement': 'Bastion',
+    'EJobEnum::JE_Phantom': 'Phantom',
+    'EJobEnum::JE_Cursed_Sword': 'Hellblade',
+    'EJobEnum::JE_Brave': 'Bravebearer',
+}
 
 class ITEMDATA(DATA):
     def __init__(self, rom, text):
@@ -161,8 +188,6 @@ class JOBDATA:
             self.nameToId[skill.Name] = skill.Id
         for skill in self.supportDict.values():
             self.nameToId[skill.Name] = skill.Id
-            
-        #### MUST ASSERT THAT actionsDict and supportDict <==> job actions and support
 
     def update(self):
         for job in self.jobs:
@@ -186,38 +211,12 @@ class JOBDATA:
         return self.getActionIds(*group)
 
     def spoilers(self, filename):
-        jobNames= {
-            'EJobEnum::JE_Sobriety': 'Freelancer',
-            'EJobEnum::JE_Monk': 'Monk',
-            'EJobEnum::JE_White_Mage': 'White Mage',
-            'EJobEnum::JE_Black_Mage': 'Black Mage',
-            'EJobEnum::JE_Vanguard': 'Vanguard',
-            'EJobEnum::JE_Troubadour': 'Bard',
-            'EJobEnum::JE_Tamer': 'Beastmaster',
-            'EJobEnum::JE_Thief': 'Thief',
-            'EJobEnum::JE_Gambler': 'Gambler',
-            'EJobEnum::JE_Berzerk': 'Berserker',
-            'EJobEnum::JE_Red_Mage': 'Red Mage',
-            'EJobEnum::JE_Hunter': 'Ranger',
-            'EJobEnum::JE_Shield_Master': 'Shieldmaster',
-            'EJobEnum::JE_Pictomancer': 'Pictomancer',
-            'EJobEnum::JE_Dragoon_Warrior': 'Dragoon',
-            'EJobEnum::JE_Master': 'Spiritmaster',
-            'EJobEnum::JE_Sword_Master': 'Swordmaster',
-            'EJobEnum::JE_Oracle': 'Oracle',
-            'EJobEnum::JE_Doctor': 'Salve-Maker',
-            'EJobEnum::JE_Demon': 'Arcanist',
-            'EJobEnum::JE_Judgement': 'Bastion',
-            'EJobEnum::JE_Phantom': 'Phantom',
-            'EJobEnum::JE_Cursed_Sword': 'Hellblade',
-            'EJobEnum::JE_Brave': 'Bravebearer',
-        }
-        
+        jobs = {job.Name:job for job in self.jobs}
         with open(filename, 'w') as sys.stdout:
             print('')
             print('')
-            for job in self.jobs:
-                name = jobNames[job.Name]
+            for key, name in jobNames.items():
+                job = jobs[key]
                 print(name)
                 print('-'*len(name))
                 print('')
@@ -227,8 +226,8 @@ class JOBDATA:
                     else:
                         print('   ', support.getString())
                 print('')
-                print('   Trait 1: ', job.getTrait1Obj().getString())
-                print('   Trait 2: ', job.getTrait2Obj().getString())
+                print('    Trait 1: ', job.getTrait1Obj().getString())
+                print('    Trait 2: ', job.getTrait2Obj().getString())
                 print('')
         
         sys.stdout = sys.__stdout__
@@ -241,22 +240,103 @@ class JOBSTATS(DATA):
         super().__init__(rom, 'JobCorrectionAsset')
         self.data = self.table['JobLevelMap']['data']
 
-    # Shuffles jobs
-    def shuffleStats(self):
-        keys = list(self.data.keys())
-        for i, ki in enumerate(self.data):
-            kj = random.sample(keys[i:], 1)[0]
-            self.data[ki], self.data[kj] = self.data[kj], self.data[ki]
-            self.data[ki]['_id'], self.data[kj]['_id'] = self.data[kj]['_id'], self.data[ki]['_id'] # SWAP ID BACK
+        self.stats = {}
+        self.affinities = {}
+        for k, d in self.data.items():
+            self.stats[k] = STATS(
+                d['HP'],
+                d['MP'],
+                d['Weight'],
+                d['PhysicalAttack'],
+                d['PhysicalDefence'],
+                d['MagicAttack'],
+                d['MagicDefence'],
+                d['Heal'],
+                d['Speed'],
+                d['Accuracy'],
+                d['Evasion'],
+                d['Critical'],
+                d['Aggro'],
+            )
+            self.affinities[k] = AFFINITY(
+                d['BareHand'],
+                d['ShortSword'],
+                d['Sword'],
+                d['Axe'],
+                d['Spear'],
+                d['Bow'],
+                d['Staff'],
+                d['Shield'],
+            )
 
-    # Unbiased shuffling
+    def _shuffle(self, dic):
+        jobs = list(dic.keys())
+        for i,ji in enumerate(dic.keys()):
+            jk = random.choices(jobs[i:])[0]
+            dic[ji], dic[jk] = dic[ji], dic[jk]
+
+    def _random(self, dic):
+        jobs = list(dic.keys())
+        for i,ji in enumerate(dic.keys()):
+            for attr in dic[ji].__dict__.keys():
+                jk = random.choices(jobs[i:])[0]
+                vi, vk = getattr(dic[ji], attr), getattr(dic[jk], attr)
+                setattr(dic[ji], attr, vk)
+                setattr(dic[jk], attr, vi)
+
+    def shuffleStats(self):
+        self._shuffle(self.stats)
+
     def randomStats(self):
-        stats = list(self.data['EJobEnum::JE_Sobriety'].keys())[1:] # omit _id
-        keys = list(self.data.keys())
-        for stat in stats: # HP, MP, ...
-            for i, ki in enumerate(self.data): # Freelancer, ...
-                kj = random.sample(keys[i:], 1)[0]
-                self.data[ki][stat], self.data[kj][stat] = self.data[kj][stat], self.data[ki][stat]
+        self._random(self.stats)
+
+    def shuffleAffinities(self):
+        self._shuffle(self.affinities)
+
+    def randomAffinities(self):
+        self._random(self.affinities)
+
+    def update(self):
+
+        for job, stats in self.stats.items():
+            for attr, value in stats.__dict__.items():
+                self.data[job][attr] = value
+
+        for job, stats in self.affinities.items():
+            for attr, value in stats.__dict__.items():
+                self.data[job][attr] = value
+
+        super().update()
+
+    def spoilers_stats(self, filename):
+        k = ['HP', 'MP', 'Wt', 'PAtk', 'PDef', 'MAtk', 'MDef', 'Heal', 'Spd', 'Acc', 'Eva', 'Crit', 'Aggr']
+        k = list(map(lambda x: x.rjust(5, ' '), k))
+        with open(filename, 'w') as sys.stdout:
+            print('')
+            print('')
+            print(' '*20, *k)
+            for key, name in jobNames.items():
+                stats = self.stats[key]
+                values = stats.getValues()
+                values = list(map(lambda x: x.rjust(5, ' '), stats.getValues()))
+                print(name.ljust(20, ' '), *values)
+
+        sys.stdout = sys.__stdout__
+
+    def spoilers_affinities(self, filename):
+        k = ['Bare Hand', 'ShortSword', 'Sword', 'Axe', 'Spear', 'Bow', 'Staff', 'Shield']
+        k = list(map(lambda x: x.rjust(10, ' '), k))
+        with open(filename, 'w') as sys.stdout:
+            print('')
+            print('')
+            print(' '*20, *k)
+            for key, name in jobNames.items():
+                affinities = self.affinities[key]
+                values = affinities.getValues()
+                values = list(map(lambda x: x.rjust(10, ' '), affinities.getValues()))
+                print(name.ljust(20, ' '), *values)
+
+        sys.stdout = sys.__stdout__
 
 
 # TODO: shuffle asterisk rematch battles????

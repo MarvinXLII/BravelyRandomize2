@@ -11,9 +11,6 @@ import shutil
 
 def randomize(settings):
 
-    # Set seed
-    random.seed(settings['seed'])
-    
     # Load ROM
     rom = ROM(settings['rom'])
 
@@ -37,28 +34,49 @@ def randomize(settings):
     quests = QUESTS(rom, itemText)
 
     ### STATS
-    if settings['job-stats'] == 'swap':
-        jobstats.shuffleStats()
-    elif settings['job-stats'] == 'random':
-        jobstats.randomStats()
+    if settings['job-stats']:
+        random.seed(settings['seed'])
+        if settings['job-stats-option'] == 'swap':
+            jobstats.shuffleStats()
+        elif settings['job-stats-option'] == 'random':
+            jobstats.randomStats()
+        else:
+            sys.exit(f"{settings['job-stats-option']} is not a valid option for job stats")
+
+    ### AFFINITIES
+    if settings['job-affinities']:
+        random.seed(settings['seed'])
+        if settings['job-affinities-option'] == 'swap':
+            jobstats.shuffleAffinities()
+        elif settings['job-affinities-option'] == 'random':
+            jobstats.randomAffinities()
+        else:
+            sys.exit(f"{settings['job-affinities-option']} is not a valid option for job affinities")
 
     # Job skills
     if settings['job-abilities']:
-        count = 0
+        count = 1
+        random.seed(settings['seed'])
         while not shuffleJobAbilities(jobdata, settings['late-godspeed-strike']):
             count += 1
-        print("Shuffling abilities took ", count, " attempts!")
+        if count == 1:
+            print("Shuffling abilities took ", count, " attempt!")
+        else:
+            print("Shuffling abilities took ", count, " attempts!")
 
     # Job skill costs
     if settings['job-costs']:
+        random.seed(settings['seed'])
         randomActionCosts(jobdata)
 
     ### ITEM SHUFFLER
     if settings['items']:
+        random.seed(settings['seed'])
         shuffleItems(treasures, quests, monsters)
 
     ### RESISTANCE SHUFFLER
     if settings['resistance']:
+        random.seed(settings['seed'])
         shuffleResistance(monsters)
 
     ### QOL
@@ -105,5 +123,7 @@ def randomize(settings):
     quests.spoilers(os.path.join(outdir, 'spoilers_quests.log'))
     treasures.spoilers(os.path.join(outdir, 'spoilers_treasures.log'))
     jobdata.spoilers(os.path.join(outdir, 'spoilers_jobs.log'))
+    jobstats.spoilers_stats(os.path.join(outdir, 'spoilers_stats.log'))
+    jobstats.spoilers_affinities(os.path.join(outdir, 'spoilers_affinities.log'))
 
     return True

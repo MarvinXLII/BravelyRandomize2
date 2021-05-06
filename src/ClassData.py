@@ -245,7 +245,48 @@ class STEAL:
             rareItemString.ljust(35, ' '),
         ])
 
-        
+
+@dataclass
+class STATS:
+    HP: EnumProperty
+    MP: EnumProperty
+    Weight: EnumProperty
+    PhysicalAttack: EnumProperty
+    PhysicalDefence: EnumProperty
+    MagicAttack: EnumProperty
+    MagicDefence: EnumProperty
+    Heal: EnumProperty
+    Speed: EnumProperty
+    Accuracy: EnumProperty
+    Evasion: EnumProperty
+    Critical: EnumProperty
+    Aggro: EnumProperty
+
+    def getValues(self):
+        values = []
+        for prop in self.__dict__.values():
+            values.append(prop.value.split('::')[-1])
+        return values
+
+
+@dataclass
+class AFFINITY:
+    BareHand: EnumProperty
+    ShortSword: EnumProperty
+    Sword: EnumProperty
+    Axe: EnumProperty
+    Spear: EnumProperty
+    Bow: EnumProperty
+    Staff: EnumProperty
+    Shield: EnumProperty
+
+    def getValues(self):
+        values = []
+        for prop in self.__dict__.values():
+            values.append(prop.value.split('::')[-1])
+        return values
+
+
 @dataclass
 class JOB:
     Name: str

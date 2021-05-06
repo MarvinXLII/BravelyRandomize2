@@ -30,12 +30,30 @@
 	    {
               label: "Swap"
 	      value: swap
-	      help: "E.g. the Freelancer could inherit the the stats of the White Mage."
+	      help: "E.g. the Freelancer could inherit all the stats of the White Mage."
             }
 	    {
               label: "Random"
 	      value: random
-	      help: "E.g. the Freelance could inherit HP skills of the White Mage, MP skills of the Black Mage, ...."
+	      help: "E.g. the Freelancer could inherit HP skills of the White Mage, MP skills of the Black Mage, ...."
+            }
+	]
+      }
+      {
+	name: job-affinities
+	label: Shuffle affinities
+	type: radiobutton
+	help: "Shuffles weapon/shield affinities among jobs."
+	indent: [
+	    {
+              label: "Swap"
+	      value: swap
+	      help: "E.g. the Freelancer could inherit all affinities of the White Mage."
+            }
+	    {
+              label: "Random"
+	      value: random
+	      help: "E.g. the Freelancer could inherit the Sword affinity of the White Mage, Shield affinity of the Black Mage, ...."
             }
 	]
       }
