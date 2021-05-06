@@ -227,16 +227,9 @@ class JOBDATA:
                     else:
                         print('   ', support.getString())
                 print('')
+                print('   Trait 1: ', job.getTrait1Obj().getString())
+                print('   Trait 2: ', job.getTrait2Obj().getString())
                 print('')
-
-            
-            # print('Name'.ljust(24, ' '), 'Steal Item'.ljust(35, ' '), 'Steal Rare Item'.ljust(35, ' '), 'Drop Item'.ljust(35, ' '), 'Drop Rare Item'.ljust(35, ' '))
-            # print('-'*24, '-'*35, '-'*35, '-'*35, '-'*35)
-            # print('')
-            # for es in steals:
-            #     ed = self.drops[es.EnemyId]
-            #     assert es.Name == ed.Name
-            #     print(es.Name.ljust(24, ' '), es.getString(), ed.getString())
         
         sys.stdout = sys.__stdout__
 

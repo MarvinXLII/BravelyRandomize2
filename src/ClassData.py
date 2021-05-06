@@ -279,6 +279,12 @@ class JOB:
     def getTrait2(self):
         return self.Support[16].Id
 
+    def getTrait1Obj(self):
+        return self.Support[15]
+
+    def getTrait2Obj(self):
+        return self.Support[16]
+
     def setActions(self, lst):
         for i, li in enumerate(lst):
             self.Actions[i] = li

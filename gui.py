@@ -226,7 +226,7 @@ The folder name will be something like \nSunrise-E\Content\Paks.\n
         else:
             self.settings['rom'].set('')
             self.bottomLabel('The folder selected is invalid or does not contained the required paks.', 'red', 0)
-            self.bottomLabel(' ...\Bravely Default II v0 (BASE)\RomFS\Sunrise-E\Content\Paks', 'red', 2)
+            self.bottomLabel('e.g. ...Sunrise-E\Content\Paks', 'red', 2)
 
     def toggler(self, lst, key):
         def f():
