@@ -222,12 +222,16 @@ class JOBDATA:
                 print('')
                 for action, support in zip(job.Actions, job.Support):
                     if action:
-                        print('   ', action.getString())
+                        a, c = action.getString()
+                        print('   ', a.ljust(40, ' '), c)
                     else:
-                        print('   ', support.getString())
+                        s, c = support.getString()
+                        print('   ', s.ljust(40, ' '), c)
                 print('')
-                print('    Trait 1: ', job.getTrait1Obj().getString())
-                print('    Trait 2: ', job.getTrait2Obj().getString())
+                t, c = job.getTrait1Obj().getString()
+                print('    Trait 1: ', t.ljust(30, ' '), c)
+                t, c = job.getTrait2Obj().getString()
+                print('    Trait 2: ', t.ljust(30, ' '), c)
                 print('')
         
         sys.stdout = sys.__stdout__

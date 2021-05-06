@@ -38,7 +38,7 @@ class ACTIONSKILL:
             cost += f"{self.CostValue} PG"
         else:
             cost = ''
-        return self.Name.ljust(30, ' ') + cost
+        return self.Name, cost
 
 @dataclass
 class SUPPORTSKILL:
@@ -48,7 +48,7 @@ class SUPPORTSKILL:
     Description: str
 
     def getString(self):
-        return self.Name.ljust(30, ' ') + f"{self.Cost} SP"
+        return self.Name, f"{self.Cost} SP"
 
 @dataclass
 class MAGIC:
