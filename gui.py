@@ -219,7 +219,7 @@ The folder name will be something like \nSunrise-E\Content\Paks.\n
     def getPakFile(self):
         self.clearBottomLabels()
         path = filedialog.askdirectory()
-        if path:
+        if not path:
             return
         pakFile = self.checkFile(path)
         if pakFile:
@@ -234,7 +234,7 @@ The folder name will be something like \nSunrise-E\Content\Paks.\n
             if self.settings[key].get():
                 try:
                     lst[0][1].select()
-                except AttributeError:
+                except (AttributeError, IndexError) as error:
                     pass
                 for vi, bi in lst:
                     bi.config(state=tk.NORMAL)
