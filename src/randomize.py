@@ -8,6 +8,7 @@ from Jobs import shuffleJobAbilities, randomActionCosts
 import random
 import os
 import shutil
+import hjson
 
 def randomize(settings):
 
@@ -125,5 +126,9 @@ def randomize(settings):
     jobdata.spoilers(os.path.join(outdir, 'spoilers_jobs.log'))
     jobstats.spoilers_stats(os.path.join(outdir, 'spoilers_stats.log'))
     jobstats.spoilers_affinities(os.path.join(outdir, 'spoilers_affinities.log'))
+
+    # Print settings
+    with open(os.path.join(outdir, 'settings.json'), 'w') as file:
+        hjson.dump(settings, file)
 
     return True
