@@ -232,8 +232,8 @@ The folder name will be something like \nSunrise-E\Content\Paks.\n
     def toggler(self, lst, key):
         def f():
             if self.settings[key].get():
-                try:
-                    lst[0][1].select()
+                try: # "if radiobutton"
+                    lst[0][1].select() # Selects the first option
                 except (AttributeError, IndexError) as error:
                     pass
                 for vi, bi in lst:
@@ -245,6 +245,7 @@ The folder name will be something like \nSunrise-E\Content\Paks.\n
                     if isinstance(vi.get(), str):
                         vi.set(None)
                     bi.config(state=tk.DISABLED)
+            return key, lst
         return f
 
     def buildToolTip(self, button, field, wraplength=200):
@@ -273,7 +274,13 @@ The folder name will be something like \nSunrise-E\Content\Paks.\n
                 continue
             self.settings[key].set(value)
         for toggle in self.togglers:
-            toggle()
+            key, buttons = toggle()
+            # Set the correct option for radio buttons
+            if settings[key] and key+'-option' in settings:
+                for option, button in buttons:
+                    button.select()
+                    if self.settings[key+'-option'] == settings[key+'-option']:
+                        break
 
     def bottomLabel(self, text, fg, row):
         L = tk.Label(self.canvas, text=text, fg=fg)
