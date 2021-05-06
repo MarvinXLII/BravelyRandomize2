@@ -219,7 +219,8 @@ The folder name will be something like \nSunrise-E\Content\Paks.\n
     def getPakFile(self):
         self.clearBottomLabels()
         path = filedialog.askdirectory()
-        if path == (): return
+        if path:
+            return
         pakFile = self.checkFile(path)
         if pakFile:
             self.settings['rom'].set(pakFile)
@@ -231,14 +232,18 @@ The folder name will be something like \nSunrise-E\Content\Paks.\n
     def toggler(self, lst, key):
         def f():
             if self.settings[key].get():
-                try: lst[0][1].select()
-                except: pass
+                try:
+                    lst[0][1].select()
+                except AttributeError:
+                    pass
                 for vi, bi in lst:
                     bi.config(state=tk.NORMAL)
             else:
                 for vi, bi in lst:
-                    if type(vi.get()) == bool: vi.set(False)
-                    if type(vi.get()) == str: vi.set(None)
+                    if isinstance(vi.get(), bool):
+                        vi.set(False)
+                    if isinstance(vi.get(), str):
+                        vi.set(None)
                     bi.config(state=tk.DISABLED)
         return f
 
@@ -260,9 +265,12 @@ The folder name will be something like \nSunrise-E\Content\Paks.\n
             self.turnBoolsOff()
             return
         for key, value in settings.items():
-            if key == 'rom': continue
-            if key == 'release': continue
-            if key not in self.settings: continue
+            if key == 'rom':
+                continue
+            if key == 'release':
+                continue
+            if key not in self.settings:
+                continue
             self.settings[key].set(value)
         for toggle in self.togglers:
             toggle()

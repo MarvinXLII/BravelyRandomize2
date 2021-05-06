@@ -497,6 +497,9 @@ def shuffleJobAbilities(jobData, lateGodspeedStrike):
             w[i] = False
             c -= 1
 
+    if support:
+        return False
+
     ########################################
     #### FOURTH: Finish filling actions ####
     ########################################
@@ -517,6 +520,9 @@ def shuffleJobAbilities(jobData, lateGodspeedStrike):
             w[i] = False
             c -= 1
 
+    if actions:
+        return False
+
     ################################
     #### GODSPEED STRIKE OPTION ####
     ################################
@@ -526,10 +532,10 @@ def shuffleJobAbilities(jobData, lateGodspeedStrike):
         job = jobs[assignments[num]]
         for idx, a in enumerate(job.Actions):
             if a and a.Id == num:
+                action = job.Actions.pop(idx)
+                job.Actions.append(action)
+                job.Support.pop(idx)
+                job.Support.insert(14, None)
                 break
-        action = job.Actions.pop(idx)
-        job.Actions.append(action)
-        job.Support.pop(idx)
-        job.Support.insert(14, None)
         
     return True
