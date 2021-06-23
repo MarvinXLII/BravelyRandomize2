@@ -35,7 +35,7 @@
 	    {
               label: "Random"
 	      value: random
-	      help: "E.g. the Freelancer could inherit HP skills of the White Mage, MP skills of the Black Mage, ...."
+	      help: "E.g. the Freelancer could inherit HP stats of the White Mage, MP stats of the Black Mage, ...."
             }
 	]
       }
@@ -81,7 +81,7 @@
 	name: early-access
 	label: "Early Hi-Potions and Ethers"
 	type: checkbutton
-	help: "All shops in the early game can sell Hi-Poitions and Ethers."
+	help: "All shops in the early game will sell Hi-Poitions and Ethers."
       }
     ]
     Battles: [
@@ -95,7 +95,7 @@
 	name: qol-scale-exp
 	label: "Scale experience"
 	type: spinbox
-	help: "Scales experience earned from battles."
+	help: "Scales experience earned from battles (capped at 99999)."
 	spinbox: {
 	  default: 1,
 	  min: 1,
@@ -106,7 +106,7 @@
 	name: qol-scale-jp
 	label: "Scale JP"
 	type: spinbox
-	help: "Scales job points earned from battles."
+	help: "Scales job points earned from battles (capped at 9999)."
 	spinbox: {
 	  default: 1,
 	  min: 1,
@@ -117,7 +117,7 @@
 	name: qol-scale-pg
 	label: "Scale PG"
 	type: spinbox
-	help: "Scales PG earned from battles."
+	help: "Scales PG earned from battles (capped at 99999)."
 	spinbox: {
 	  default: 1,
 	  min: 1,
