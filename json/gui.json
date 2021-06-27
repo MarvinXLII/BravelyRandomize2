@@ -3,23 +3,15 @@
     Jobs: [
       {
 	name: job-abilities
-	label: Shuffle skills
+	label: Shuffle abilities
 	type: checkbutton
-	help: "Shuffles both action ans support skills among jobs. Groups of spells will (mostly) be kept together, e.g. Fire/Fira/Firaga/Flare"
-	indent: [
-	    {
-	      name: late-godspeed-strike
-              label: "Godspeed Strike late game only"
-	      type: checkbutton
-	      help: "Forces Godspeed Strike to be in the 15th slot of a job's skills."
-            }
-	]
+	help: "Shuffles active, passive, and specialty abilities among jobs. Groups of related abilities will mostly be kept together, e.g. Fire, Fira, Firaga, and Flare will end up on one job, while Apex Predator plus many, but not all, of the Ranger's X Slayer abilities will end up on a single job."
       }
       {      
 	name: job-costs
-	label: Randomize action skill costs types
+	label: Randomize ability cost types
 	type: checkbutton
-	help: "Randomly shuffles cost types (i.e. MP, HP, BP, PG) among job skills. The actual costs are adjusted accordingly."
+	help: "Randomly shuffles cost types (i.e. MP, HP, BP, PG) among job abilities. The actual costs are adjusted accordingly. Displayed costs are updated in game, but the ability descriptions are not."
       }
       {
 	name: job-stats
@@ -41,19 +33,19 @@
       }
       {
 	name: job-affinities
-	label: Shuffle affinities
+	label: Shuffle recommended equipment
 	type: radiobutton
-	help: "Shuffles weapon/shield affinities among jobs."
+	help: "Shuffles weapon/shield boosts among jobs."
 	indent: [
 	    {
               label: "Swap"
 	      value: swap
-	      help: "E.g. the Freelancer could inherit all affinities of the White Mage."
+	      help: "E.g. the Freelancer could inherit all boosts of the White Mage."
             }
 	    {
               label: "Random"
 	      value: random
-	      help: "E.g. the Freelancer could inherit the Sword affinity of the White Mage, Shield affinity of the Black Mage, ...."
+	      help: "E.g. the Freelancer could inherit the Sword boost D of the White Mage, Shield boost C of the Black Mage, ...."
             }
 	]
       }
@@ -63,7 +55,7 @@
 	name: items
 	label: Shuffle items
 	type: checkbutton
-	help: "Shuffle items among chests, quests, enemy drops and enemy steals. Items dropped by enemies for quests will be kept on the same enemy."
+	help: "Shuffle items among chests, quests, enemy drops and enemy steals. Items dropped by enemies, found in grass, etc. for quests are kept in their default locations."
       }
       {
 	name: magnifying-glass-costs
@@ -81,7 +73,7 @@
 	name: early-access
 	label: "Early Hi-Potions and Ethers"
 	type: checkbutton
-	help: "All shops in the early game will sell Hi-Poitions and Ethers."
+	help: "All shops in the early game sell Hi-Potions and Ethers."
       }
     ]
     Battles: [

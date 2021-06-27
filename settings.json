@@ -1,20 +1,22 @@
 {
-  release: 0.0.1a
+  release: 0.0.1
   rom: /path/to/Sunrise-E/Content/Paks
   seed: 28
 
   job-stats: true
-  // job-stats-option: 'swap'
-  job-stats-option: 'random'
+  job-stats-option: 'swap'
+  // job-stats-option: 'random'
 
   job-abilities: true
-  late-godspeed-strike: true
   job-costs: true
 
-  // items: false
+  job-affinities: true
+  job-affinities-option: 'swap'
+  // job-affinities-option: 'random'
+  late-godspeed-strike: true
+
   items: true
 
-  // resistance: false
   resistance: true
 
   qol-scale-exp: 2

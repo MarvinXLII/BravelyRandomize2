@@ -58,7 +58,11 @@ def randomize(settings):
     if settings['job-abilities']:
         count = 1
         random.seed(settings['seed'])
-        while not shuffleJobAbilities(jobdata, settings['late-godspeed-strike']):
+        if 'late-godspeed-strike' in settings:
+            lategodspeedstrike = settings['late-godspeed-strike']
+        else:
+            lategodspeedstrike = False
+        while not shuffleJobAbilities(jobdata, lategodspeedstrike):
             count += 1
         if count == 1:
             print("Shuffling abilities took ", count, " attempt!")
