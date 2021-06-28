@@ -6,6 +6,7 @@
 *.log
 *.csv
 *.xlsx
+*.exe
 *~
 settingsMine.json
 Sunrise-E-Switch
@@ -13,3 +14,5 @@ BRAVELY DEFAULT ___ v0 (01006DC010326000) (BASE)
 csvToJson.py
 print_csv.py
 seed_*
+build
+dist

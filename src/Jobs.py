@@ -2,6 +2,7 @@ import random
 import hjson
 import sys
 sys.path.append("..")
+from Utilities import get_filename
 
 
 def randomActionCosts(jobData):
@@ -14,8 +15,8 @@ def randomActionCosts(jobData):
                 done[action.Name] = False
 
     # Load groups
-    groups = hjson.load(open("json/groups.json", 'r'))
-    costData = hjson.load(open("json/costs.json", 'r'))
+    groups = hjson.load(open(get_filename("json/groups.json"), 'r'))
+    costData = hjson.load(open(get_filename("json/costs.json"), 'r'))
 
     # Update groups all at once with the same costs
     weightDict = {
@@ -147,7 +148,7 @@ def shuffleJobAbilities(jobData, lateGodspeedStrike):
     #### FIRST: FILL ALL GROUPINGS ####
     ###################################
 
-    groups = hjson.load(open("json/groups.json", 'r'))
+    groups = hjson.load(open(get_filename("json/groups.json"), 'r'))
 
     # MONK SKILLS
     monk = jobData.pickIds(1, groups['monk'])
