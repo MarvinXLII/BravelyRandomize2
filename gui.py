@@ -10,7 +10,8 @@ import glob
 import sys
 sys.path.append('src')
 from Utilities import get_filename
-from randomize import randomize
+from randomize import SWITCH, STEAM
+from ROM import ROM
 
 MAIN_TITLE = f"Bravely Randomize 2 v{RELEASE}"
 
@@ -66,6 +67,7 @@ class GuiApplication:
         self.settings = {}
         self.settings['release'] = tk.StringVar()
         self.settings['system'] = tk.StringVar()
+        self.rom = None
 
         with open(get_filename('json/gui.json'), 'r') as file:
             fields = hjson.loads(file.read())
@@ -223,7 +225,15 @@ The folder name will be something like \nSunrise-E\Content\Paks.\n
             return
         pakFile = self.checkFile(path)
         if pakFile:
-            self.settings['rom'].set(pakFile)
+            try:
+                self.bottomLabel('Loading Pak....', 'blue', 0)
+                self.rom = ROM(pakFile)
+                self.settings['rom'].set(pakFile)
+                self.bottomLabel('Done', 'blue', 1)
+            except:
+                self.clearBottomLabels()
+                self.bottomLabel('Your game is incompatible with this randomizer.','red',0)
+                self.bottomLabel('It has only been tested on Steam and Switch releases.','red',1)
         else:
             self.settings['rom'].set('')
             self.bottomLabel('The folder selected is invalid or does not contained the required paks.', 'red', 0)
@@ -308,13 +318,34 @@ The folder name will be something like \nSunrise-E\Content\Paks.\n
         self.clearBottomLabels()
         self.bottomLabel('Randomizing....', 'blue', 0)
 
-        try:
-            randomize(settings)
+        if randomize(self.rom, settings):
             self.clearBottomLabels()
             self.bottomLabel('Randomizing...done! Good luck!', 'blue', 0)
-        except:
+        else:
             self.clearBottomLabels()
             self.bottomLabel('Randomizing failed.', 'red', 0)
+
+
+def randomize(rom, settings):
+    try:
+        # Start with a fresh ROM
+        rom.clean()
+        # Load data
+        if settings['system'] == 'Steam':
+            mod = STEAM(rom, settings)
+        elif settings['system'] == 'Switch':
+            mod = SWITCH(rom, settings)
+        else:
+            sys.exit(f"{settings['system']} not included in the randomizer!")
+        # Modify data
+        mod.randomize()
+        mod.qualityOfLife()
+        # Dump pak
+        mod.dump()
+        return True
+    except:
+        mod.failed()
+        return False
 
 
 if __name__ == '__main__':
