@@ -59,7 +59,7 @@ class MOD:
 
         ### AFFINITIES
         if self.settings['job-affinities']:
-            random.seed(self.settings['seed'])
+            random.seed(self.settings['seed']*2)
             if self.settings['job-affinities-option'] == 'swap':
                 self.jobstats.shuffleAffinities()
             elif self.settings['job-affinities-option'] == 'random':
@@ -70,7 +70,7 @@ class MOD:
         # Job skills
         if self.settings['job-abilities']:
             count = 1
-            random.seed(self.settings['seed'])
+            random.seed(self.settings['seed']*3)
             if 'late-godspeed-strike' in self.settings:
                 lategodspeedstrike = self.settings['late-godspeed-strike']
             else:
@@ -84,17 +84,17 @@ class MOD:
 
         # Job skill costs
         if self.settings['job-costs']:
-            random.seed(self.settings['seed'])
+            random.seed(self.settings['seed']*4)
             randomActionCosts(self.jobdata)
 
         ### ITEM SHUFFLER
         if self.settings['items']:
-            random.seed(self.settings['seed'])
+            random.seed(self.settings['seed']*5)
             shuffleItems(self.treasures, self.quests, self.monsters)
 
         ### RESISTANCE SHUFFLER
         if self.settings['resistance']:
-            random.seed(self.settings['seed'])
+            random.seed(self.settings['seed']*6)
             shuffleResistance(self.monsters)
 
 
