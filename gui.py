@@ -11,7 +11,7 @@ import sys
 sys.path.append('src')
 from Utilities import get_filename
 from randomize import SWITCH, STEAM
-from ROM import ROM
+from ROM import ROM_SWITCH, ROM_PC
 
 MAIN_TITLE = f"Bravely Randomize 2 v{RELEASE}"
 
@@ -215,7 +215,12 @@ The folder name will be something like \nSunrise-E\Content\Paks.\n
             return
 
         for fileName in fileNames:
-            if 'Sunrise-E-Switch.pak' in fileName:
+            baseName = os.path.basename(fileName)
+            if baseName == 'Sunrise-E-Switch.pak':
+                self.settings['system'].set('Switch')
+                return fileName
+            if baseName == 'Bravely_Default_II-WindowsNoEditor.pak':
+                self.settings['system'].set('Steam')
                 return fileName
 
     def getPakFile(self):
@@ -225,15 +230,20 @@ The folder name will be something like \nSunrise-E\Content\Paks.\n
             return
         pakFile = self.checkFile(path)
         if pakFile:
+            self.bottomLabel('Loading Pak....', 'blue', 0)
             try:
-                self.bottomLabel('Loading Pak....', 'blue', 0)
-                self.rom = ROM(pakFile)
-                self.settings['rom'].set(pakFile)
-                self.bottomLabel('Done', 'blue', 1)
+                if self.settings['system'].get() == 'Switch':
+                    self.rom = ROM_SWITCH(pakFile)
+                elif self.settings['system'].get() == 'Steam':
+                    self.rom = ROM_PC(pakFile)
             except:
                 self.clearBottomLabels()
                 self.bottomLabel('Your game is incompatible with this randomizer.','red',0)
                 self.bottomLabel('It has only been tested on Steam and Switch releases.','red',1)
+            else:
+                pakDir = os.path.dirname(pakFile)
+                self.settings['rom'].set(pakDir)
+                self.bottomLabel('Done', 'blue', 1)
         else:
             self.settings['rom'].set('')
             self.bottomLabel('The folder selected is invalid or does not contained the required paks.', 'red', 0)
@@ -277,7 +287,16 @@ The folder name will be something like \nSunrise-E\Content\Paks.\n
             return
         for key, value in settings.items():
             if key == 'rom':
-                continue
+                if not os.path.isdir(value):
+                    continue
+                pakFile = self.checkFile(value)
+                try:
+                    if self.settings['system'].get() == 'Switch':
+                        self.rom = ROM_SWITCH(pakFile)
+                    elif self.settings['system'].get() == 'Steam':
+                        self.rom = ROM_PC(pakFile)
+                except:
+                    continue
             if key == 'release':
                 continue
             if key not in self.settings:
