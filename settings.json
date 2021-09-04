@@ -1,29 +1,21 @@
 {
-  release: 0.0.1
-  rom: /path/to/Sunrise-E/Content/Paks
-  seed: 28
-
-  job-stats: true
-  job-stats-option: 'swap'
-  // job-stats-option: 'random'
-
+  release: 0.0.1b
+  system: Switch
+  rom:
+  seed: 1
   job-abilities: true
-  job-costs: true
-
-  job-affinities: true
-  job-affinities-option: 'swap'
-  // job-affinities-option: 'random'
-  late-godspeed-strike: true
-
-  items: true
-
-  resistance: true
-
-  qol-scale-exp: 2
-  qol-scale-jp: 2
-  qol-scale-pg: 2
-
-  magnifying-glass-costs: true
-  teleport-stone-costs: true
-  early-access: true
+  late-godspeed-strike: false
+  job-costs: false
+  job-stats: false
+  job-stats-option: None
+  job-affinities: false
+  job-affinities-option: None
+  items: false
+  magnifying-glass-costs: false
+  teleport-stone-costs: false
+  early-access: false
+  resistance: false
+  qol-scale-exp: 1
+  qol-scale-jp: 1
+  qol-scale-pg: 1
 }
