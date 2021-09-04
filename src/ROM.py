@@ -4,6 +4,8 @@ import sys
 import zstandard # Decompress
 import zlib # Compress
 import hjson
+from Utilities import get_filename
+
 
 class ROM:
     def __init__(self, fileName, patches=None):
@@ -274,7 +276,7 @@ class ROM_PC(ROM):
         assert int.from_bytes(sha, byteorder='big') == 0xe003b74f42a8556489a87f24644c3bb18d6af4f3
 
         # Pointers and files
-        self.pointers = hjson.load(open('json/pointers.json','r'))
+        self.pointers = hjson.load(open(get_filename('json/pointers.json'),'r'))
         self.baseDir = '../../../'
 
         # Read entries
