@@ -15,27 +15,11 @@ class ROM:
         self.compressionTypes[:4] = b'Zlib'
         self.compressionTypes[0x20:0x24] = bytearray([0]*4)
 
-        # Load pointers to files
-        self.file.seek(-44 - 0xa0, 2)
-        self.magic = self.readInt(8) # Something from the original Pak; remains constant in patches
-        self.fileSectionStart = self.readInt(8)
-        self.fileSectionSize = self.readInt(8)
-        self.fileSectionSHA1 = self.readBytes(20)
-        assert self.checkSHA(self.fileSectionStart, self.fileSectionSize, self.fileSectionSHA1)
-        
-        # Setup for reading entries
-        self.file.seek(self.fileSectionStart)
-        size = self.readInt(4)
-        self.baseDir = self.readString(size)
-        self.file.seek(4, 1) # Number of files (== len(self.files))
-
-        # Read entries
+        # Files
         self.files = {}
         self.fileNames = {}
-        while self.file.tell() < self.fileSectionStart + self.fileSectionSize:
-            self.readFileEntry()
 
-        # For extracted files
+        # Extracted files
         self.data = {}
         self.isPatched = {}
 
@@ -102,9 +86,7 @@ class ROM:
             pointers.append((start, end))
         return comp, pointers
         
-    def readFileEntry(self):
-        size = self.readInt(4)
-        fileName = self.readString(size)
+    def readFileEntry(self, fileName):
         assert fileName not in self.files
         f = {}
         f['base'] = self.readInt(8)
@@ -137,10 +119,6 @@ class ROM:
         if baseName not in self.fileNames:
             self.fileNames[baseName] = []
         self.fileNames[baseName].append(fileName)
-
-        address = self.file.tell()
-        # assert self.checkSHA(f['pointers'][0][0], f['size'], f['sha1'])
-        self.file.seek(address)
 
     def readString(self, size):
         if size < 0:
@@ -265,16 +243,37 @@ class ROM:
             file.write(self.compressionTypes)
 
 
+class ROM_SWITCH(ROM):
+    def __init__(self, fileName):
+        super(ROM_SWITCH, self).__init__(fileName)
+
+        # Load pointers to files
+        self.file.seek(-44 - 0xa0, 2)
+        self.magic = self.readInt(8)
+        self.fileSectionStart = self.readInt(8)
+        self.fileSectionSize = self.readInt(8)
+        self.fileSectionSHA1 = self.readBytes(20)
+        assert self.checkSHA(self.fileSectionStart, self.fileSectionSize, self.fileSectionSHA1)
+        
+        # Setup for reading entries
+        self.file.seek(self.fileSectionStart)
+        size = self.readInt(4)
+        self.baseDir = self.readString(size)
+        self.file.seek(4, 1) # Number of files (== len(self.files))
+
+        # Read entries
+        while self.file.tell() < self.fileSectionStart + self.fileSectionSize:
+            self.readFileEntry()
+
+    def readFileEntry(self):
+        size = self.readInt(4)
+        fileName = self.readString(size)
+        super(ROM_SWITCH, self).readFileEntry(fileName)
+
 
 class ROM_PC(ROM):
     def __init__(self, fileName): # NO PATCHES FOR PC!
-        self.file = open(fileName, 'rb')
-        
-        # Compression types (zlib, zstd)
-        self.file.seek(-0xa0, 2)
-        self.compressionTypes = bytearray(self.file.read())
-        self.compressionTypes[:4] = b'Zlib'
-        self.compressionTypes[0x20:0x24] = bytearray([0]*4)
+        super(ROM_PC, self).__init__(fileName)
 
         # Check SHA
         self.file.seek(-44 - 0xa0, 2)
@@ -287,63 +286,11 @@ class ROM_PC(ROM):
         self.pointers = hjson.load(open('json/pointers.json','r'))
         self.baseDir = '../../../'
 
-        self.files = {}
-        self.fileNames = {}
+        # Read entries
         for fileName, pointer in self.pointers.items():
             self.file.seek(pointer)
             self.readFileEntry(fileName)
 
-        # For extracted files
-        self.data = {}
-        self.isPatched = {}
-
     def readFileEntry(self, fileName):
-        assert fileName not in self.files
-        f = {}
-        f['base'] = self.pointers[fileName]
-        self.file.seek(8, 1)
-        f['size'] = self.readInt(8)
-        f['decompSize'] = self.readInt(8)
-        f['compType'] = self.readInt(4)
-        f['sha1'] = self.readBytes(20) # compressed data 
-        f['count'] = self.readInt(4)
-        f['pointers'] = []
-        if f['compType']:
-            for _ in range(f['count']):
-                f['pointers'].append([
-                    self.readInt(8), # base
-                    self.readInt(8), # end
-                    # end - base == size
-                ])
-            self.file.seek(5, 1)
-        else: # File is not compressed
-            assert f['count'] == 0
-            self.file.seek(1, 1)
-            f['pointers'].append([
-                f['base'] + 8*3+4+20+5,
-                f['base'] + 8*3+4+20+5 + f['size'],
-            ])
-        # Store entry
-        self.files[fileName] = f
-
-        # Map baseName to full file path (important when there are MANY files!) 
-        baseName = os.path.basename(fileName)
-        if baseName not in self.fileNames:
-            self.fileNames[baseName] = []
-        self.fileNames[baseName].append(fileName)
-
-        
-# if __name__ == '__main__':
-#     # fileName = 'Sunrise-E-Switch.pak'
-#     # rom = ROM(fileName)
-    
-#     fileName = 'Bravely_Default_II-WindowsNoEditor.pak'
-#     rom = ROM_PC(fileName)
-
-#     import copy
-#     uexp = copy.copy(rom.extractFile('JobDataAsset.uexp'))
-#     uasset = copy.copy(rom.extractFile('JobDataAsset.uasset'))
-
-#     uexp[0] += 1
-#     rom.patchFile(uexp, 'JobDataAsset.uexp')
-#     rom.buildPak('test.pak')
+        super(ROM_PC, self).readFileEntry(fileName)
+        self.files[fileName]['base'] = self.pointers[fileName]

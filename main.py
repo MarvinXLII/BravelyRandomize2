@@ -4,7 +4,7 @@ import sys
 import glob
 sys.path.append('src')
 from gui import randomize
-from ROM import ROM, ROM_PC
+from ROM import ROM_SWITCH, ROM_PC
 
 if __name__=='__main__':
     if len(sys.argv) != 2:
@@ -17,7 +17,7 @@ if __name__=='__main__':
     for pak in filenames:
         if os.path.basename(pak) == 'Sunrise-E-Switch.pak':
             settings['system'] = 'Switch'
-            rom = ROM(pak)
+            rom = ROM_SWITCH(pak)
             break
         elif os.path.basename(pak) == 'Bravely_Default_II-WindowsNoEditor.pak':
             settings['system'] = 'Steam'
