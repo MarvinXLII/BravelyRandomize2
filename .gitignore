@@ -9,6 +9,8 @@
 *.exe
 *~
 settingsMine.json
+settings_steam.json
+settings_switch.json
 Sunrise-E-Switch
 BRAVELY DEFAULT ___ v0 (01006DC010326000) (BASE)
 csvToJson.py

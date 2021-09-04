@@ -1,6 +1,7 @@
 ## ABOUT
 
-This is a randomizer for Bravely Default II.
+This is a randomizer for Bravely Default II. It's compatible with both
+the Switch and Steam releases.
 
 Play this at your own risk. I bear no responsibility if you or this
 mod bricks your Switch, etc. Online functionality has NEVER been
@@ -28,6 +29,17 @@ Some quality of life options include
 Download and run the executable from the Releases page. Select the
 `Paks` folder of your game and select all desired options. When ready,
 push the `Randomize` button. This will dump a mod and some spoiler
-files in the folder `seed_####`. The mod will be in the title ID
-folder. Copy this folder to the appropriate location on your SD card,
-e.g. `/path/to/SD/card/atmosphere/contents/01006DC010326000/romfs/Sunrise-E/Content/Paks/Sunrise-E-Switch_2_P.pak`.
+files in the folder `seed_####`.
+
+#### SWITCH
+
+The mod will be in the title ID folder, and should be directly copied
+to the appropriate location on your SD card. For example, when using
+atmosphere, the file should be located somewhere like this:
+`\path\to\SD\card\atmosphere\contents\01006DC010326000\romfs\Sunrise-E\Content\Paks\Sunrise-E-Switch_2_P.pak`.
+
+#### STEAM
+
+The mod will be in the pak titled "random_P.pak". To use the pak, copy
+it to the location of the original pak folder. On Windows, the mod's location should be something like:
+`C:\\Program Files\Steam\steamapps\common\BRAVELY DEFAULT II\Bravely_Default_II\Content\Paks\random_P.pak`.
