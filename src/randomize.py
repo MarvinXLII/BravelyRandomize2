@@ -71,11 +71,7 @@ class MOD:
         if self.settings['job-abilities']:
             count = 1
             random.seed(self.settings['seed']*3)
-            if 'late-godspeed-strike' in self.settings:
-                lategodspeedstrike = self.settings['late-godspeed-strike']
-            else:
-                lategodspeedstrike = False
-            while not shuffleJobAbilities(self.jobdata, lategodspeedstrike):
+            while not shuffleJobAbilities(self.jobdata):
                 count += 1
             if count == 1:
                 print("Shuffling abilities took ", count, " attempt!")
