@@ -1,6 +1,7 @@
 ## ABOUT
 
-This is a randomizer for Bravely Default II.
+This is a randomizer for Bravely Default II. It's compatible with both
+the Switch and Steam releases.
 
 Play this at your own risk. I bear no responsibility if you or this
 mod bricks your Switch, etc. Online functionality has NEVER been
