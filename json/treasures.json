@@ -332,55 +332,55 @@
   MAP0010_01:
   {
     Chapter: 0
-    Location: Outlaw’s Hideout – Level 1
+    Location: Outlaw's Hideout - Level 1
     Item: Mini Ether x2
   }
   MAP0010_02:
   {
     Chapter: 0
-    Location: Outlaw’s Hideout – Level 1
+    Location: Outlaw's Hideout - Level 1
     Item: 320 pg
   }
   MAP0010_03:
   {
     Chapter: 0
-    Location: Outlaw’s Hideout – Level 1
+    Location: Outlaw's Hideout - Level 1
     Item: Teleport Stone
   }
   MAP0011_01:
   {
     Chapter: 0
-    Location: Outlaw’s Hideout – Level 2
+    Location: Outlaw's Hideout - Level 2
     Item: Tent
   }
   MAP0011_02:
   {
     Chapter: 0
-    Location: Outlaw’s Hideout – Level 2
+    Location: Outlaw's Hideout - Level 2
     Item: Long Sword
   }
   MAP0012_01:
   {
     Chapter: 0
-    Location: Outlaw’s Hideout – Basement Level 1
+    Location: Outlaw's Hideout - Basement Level 1
     Item: 570 pg
   }
   MAP0012_02:
   {
     Chapter: 0
-    Location: Outlaw’s Hideout – Basement Level 1
+    Location: Outlaw's Hideout - Basement Level 1
     Item: Francisca
   }
   MAP0012_03:
   {
     Chapter: 0
-    Location: Outlaw’s Hideout – Basement Level 1
+    Location: Outlaw's Hideout - Basement Level 1
     Item: Dart
   }
   MAP0012_04:
   {
     Chapter: 0
-    Location: Outlaw’s Hideout – Basement Level 1
+    Location: Outlaw's Hideout - Basement Level 1
     Item: Round Shield
   }
   MAP0020_01:
@@ -548,127 +548,127 @@
   MAP1200_01:
   {
     Chapter: 1
-    Location: Dungeons – Level 1
+    Location: Dungeons - Level 1
     Item: Well-Worn Muleta
   }
   MAP1200_02:
   {
     Chapter: 1
-    Location: Dungeons – Level 1
+    Location: Dungeons - Level 1
     Item: Mini Ether x4
   }
   MAP1200_03:
   {
     Chapter: 1
-    Location: Dungeons – Level 1
+    Location: Dungeons - Level 1
     Item: Phoenix Down x3
   }
   MAP1301_01:
   {
     Chapter: 1
-    Location: Abandoned Mansion – Level 1
+    Location: Abandoned Mansion - Level 1
     Item: Lü Bu's Spear
   }
   MAP1301_02:
   {
     Chapter: 1
-    Location: Abandoned Mansion – Level 1
+    Location: Abandoned Mansion - Level 1
     Item: Remedy x4
   }
   MAP1302_01:
   {
     Chapter: 1
-    Location: Abandoned Mansion – Level 2
+    Location: Abandoned Mansion - Level 2
     Item: Staff of Life
   }
   MAP1302_02:
   {
     Chapter: 1
-    Location: Abandoned Mansion – Level 2
+    Location: Abandoned Mansion - Level 2
     Item: Hi-Potion x3
   }
   MAP1303_01:
   {
     Chapter: 1
-    Location: Abandoned Mansion – Level 3
+    Location: Abandoned Mansion - Level 3
     Item: Star Corslet
   }
   MAP1303_02:
   {
     Chapter: 1
-    Location: Abandoned Mansion – Level 3
+    Location: Abandoned Mansion - Level 3
     Item: 950 pg
   }
   MAP1303_03:
   {
     Chapter: 1
-    Location: Abandoned Mansion – Level 3
+    Location: Abandoned Mansion - Level 3
     Item: Mythril Shield
   }
   MAP1400_01:
   {
     Chapter: 1
-    Location: Bernard’s Mansion
+    Location: Bernard's Mansion
     Item: Bad Bone
   }
   MAP1400_02:
   {
     Chapter: 1
-    Location: Bernard’s Mansion
+    Location: Bernard's Mansion
     Item: Legion Helm
   }
   MAP1400_03:
   {
     Chapter: 1
-    Location: Bernard’s Mansion
+    Location: Bernard's Mansion
     Item: Stab & Grab
   }
   MAP1401_01:
   {
     Chapter: 1
-    Location: Bernard’s Mansion – Basement
+    Location: Bernard's Mansion - Basement
     Item: Tent
   }
   MAP1401_02:
   {
     Chapter: 1
-    Location: Bernard’s Mansion – Basement
+    Location: Bernard's Mansion - Basement
     Item: Remedy x2
   }
   MAP1401_03:
   {
     Chapter: 1
-    Location: Bernard’s Mansion – Basement
+    Location: Bernard's Mansion - Basement
     Item: Medium JP Orb
   }
   MAP1401_04:
   {
     Chapter: 1
-    Location: Bernard’s Mansion – Basement
+    Location: Bernard's Mansion - Basement
     Item: 3000 pg
   }
   MAP1401_05:
   {
     Chapter: 1
-    Location: Bernard’s Mansion – Basement
+    Location: Bernard's Mansion - Basement
     Item: Holy Mitre
   }
   MAP1401_06:
   {
     Chapter: 1
-    Location: Bernard’s Mansion – Basement
+    Location: Bernard's Mansion - Basement
     Item: Iron Bangle
   }
   MAP1401_07:
   {
     Chapter: 1
-    Location: Bernard’s Mansion – Basement
+    Location: Bernard's Mansion - Basement
     Item: Teleport Stone
   }
   MAP1401_08:
   {
     Chapter: 1
-    Location: Bernard’s Mansion – Basement
+    Location: Bernard's Mansion - Basement
     Item: Hawkeye
   }
   MAP2000_01:
@@ -752,133 +752,133 @@
   MAP2101_01:
   {
     Chapter: 2
-    Location: Institute – East Wing – Level 1
+    Location: Institute - East Wing - Level 1
     Item: Rod of Fire
   }
   MAP2101_02:
   {
     Chapter: 2
-    Location: Institute – East Wing – Level 1
+    Location: Institute - East Wing - Level 1
     Item: Mortarboard
   }
   MAP2101_03:
   {
     Chapter: 2
-    Location: Institute – East Wing – Level 1
+    Location: Institute - East Wing - Level 1
     Item: Mini Ether x5
   }
   MAP2101_04:
   {
     Chapter: 2
-    Location: Institute – East Wing – Level 1
+    Location: Institute - East Wing - Level 1
     Item: 1330 pg
   }
   MAP2102_01:
   {
     Chapter: 2
-    Location: Institute – East Wing – Level 2
+    Location: Institute - East Wing - Level 2
     Item: Dark Drops x3
   }
   MAP2103_01:
   {
     Chapter: 2
-    Location: Institute – East Wing – Level 3
+    Location: Institute - East Wing - Level 3
     Item: Devil's Delight x4
   }
   MAP2103_02:
   {
     Chapter: 2
-    Location: Institute – East Wing – Level 3
+    Location: Institute - East Wing - Level 3
     Item: Academy Gown
   }
   MAP2103_03:
   {
     Chapter: 2
-    Location: Institute – East Wing – Level 3
+    Location: Institute - East Wing - Level 3
     Item: Earthing Rod
   }
   MAP2103_04:
   {
     Chapter: 2
-    Location: Institute – East Wing – Level 3
+    Location: Institute - East Wing - Level 3
     Item: 1840 pg
   }
   MAP2103_05:
   {
     Chapter: 2
-    Location: Institute – East Wing – Level 3
+    Location: Institute - East Wing - Level 3
     Item: Mirage Vest
   }
   MAP2103_06:
   {
     Chapter: 2
-    Location: Institute – East Wing – Level 3
+    Location: Institute - East Wing - Level 3
     Item: Courage Ring
   }
   MAP2200_01:
   {
     Chapter: 2
-    Location: Treetop Tower – Level 1
+    Location: Treetop Tower - Level 1
     Item: 2520 pg
   }
   MAP2201_01:
   {
     Chapter: 2
-    Location: Treetop Tower – Level 2
+    Location: Treetop Tower - Level 2
     Item: Teleport Stone
   }
   MAP2201_02:
   {
     Chapter: 2
-    Location: Treetop Tower – Level 2
+    Location: Treetop Tower - Level 2
     Item: Earthbreaker
   }
   MAP2202_01:
   {
     Chapter: 2
-    Location: Treetop Tower – Level 3
+    Location: Treetop Tower - Level 3
     Item: Typhoon Shield
   }
   MAP2202_02:
   {
     Chapter: 2
-    Location: Treetop Tower – Level 3
+    Location: Treetop Tower - Level 3
     Item: Ether x3
   }
   MAP2202_03:
   {
     Chapter: 2
-    Location: Treetop Tower – Level 3
+    Location: Treetop Tower - Level 3
     Item: Phoenix Down x4
   }
   MAP2203_01:
   {
     Chapter: 2
-    Location: Treetop Tower – Level 4
+    Location: Treetop Tower - Level 4
     Item: Adamant Helm
   }
   MAP2205_01:
   {
     Chapter: 2
-    Location: Treetop Tower – Level 6
+    Location: Treetop Tower - Level 6
     Item: Medium JP Orb
   }
   MAP2205_02:
   {
     Chapter: 2
-    Location: Treetop Tower – Level 6
+    Location: Treetop Tower - Level 6
     Item: Courage Ring
   }
   MAP2205_03:
   {
     Chapter: 2
-    Location: Treetop Tower – Level 6
+    Location: Treetop Tower - Level 6
     Item: Longinus
   }
   MAP2205_04:
   {
     Chapter: 2
-    Location: Treetop Tower – Level 6
+    Location: Treetop Tower - Level 6
     Item: Mini Ether x7
   }
   MAP2300_01:
@@ -1010,55 +1010,55 @@
   MAP3000_01:
   {
     Chapter: 3
-    Location: Serpent’s Grotto
+    Location: Serpent's Grotto
     Item: Soul Food x4
   }
   MAP3000_02:
   {
     Chapter: 3
-    Location: Serpent’s Grotto
+    Location: Serpent's Grotto
     Item: X-Potion x2
   }
   MAP3000_03:
   {
     Chapter: 3
-    Location: Serpent’s Grotto
+    Location: Serpent's Grotto
     Item: Meteorite x3
   }
   MAP3000_04:
   {
     Chapter: 3
-    Location: Serpent’s Grotto
+    Location: Serpent's Grotto
     Item: Gaia Rod
   }
   MAP3000_05:
   {
     Chapter: 3
-    Location: Serpent’s Grotto
+    Location: Serpent's Grotto
     Item: Tent
   }
   MAP3000_06:
   {
     Chapter: 3
-    Location: Serpent’s Grotto
+    Location: Serpent's Grotto
     Item: Icefire Shield
   }
   MAP3000_07:
   {
     Chapter: 3
-    Location: Serpent’s Grotto
+    Location: Serpent's Grotto
     Item: Mini Ether x5
   }
   MAP3000_08:
   {
     Chapter: 3
-    Location: Serpent’s Grotto
+    Location: Serpent's Grotto
     Item: Lamia's Tiara
   }
   MAP3000_09:
   {
     Chapter: 3
-    Location: Serpent’s Grotto
+    Location: Serpent's Grotto
     Item: Ether x4
   }
   MAP3100_01:
@@ -1100,91 +1100,91 @@
   MAP3200_01:
   {
     Chapter: 3
-    Location: Hall of High Holies – Level 1
+    Location: Hall of High Holies - Level 1
     Item: Witch's Whisper x3
   }
   MAP3200_02:
   {
     Chapter: 3
-    Location: Hall of High Holies – Level 1
+    Location: Hall of High Holies - Level 1
     Item: 7400 pg
   }
   MAP3200_03:
   {
     Chapter: 3
-    Location: Hall of High Holies – Level 1
+    Location: Hall of High Holies - Level 1
     Item: Artisan Gloves
   }
   MAP3200_04:
   {
     Chapter: 3
-    Location: Hall of High Holies – Level 1
+    Location: Hall of High Holies - Level 1
     Item: Remedy x2
   }
   MAP3201_01:
   {
     Chapter: 3
-    Location: Hall of High Holies – Level 2
+    Location: Hall of High Holies - Level 2
     Item: Acorn Hat
   }
   MAP3201_02:
   {
     Chapter: 3
-    Location: Hall of High Holies – Level 2
+    Location: Hall of High Holies - Level 2
     Item: Cuirass
   }
   MAP3201_03:
   {
     Chapter: 3
-    Location: Hall of High Holies – Level 2
+    Location: Hall of High Holies - Level 2
     Item: Tengu Yawn x2
   }
   MAP3201_04:
   {
     Chapter: 3
-    Location: Hall of High Holies – Level 2
+    Location: Hall of High Holies - Level 2
     Item: Large JP Orb
   }
   MAP3201_05:
   {
     Chapter: 3
-    Location: Hall of High Holies – Level 2
+    Location: Hall of High Holies - Level 2
     Item: 13400 pg
   }
   MAP3203_01:
   {
     Chapter: 3
-    Location: Hall of High Holies – Level 4
+    Location: Hall of High Holies - Level 4
     Item: Dreadstool x3
   }
   MAP3203_02:
   {
     Chapter: 3
-    Location: Hall of High Holies – Level 4
+    Location: Hall of High Holies - Level 4
     Item: Heart Ring
   }
   MAP3203_03:
   {
     Chapter: 3
-    Location: Hall of High Holies – Level 4
+    Location: Hall of High Holies - Level 4
     Item: Sands of Time
   }
   MAP3203_04:
   {
     Chapter: 3
-    Location: Hall of High Holies – Level 4
+    Location: Hall of High Holies - Level 4
     Item: Summoner's Axe
   }
   MAP3203_05:
   {
     Chapter: 3
-    Location: Hall of High Holies – Level 4
+    Location: Hall of High Holies - Level 4
     Item: Hush Pollen x5
   }
   MAP3203_06:
   {
     Chapter: 3
-    Location: Hall of High Holies – Level 4
+    Location: Hall of High Holies - Level 4
     Item: Mini Ether x8
   }
   MAP3300_01:
@@ -1376,55 +1376,55 @@
   MAP4100_01:
   {
     Chapter: 4
-    Location: Holograd Army HQ – Level 1
+    Location: Holograd Army HQ - Level 1
     Item: Artemis's Bow
   }
   MAP4100_02:
   {
     Chapter: 4
-    Location: Holograd Army HQ – Level 1
+    Location: Holograd Army HQ - Level 1
     Item: Throwing Stick x2
   }
   MAP4101_01:
   {
     Chapter: 4
-    Location: Holograd Army HQ – Level 2
+    Location: Holograd Army HQ - Level 2
     Item: Gáe Bulg
   }
   MAP4102_01:
   {
     Chapter: 4
-    Location: Holograd Army HQ – Level 3
+    Location: Holograd Army HQ - Level 3
     Item: Healing Bloom x3
   }
   MAP4102_02:
   {
     Chapter: 4
-    Location: Holograd Army HQ – Level 3
+    Location: Holograd Army HQ - Level 3
     Item: Large JP Orb
   }
   MAP4102_03:
   {
     Chapter: 4
-    Location: Holograd Army HQ – Level 3
+    Location: Holograd Army HQ - Level 3
     Item: 5540 pg
   }
   MAP4103_01:
   {
     Chapter: 4
-    Location: Holograd Army HQ – Basement Level 1
+    Location: Holograd Army HQ - Basement Level 1
     Item: Courage Ring
   }
   MAP4103_02:
   {
     Chapter: 4
-    Location: Holograd Army HQ – Basement Level 1
+    Location: Holograd Army HQ - Basement Level 1
     Item: Saffron Robes
   }
   MAP4103_03:
   {
     Chapter: 4
-    Location: Holograd Army HQ – Basement Level 1
+    Location: Holograd Army HQ - Basement Level 1
     Item: Spellblossom x4
   }
   MAP4200_01:
@@ -1448,109 +1448,109 @@
   MAP4201_01:
   {
     Chapter: 4
-    Location: Flying Fortress – Living Quarters
+    Location: Flying Fortress - Living Quarters
     Item: Ripper
   }
   MAP4201_02:
   {
     Chapter: 4
-    Location: Flying Fortress – Living Quarters
+    Location: Flying Fortress - Living Quarters
     Item: X-Potion x2
   }
   MAP4201_03:
   {
     Chapter: 4
-    Location: Flying Fortress – Living Quarters
+    Location: Flying Fortress - Living Quarters
     Item: Demon's Rod
   }
   MAP4201_04:
   {
     Chapter: 4
-    Location: Flying Fortress – Living Quarters
+    Location: Flying Fortress - Living Quarters
     Item: Tengu Sneeze
   }
   MAP4201_05:
   {
     Chapter: 4
-    Location: Flying Fortress – Living Quarters
+    Location: Flying Fortress - Living Quarters
     Item: Black Belt
   }
   MAP4202_01:
   {
     Chapter: 4
-    Location: Flying Fortress – Grand Hall
+    Location: Flying Fortress - Grand Hall
     Item: Spellblossom x5
   }
   MAP4202_02:
   {
     Chapter: 4
-    Location: Flying Fortress – Grand Hall
+    Location: Flying Fortress - Grand Hall
     Item: Soul Food x2
   }
   MAP4203_01:
   {
     Chapter: 4
-    Location: Flying Fortress – Ducts
+    Location: Flying Fortress - Ducts
     Item: Spiked Shield
   }
   MAP4203_02:
   {
     Chapter: 4
-    Location: Flying Fortress – Ducts
+    Location: Flying Fortress - Ducts
     Item: Earth Mallet x2
   }
   MAP4205_01:
   {
     Chapter: 4
-    Location: Flying Fortress – Central Concourse
+    Location: Flying Fortress - Central Concourse
     Item: Ether x2
   }
   MAP4205_02:
   {
     Chapter: 4
-    Location: Flying Fortress – Central Concourse
+    Location: Flying Fortress - Central Concourse
     Item: Shuriken x3
   }
   MAP4205_03:
   {
     Chapter: 4
-    Location: Flying Fortress – Central Concourse
+    Location: Flying Fortress - Central Concourse
     Item: Teleport Stone
   }
   MAP4205_04:
   {
     Chapter: 4
-    Location: Flying Fortress – Central Concourse
+    Location: Flying Fortress - Central Concourse
     Item: Phoenix Down x3
   }
   MAP4206_01:
   {
     Chapter: 4
-    Location: Flying Fortress – Ducts
+    Location: Flying Fortress - Ducts
     Item: Gauntlets
   }
   MAP4206_02:
   {
     Chapter: 4
-    Location: Flying Fortress – Ducts
+    Location: Flying Fortress - Ducts
     Item: 7690 pg
   }
   MAP4206_03:
   {
     Chapter: 4
-    Location: Flying Fortress – Ducts
+    Location: Flying Fortress - Ducts
     Item: Dragonscale Armour
   }
   MAP4206_04:
   {
     Chapter: 4
-    Location: Flying Fortress – Ducts
+    Location: Flying Fortress - Ducts
     Item: Magic Herb x2
   }
   MAP4206_05:
   {
     Chapter: 4
-    Location: Flying Fortress – Ducts
+    Location: Flying Fortress - Ducts
     Item: Black Cowl
   }
   MAP4300_01:
@@ -1628,115 +1628,115 @@
   MAP5101_01:
   {
     Chapter: 5
-    Location: Crystal’s Resting Place – Wind Room
+    Location: Crystal's Resting Place - Wind Room
     Item: Tengu Sneeze x6
   }
   MAP5101_02:
   {
     Chapter: 5
-    Location: Crystal’s Resting Place – Wind Room
+    Location: Crystal's Resting Place - Wind Room
     Item: Giant Axe
   }
   MAP5101_03:
   {
     Chapter: 5
-    Location: Crystal’s Resting Place – Wind Room
+    Location: Crystal's Resting Place - Wind Room
     Item: Ghoulash x3
   }
   MAP5101_04:
   {
     Chapter: 5
-    Location: Crystal’s Resting Place – Wind Room
+    Location: Crystal's Resting Place - Wind Room
     Item: X-Potion x4
   }
   MAP5101_05:
   {
     Chapter: 5
-    Location: Crystal’s Resting Place – Wind Room
+    Location: Crystal's Resting Place - Wind Room
     Item: Healing Bloom x5
   }
   MAP5102_01:
   {
     Chapter: 5
-    Location: Crystal’s Resting Place – Fire Room
+    Location: Crystal's Resting Place - Fire Room
     Item: Safety Ring
   }
   MAP5102_02:
   {
     Chapter: 5
-    Location: Crystal’s Resting Place – Fire Room
+    Location: Crystal's Resting Place - Fire Room
     Item: Red Cap
   }
   MAP5102_03:
   {
     Chapter: 5
-    Location: Crystal’s Resting Place – Fire Room
+    Location: Crystal's Resting Place - Fire Room
     Item: Elixir x2
   }
   MAP5103_01:
   {
     Chapter: 5
-    Location: Crystal’s Resting Place – Water Room
+    Location: Crystal's Resting Place - Water Room
     Item: Smiley Badge
   }
   MAP5103_02:
   {
     Chapter: 5
-    Location: Crystal’s Resting Place – Water Room
+    Location: Crystal's Resting Place - Water Room
     Item: Dragonskin Headscarf
   }
   MAP5103_03:
   {
     Chapter: 5
-    Location: Crystal’s Resting Place – Water Room
+    Location: Crystal's Resting Place - Water Room
     Item: Life Ring
   }
   MAP5103_04:
   {
     Chapter: 5
-    Location: Crystal’s Resting Place – Water Room
+    Location: Crystal's Resting Place - Water Room
     Item: 11770 pg
   }
   MAP5103_05:
   {
     Chapter: 5
-    Location: Crystal’s Resting Place – Water Room
+    Location: Crystal's Resting Place - Water Room
     Item: Ink x6
   }
   MAP5104_01:
   {
     Chapter: 5
-    Location: Crystal’s Resting Place – Earth Room
+    Location: Crystal's Resting Place - Earth Room
     Item: Snappy Sash
   }
   MAP5104_02:
   {
     Chapter: 5
-    Location: Crystal’s Resting Place – Earth Room
+    Location: Crystal's Resting Place - Earth Room
     Item: Soul of Thamasa
   }
   MAP5104_03:
   {
     Chapter: 5
-    Location: Crystal’s Resting Place – Earth Room
+    Location: Crystal's Resting Place - Earth Room
     Item: Giant's Gloves
   }
   MAP5104_04:
   {
     Chapter: 5
-    Location: Crystal’s Resting Place – Earth Room
+    Location: Crystal's Resting Place - Earth Room
     Item: 6210 pg
   }
   MAP5104_05:
   {
     Chapter: 5
-    Location: Crystal’s Resting Place – Earth Room
+    Location: Crystal's Resting Place - Earth Room
     Item: Hush Pollen x4
   }
   MAP5104_06:
   {
     Chapter: 5
-    Location: Crystal’s Resting Place – Earth Room
+    Location: Crystal's Resting Place - Earth Room
     Item: Large JP Orb
   }
   MAP5200_01:
@@ -1874,7 +1874,7 @@
   TW0002_01:
   {
     Chapter: 0
-    Location: Halcyonia – Palace
+    Location: Halcyonia - Palace
     Item: Pilgrim's Hat
   }
   TW0010_01:
@@ -1898,7 +1898,7 @@
   TW0011_01:
   {
     Chapter: 1
-    Location: Savalon – Palace
+    Location: Savalon - Palace
     Item: Antidote x3
   }
   TW0012_01:
