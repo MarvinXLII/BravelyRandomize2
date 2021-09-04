@@ -1,21 +1,29 @@
 {
-  release: 0.0.1b
+  release: 0.0.2
   system: Switch
-  rom:
-  seed: 1
+  // system: Steam
+
+  rom: /path/to/Paks/folder
+  seed: 28
+
+  items: true
+  resistance: true
   job-abilities: true
-  late-godspeed-strike: false
-  job-costs: false
-  job-stats: false
-  job-stats-option: None
-  job-affinities: false
-  job-affinities-option: None
-  items: false
-  magnifying-glass-costs: false
-  teleport-stone-costs: false
-  early-access: false
-  resistance: false
-  qol-scale-exp: 1
-  qol-scale-jp: 1
-  qol-scale-pg: 1
+  job-costs: true
+
+  job-stats: true
+  job-stats-option: 'swap'
+  // job-stats-option: 'random'
+
+  job-affinities: true
+  job-affinities-option: 'swap'
+  // job-affinities-option: 'random'
+
+  qol-scale-exp: 2
+  qol-scale-jp: 2
+  qol-scale-pg: 2
+
+  magnifying-glass-costs: true
+  teleport-stone-costs: true
+  early-access: true
 }
