@@ -94,8 +94,9 @@ class GuiApplication:
         pathButton.grid(row=1, column=1, sticky='e', padx=5, pady=2)
         self.buildToolTip(pathButton,
                           """
-Input the game folder containing "Sunrise-E-Switch" pak files.\n
-The folder name will be something like \nSunrise-E\Content\Paks.\n
+Input the game folder labelled "Paks".\n
+On Switch the folder name will be something like \nSunrise-E\Content\Paks.\n
+On Steam the folder name will be something like \nC:\\Program Files\Steam\steamapps\common\BRAVELY DEFAULT II\Bravely Default II\Content\Paks\n
                           """
                           , wraplength=500)
 
@@ -371,6 +372,8 @@ if __name__ == '__main__':
     if len(sys.argv) > 2:
         print('Usage: python gui.py <settings.json>')
     elif len(sys.argv) == 2:
+        exePath = os.path.dirname(sys.argv[0])
+        os.chdir(exePath)
         with open(sys.argv[1], 'r') as file:
             settings = hjson.load(file)
         GuiApplication(settings)
