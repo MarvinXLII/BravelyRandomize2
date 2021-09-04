@@ -1,23 +1,23 @@
 {
-  release: 0.0.1
-  rom: /path/to/Sunrise-E/Content/Paks
+  release: 0.0.2
+  system: Switch
+  // system: Steam
+
+  rom: /path/to/Paks/folder
   seed: 28
+
+  items: true
+  resistance: true
+  job-abilities: true
+  job-costs: true
 
   job-stats: true
   job-stats-option: 'swap'
   // job-stats-option: 'random'
 
-  job-abilities: true
-  job-costs: true
-
   job-affinities: true
   job-affinities-option: 'swap'
   // job-affinities-option: 'random'
-  late-godspeed-strike: true
-
-  items: true
-
-  resistance: true
 
   qol-scale-exp: 2
   qol-scale-jp: 2

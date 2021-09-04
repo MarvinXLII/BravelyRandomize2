@@ -512,19 +512,19 @@ class MONSTERS(DATA):
 
     # "PQ" in the code, "PG" in the game
     def scalePG(self, scale):
-        assert scale > 0
+        assert scale >= 0
         for d in self.data.values():
             pg = int(scale * d['pq'].value)
             d['pq'].value = min(pg, 99999)
 
     def scaleEXP(self, scale):
-        assert scale > 0
+        assert scale >= 0
         for d in self.data.values():
             exp = int(scale * d['Exp'].value)
             d['Exp'].value = min(exp, 99999)
 
     def scaleJP(self, scale):
-        assert scale > 0
+        assert scale >= 0
         for d in self.data.values():
             jp = int(scale * d['Jp'].value)
             d['Jp'].value = min(jp, 9999)

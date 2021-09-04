@@ -10,129 +10,152 @@ import os
 import shutil
 import hjson
 
-def randomize(settings):
+class MOD:
+    def __init__(self, rom, settings):
+        self.settings = settings
 
-    # Load ROM
-    rom = ROM(settings['rom'])
+        # Outputs
+        self.outPath = f"seed_{self.settings['seed']}"
+        if os.path.isdir(self.outPath):
+            shutil.rmtree(self.outPath)
+        os.makedirs(self.outPath)
 
-    ### TEXT FILES
-    actionText = TEXT(rom, 'L10N/en/DataAsset/Ability/Player/ActionAbilityTextAsset')
-    supportText = TEXT(rom, 'L10N/en/DataAsset/Ability/Player/SupportAbilityTextAsset')
-    specialText = TEXT(rom, 'L10N/en/DataAsset/Ability/Player/SpecialAbilityTextAsset')
-    itemText = TEXT(rom, 'L10N/en/DataAsset/Item/ItemTextAsset')
-    monsterText = TEXT(rom, 'L10N/en/DataAsset/Monster/MonsterTextDataAsset')
+        # Load ROM
+        self.rom = rom
 
-    ### ASSETS
-    support = SUPPORT(rom, supportText)
-    actions = ACTIONS(rom, actionText)
-    shops = SHOPDATA(rom, itemText)
-    items = ITEMDATA(rom, itemText)
-    jobstats = JOBSTATS(rom)
-    jobdata = JOBDATA(rom, actions, support)
-    monsterParty = MONSTERPARTY(rom)
-    monsters = MONSTERS(rom, monsterText, itemText, monsterParty)
-    treasures = TREASURES(rom, itemText)
-    quests = QUESTS(rom, itemText)
+        # Text files
+        self.actionText = TEXT(self.rom, 'L10N/en/DataAsset/Ability/Player/ActionAbilityTextAsset')
+        self.supportText = TEXT(self.rom, 'L10N/en/DataAsset/Ability/Player/SupportAbilityTextAsset')
+        self.specialText = TEXT(self.rom, 'L10N/en/DataAsset/Ability/Player/SpecialAbilityTextAsset')
+        self.itemText = TEXT(self.rom, 'L10N/en/DataAsset/Item/ItemTextAsset')
+        self.monsterText = TEXT(self.rom, 'L10N/en/DataAsset/Monster/MonsterTextDataAsset')
 
-    ### STATS
-    if settings['job-stats']:
-        random.seed(settings['seed'])
-        if settings['job-stats-option'] == 'swap':
-            jobstats.shuffleStats()
-        elif settings['job-stats-option'] == 'random':
-            jobstats.randomStats()
-        else:
-            sys.exit(f"{settings['job-stats-option']} is not a valid option for job stats")
+        # Assets
+        self.support = SUPPORT(self.rom, self.supportText)
+        self.actions = ACTIONS(self.rom, self.actionText)
+        self.shops = SHOPDATA(self.rom, self.itemText)
+        self.items = ITEMDATA(self.rom, self.itemText)
+        self.jobstats = JOBSTATS(self.rom)
+        self.jobdata = JOBDATA(self.rom, self.actions, self.support)
+        self.monsterParty = MONSTERPARTY(self.rom)
+        self.monsters = MONSTERS(self.rom, self.monsterText, self.itemText, self.monsterParty)
+        self.treasures = TREASURES(self.rom, self.itemText)
+        self.quests = QUESTS(self.rom, self.itemText)
 
-    ### AFFINITIES
-    if settings['job-affinities']:
-        random.seed(settings['seed'])
-        if settings['job-affinities-option'] == 'swap':
-            jobstats.shuffleAffinities()
-        elif settings['job-affinities-option'] == 'random':
-            jobstats.randomAffinities()
-        else:
-            sys.exit(f"{settings['job-affinities-option']} is not a valid option for job affinities")
+    def failed(self):
+        print(f"Randomizer failed! Removing directory {self.outPath}.")
+        shutil.rmtree(self.outPath)
 
-    # Job skills
-    if settings['job-abilities']:
-        count = 1
-        random.seed(settings['seed'])
-        if 'late-godspeed-strike' in settings:
-            lategodspeedstrike = settings['late-godspeed-strike']
-        else:
-            lategodspeedstrike = False
-        while not shuffleJobAbilities(jobdata, lategodspeedstrike):
-            count += 1
-        if count == 1:
-            print("Shuffling abilities took ", count, " attempt!")
-        else:
-            print("Shuffling abilities took ", count, " attempts!")
+    def randomize(self):
+        ### STATS
+        if self.settings['job-stats']:
+            random.seed(self.settings['seed'])
+            if self.settings['job-stats-option'] == 'swap':
+                self.jobstats.shuffleStats()
+            elif self.settings['job-stats-option'] == 'random':
+                self.jobstats.randomStats()
+            else:
+                sys.exit(f"{self.settings['job-stats-option']} is not a valid option for job stats")
 
-    # Job skill costs
-    if settings['job-costs']:
-        random.seed(settings['seed'])
-        randomActionCosts(jobdata)
+        ### AFFINITIES
+        if self.settings['job-affinities']:
+            random.seed(self.settings['seed']*2)
+            if self.settings['job-affinities-option'] == 'swap':
+                self.jobstats.shuffleAffinities()
+            elif self.settings['job-affinities-option'] == 'random':
+                self.jobstats.randomAffinities()
+            else:
+                sys.exit(f"{self.settings['job-affinities-option']} is not a valid option for job affinities")
 
-    ### ITEM SHUFFLER
-    if settings['items']:
-        random.seed(settings['seed'])
-        shuffleItems(treasures, quests, monsters)
+        # Job skills
+        if self.settings['job-abilities']:
+            count = 1
+            random.seed(self.settings['seed']*3)
+            while not shuffleJobAbilities(self.jobdata):
+                count += 1
+            if count == 1:
+                print("Shuffling abilities took ", count, " attempt!")
+            else:
+                print("Shuffling abilities took ", count, " attempts!")
 
-    ### RESISTANCE SHUFFLER
-    if settings['resistance']:
-        random.seed(settings['seed'])
-        shuffleResistance(monsters)
+        # Job skill costs
+        if self.settings['job-costs']:
+            random.seed(self.settings['seed']*4)
+            randomActionCosts(self.jobdata)
 
-    ### QOL
-    monsters.scaleEXP(int(settings['qol-scale-exp']))
-    monsters.scaleJP(int(settings['qol-scale-jp']))
-    monsters.scalePG(int(settings['qol-scale-pg']))
+        ### ITEM SHUFFLER
+        if self.settings['items']:
+            random.seed(self.settings['seed']*5)
+            shuffleItems(self.treasures, self.quests, self.monsters)
 
-    # ITEM COSTS
-    if settings['teleport-stone-costs']:
-        items.zeroCost('Teleport Stone')
-    if settings['magnifying-glass-costs']:
-        items.zeroCost('Magnifying Glass')
+        ### RESISTANCE SHUFFLER
+        if self.settings['resistance']:
+            random.seed(self.settings['seed']*6)
+            shuffleResistance(self.monsters)
 
-    # ITEM AVAILABILITY
-    if settings['early-access']:
-        shops.earlyAccess('Hi-Potion')
-        shops.earlyAccess('Ether')
 
-    ### UPDATE SHUFFLED TABLES
-    shops.update()
-    items.update()
-    jobstats.update()
-    jobdata.update()
-    monsters.update()
-    treasures.update()
-    quests.update()
-    actions.update()
-    support.update()
+    def qualityOfLife(self):
+        self.monsters.scaleEXP(int(self.settings['qol-scale-exp']))
+        self.monsters.scaleJP(int(self.settings['qol-scale-jp']))
+        self.monsters.scalePG(int(self.settings['qol-scale-pg']))
+        
+        # ITEM COSTS
+        if self.settings['teleport-stone-costs']:
+            self.items.zeroCost('Teleport Stone')
+        if self.settings['magnifying-glass-costs']:
+            self.items.zeroCost('Magnifying Glass')
 
-    outdir = f"seed_{settings['seed']}"
-    if not os.path.isdir(outdir):
-        os.makedirs(outdir)
-    else:
-        shutil.rmtree(outdir)
-    
-    # Dump pak
-    fileName = os.path.join(outdir, '01006DC010326000', 'romfs', 'Sunrise-E', 'Content', 'Paks', 'Sunrise-E-Switch_2_P.pak')
-    dirName = os.path.dirname(fileName)
-    os.makedirs(dirName)
-    rom.buildPak(fileName)
+        # ITEM AVAILABILITY
+        if self.settings['early-access']:
+            self.shops.earlyAccess('Hi-Potion')
+            self.shops.earlyAccess('Ether')
 
-    # Print spoilers
-    monsters.spoilers(os.path.join(outdir, 'spoilers_monsters.log'))
-    quests.spoilers(os.path.join(outdir, 'spoilers_quests.log'))
-    treasures.spoilers(os.path.join(outdir, 'spoilers_treasures.log'))
-    jobdata.spoilers(os.path.join(outdir, 'spoilers_jobs.log'))
-    jobstats.spoilers_stats(os.path.join(outdir, 'spoilers_stats.log'))
-    jobstats.spoilers_affinities(os.path.join(outdir, 'spoilers_affinities.log'))
+    def _spoilerLog(self):
+        self.monsters.spoilers(os.path.join(self.outPath, 'spoilers_monsters.log'))
+        self.quests.spoilers(os.path.join(self.outPath, 'spoilers_quests.log'))
+        self.treasures.spoilers(os.path.join(self.outPath, 'spoilers_treasures.log'))
+        self.jobdata.spoilers(os.path.join(self.outPath, 'spoilers_jobs.log'))
+        self.jobstats.spoilers_stats(os.path.join(self.outPath, 'spoilers_stats.log'))
+        self.jobstats.spoilers_affinities(os.path.join(self.outPath, 'spoilers_affinities.log'))
 
-    # Print settings
-    with open(os.path.join(outdir, 'settings.json'), 'w') as file:
-        hjson.dump(settings, file)
+    def dump(self, fileName):
+        ### UPDATE SHUFFLED TABLES
+        self.shops.update()
+        self.items.update()
+        self.jobstats.update()
+        self.jobdata.update()
+        self.monsters.update()
+        self.treasures.update()
+        self.quests.update()
+        self.actions.update()
+        self.support.update()
 
-    return True
+        # Dump pak
+        self.rom.buildPak(fileName)
+
+        # Print spoiler logs
+        self._spoilerLog()
+        
+        # Print settings
+        with open(os.path.join(self.outPath, 'settings.json'), 'w') as file:
+            hjson.dump(self.settings, file)
+
+
+class STEAM(MOD):
+    def __init__(self, rom, settings):
+        super(STEAM, self).__init__(rom, settings)
+
+    def dump(self):
+        pakName = os.path.join(self.outPath, 'random_P.pak')
+        super(STEAM, self).dump(pakName)
+
+
+class SWITCH(MOD):
+    def __init__(self, rom, settings):
+        super(SWITCH, self).__init__(rom, settings)
+
+    def dump(self):
+        pakPath = os.path.join(self.outPath, '01006DC010326000', 'romfs', 'Sunrise-E', 'Content', 'Paks')
+        os.makedirs(pakPath)
+        pakName = os.path.join(pakPath, 'Sunrise-E-Switch_2_P.pak')
+        super(SWITCH, self).dump(pakName)
