@@ -1,0 +1,239 @@
+{
+  // Halls of Tribulation -- Portal 1 (Near Halcyonia)
+  "Lady Emma": {
+    Id: 300303
+    Name: "Lady Emma"
+    Party: [
+      {
+	PartyId: 760007
+	Slot: Monster3Id
+      }
+    ]
+  }
+  Lonsdale: {
+    Id: 302002
+    Name: Lonsdale
+    Party: [
+      {
+	PartyId: 760007
+	Slot: Monster1Id
+      }
+    ]
+  }
+  "Sir Sloan": {
+    Id: 302302
+    Name: "Sir Sloan"
+    Party: [
+      {
+	PartyId: 760007
+	Slot: Monster2Id
+      }
+    ]
+  }
+  // Halls of Tribulation -- Portal 2 (Valley of Sighs, Near Halcyonia)
+  Orpheus: {
+    Id: 300502
+    Name: Orpheus
+    Party: [
+      {
+	PartyId: 760001
+	Slot: Monster1Id
+      }
+    ]
+  }
+  Bernard: {
+    Id: 300702
+    Name: Bernard
+    Party: [
+      {
+	PartyId: 760001
+	Slot: Monster2Id
+      }
+    ]
+  }
+  Anihal: {
+    Id: 300602
+    Name: Anihal
+    Party: [
+      {
+	PartyId: 760001
+	Slot: Monster3Id
+      }
+    ]
+  }
+  Shirley: {
+    Id: 300802
+    Name: Shirley
+    Party: [
+      {
+	PartyId: 760001
+	Slot: Monster4Id
+      }
+    ]
+  }
+  // Halls of Tribulation -- Portal 3 (Near Savalon)
+  Gladys: {
+    Id: 301602
+    Name: Gladys
+    Party: [
+      {
+	PartyId: 760002
+	Slot: Monster1Id
+      }
+    ]
+  }
+  Galahad: {
+    Id: 301202
+    Name: Galahad
+    Party: [
+      {
+	PartyId: 760002
+	Slot: Monster2Id
+      }
+    ]
+  }
+  Glenn: {
+    Id: 301802
+    Name: Glenn
+    Party: [
+      {
+	PartyId: 760002
+	Slot: Monster3Id
+      }
+    ]
+  }
+  // Halls of Tribulation -- Portal 4 (Near Wiswald)
+  Martha: {
+    Id: 301402
+    Name: Martha
+    Party: [
+      {
+	PartyId: 760005
+	Slot: Monster1Id
+      }
+    ]
+  }
+  Domenic: {
+    Id: 301702
+    Name: Domenic 
+    Party: [
+      {
+	PartyId: 760005
+	Slot: Monster2Id
+      }
+    ]
+  }
+  Helio: {
+    Id: 301502
+    Name: Helio
+    Party: [
+      {
+	PartyId: 760005
+	Slot: Monster3Id
+      }
+    ]
+  }
+  // Halls of Tribulation -- Portal 5 (Near Ederno)
+  Vigintio: {
+    Id: 301902
+    Name: Vigintio
+    Party: [
+      {
+	PartyId: 760006
+	Slot: Monster1Id
+      }
+    ]
+  }
+  "Prince Castor": {
+    Id: 300902
+    Name: "Prince Castor"
+    Party: [
+      {
+	PartyId: 760006
+	Slot: Monster2Id
+      }
+    ]
+  }
+  Folie: {
+    Id: 301302
+    Name: Folie
+    Party: [
+      {
+	PartyId: 760006
+	Slot: Monster3Id
+      }
+    ]
+  }
+  // Halls of Tribulation -- Portal 6 (Near Rimedhal)
+  Horten: {
+    Id: 300102
+    Name: Horten
+    Party: [
+      {
+	PartyId: 760004
+	Slot: Monster1Id
+      }
+    ]
+  }
+  Adam: {
+    Id: 302203
+    Name: Adam
+    Party: [
+      {
+	PartyId: 760004
+	Slot: Monster2Id
+      }
+    ]
+  }
+  Marla: {
+    Id: 302102
+    Name: Marla
+    Party: [
+      {
+	PartyId: 760004
+	Slot: Monster3Id
+      }
+    ]
+  }
+  // Halls of Tribulation -- Portal 7 (Near Holograd)
+  Roddy: {
+    Id: 301002
+    Name: Roddy
+    Party: [
+      {
+	PartyId: 760003
+	Slot: Monster1Id
+      }
+    ]
+  }
+  Dag: {
+    Id: 300402
+    Name: Dag
+    Party: [
+      {
+	PartyId: 760003
+	Slot: Monster2Id
+      }
+    ]
+  }
+  Selene: {
+    Id: 300202
+    Name: Selene
+    Party: [
+      {
+	PartyId: 760003
+	Slot: Monster3Id
+      }
+    ]
+  }
+  Lily: {
+    Id: 301102
+    Name: Lily
+    Party: [
+      {
+	PartyId: 760003
+	Slot: Monster4Id
+      }
+    ]
+  }
+}

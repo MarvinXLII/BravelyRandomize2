@@ -17,12 +17,18 @@ There are various options in this randomizer:
 - Job equipment recommendations (S, A, B, ....)
 - Items (chests, quests, and enemy drops and steals)
 - Enemy weaknesses, resistances, etc.
+- Shuffling bosses
 
 Some quality of life options include
 
 - Scaling exp, JP, and pg from battles.
 - Free Magnifying Glasses and Teleport Stones from shops.
-- All shops include Hi-Potions and Ethers.
+
+Some shops are automaticlly updates based on options selected. Check them out!
+
+- Early shops include Hi-Potions and Ethers (only when shuffling job abilities)
+- Early shops include attack items (only when shuffling bosses and/or their resistances)
+- Early shops include all status healing items (only when shuffling bosses)
 
 ## USAGE
 
@@ -43,3 +49,49 @@ atmosphere, the file should be located somewhere like this:
 The mod will be in the pak titled "random_P.pak". To use the pak, copy
 it to the location of the original pak folder. On Windows, the mod's location should be something like:
 `C:\\Program Files\Steam\steamapps\common\BRAVELY DEFAULT II\Bravely_Default_II\Content\Paks\random_P.pak`.
+
+
+## KNOWN ISSUES AND LIMITATIONS
+
+#### SHUFFLING CHEST BATTLES
+
+- Chest battles will only be set when starting a new game. If you
+  start from an existing save file or generate a new randomizer pak
+  during a playthrough, chest battles will not get updated.
+
+#### SHUFFLING ABILITIES
+
+- Special Abilities (e.g. All Out Assault on the Freelancer job) will
+  be very difficult to trigger normally if job abilities get
+  shuffled. They are triggered by the vanilla abilities of a job,
+  which will likely be elsewhere. Do not expect you'll get to use
+  Special Abilities.
+
+#### BOSS SHUFFLER
+
+- Various enemy attacks and healing abilities had to be rescaled. In
+  some cases, they had to be rescaled based on either the user's or
+  the targets HP. Most are done fairly (in my opinion), e.g. Roddy's
+  Healara, Domenic's Bomb Arm, or Glenn's Contagion Agent. However,
+  Orpheus' Stone and Glenn's Gigapotion will seem poorly balanced in
+  the Halls of Tribulation because the exact same abilities are reused
+  for all their battles. I chose to rescale these abilities for
+  mandatory battles for the story, NOT for optional battles. But don't
+  worry, the Hall of Tribulation battles will still be very doable.
+
+- Some enemy buff/heal abilities are hard coded for specific party
+  members. The following abilities are no longer guaranteed work in
+  the Halls of Tribulation: Selene's "Revive All", "Shell", and
+  "Protect", Glenn's "Gigapotion", "Mega Pheonix", and "BP Tonic" and
+  Gladys' "Three Steps Ahead". In the main game, the same applies for
+  Gladys' "One Step Ahead". I'll look into fixing this, but no
+  guarantees it is practical for a randomizer.
+
+- Some battles have specific layouts for enemies, and cannot
+  accommodate certain groups. This will be most notable in fights with
+  the Night's Nexus. I view this as a minor incovenience. The battles
+  are still worth it!
+
+- In battle cutscenes are not updated to account for each sprites
+  animations, height, voice, etc. They can be amusing to watch, but
+  they're also worth skipping.

@@ -1,11 +1,13 @@
+from dataclasses import dataclass, field
 import hjson
 import sys
 import random
 import struct
 import io
 from Classes import DATA
-from ClassData import ITEMASSET, ACTIONSKILL, SUPPORTSKILL, ITEM, ITEMENEMY, CHEST, QUESTREWARD, DROP, STEAL, MAGIC, WEAPONS, EFFECTS, JOB, STATS, AFFINITY
+from ClassData import ITEMASSET, ACTIONSKILL, SUPPORTSKILL, ITEM, ITEMENEMY, CHEST, QUESTREWARD, DROP, STEAL, MAGIC, WEAPONS, EFFECTS, JOB, STATS, AFFINITY, BOSSAI
 from Utilities import get_filename
+from copy import deepcopy
 
 
 jobNames= {
@@ -91,6 +93,51 @@ class SHOPDATA:
     def update(self):
         for data in self.data.values():
             data.update()
+
+
+class TIPPING(DATA):
+    def __init__(self, rom):
+        super().__init__(rom, 'L10N/en/DataAsset/TipsDataAsset')
+        self.tips = DATA(self.rom, 'L10N/en/DataAsset/TipsDataAsset')
+        self.data = self.table['Tips']['data'].array
+
+    def update(self):
+        # Allow all "tips" to be used at any time
+        for entry in self.data:
+            entry['MinMainProgress'].value = 1
+
+        # Make "tip" display at the start of a new game
+        # NB: At least 2 must be accessible for anything to show!!!
+        for entry in self.data[:2]:
+            entry['Text'].string = '* Randomizing... *'
+            entry['MinMainProgress'].value = 0
+            entry['MaxMainProgress'].value = 1
+
+        # Demo of overwriting tips with quotes
+        # Maybe use for credits for testers?
+        quotes = [
+            "Mrgrgrgr!",
+            "Unacceptable!",
+            "Whaaaat!?",
+            "Not fashionable! FASHIONAAABLUH!",
+            "Coup de gravy!",
+            "You're my hope.",
+            "The courage to try again.",
+            "Oh, hello. I see fire in those eyes! How do I put it?\nThey've a strong sense of duty. Like whatever you start, you'll always see through, no matter what!",
+            "Iwon'tbecalledimprudentbyaflounderingfoollikeyou.",
+            "It's time to bust some Ba'als!",
+        ]
+        entries = random.sample(self.data[2:], len(quotes) + 2)
+        while quotes:
+            entry = entries.pop()
+            entry['Text'].string = f"* Quotes *\n{quotes.pop()}"
+
+        # Just for fun
+        while entries:
+            entry = entries.pop()
+            entry['Text'].string = entry['Text'].string[::-1]
+
+        super().update()
 
 
 class ACTIONS(DATA):
@@ -359,6 +406,106 @@ class MONSTERPARTY(DATA):
                     self.levels[Id] = set()
                 self.levels[Id].add(Level)
 
+        ### MUST LOAD DATA (TO BE UPDATED) FOR SHUFFLING ENEMIES IN JOB BATTLES
+        self.asterisks = hjson.load(open(get_filename('json/asterisks.json'), 'r')) # Battles where you earn an asterisk
+        self.tribulation = hjson.load(open(get_filename('json/tribulation.json'), 'r'))
+        self.rareMonsters = hjson.load(open(get_filename('json/rare_monsters.json'), 'r'))
+        self.questBosses = hjson.load(open(get_filename('json/quest_bosses.json'), 'r'))
+        self.bosses = hjson.load(open(get_filename('json/bosses.json'), 'r'))
+        self.nexus = hjson.load(open(get_filename('json/nexus.json'), 'r'))
+        # ENSURE NEXUS IS LAST FOR HALL REPEATS
+        self.bossList = [self.asterisks, self.tribulation, self.rareMonsters, self.questBosses, self.bosses, self.nexus]
+
+        self.enemyIdToName = {}
+        def fillEnemyName(d):
+            for name, value in d.items():
+                self.enemyIdToName[value['Id']] = name
+
+        for bosses in self.bossList:
+            fillEnemyName(bosses)
+
+        self.enemyLevels = {}
+        def fillLevelDict(d):
+            for name, value in d.items():
+                self.enemyLevels[name] = 0
+                for party in value['Party']:
+                    Id = party['PartyId']
+                    slotNum = party['Slot'][7] # Monster?Id
+                    level = self.data[Id][f"Monster{slotNum}Level"].value
+                    self.enemyLevels[name] = max(level, self.enemyLevels[name])
+
+        for bosses in self.bossList:
+            fillLevelDict(bosses)
+
+    # Nerf the whole party that includes the monster with Id
+    # JUST FOR TESTING PURPOSES!!!
+    def partyNerf(self, Id):
+        name = self.enemyIdToName[Id]
+        for bosses in self.bossList:
+            for boss in bosses.values():
+                if name == boss['Name']:
+                    partyId = boss['Party'][-1]['PartyId'] # Assumes the last party is the only important one!!!!
+                    party = self.data[partyId]
+                    print(f"Nerfing {name}'s party to Level 1")
+                    for i in range(1, 7):
+                        party[f"Monster{i}Level"].value = 1
+                    return
+
+    def getGroup(self, Id):
+        assert Id in self.enemyIdToName, f"Enemy ID {Id} is not in a boss dictionary!"
+        group = []
+        name = self.enemyIdToName[Id]
+        for bosses in self.bossList:
+            for boss in bosses.values():
+                if name == boss['Name']:
+                    partyId = boss['Party'][-1]['PartyId'] # Assumes the last party is the only important one!!!!
+                    party = self.data[partyId]
+                    for i in range(1, 7):
+                        enemyId = party[f"Monster{i}Id"].value
+                        if enemyId > 0 and enemyId != Id:
+                            group.append(enemyId)
+                    return group
+        return group
+
+    def update(self):
+
+        def patchParty(d):
+            for boss in d.values():
+                for party in boss['Party']:
+                    Id = party['PartyId']
+                    slot = party['Slot']
+                    self.data[Id][slot].value = boss['Id']
+
+        patchParty(self.asterisks)
+        patchParty(self.tribulation)
+        patchParty(self.rareMonsters)
+        patchParty(self.questBosses)
+        patchParty(self.bosses)
+        patchParty(self.nexus)
+
+        ########################
+        # MISCELLANEOUS TWEAKS #
+        ########################
+
+        # Hall of Tribulation party arrangements -- allow for enemy of size S, M, or L
+        partyIds = set([battle['Party'][0]['PartyId'] for battle in self.tribulation.values()])
+        for Id in partyIds:
+            if self.data[Id]['LayoutTypeName'].name[:21] == 'MonsterPosition_3_JBS':
+                self.data[Id]['LayoutTypeName'].name = 'MonsterPosition_3_L'
+                self.data[Id]['IntroductionName'].name = 'MonsterPosition_3_L'
+            elif self.data[Id]['LayoutTypeName'].name[:21] == 'MonsterPosition_4_JBS':
+                self.data[Id]['LayoutTypeName'].name = 'MonsterPosition_4_L'
+                self.data[Id]['IntroductionName'].name = 'MonsterPosition_4_L'
+
+        # Nexus fight layouts
+        if self.data[750017]['Monster1Id'].value != 400905: # No longer an arm!
+            self.data[750017]['LayoutTypeName'].name = 'MonsterPosition_3_L'      # Chapter 6
+            self.data[750017]['IntroductionName'].name = 'MonsterPosition_3_L'
+            self.data[750009]['LayoutTypeName'].name = 'MonsterPosition_3_L'      # Chapter 7
+            self.data[750009]['IntroductionName'].name = 'MonsterPosition_3_L'
+
+        super().update()
+
     # NOTE: This is a crude estimate of chapter based on the enemy's level!
     def getChapter(self, Id):
         if Id not in self.levels:
@@ -371,14 +518,122 @@ class MONSTERPARTY(DATA):
         chapter = int(min(levels) / 10)
         return min(chapter, 7)
 
+    def spoilers(self, filename):
+
+        def printLine(old, new):
+            print('   ', old.ljust(14, ' '), '<-- ', new)
+
+        def printHall(name):
+            printLine(name, self.tribulation[name]['Name'])
+
+        def printNexus(name):
+            printLine(name[:-2], self.nexus[name]['Name'])
+
+        def printQuest(name):
+            quest = f"Quest {self.questBosses[name]['Quest']}".ljust(10, ' ')
+            print('   ', quest, name.ljust(14, ' '), '<-- ', self.questBosses[name]['Name'])
+
+        with open(filename, 'w') as sys.stdout:
+            print('')
+            # print('Default Boss'.ljust(19, ' '), 'New Boss')
+            print('---------------')
+            print('Asterisk Bosses')
+            print('---------------')
+            print('')
+            for name, value in self.asterisks.items():
+                printLine(name, value['Name'])
+            print('')
+            print('')
+            print('----')
+            print('Musa')
+            print('----')
+            print('')
+            for name, value in self.bosses.items():
+                printLine(name, value['Name'])
+            print('')
+            print('')
+            print('-------------')
+            print("Night's Nexus")
+            print('-------------')
+            print('')
+            print(' Chapter 6')
+            printNexus('Grasping Hand 1')
+            printNexus('Cradling Hand 1')
+            print('')
+            print(' Chapter 7')
+            printNexus('Grasping Hand 2')
+            printNexus('Cradling Hand 2')
+            print('')
+            print('')
+            print('--------------------')
+            print('Halls of Tribulation')
+            print('--------------------')
+            print('')
+            print(' Portal 1 -- Near Halcyonia')
+            printHall('Lady Emma')
+            printHall('Lonsdale')
+            printHall('Sir Sloan')
+            print('')
+            print(' Portal 2 -- Near Halcyonia (Vally of Sighs)')
+            printHall('Orpheus')
+            printHall('Bernard')
+            printHall('Anihal')
+            printHall('Shirley')
+            print('')
+            print(' Portal 3 -- Near Savalon')
+            printHall('Gladys')
+            printHall('Galahad')
+            printHall('Glenn')
+            print('')
+            print(' Portal 4 -- Near Wiswald')
+            printHall('Martha')
+            printHall('Domenic')
+            printHall('Helio')
+            print('')
+            print(' Portal 5 -- Near Ederno')
+            printHall('Vigintio')
+            printHall('Prince Castor')
+            printHall('Folie')
+            print('')
+            print(' Portal 6 -- Near Rimedhal')
+            printHall('Horten')
+            printHall('Adam')
+            printHall('Marla')
+            print('')
+            print(' Portal 7 -- Near Holograd')
+            printHall('Roddy')
+            printHall('Dag')
+            printHall('Selene')
+            printHall('Lily')
+            print('')
+            print('')
+            print('------------')
+            print('Quest Bosses')
+            print('------------')
+            print('')
+            for name in self.questBosses:
+                printQuest(name)
+            print('')
+            print('')
+            print('------------')
+            print('Rare Enemies')
+            print('------------')
+            print('')
+            for name, value in self.rareMonsters.items():
+                printLine(name, value['Name'])
+            print('')
+            print('')
+
+        sys.stdout = sys.__stdout__
+
 
 class MONSTERS(DATA):
-    def __init__(self, rom, monster, items, party):
+    def __init__(self, rom, monsterText, itemText, monsterParty):
         super().__init__(rom, 'MonsterDataAsset')
         self.data = self.table['MonsterDataMap']['data']
-        self.monster = monster
-        self.items = items
-        self.party = party
+        self.monsterText = monsterText
+        self.itemText = itemText
+        self.monsterParty = monsterParty
 
         self.steals = {}
         self.drops = {}
@@ -392,20 +647,20 @@ class MONSTERS(DATA):
             Id = d['Id'].value
 
             # Skip monster with no distinguishable chapter (i.e. level)
-            chapter = self.party.getChapter(Id)
+            chapter = self.monsterParty.getChapter(Id)
             if chapter is None:
                 continue
 
             # Skip monster without a name
-            name = self.monster.getName(Id)
+            name = self.monsterText.getName(Id)
             if not name:
                 continue
 
             # Stolen items
             itemId = d['StealItem'].value
-            itemName = self.items.getName(itemId)
+            itemName = self.itemText.getName(itemId)
             rareItemId = d['StealRareItem'].value
-            rareItemName = self.items.getName(rareItemId)
+            rareItemName = self.itemText.getName(rareItemId)
             self.steals[Id] = STEAL(
                 chapter, Id,
                 ITEMENEMY(itemId, Name=itemName),
@@ -415,9 +670,9 @@ class MONSTERS(DATA):
 
             # Dropped items
             itemId = d['DropItemId'].value
-            itemName = self.items.getName(itemId)
+            itemName = self.itemText.getName(itemId)
             rareItemId = d['DropRareItemId'].value
-            rareItemName = self.items.getName(rareItemId)
+            rareItemName = self.itemText.getName(rareItemId)
             self.drops[Id] = DROP(
                 chapter, Id,
                 ITEMENEMY(itemId, Name=itemName),
@@ -426,6 +681,13 @@ class MONSTERS(DATA):
                 itemId in dontdrop,
                 rareItemId in dontdrop,
             )
+
+        # ENSURE STEAM AND SWITCH GIVE THE SAME RESULTS!!!!
+        # Their levels are messed up in the Switch version!
+        self.steals[103202].Chapter = 1 # Staggermoth
+        self.drops[103202].Chapter = 1
+        self.steals[105503].Chapter = 4 # Xanthos
+        self.drops[105503].Chapter = 4
                 
         # Group subsets of the resistance data together for shuffling
         self.isBoss = {}
@@ -474,6 +736,36 @@ class MONSTERS(DATA):
                 d['ResistanceWeakPoint'],       d['ResistanceLevelWeakPoint'],
             )
 
+        # AI for boss shuffle
+        self.ai = {}
+        ids = [
+            300101,300201,300401,300501,300601,300701,300801,
+            300901,301001,301101,301201,301301,301401,301501,
+            301601,301701,301801,301901,302001,302101,302202,
+            302301,
+        ]
+        for id in ids:
+            d = self.data[id]
+            self.ai[id] = BOSSAI(
+                d['BattleAnimationBlueprintName'],
+                d['BattleActionPathName'],
+                d['ArtificialIntelligenceID'],
+            )
+
+        # Various stats to be swapped along with asterisk bosses
+        # Don't bother with tribulation bosses
+        self.stats = {}
+        for name, asterisk in self.monsterParty.asterisks.items():
+            Id = asterisk['Id']
+            self.stats[name] = {
+                'HPModifier': self.data[Id]['HPModifier'].value,
+                'PhysicalAttackModifier': self.data[Id]['PhysicalAttackModifier'].value,
+                'MagicAttackModifier': self.data[Id]['MagicAttackModifier'].value,
+                'pq': self.data[Id]['pq'].value,
+                'Exp': self.data[Id]['Exp'].value,
+                'Jp': self.data[Id]['Jp'].value,
+            }
+
         # Store vanilla sword resistance for early bosses
         self.selene = self.weapons[300201].SwordResistance
         self.dag = self.weapons[300401].SwordResistance
@@ -508,8 +800,43 @@ class MONSTERS(DATA):
             self.data[Id]['StealItem'].value = steal.Item.Id
             self.data[Id]['StealRareItem'].value = steal.RareItem.Id
 
+        # Update Boss IDs
+        for Id, ai in self.ai.items():
+            # self.data[Id]['BattleAnimationBlueprintName'] = ai.Animation
+            self.data[Id]['BattleActionPathName'] = ai.ActionPath
+            self.data[Id]['ArtificialIntelligenceID'] = ai.AIID
+
+        # Miscellaneous stats to be swapped with bosses
+        for slot in self.monsterParty.asterisks:
+            boss = self.monsterParty.asterisks[slot]['Name']
+            newId = self.monsterParty.asterisks[slot]['Id']
+            self.data[newId]['MPModifier'].value = 10000
+            for key, value in self.stats[boss].items():
+                self.data[newId][key].value = value
+            if slot in ['Selene*', 'Dag*', 'Horten*']: # Ensure any boss in the early slots are weak to Swords
+                self.weapons[newId].SwordResistance = self.selene
+
+        #########################
+        # Specific boss updates #
+        #########################
+
+        ### Vigintio ###
+        newId = self.monsterParty.asterisks['Vigintio*']['Id']
+        if newId != 301901:
+            # Increase Vigintio's HP Modifier
+            self.data[301901]['HPModifier'].value = 3000
+            # Split Vigintio's replacement's HP Modifier
+            self.data[newId]['HPModifier'].value = int(self.data[newId]['HPModifier'].value / 2)
+
         super().update()
 
+    def shuffleBossAI(self):
+        ids = list(self.ai.keys())
+        for i, Id_i in enumerate(ids):
+            Id_j = random.sample(ids[i:], 1)[0]
+            print(Id_i, '<--', self.ai[Id_j].AIID.name)
+            self.ai[Id_i], self.ai[Id_j] = self.ai[Id_j], self.ai[Id_i]
+        
     # "PQ" in the code, "PG" in the game
     def scalePG(self, scale):
         assert scale >= 0
@@ -544,6 +871,40 @@ class MONSTERS(DATA):
                 print(es.Name.ljust(24, ' '), es.getString(), ed.getString())
         
         sys.stdout = sys.__stdout__
+
+
+class MONSTERABILITIES(DATA):
+    def __init__(self, rom, monsterAbilityText):
+        super().__init__(rom, 'MonsterActionAbilityAsset')
+        self.abilities = self.table['ActionAbilityDataMap']['data']
+        self.abilityText = monsterAbilityText # ID -> GetName -> Name
+
+    def overwriteValue(self, abilityID, value, index):
+        effects = self.abilities[abilityID]['AbilityEffect'].array
+        effects[index]['Value1'].value = float(value)
+
+    def scaleByMaxHP(self, abilityID, percent, index=0):
+        effects = self.abilities[abilityID]['AbilityEffect'].array
+        effects[index]['Value1'].value = float(percent)
+        effects[index]['ValueType'].value = 'EAbilityEffectTypeEnum::AETE_Maximum_HP'
+
+    def scaleByMaxTargetHP(self, abilityID, percent, index=0):
+        effects = self.abilities[abilityID]['AbilityEffect'].array
+        effects[index]['Value1'].value = float(percent)
+        effects[index]['ValueType'].value = 'EAbilityEffectTypeEnum::AETE_Target_Maximum_HP'
+
+    def removeEffects(self, abilityID, indices):
+        if isinstance(indices, list):
+            indices = sorted(indices)
+        elif isinstance(indices, int):
+            indices = [indices]
+        else:
+            sys.exit(f"Monster Abilities removeEffects does not take type {type(indices)} for indices")
+
+        effects = self.abilities[abilityID]['AbilityEffect'].array
+        while indices:
+            index = indices.pop()
+            effects.pop(index)
 
 
 class QUESTS(DATA):
@@ -622,6 +983,7 @@ class TREASURES(DATA):
             self.json = hjson.load(file)
 
         self.chests = {i:[] for i in range(8)}
+        self.enemyParties = {}
         for key, value in self.data.items():
             if key in self.json:
                 chapter = self.json[key]['Chapter']
@@ -641,6 +1003,11 @@ class TREASURES(DATA):
                         location,
                     )
                 )
+                # NEED TO ORGANIZE ENEMY PARTY BY LOCATION
+                if location not in self.enemyParties:
+                    self.enemyParties[location] = []
+                if enemyPartyId > 100:
+                    self.enemyParties[location].append(enemyPartyId)
 
         # Sort by location
         for chests in self.chests.values():
@@ -652,8 +1019,8 @@ class TREASURES(DATA):
                 data = self.data[chest.Key]
                 data['ItemId'].value = chest.Item.Id
                 data['ItemCount'].value = chest.Item.Count
-                data['EventType'].vlaue = chest.EventType
-                data['EnemyPartyId'].vlaue = chest.EnemyPartyId
+                data['EventType'].value = chest.EventType
+                data['EnemyPartyId'].value = chest.EnemyPartyId
                 if chest.Item.isMoney():
                     data['TreasureType'].value = 'ETreasureType::Money'
                 else:
@@ -665,6 +1032,7 @@ class TREASURES(DATA):
         with open(filename, 'w') as sys.stdout:
             for i in range(8):
                 if i == 0:
+                    print('** denotes chests with battle')
                     print('')
                     print('')
                     print('--------')
@@ -678,7 +1046,10 @@ class TREASURES(DATA):
                     print('----------')
                 print('')
                 for chest in self.chests[i]:
-                    print('   ', chest.getString())
+                    if chest.EventType == 3:
+                        print(' **', chest.getString())
+                    else:
+                        print('   ', chest.getString())
 
         sys.stdout = sys.__stdout__
 
@@ -750,3 +1121,107 @@ class TEXT(DATA):
 #             self.ints[i]['InitialValue'] = value
 
 #         super().update()
+
+
+# class AI(DATA):
+#     def __init__(self, rom, monsterText, monsters, monsterParty, abilityText, supportText):
+#         super().__init__(rom, 'MonsterAIAsset')
+#         self.monsterText = monsterText # Link ID to name
+#         self.monsters = monsters # find out which AI to use
+#         self.monsterParty = monsterParty # e.g. find which enemies Glenn should revive
+#         self.abilityText = abilityText
+#         self.supportText = supportText
+
+#         self.data = self.table['MonsterAIDataMap']['data']
+
+#         with open(get_filename('json/asterisks.json'),'r') as file:
+#             asterisks = hjson.load(file)
+#         self.asteriskIDToName = {a['Id']:name for name, a in asterisks.items()}
+
+#         #### MAP AI TO ENEMY NAME
+#         self.aiToName = {}
+#         self.dataActions = {}
+#         for mID, monster in self.monsters.data.items():
+#             if mID in self.asteriskIDToName: # Distinguish asterisk bosses from hall of tribulation bosses
+#                 name = self.asteriskIDToName[mID]
+#             else:
+#                 name = self.monsterText.getName(mID)
+#             ai = monster['ArtificialIntelligenceID'].name
+#             datum = self.data[ai]
+#             # List of actions
+#             array = []
+#             for state in datum['States'].array:
+#                 array += state['HealAction'].structData['Actions'].array
+#                 array += state['Brave0'].structData['Actions'].array
+#                 array += state['Brave1'].structData['Actions'].array
+#                 array += state['Brave2'].structData['Actions'].array
+#                 array += state['Brave3'].structData['Actions'].array
+#                 for routine in state['Routines'].array:
+#                     for actionList in routine['NormalActions'].array:
+#                         array += actionList['Actions'].array
+
+#             # Store all structs with ID in a dict so they can all be overwritten as needed
+#             self.dataActions[name] = {ai['ID'].value:[] for ai in array}
+#             for ai in array:
+#                 ID = ai['ID'].value
+#                 self.dataActions[name][ID].append(ai['ID'])
+
+#         # #### MIGHT BE USEFUL FOR ORGANIZING TARGETS FOR GLENN, ETC.
+#         # self.hall_Glenn = self.structDicts('JBS18_AI002')
+#         # group = self.monsterParty.getGroup(301802)
+
+
+#     # CHANGE ACTIONS
+#     def changeActions(self, enemyName, oldID, newID):
+#         actions = self.dataActions[enemyName]
+#         for action in actions[oldID]:
+#             action.value = newID
+
+#     #### MIGHT BE USEFUL FOR ORGANIZING TARGETS FOR GLENN, ETC.
+#     def structDicts(self, Id):
+#         structs = {}
+
+#         def addToStructs(struct):
+#             value = int(struct['Value'].value)
+#             if value in self.monsterParty.enemyIdToName:
+#                 name = self.monsterParty.enemyIdToName[value]
+#                 if name not in structs:
+#                     structs[name] = []
+#                 structs[name].append(struct)
+
+#         def commonStruct(struct):
+#             addToStructs(struct['Condition'].structData)
+#             for action in struct['Actions'].array:
+#                 addToStructs(action['Condition'].structData)
+#                 for target in action['Targets'].array:
+#                     addToStructs(target)
+
+#         states = self.data[Id]['States']
+#         for state in states.array:
+#             commonStruct(state['HealAction'].structData)
+#             for routine in state['Routines'].array:
+#                 for action in routine['NormalActions'].array:
+#                     commonStruct(action)
+#             commonStruct(state['Brave0'].structData)
+#             commonStruct(state['Brave1'].structData)
+#             commonStruct(state['Brave2'].structData)
+#             commonStruct(state['Brave3'].structData)
+
+#         return structs
+
+#     #### MIGHT BE USEFUL FOR ORGANIZING TARGETS FOR GLENN, ETC.
+#     def updateDicts(self, name, structs, group):
+#         for key, structArray in structs.items():
+#             if key == name:
+#                 continue
+#             Id = group.pop(0)
+#             # Id = group.pop()
+#             for struct in structArray:
+#                 struct['Value'].value = float(Id)
+
+#     def update(self):
+#         # #### MIGHT BE USEFUL FOR ORGANIZING TARGETS FOR GLENN, ETC.
+#         # group = self.monsterParty.getGroup(301802) # Glenn from Hall of Tribulation
+#         # self.updateDicts('Glenn', self.hall_Glenn, group)
+#         super().update()
+

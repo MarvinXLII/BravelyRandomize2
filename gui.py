@@ -225,11 +225,14 @@ On Steam the folder name will be something like \nC:\\Program Files\Steam\steama
                 return fileName
 
     def getPakFile(self):
-        self.clearBottomLabels()
         path = filedialog.askdirectory()
         if not path:
             return
         pakFile = self.checkFile(path)
+        self.loadPakFile(pakFile)
+
+    def loadPakFile(self, pakFile):
+        self.clearBottomLabels()
         if pakFile:
             self.bottomLabel('Loading Pak....', 'blue', 0)
             try:
@@ -291,13 +294,8 @@ On Steam the folder name will be something like \nC:\\Program Files\Steam\steama
                 if not os.path.isdir(value):
                     continue
                 pakFile = self.checkFile(value)
-                try:
-                    if self.settings['system'].get() == 'Switch':
-                        self.rom = ROM_SWITCH(pakFile)
-                    elif self.settings['system'].get() == 'Steam':
-                        self.rom = ROM_PC(pakFile)
-                except:
-                    continue
+                if pakFile:
+                    self.loadPakFile(pakFile)
             if key == 'release':
                 continue
             if key not in self.settings:
@@ -328,7 +326,7 @@ On Steam the folder name will be something like \nC:\\Program Files\Steam\steama
         self.settings['seed'].set(random.randint(0, 1e8))
 
     def randomize(self):
-        if self.settings['rom'] == '':
+        if self.settings['rom'].get() == '':
             self.clearBottomLabels()
             self.bottomLabel('Must specify the path to your "Paks" folder', 'red', 0)
             return
@@ -372,10 +370,11 @@ if __name__ == '__main__':
     if len(sys.argv) > 2:
         print('Usage: python gui.py <settings.json>')
     elif len(sys.argv) == 2:
-        exePath = os.path.dirname(sys.argv[0])
-        os.chdir(exePath)
         with open(sys.argv[1], 'r') as file:
             settings = hjson.load(file)
+        exePath = os.path.dirname(sys.argv[0])
+        if exePath:
+            os.chdir(exePath)
         GuiApplication(settings)
     else:
         GuiApplication()

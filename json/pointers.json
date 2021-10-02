@@ -1,4 +1,18 @@
 {
+  Bravely_Default_II/Content/DataAsset/Ability/Monster/MonsterActionAbilityAsset.uasset: 5714518016
+  Bravely_Default_II/Content/DataAsset/Ability/Monster/MonsterActionAbilityAsset.uexp: 5714528163
+  Bravely_Default_II/Content/DataAsset/Item/ItemAbilityAsset.uasset: 5715884032
+  Bravely_Default_II/Content/DataAsset/Item/ItemAbilityAsset.uexp: 5715887014
+  Bravely_Default_II/Content/L10N/en/DataAsset/Ability/Monster/MonsterActionAbilityTextAsset.uasset: 9058357248
+  Bravely_Default_II/Content/L10N/en/DataAsset/Ability/Monster/MonsterActionAbilityTextAsset.uexp: 9058357796
+  Bravely_Default_II/Content/L10N/en/DataAsset/Ability/Monster/MonsterSupportAbilityTextAsset.uasset: 9058377728
+  Bravely_Default_II/Content/L10N/en/DataAsset/Ability/Monster/MonsterSupportAbilityTextAsset.uexp: 9058378272
+  Bravely_Default_II/Content/DataAsset/Monster/MonsterAIAsset.uasset: 5722564608
+  Bravely_Default_II/Content/DataAsset/Monster/MonsterAIAsset.uexp: 5722575991
+  Bravely_Default_II/Content/DataAsset/Character/ParameterDataAsset.uasset: 5715507200
+  Bravely_Default_II/Content/DataAsset/Character/ParameterDataAsset.uexp: 5715507725
+  Bravely_Default_II/Content/DataAsset/Flag/FlagDataAsset.uasset: 5715873792
+  Bravely_Default_II/Content/DataAsset/Flag/FlagDataAsset.uexp: 5715880460
   Bravely_Default_II/Content/L10N/en/DataAsset/Ability/Player/ActionAbilityTextAsset.uasset: 9058390016
   Bravely_Default_II/Content/L10N/en/DataAsset/Ability/Player/ActionAbilityTextAsset.uexp: 9058390553
   Bravely_Default_II/Content/L10N/en/DataAsset/Ability/Player/SupportAbilityTextAsset.uasset: 9058424832
@@ -9,6 +23,8 @@
   Bravely_Default_II/Content/L10N/en/DataAsset/Item/ItemTextAsset.uexp: 9058476538
   Bravely_Default_II/Content/L10N/en/DataAsset/Monster/MonsterTextDataAsset.uasset: 9058551808
   Bravely_Default_II/Content/L10N/en/DataAsset/Monster/MonsterTextDataAsset.uexp: 9058552311
+  Bravely_Default_II/Content/L10N/en/DataAsset/TipsDataAsset.uasset: 9059020800  
+  Bravely_Default_II/Content/L10N/en/DataAsset/TipsDataAsset.uexp: 9059021929
   Bravely_Default_II/Content/DataAsset/Ability/Player/SupportAbilityAsset.uasset: 5714741248
   Bravely_Default_II/Content/DataAsset/Ability/Player/SupportAbilityAsset.uexp: 5714746234
   Bravely_Default_II/Content/DataAsset/Ability/Player/ActionAbilityAsset.uasset: 5714655232

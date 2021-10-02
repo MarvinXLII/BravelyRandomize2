@@ -69,19 +69,25 @@
 	type: checkbutton
 	help: "Buy Teleport Stones for free from shops."
       }
-      {
-	name: early-access
-	label: "Early Hi-Potions and Ethers"
-	type: checkbutton
-	help: "All shops in the early game sell Hi-Potions and Ethers."
-      }
     ]
     Battles: [
       {
-	name: resistance
-	label: "Shuffle enemy resistances/status effects."
+	name: bosses
+	label: "Shuffle bosses"
 	type: checkbutton
-	help: "Bosses and enemies are shuffled separately."
+	help: "Shuffle asterisk bosses, Hall of Tribulation bosses, and replace Night's Nexus' arms with Hall of Tribulation bosses."
+      }
+      {
+	name: resistance
+	label: "Shuffle enemy resistances/status effects"
+	type: checkbutton
+	help: "Boss and enemy data are shuffled separately."
+      }
+      {
+	name: chest-battles
+	label: "Shuffle chest battles"
+	type: checkbutton
+	help: "Random chests will have enemy battles."
       }
       {
 	name: qol-scale-exp
@@ -90,8 +96,8 @@
 	help: "Scales experience earned from battles (capped at 99999)."
 	spinbox: {
 	  default: 1,
-	  min: 1,
-	  max: 10
+	  min: 0,
+	  max: 100
 	}
       }
       {
@@ -101,8 +107,8 @@
 	help: "Scales job points earned from battles (capped at 9999)."
 	spinbox: {
 	  default: 1,
-	  min: 1,
-	  max: 10
+	  min: 0,
+	  max: 100
 	}
       }
       {
@@ -112,8 +118,8 @@
 	help: "Scales PG earned from battles (capped at 99999)."
 	spinbox: {
 	  default: 1,
-	  min: 1,
-	  max: 10
+	  min: 0,
+	  max: 100
 	}
       }
     ]

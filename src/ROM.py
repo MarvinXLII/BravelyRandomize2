@@ -8,7 +8,7 @@ from Utilities import get_filename
 
 
 class ROM:
-    def __init__(self, fileName, patches=None):
+    def __init__(self, fileName):
         self.file = open(fileName, 'rb')
 
         # Compression types (zlib, zstd)
@@ -186,8 +186,7 @@ class ROM:
             if comDir:
                 tmpDir = key.split(comDir)[-1]
             else:
-                # tmpDir = key
-                tmpDir = k
+                tmpDir = key
             fileName, size = self.pakString(tmpDir)
             pakFile += self.pakInt(size)
             pakFile += fileName
@@ -265,7 +264,7 @@ class ROM_SWITCH(ROM):
 
 
 class ROM_PC(ROM):
-    def __init__(self, fileName): # NO PATCHES FOR PC!
+    def __init__(self, fileName):
         super(ROM_PC, self).__init__(fileName)
 
         # Check SHA
@@ -277,6 +276,7 @@ class ROM_PC(ROM):
 
         # Pointers and files
         self.pointers = hjson.load(open(get_filename('json/pointers.json'),'r'))
+        # self.pointers = hjson.load(open(get_filename('json/pointers_all.json'),'r'))
         self.baseDir = '../../../'
 
         # Read entries

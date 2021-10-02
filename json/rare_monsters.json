@@ -1,0 +1,113 @@
+{
+  // Rare Monster Bosses
+  "Leannan Sith": {
+    Id: 107305
+    Name: "Leannan Sith"
+    LateGame: false
+    Party: [
+      {
+	PartyId: 14000
+	Slot: Monster1Id
+      }
+    ]
+  }
+  "Coral Emperor": {
+    Id: 102305
+    Name: "Coral Emperor"
+    LateGame: false
+    Party: [
+      {
+	PartyId: 13000
+	Slot: Monster1Id
+      }
+    ]
+  }
+  Nightmare: {
+    Id: 105505
+    Name: Nightmare
+    LateGame: false
+    Party: [
+      {
+	PartyId: 113000
+	Slot: Monster1Id
+      }
+    ]
+  }
+  // Skullcap: {
+  //   Id: 104505
+  //   Name: Skullcap
+  //   LateGame: false
+  //   Party: [
+  //     {
+  // 	PartyId: 214000
+  // 	Slot: Monster2Id
+  //     }
+  //   ]
+  // }
+  Baal: {
+    Id: 103405
+    Name: Baal
+    LateGame: true
+    Party: [
+      {
+	PartyId: 215000
+	Slot: Monster1Id
+      }
+    ]
+  }
+  "Baba Yaga": {
+    Id: 100405
+    Name: "Baba Yaga"
+    LateGame: false
+    Party: [
+      {
+	PartyId: 311000
+	Slot: Monster4Id
+      }
+    ]
+  }
+  Astaroth: {
+    Id: 106405
+    Name: Astaroth
+    LateGame: false
+    Party: [
+      {
+	PartyId: 312000
+	Slot: Monster1Id
+      }
+    ]
+  }
+  Zeus: {
+    Id: 107505
+    Name: Zeus
+    LateGame: false
+    Party: [
+      {
+	PartyId: 413000
+	Slot: Monster1Id
+      }
+    ]
+  }
+  Cyclops: {
+    Id: 100605
+    Name: Cyclops
+    LateGame: true
+    Party: [
+      {
+	PartyId: 412000
+	Slot: Monster4Id
+      }
+    ]
+  }
+  Susanoo: {
+    Id: 105405
+    Name: Susanoo
+    LateGame: true
+    Party: [
+      {
+	PartyId: 411000
+	Slot: Monster1Id
+      }
+    ]
+  }
+}
