@@ -472,9 +472,9 @@ class MONSTERPARTY(DATA):
         def patchParty(d):
             for boss in d.values():
                 for party in boss['Party']:
-                    Id = party['PartyId']
+                    partyId = party['PartyId']
                     slot = party['Slot']
-                    self.data[Id][slot].value = boss['Id']
+                    self.data[partyId][slot].value = boss['Id']
 
         patchParty(self.asterisks)
         patchParty(self.tribulation)
@@ -497,12 +497,22 @@ class MONSTERPARTY(DATA):
                 self.data[Id]['LayoutTypeName'].name = 'MonsterPosition_4_L'
                 self.data[Id]['IntroductionName'].name = 'MonsterPosition_4_L'
 
-        # Nexus fight layouts
-        if self.data[750017]['Monster1Id'].value != 400905: # No longer an arm!
+        # Nexus fights
+        def patchNexus(oldBoss, newId):
+            for party in self.nexus[oldBoss]['Party']:
+                partyId = party['PartyId']
+                slot = party['Slot']
+                self.data[partyId][slot].value = newId
+
+        if self.nexus['Grasping Hand 1']['Name'] != 'Grasping Hand': # No longer an arm!
             self.data[750017]['LayoutTypeName'].name = 'MonsterPosition_3_L'      # Chapter 6
             self.data[750017]['IntroductionName'].name = 'MonsterPosition_3_L'
             self.data[750009]['LayoutTypeName'].name = 'MonsterPosition_3_L'      # Chapter 7
             self.data[750009]['IntroductionName'].name = 'MonsterPosition_3_L'
+            patchNexus('Grasping Hand 1', 400914)
+            patchNexus('Cradling Hand 1', 400915)
+            patchNexus('Grasping Hand 2', 400924)
+            patchNexus('Cradling Hand 2', 400925)
 
         super().update()
 
@@ -805,6 +815,19 @@ class MONSTERS(DATA):
             # self.data[Id]['BattleAnimationBlueprintName'] = ai.Animation
             self.data[Id]['BattleActionPathName'] = ai.ActionPath
             self.data[Id]['ArtificialIntelligenceID'] = ai.AIID
+
+        # Night's Nexus' arms
+        def updateNexusArms(name, Id):
+            newId = self.monsterParty.nexus[name]['Id']
+            self.data[Id] = deepcopy(self.data[newId])
+            self.data[Id]['HPModifier'].value = int(0.30 * self.data[Id]['HPModifier'].value)
+            self.data[Id]['Id'].value = Id
+
+        if self.monsterParty.nexus['Grasping Hand 1']['Id'] != 400904:
+            updateNexusArms('Grasping Hand 1', 400914)
+            updateNexusArms('Cradling Hand 1', 400915)
+            updateNexusArms('Grasping Hand 2', 400924)
+            updateNexusArms('Cradling Hand 2', 400925)
 
         # Miscellaneous stats to be swapped with bosses
         for slot in self.monsterParty.asterisks:

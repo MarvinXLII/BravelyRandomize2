@@ -3,6 +3,7 @@ import struct
 import io
 import hashlib
 from functools import partial
+from copy import copy, deepcopy
 
 
 class TYPE:
@@ -38,6 +39,17 @@ class TYPE:
 
     def getSHA(self, sha):
         return sha.encode() + b'\x00'
+
+    def __deepcopy__(self, memo):
+        cls = self.__class__
+        result = cls.__new__(cls)
+        memo[id(self)] = result
+        for k, v in self.__dict__.items():
+            try:
+                setattr(result, k, deepcopy(v, memo))
+            except:
+                setattr(result, k, v) # Don't deepcopy the functions!
+        return result
 
 
 class FILE(TYPE):
@@ -85,7 +97,7 @@ class FloatProperty(TYPE):
         file.data.seek(1, 1)
         self.value = file.readFloat()
 
-    def build(self):
+    def build(self, uasset):
         tmp = self.getInt64(4)
         tmp += bytearray([0])
         tmp += self.getFloat(self.value)
@@ -100,7 +112,7 @@ class StrProperty(TYPE):
         self.string = file.data.read(size)
         assert size == len(self.string)
 
-    def build(self):
+    def build(self, uasset):
         tmp = self.getInt64(len(self.string))
         tmp += bytearray([0])
         tmp += self.string
@@ -110,17 +122,16 @@ class StrProperty(TYPE):
 class EnumProperty(TYPE):
     def __init__(self, file, uasset):
         self.dataType = 'EnumProperty'
-        self.uasset = uasset
         assert file.readInt64() == 8
         self.value0 = uasset.getName(file.readInt64())
         assert file.readInt8() == 0
         self.value = uasset.getName(file.readInt64())
 
-    def build(self):
+    def build(self, uasset):
         tmp = self.getInt64(8)
-        tmp += self.getInt64(self.uasset.getIndex(self.value0))
+        tmp += self.getInt64(uasset.getIndex(self.value0))
         tmp += bytearray([0])
-        tmp += self.getInt64(self.uasset.getIndex(self.value))
+        tmp += self.getInt64(uasset.getIndex(self.value))
         return tmp
 
 
@@ -131,7 +142,7 @@ class BoolProperty(TYPE):
         self.value = file.readInt8()
         file.data.seek(1, 1)
 
-    def build(self):
+    def build(self, uasset):
         tmp = bytearray([0]*8)
         tmp += self.getInt8(self.value)
         tmp += bytearray([0])
@@ -141,15 +152,14 @@ class BoolProperty(TYPE):
 class NameProperty(TYPE):
     def __init__(self, file, uasset):
         self.dataType = 'NameProperty'
-        self.uasset = uasset
         assert file.readInt64() == 8
         file.data.seek(1, 1)
-        self.name = self.uasset.getName(file.readInt64())
+        self.name = uasset.getName(file.readInt64())
 
-    def build(self):
+    def build(self, uasset):
         tmp = self.getInt64(8)
         tmp += bytearray([0])
-        tmp += self.getInt64(self.uasset.getIndex(self.name))
+        tmp += self.getInt64(uasset.getIndex(self.name))
         return tmp
 
 
@@ -160,7 +170,7 @@ class IntProperty(TYPE):
         file.data.seek(1, 1)
         self.value = file.readInt32()
 
-    def build(self):
+    def build(self, uasset):
         tmp = self.getInt64(4)
         tmp += bytearray([0])
         tmp += self.getInt32(self.value)
@@ -174,7 +184,7 @@ class UInt32Property(TYPE):
         file.data.seek(1, 1)
         self.value = file.readUInt32()
 
-    def build(self):
+    def build(self, uasset):
         tmp = self.getInt64(4)
         tmp += bytearray([0])
         tmp += self.getUInt32(self.value)
@@ -189,7 +199,7 @@ class ByteProperty(TYPE):
         file.data.seek(1, 1)
         self.value = file.readInt8()
 
-    def build(self):
+    def build(self, uasset):
         tmp = self.getInt64(1)
         tmp += self.getInt64(self.none)
         tmp += bytearray([0])
@@ -204,7 +214,7 @@ class SoftObjectProperty(TYPE):
         file.data.seek(1, 1)
         self.asset = file.data.read(0xc)
 
-    def build(self):
+    def build(self, uasset):
         tmp = self.getInt64(0xc)
         tmp += bytearray([0])
         tmp += self.asset
@@ -215,12 +225,11 @@ class SoftObjectProperty(TYPE):
 # Just lost struct as a bytearray
 class StructProperty(TYPE):
     def __init__(self, file, uasset, callbackLoad, callbackBuild):
-        self.uasset = uasset
         self.none = uasset.getIndex('None')
         self.callbackBuild = callbackBuild
         self.dataType = 'StructProperty'
         self.structSize = file.readInt64()
-        self.structType = self.uasset.getName(file.readInt64())
+        self.structType = uasset.getName(file.readInt64())
         file.data.seek(17, 1)
         # self.structData = file.data.read(self.size)
         if self.structType == 'Vector':
@@ -235,10 +244,10 @@ class StructProperty(TYPE):
         else:
             self.structData = callbackLoad()
 
-    def build(self):
+    def build(self, uasset):
         if self.structType == 'Vector':
             tmp = self.getInt64(self.structSize)
-            tmp += self.getInt64(self.uasset.getIndex(self.structType))
+            tmp += self.getInt64(uasset.getIndex(self.structType))
             tmp += bytearray([0]*17)
             tmp += self.getInt32(self.x)
             tmp += self.getInt32(self.y)
@@ -246,7 +255,7 @@ class StructProperty(TYPE):
             return tmp
         elif self.structType == 'LinearColor':
             tmp = self.getInt64(self.structSize)
-            tmp += self.getInt64(self.uasset.getIndex(self.structType))
+            tmp += self.getInt64(uasset.getIndex(self.structType))
             tmp += bytearray([0]*17)
             tmp += self.getFloat(self.r)
             tmp += self.getFloat(self.g)
@@ -254,10 +263,11 @@ class StructProperty(TYPE):
             tmp += self.getFloat(self.a)
             return tmp
 
+        none = uasset.getIndex('None')
         tmp2 = self.callbackBuild(self.structData)
-        tmp2 += self.getInt64(self.none)
+        tmp2 += self.getInt64(none)
         tmp = self.getInt64(len(tmp2))
-        tmp += self.getInt64(self.uasset.getIndex(self.structType))
+        tmp += self.getInt64(uasset.getIndex(self.structType))
         tmp += bytearray([0]*17)
         return tmp + tmp2
 
@@ -278,7 +288,7 @@ class TextProperty(TYPE):
             size = file.readInt32()
             self.string = file.readString(size)
 
-    def build(self):
+    def build(self, uasset):
         tmp = bytearray([0]*4)
         if not self.string:
             tmp += bytearray([0xff]+[0]*4)
@@ -298,12 +308,11 @@ class TextProperty(TYPE):
 
 class ArrayProperty(TYPE):
     def __init__(self, file, uasset, callbackLoad, callbackBuild):
-        self.uasset = uasset
         self.none = uasset.getIndex('None')
         self.callbackBuild = callbackBuild
         self.dataType = 'ArrayProperty'
         self.size = file.readInt64()
-        self.prop = self.uasset.getName(file.readInt64())
+        self.prop = uasset.getName(file.readInt64())
         file.data.seek(1, 1)
         num = file.readInt32()
         self.array = []
@@ -317,14 +326,14 @@ class ArrayProperty(TYPE):
         if self.prop == 'EnumProperty':
             assert self.size == 4 + 8*num
             for _ in range(num):
-                self.array.append(self.uasset.getName(file.readInt64()))
+                self.array.append(uasset.getName(file.readInt64()))
             return
 
         if self.prop == 'StructProperty':
-            self.name = self.uasset.getName(file.readInt64())
-            assert self.uasset.getName(file.readInt64()) == 'StructProperty'
+            self.name = uasset.getName(file.readInt64())
+            assert uasset.getName(file.readInt64()) == 'StructProperty'
             self.structSize = file.readInt64()
-            self.structType = self.uasset.getName(file.readInt64())
+            self.structType = uasset.getName(file.readInt64())
             file.data.seek(17, 1)
             for _ in range(num):
                 self.array.append(callbackLoad())
@@ -332,8 +341,9 @@ class ArrayProperty(TYPE):
 
         sys.exit(f"Load array property does not allow for {prop} types!")
 
-    def build(self):
-        tmp1 = self.getInt64(self.uasset.getIndex(self.prop))
+    def build(self, uasset):
+        none = uasset.getIndex('None')
+        tmp1 = self.getInt64(uasset.getIndex(self.prop))
         tmp1 += bytearray([0])
 
         tmp2 = self.getInt32(len(self.array))
@@ -342,16 +352,16 @@ class ArrayProperty(TYPE):
                 tmp2 += self.getInt32(ai)
         elif self.prop == 'EnumProperty':
             for ai in self.array:
-                tmp2 += self.getInt64(self.uasset.getIndex(ai))
+                tmp2 += self.getInt64(uasset.getIndex(ai))
         elif self.prop == 'StructProperty':
-            tmp2 += self.getInt64(self.uasset.getIndex(self.name))
-            tmp2 += self.getInt64(self.uasset.getIndex('StructProperty'))
+            tmp2 += self.getInt64(uasset.getIndex(self.name))
+            tmp2 += self.getInt64(uasset.getIndex('StructProperty'))
             tmp2 += self.getInt64(self.structSize)
-            tmp2 += self.getInt64(self.uasset.getIndex(self.structType))
+            tmp2 += self.getInt64(uasset.getIndex(self.structType))
             tmp2 += bytearray([0]*17)
             for ai in self.array:
                 tmp2 += self.callbackBuild(ai)
-                tmp2 += self.getInt64(self.none)
+                tmp2 += self.getInt64(none)
 
         tmp = self.getInt64(len(tmp2))
         return tmp + tmp1 + tmp2
@@ -456,9 +466,9 @@ class DATA:
             prop = self.table[name]['prop']
             data += self.uexp.getInt64(self.uasset.getIndex(prop))
             if prop == 'ArrayProperty':
-                data += self.table[name]['data'].build()
+                data += self.table[name]['data'].build(self.uasset)
             if prop == 'IntProperty':
-                data += self.table[name]['data'].build()
+                data += self.table[name]['data'].build(self.uasset)
             elif prop == 'MapProperty':
                 tmp1 = self.uexp.getInt64(self.uasset.getIndex(self.table[name]['type']))
                 tmp1 += self.uexp.getInt64(self.uasset.getIndex('StructProperty'))
@@ -487,7 +497,7 @@ class DATA:
         for key, d in entry.items():
             data += self.uexp.getInt64(self.uasset.getIndex(key))
             data += self.uexp.getInt64(self.uasset.getIndex(d.dataType))
-            data += d.build()
+            data += d.build(self.uasset)
         return data
 
     def loadEntry(self):
