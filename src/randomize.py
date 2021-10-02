@@ -16,9 +16,8 @@ class MOD:
 
         # Outputs
         self.outPath = f"seed_{self.settings['seed']}"
-        if os.path.isdir(self.outPath):
-            shutil.rmtree(self.outPath)
-        os.makedirs(self.outPath)
+        if not os.path.isdir(self.outPath):
+            os.makedirs(self.outPath)
 
         # Load ROM
         self.rom = rom

@@ -79,9 +79,15 @@
       }
       {
 	name: resistance
-	label: "Shuffle enemy resistances/status effects."
+	label: "Shuffle enemy resistances/status effects"
 	type: checkbutton
 	help: "Boss and enemy data are shuffled separately."
+      }
+      {
+	name: chest-battles
+	label: "Shuffle chest battles"
+	type: checkbutton
+	help: "Random chests will have enemy battles."
       }
       {
 	name: qol-scale-exp
