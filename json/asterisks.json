@@ -1,0 +1,238 @@
+{
+  "Selene*": {
+    Id: 300201
+    Name: "Selene*"
+    Party: [
+      {
+	PartyId: 700001
+	Slot: Monster2Id
+      }
+    ]
+  }
+  "Dag*": {
+    Id: 300401
+    Name: "Dag*"
+    Party: [
+      {
+	PartyId: 700001
+	Slot: Monster1Id
+      }
+    ]
+  }
+  "Horton*": {
+    Id: 300101
+    Name: "Horton*"
+    Party: [
+      {
+	PartyId: 700002
+	Slot: Monster1Id
+      }
+    ]
+  }
+  "Orpheus*": {
+    Id: 300501
+    Name: "Orpheus*"
+    Party: [
+      {
+	PartyId: 710001
+	Slot: Monster3Id
+      }
+    ]
+  }
+  "Anihal*": {
+    Id: 300601
+    Name: "Anihal*"
+    Party: [
+      {
+	PartyId: 710002
+	Slot: Monster2Id
+      }
+    ]
+  }
+  "Bernard*": {
+    Id: 300701
+    Name: "Bernard*"
+    Party: [
+      {
+	PartyId: 710003
+	Slot: Monster2Id
+      }
+    ]
+  }
+  "Shirley*": {
+    Id: 300801
+    Name: "Shirley*"
+    Party: [
+      {
+	PartyId: 711003
+	Slot: Monster4Id
+      }
+    ]
+  }
+  "Prince Castor*": {
+    Id: 300901
+    Name: "Prince Castor*"
+    Party: [
+      {
+	PartyId: 710005
+	Slot: Monster1Id
+      }
+    ]
+  }
+  "Roddy*": {
+    Id: 301001
+    Name: "Roddy*"
+    Party: [
+      {
+	PartyId: 720001
+	Slot: Monster2Id
+      }
+    ]
+  }
+  "Lily*": {
+    Id: 301101
+    Name: "Lily*"
+    Party: [
+      {
+	PartyId: 720002
+	Slot: Monster2Id
+      }
+    ]
+  }
+  "Galahad*": {
+    Id: 301201,
+    Name: "Galahad*"
+    Party: [
+      {
+	PartyId: 720003
+	Slot: Monster2Id
+      }
+      {
+	PartyId: 720004
+	Slot: Monster2Id
+      }
+    ]
+  }
+  "Folie*": {
+    Id: 301301
+    Name: "Folie*"
+    Party: [
+      {
+	PartyId: 720005
+	Slot: Monster2Id
+      }
+    ]
+  }
+  "Martha*": {
+    Id: 301401
+    Name: "Martha*"
+    Party: [
+      {
+	PartyId: 730001
+	Slot: Monster1Id
+      }
+    ]
+  }
+  "Helio*": {
+    Id: 301501
+    Name: "Helio*"
+    Party: [
+      {
+	PartyId: 730003
+	Slot: Monster1Id
+      }
+    ]
+  }
+  "Gladys*": {
+    Id: 301601
+    Name: "Gladys*"
+    Party: [
+      {
+	PartyId: 730003
+	Slot: Monster2Id
+      }
+    ]
+  }
+  "Domenic*": {
+    Id: 301701
+    Name: "Domenic*"
+    Party: [
+      {
+	PartyId: 730004
+	Slot: Monster1Id
+      }
+    ]
+  }
+  "Glenn*": {
+    Id: 301801
+    Name: "Glenn*"
+    Party: [
+      {
+	PartyId: 731001
+	Slot: Monster1Id
+      }
+    ]
+  }
+  "Vigintio*": {
+    Id: 301901
+    Name: "Vigintio*"
+    Party: [
+      {
+	PartyId: 740004
+	Slot: Monster1Id
+      }
+      {
+	PartyId: 740006
+	Slot: Monster1Id
+      }
+      {
+	PartyId: 740007
+	Slot: Monster1Id
+      }
+    ]
+  }
+  "Lonsdale*": {
+    Id: 302001
+    Name: "Lonsdale*"
+    Party: [
+      {
+	PartyId: 740001
+	Slot: Monster1Id
+      }
+    ]
+  }
+  "Marla*": {
+    Id: 302101
+    Name: "Marla*"
+    Party: [
+      {
+	PartyId: 740003
+	Slot: Monster1Id
+      }
+      {
+	PartyId: 740002
+	Slot: Monster1Id
+      }
+    ]
+  }
+  "Adam*": {
+    Id: 302202
+    Name: "Adam*"
+    Party: [
+      {
+	PartyId: 740005
+	Slot: Monster1Id
+      }
+    ]
+  }
+  "Sloan*": {
+    Id: 302301
+    Name: "Sloan*"
+    Party: [
+      {
+	PartyId: 750008
+	Slot: Monster1Id
+      }
+    ]
+  }
+}

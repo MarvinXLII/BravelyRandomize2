@@ -4,6 +4,7 @@ import io
 import hashlib
 from functools import partial
 
+
 class TYPE:
     def getInt8(self, value):
         return struct.pack("<b", value)
@@ -37,7 +38,6 @@ class TYPE:
 
     def getSHA(self, sha):
         return sha.encode() + b'\x00'
-
 
 
 class FILE(TYPE):
@@ -196,6 +196,7 @@ class ByteProperty(TYPE):
         tmp += self.getInt8(self.value)
         return tmp
 
+
 class SoftObjectProperty(TYPE):
     def __init__(self, file):
         self.dataType = 'SoftObjectProperty'
@@ -213,19 +214,52 @@ class SoftObjectProperty(TYPE):
 # MonsterDataAsset: Include a bunch of floats I won't need to modify.
 # Just lost struct as a bytearray
 class StructProperty(TYPE):
-    def __init__(self, file):
+    def __init__(self, file, uasset, callbackLoad, callbackBuild):
+        self.uasset = uasset
+        self.none = uasset.getIndex('None')
+        self.callbackBuild = callbackBuild
         self.dataType = 'StructProperty'
-        self.size = file.readInt64()
-        self.value = file.readInt64()
+        self.structSize = file.readInt64()
+        self.structType = self.uasset.getName(file.readInt64())
         file.data.seek(17, 1)
-        self.structData = file.data.read(self.size)
+        # self.structData = file.data.read(self.size)
+        if self.structType == 'Vector':
+            self.x = file.readInt32()
+            self.y = file.readInt32()
+            self.z = file.readInt32()
+        elif self.structType == 'LinearColor':
+            self.r = file.readFloat()
+            self.g = file.readFloat()
+            self.b = file.readFloat()
+            self.a = file.readFloat()
+        else:
+            self.structData = callbackLoad()
 
     def build(self):
-        tmp = self.getInt64(self.size)
-        tmp += self.getInt64(self.value)
+        if self.structType == 'Vector':
+            tmp = self.getInt64(self.structSize)
+            tmp += self.getInt64(self.uasset.getIndex(self.structType))
+            tmp += bytearray([0]*17)
+            tmp += self.getInt32(self.x)
+            tmp += self.getInt32(self.y)
+            tmp += self.getInt32(self.z)
+            return tmp
+        elif self.structType == 'LinearColor':
+            tmp = self.getInt64(self.structSize)
+            tmp += self.getInt64(self.uasset.getIndex(self.structType))
+            tmp += bytearray([0]*17)
+            tmp += self.getFloat(self.r)
+            tmp += self.getFloat(self.g)
+            tmp += self.getFloat(self.b)
+            tmp += self.getFloat(self.a)
+            return tmp
+
+        tmp2 = self.callbackBuild(self.structData)
+        tmp2 += self.getInt64(self.none)
+        tmp = self.getInt64(len(tmp2))
+        tmp += self.getInt64(self.uasset.getIndex(self.structType))
         tmp += bytearray([0]*17)
-        tmp += self.structData
-        return tmp
+        return tmp + tmp2
 
 
 class TextProperty(TYPE):
@@ -299,27 +333,28 @@ class ArrayProperty(TYPE):
         sys.exit(f"Load array property does not allow for {prop} types!")
 
     def build(self):
-        tmp = bytearray(self.getInt64(self.size))
-        tmp += self.getInt64(self.uasset.getIndex(self.prop))
-        tmp += bytearray([0])
-        tmp += self.getInt32(len(self.array))
+        tmp1 = self.getInt64(self.uasset.getIndex(self.prop))
+        tmp1 += bytearray([0])
+
+        tmp2 = self.getInt32(len(self.array))
         if self.prop == 'IntProperty':
             for ai in self.array:
-                tmp += self.getInt32(ai)
+                tmp2 += self.getInt32(ai)
         elif self.prop == 'EnumProperty':
             for ai in self.array:
-                tmp += self.getInt64(self.uasset.getIndex(ai))
+                tmp2 += self.getInt64(self.uasset.getIndex(ai))
         elif self.prop == 'StructProperty':
-            tmp += self.getInt64(self.uasset.getIndex(self.name))
-            tmp += self.getInt64(self.uasset.getIndex('StructProperty'))
-            tmp += self.getInt64(self.structSize)
-            tmp += self.getInt64(self.uasset.getIndex(self.structType))
-            tmp += bytearray([0]*17)
+            tmp2 += self.getInt64(self.uasset.getIndex(self.name))
+            tmp2 += self.getInt64(self.uasset.getIndex('StructProperty'))
+            tmp2 += self.getInt64(self.structSize)
+            tmp2 += self.getInt64(self.uasset.getIndex(self.structType))
+            tmp2 += bytearray([0]*17)
             for ai in self.array:
-                tmp += self.callbackBuild(ai)
-                tmp += self.getInt64(self.none)
-        return tmp
+                tmp2 += self.callbackBuild(ai)
+                tmp2 += self.getInt64(self.none)
 
+        tmp = self.getInt64(len(tmp2))
+        return tmp + tmp1 + tmp2
 
 
 class UASSET(FILE):
@@ -335,7 +370,11 @@ class UASSET(FILE):
         self.data.seek(0x75)
         count = self.readInt32()
         self.data.seek(0xbd)
-        addrUexp = self.readInt32() - 0x54
+        self.addrUexp = self.readInt32() - 0x54
+        self.data.seek(self.addrUexp)
+        self.size1 = self.readInt64()
+        self.data.seek(0xa9)
+        self.size2 = self.readInt64()
         # Store header
         self.data.seek(0)
         self.header = bytearray(self.data.read(0xc1))
@@ -353,14 +392,10 @@ class UASSET(FILE):
             self.data.seek(base)
             self.entries[name] = bytearray(self.data.read(size))
         # Store footers (not sure what they're used for)
-        self.addrUexp = addrUexp - self.data.tell()
+        # self.addrUexp = addrUexp - self.data.tell()
         self.footer = bytearray(self.data.read())
 
-    def build(self, sizeUEXP=None):
-        # Update size of uexp if needed
-        if sizeUEXP:
-            self.footer[self.addrUexp:self.addrUexp+8] = self.getUInt64(sizeUEXP-4)
-        # Build uasset
+    def build(self):
         data = bytearray([])
         for entry in self.entries.values():
             data += entry
@@ -397,7 +432,7 @@ class DATA:
         # Store none index
         self.none = self.uasset.getIndex('None')
         # Organize/"parse" uexp data
-        self.switcher = { ## REPLACE WITH MATCH IN py3.10????
+        self.switcher = {  # REPLACE WITH MATCH IN py3.10????
             'EnumProperty': partial(EnumProperty, self.uexp, self.uasset),
             'TextProperty': partial(TextProperty, self.uexp),
             'IntProperty': partial(IntProperty, self.uexp),
@@ -406,7 +441,7 @@ class DATA:
             'StrProperty': partial(StrProperty, self.uexp),
             'BoolProperty': partial(BoolProperty, self.uexp),
             'NameProperty': partial(NameProperty, self.uexp, self.uasset),
-            'StructProperty': partial(StructProperty, self.uexp),
+            'StructProperty': partial(StructProperty, self.uexp, self.uasset, self.loadEntry, self.buildEntry),
             'FloatProperty': partial(FloatProperty, self.uexp),
             'ByteProperty': partial(ByteProperty, self.uexp),
             'SoftObjectProperty': partial(SoftObjectProperty, self.uexp),
@@ -422,21 +457,26 @@ class DATA:
             data += self.uexp.getInt64(self.uasset.getIndex(prop))
             if prop == 'ArrayProperty':
                 data += self.table[name]['data'].build()
+            if prop == 'IntProperty':
+                data += self.table[name]['data'].build()
             elif prop == 'MapProperty':
-                size = self.table[name]['size']
-                data += self.uexp.getInt64(size)
-                data += self.uexp.getInt64(self.uasset.getIndex(self.table[name]['type']))
-                data += self.uexp.getInt64(self.uasset.getIndex('StructProperty'))
-                data += bytearray([0]*5)
+                tmp1 = self.uexp.getInt64(self.uasset.getIndex(self.table[name]['type']))
+                tmp1 += self.uexp.getInt64(self.uasset.getIndex('StructProperty'))
+                tmp1 += bytearray([0])
+
+                tmp2 = bytearray([0]*4)
                 table = self.table[name]['data']
-                data += self.uexp.getInt32(len(table))
+                tmp2 += self.uexp.getInt32(len(table))
                 for key in table: # For JOB in table
                     if self.table[name]['type'] == 'IntProperty':
-                        data += self.uexp.getInt32(key)
+                        tmp2 += self.uexp.getInt32(key)
                     else: # EnumProperty, NameProperty
-                        data += self.uexp.getInt64(self.uasset.getIndex(key))
-                    data += self.buildEntry(table[key])
-                    data += self.uexp.getInt64(self.none)
+                        tmp2 += self.uexp.getInt64(self.uasset.getIndex(key))
+                    tmp2 += self.buildEntry(table[key])
+                    tmp2 += self.uexp.getInt64(self.none)
+                tmp = self.uexp.getInt64(len(tmp2))
+                data += tmp + tmp1 + tmp2
+
         data += self.uexp.getInt64(self.none)
         data += bytearray([0]*4)
         data += bytearray([0xc1, 0x83, 0x2a, 0x9e])
@@ -476,6 +516,8 @@ class DATA:
 
             if propName == 'ArrayProperty':
                 self.table[name]['data'] = ArrayProperty(self.uexp, self.uasset, self.loadEntry, self.buildEntry)
+            elif propName == 'IntProperty':
+                self.table[name]['data'] = IntProperty(self.uexp)
             elif propName == 'MapProperty':
                 self.table[name]['size'] = self.uexp.readInt64()
                 dataType = self.uasset.getName(self.uexp.readInt64())
@@ -492,14 +534,23 @@ class DATA:
                         key = self.uexp.readInt32()
                     elif dataType == 'NameProperty':
                         key = self.uasset.getName(self.uexp.readInt64())
+                    else:
+                        sys.exit(f"loadTable MapProperty not setup for {dataType}")
                     self.table[name]['data'][key] = self.loadEntry()
+            else:
+                sys.exit(f"loadTable not setup for {propName}")
             nextValue = self.uexp.readInt64()
 
     def update(self):
         # Build uexp
         dataUEXP = self.buildTable()
-        self.rom.patchFile(dataUEXP, f"{self.fileName}.uexp")
         # Build uasset
-        size = len(dataUEXP)
-        dataUASSET = self.uasset.build(sizeUEXP=size)
+        dataUASSET = self.uasset.build()
+        # Update sizes in uasset
+        uexpSize = len(dataUEXP) - 4
+        totalSize = uexpSize + len(dataUASSET)
+        dataUASSET[self.uasset.addrUexp:self.uasset.addrUexp+8] = self.uasset.getUInt64(uexpSize)
+        dataUASSET[0xa9:0xa9+8] = self.uasset.getUInt64(totalSize)
+        # Patch files
+        self.rom.patchFile(dataUEXP, f"{self.fileName}.uexp")
         self.rom.patchFile(dataUASSET, f"{self.fileName}.uasset")    

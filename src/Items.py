@@ -1,5 +1,28 @@
 import random
 
+def randomChestBattles(treasures):
+
+    locations = {}
+    for chests in treasures.chests.values():
+        for chest in chests:
+            if chest.Location not in locations:
+                locations[chest.Location] = []
+            if treasures.enemyParties[chest.Location]:
+                locations[chest.Location].append(chest)
+                chest.EnemyPartyId = -1
+                chest.EventType = 1
+
+    for chests in locations.values():
+        random.shuffle(chests)
+
+    for loc, slots in locations.items():
+        if loc in treasures.enemyParties:
+            while treasures.enemyParties[loc]:
+                chest = slots.pop()
+                chest.EnemyPartyId = treasures.enemyParties[loc].pop()
+                chest.EventType = 3
+
+
 def shuffleItems(treasures, quests, monsters):
 
     # Group all items by chapter

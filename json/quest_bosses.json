@@ -1,0 +1,185 @@
+{
+  // Optional Bosses (quests)
+  Fenrir: { // Quest 7
+    Id: 101305
+    Name: Fenrir
+    LateGame: false
+    Quest: 7
+    Party: [
+      {
+	PartyId: 49999
+	Slot: Monster1Id
+      }
+    ]
+  }
+  Enormocrag: { // Quest 12
+    Id: 400101
+    Name: Enormocrag
+    LateGame: false
+    Quest: 12
+    Party: [
+      {
+	PartyId: 701002
+	Slot: Monster1Id
+      }
+    ]
+  }
+  Amphora: { // Quest 27
+    Id: 400201
+    Name: Amphora
+    LateGame: false
+    Quest: 27
+    Party: [
+      {
+	PartyId: 711002
+	Slot: Monster1Id
+      }
+    ]
+  }
+  Mushussu: { // Quest 42
+    Id: 102505
+    Name: Mushussu
+    LateGame: false
+    Quest: 42
+    Party: [
+      {
+	PartyId: 112000
+	Slot: Monster2Id
+      }
+    ]
+  }
+  "Vespus Hex": { // Quest 43
+    Id: 103505
+    Name: "Vespus Hex"
+    LateGame: false
+    Quest: 43
+    Party: [
+      {
+	PartyId: 216000
+	Slot: Monster1Id
+      }
+    ]
+  }
+  // Empuse: { // Quest 44
+  // ALSO SWAP PAPILLOID AND FRANKEFALCOT
+  //   Id: 400302
+  //   Name: Empuse
+  //   LateGame: false
+  //   Quest: 44
+  //   Party: [
+  //     {
+  // 	PartyId: 721001 
+  // 	Slot: Monster2Id
+  //     }
+  //   ]
+  //   KeepGroup: true
+  // }
+  "Jealous Jody": { // Quest 50
+    Id: 104405
+    Name: "Jealous Jody"
+    LateGame: false
+    Quest: 50
+    Party: [
+      {
+	PartyId: 328010
+	Slot: Monster1Id
+      }
+    ]
+  }
+  Eclipse: { // Quest 58
+    Id: 101505
+    Name: Eclipse
+    LateGame: false
+    Quest: 58
+    Party: [
+      {
+	PartyId: 364010
+	Slot: Monster1Id
+      }
+    ]
+  }
+  // Jörmungandr: { // Quest 62
+  //   Id: 103605
+  //   Name: Jörmungandr
+  //   LateGame: false
+  //   Quest: 62
+  //   Party: [
+  //     {
+  // 	PartyId: 313000
+  // 	Slot: Monster5Id
+  //     }
+  //   ]
+  // }
+  Hoenir: { // Quest 73
+    Id: 106505
+    Name: Hoenir
+    LateGame: true
+    Quest: 73
+    Party: [
+      {
+	PartyId: 751001
+	Slot: Monster1Id
+      }
+    ]
+  }
+  D-Vergr: { // Quest 83
+    Id: 400501
+    Name: D-Vergr
+    LateGame: true
+    Quest: 83
+    Party: [
+      {
+	PartyId: 741001
+	Slot: Monster5Id
+      }
+    ]
+  }
+  Treant: { // Quest 85
+    Id: 104605
+    Name: Treant
+    LateGame: true
+    Quest: 85
+    Party: [
+      {
+	PartyId: 15000
+	Slot: Monster5Id
+      }
+    ]
+  }
+  "Orc King": { // Quest 86
+    Id: 100305
+    Name: Orc King
+    LateGame: false
+    Quest: 86
+    Party: [
+      {
+	PartyId: 213000
+	Slot: Monster3Id
+      }
+    ]
+  }
+  Hephaestus: { // Quest 90
+    Id: 107605
+    Name: Hephaestus
+    LateGame: true
+    Quest: 90
+    Party: [
+      {
+	PartyId: 741002
+	Slot: Monster1Id
+      }
+    ]
+  }
+  Xolotl: { // Quest 92
+    Id: 400401
+    Name: Xolotl
+    LateGame: true
+    Quest: 92
+    Party: [
+      {
+	PartyId: 751002
+	Slot: Monster1Id
+      }
+    ]
+  }
+}

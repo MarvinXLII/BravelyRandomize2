@@ -1683,7 +1683,7 @@
   {
     Default: ECommandCostEnum::CCE_MP
     "ECommandCostEnum::CCE_MP": 45
-    "ECommandCostEnum::CCE_HP": 0
+    "ECommandCostEnum::CCE_HP": 10
     "ECommandCostEnum::CCE_BP": 1
     "ECommandCostEnum::CCE_pq": 0
   }

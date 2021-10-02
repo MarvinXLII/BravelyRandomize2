@@ -1,6 +1,6 @@
 from dataclasses import dataclass, field
 from typing import List
-from Classes import EnumProperty
+from Classes import IntProperty, EnumProperty, StrProperty
 import random
 from copy import deepcopy
 
@@ -72,43 +72,49 @@ class WEAPONS:
 @dataclass
 class EFFECTS:
     ResistancePoison: EnumProperty
-    ResistanceLevelPoison: EnumProperty
+    ResistanceLevelPoison: IntProperty
     ResistanceDark: EnumProperty
-    ResistanceLevelDark: EnumProperty
+    ResistanceLevelDark: IntProperty
     ResistanceSilence: EnumProperty
-    ResistanceLevelSilence: EnumProperty
+    ResistanceLevelSilence: IntProperty
     ResistanceSleep: EnumProperty
-    ResistanceLevelSleep: EnumProperty
+    ResistanceLevelSleep: IntProperty
     ResistanceParalysis: EnumProperty
-    ResistanceLevelParalysis: EnumProperty
+    ResistanceLevelParalysis: IntProperty
     ResistanceFear: EnumProperty
-    ResistanceLevelFear: EnumProperty
+    ResistanceLevelFear: IntProperty
     ResistanceBerzerk: EnumProperty
-    ResistanceLevelBerzerk: EnumProperty
+    ResistanceLevelBerzerk: IntProperty
     ResistanceConfusion: EnumProperty
-    ResistanceLevelConfusion: EnumProperty
+    ResistanceLevelConfusion: IntProperty
     ResistanceSeduction: EnumProperty
-    ResistanceLevelSeduction: EnumProperty
+    ResistanceLevelSeduction: IntProperty
     ResistanceInstantDeath: EnumProperty
-    ResistanceLevelInstantDeath: EnumProperty
+    ResistanceLevelInstantDeath: IntProperty
     ResistanceDeathTimer: EnumProperty
-    ResistanceLevelDeathTimer: EnumProperty
+    ResistanceLevelDeathTimer: IntProperty
     ResistanceStop: EnumProperty
-    ResistanceLevelStop: EnumProperty
+    ResistanceLevelStop: IntProperty
     ResistanceFreeze: EnumProperty
-    ResistanceLevelFreeze: EnumProperty
+    ResistanceLevelFreeze: IntProperty
     ResistanceBattleExclusion: EnumProperty
-    ResistanceLevelBattleExclusion: EnumProperty
+    ResistanceLevelBattleExclusion: IntProperty
     ResistanceTransparent: EnumProperty
-    ResistanceLevelTransparent: EnumProperty
+    ResistanceLevelTransparent: IntProperty
     ResistancePaint: EnumProperty
-    ResistanceLevelPaint: EnumProperty
+    ResistanceLevelPaint: IntProperty
     ResistanceEpidemic: EnumProperty
-    ResistanceLevelEpidemic: EnumProperty
+    ResistanceLevelEpidemic: IntProperty
     ResistanceSlow: EnumProperty
-    ResistanceLevelSlow: EnumProperty
+    ResistanceLevelSlow: IntProperty
     ResistanceWeakPoint: EnumProperty
-    ResistanceLevelWeakPoint: EnumProperty
+    ResistanceLevelWeakPoint: IntProperty
+
+@dataclass
+class BOSSAI:
+    Animation: StrProperty
+    ActionPath: StrProperty
+    AIID: EnumProperty
 
 @dataclass
 class ITEM:

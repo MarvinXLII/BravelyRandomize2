@@ -1,0 +1,43 @@
+{
+  // Night's Nexus' arms
+  "Grasping Hand 1": {
+    Id: 400904
+    Name: "Grasping Hand"
+    Party: [
+      {
+	PartyId: 750017
+	Slot: Monster3Id
+      }
+    ]
+  }
+  "Cradling Hand 1": {
+    Id: 400905
+    Name: "Cradling Hand"
+    Party: [
+      {
+	PartyId: 750017
+	Slot: Monster1Id
+      }
+    ]
+  }
+  "Grasping Hand 2": {
+    Id: 400904
+    Name: "Grasping Hand"
+    Party: [
+      {
+	PartyId: 750009
+	Slot: Monster3Id
+      }
+    ]
+  }
+  "Cradling Hand 2": {
+    Id: 400905
+    Name: "Cradling Hand"
+    Party: [
+      {
+	PartyId: 750009
+	Slot: Monster1Id
+      }
+    ]
+  }
+}

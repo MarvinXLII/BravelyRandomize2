@@ -4,26 +4,29 @@
   // system: Steam
 
   rom: /path/to/Paks/folder
-  seed: 28
+  seed: 42
 
   items: true
+  chest-battles: true
+
   resistance: true
+  bosses: true
+
   job-abilities: true
   job-costs: true
 
   job-stats: true
-  job-stats-option: 'swap'
-  // job-stats-option: 'random'
+  job-stats-option: random
+  // job-stats-option: swap
 
   job-affinities: true
-  job-affinities-option: 'swap'
-  // job-affinities-option: 'random'
-
-  qol-scale-exp: 2
-  qol-scale-jp: 2
-  qol-scale-pg: 2
+  job-affinities-option: random
+  // job-affinities-option: swap
 
   magnifying-glass-costs: true
   teleport-stone-costs: true
-  early-access: true
+
+  qol-scale-exp: 4
+  qol-scale-jp: 100
+  qol-scale-pg: 10
 }

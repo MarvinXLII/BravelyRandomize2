@@ -1,0 +1,426 @@
+{
+  "Orpheus*": {
+    300505: {  // Breezy Jam
+      "Selene*": 1.167
+      "Dag*": 1.167
+      "Horton*": 2.333
+      "Orpheus*": 3.5
+      "Anihal*": 3.5
+      "Bernard*": 3.5
+      "Shirley*": 3.5
+      "Prince Castor*": 4.667
+      "Roddy*": 4.667
+      "Lily*": 4.667
+      "Galahad*": 4.667
+      "Folie*": 5.833
+      "Martha*": 5.833
+      "Helio*": 5.833
+      "Gladys*": 5.833
+      "Domenic*": 7
+      "Glenn*": 5.833
+      "Vigintio*": 7
+      "Lonsdale*": 7
+      "Marla*": 7
+      "Adam*": 7.5
+      "Sloan*": 9.333
+    }
+    300506: {  // Stone
+      "Selene*": 150
+      "Dag*": 150
+      "Horton*": 200
+      "Orpheus*": 300
+      "Anihal*": 400
+      "Bernard*": 500
+      "Shirley*": 400
+      "Prince Castor*": 600
+      "Roddy*": 800
+      "Lily*": 800
+      "Galahad*": 900
+      "Folie*": 1000
+      "Martha*": 1300
+      "Helio*": 1400
+      "Gladys*": 1400
+      "Domenic*": 1600
+      "Glenn*": 1200
+      "Vigintio*": 1800
+      "Lonsdale*": 1700
+      "Marla*": 1700
+      "Adam*": 2100
+      "Sloan*": 3000
+    }
+  }
+  "Roddy*": {
+    301001: {  // Stonera
+      "Selene*": 1
+      "Dag*": 1
+      "Horton*": 2
+      "Orpheus*": 3
+      "Anihal*": 3
+      "Bernard*": 3
+      "Shirley*": 3
+      "Prince Castor*": 4
+      "Roddy*": 4
+      "Lily*": 4
+      "Galahad*": 4
+      "Folie*": 5
+      "Martha*": 5
+      "Helio*": 5
+      "Gladys*": 5
+      "Domenic*": 6
+      "Glenn*": 5
+      "Vigintio*": 6
+      "Lonsdale*": 6
+      "Marla*": 6
+      "Adam*": 6
+      "Sloan*": 8
+    }
+    301002: {  // Aerora
+      "Selene*": 1
+      "Dag*": 1
+      "Horton*": 2
+      "Orpheus*": 3
+      "Anihal*": 3
+      "Bernard*": 3
+      "Shirley*": 3
+      "Prince Castor*": 4
+      "Roddy*": 4
+      "Lily*": 4
+      "Galahad*": 4
+      "Folie*": 5
+      "Martha*": 5
+      "Helio*": 5
+      "Gladys*": 5
+      "Domenic*": 6
+      "Glenn*": 5
+      "Vigintio*": 6
+      "Lonsdale*": 6
+      "Marla*": 6
+      "Adam*": 6
+      "Sloan*": 8
+    }
+    301003: {  // Healara
+      "Selene*": 500
+      "Dag*": 500
+      "Horton*": 750
+      "Orpheus*": 1100
+      "Anihal*": 1250
+      "Bernard*": 1600
+      "Shirley*": 1300
+      "Prince Castor*": 1700
+      "Roddy*": 2000
+      "Lily*": 2200
+      "Galahad*": 2300
+      "Folie*": 2400
+      "Martha*": 3000
+      "Helio*": 3100
+      "Gladys*": 3100
+      "Domenic*": 3300
+      "Glenn*": 2900
+      "Vigintio*": 3700
+      "Lonsdale*": 3500
+      "Marla*": 3500
+      "Adam*": 4000
+      "Sloan*": 5500
+    }
+    311004: {  // Disaster
+      "Selene*": 2.625
+      "Dag*": 2.625
+      "Horton*": 5.25
+      "Orpheus*": 7.875
+      "Anihal*": 7.875
+      "Bernard*": 7.875
+      "Shirley*": 7.875
+      "Prince Castor*": 10.5
+      "Roddy*": 10.5
+      "Lily*": 10.5
+      "Galahad*": 10.5
+      "Folie*": 13.125
+      "Martha*": 13.125
+      "Helio*": 13.125
+      "Gladys*": 13.125
+      "Domenic*": 15.75
+      "Glenn*": 13.125
+      "Vigintio*": 15.75
+      "Lonsdale*": 15.75
+      "Marla*": 15.75
+      "Adam*": 17.0
+      "Sloan*": 21.0
+    }
+  }
+  "Folie*": {
+    311301: {  // Chiaro
+      "Selene*": 2
+      "Dag*": 2
+      "Horton*": 3
+      "Orpheus*": 4
+      "Anihal*": 4
+      "Bernard*": 4
+      "Shirley*": 4
+      "Prince Castor*": 5
+      "Roddy*": 5
+      "Lily*": 5
+      "Galahad*": 5
+      "Folie*": 6
+      "Martha*": 6
+      "Helio*": 6
+      "Gladys*": 6
+      "Domenic*": 7
+      "Glenn*": 6
+      "Vigintio*": 7
+      "Lonsdale*": 7
+      "Marla*": 7
+      "Adam*": 7
+      "Sloan*": 9
+    }
+    311302: {  // Scuro
+      "Selene*": 2
+      "Dag*": 2
+      "Horton*": 3
+      "Orpheus*": 4
+      "Anihal*": 4
+      "Bernard*": 4
+      "Shirley*": 4
+      "Prince Castor*": 5
+      "Roddy*": 5
+      "Lily*": 5
+      "Galahad*": 5
+      "Folie*": 6
+      "Martha*": 6
+      "Helio*": 6
+      "Gladys*": 6
+      "Domenic*": 7
+      "Glenn*": 6
+      "Vigintio*": 7
+      "Lonsdale*": 7
+      "Marla*": 7
+      "Adam*": 7
+      "Sloan*": 9
+    }
+  }
+  "Helio*": {
+    301501: {  // Banishra
+      "Selene*": 1
+      "Dag*": 1
+      "Horton*": 2
+      "Orpheus*": 3
+      "Anihal*": 3
+      "Bernard*": 3
+      "Shirley*": 3
+      "Prince Castor*": 4
+      "Roddy*": 4
+      "Lily*": 4
+      "Galahad*": 4
+      "Folie*": 5
+      "Martha*": 5
+      "Helio*": 5
+      "Gladys*": 5
+      "Domenic*": 6
+      "Glenn*": 5
+      "Vigintio*": 6
+      "Lonsdale*": 6
+      "Marla*": 6
+      "Adam*": 6
+      "Sloan*": 8
+    }
+  }
+  "Domenic*": {
+    311703: {  // Triplaga
+      "Selene*": 1
+      "Dag*": 1
+      "Horton*": 2
+      "Orpheus*": 3
+      "Anihal*": 3
+      "Bernard*": 3
+      "Shirley*": 3
+      "Prince Castor*": 4
+      "Roddy*": 4
+      "Lily*": 4
+      "Galahad*": 4
+      "Folie*": 5
+      "Martha*": 5
+      "Helio*": 5
+      "Gladys*": 5
+      "Domenic*": 6
+      "Glenn*": 5
+      "Vigintio*": 6
+      "Lonsdale*": 6
+      "Marla*": 6
+      "Adam*": 6
+      "Sloan*": 8
+    }
+    301705: {  // Triplara
+      "Selene*": 0.667
+      "Dag*": 0.667
+      "Horton*": 1.333
+      "Orpheus*": 2
+      "Anihal*": 2
+      "Bernard*": 2
+      "Shirley*": 2
+      "Prince Castor*": 2.667
+      "Roddy*": 2.667
+      "Lily*": 2.667
+      "Galahad*": 2.667
+      "Folie*": 3.333
+      "Martha*": 3.333
+      "Helio*": 3.333
+      "Gladys*": 3.333
+      "Domenic*": 4
+      "Glenn*": 3.333
+      "Vigintio*": 4
+      "Lonsdale*": 4
+      "Marla*": 4
+      "Adam*": 4
+      "Sloan*": 5.333
+    }
+    301706: {  // Bomb Arm
+      "Selene*": 300
+      "Dag*": 300
+      "Horton*": 500
+      "Orpheus*": 700
+      "Anihal*": 800
+      "Bernard*": 1000
+      "Shirley*": 800
+      "Prince Castor*": 1000
+      "Roddy*": 1200
+      "Lily*": 1300
+      "Galahad*": 1400
+      "Folie*": 1500
+      "Martha*": 1800
+      "Helio*": 1900
+      "Gladys*": 1900
+      "Domenic*": 2000
+      "Glenn*": 1700
+      "Vigintio*": 2200
+      "Lonsdale*": 2100
+      "Marla*": 2100
+      "Adam*": 2500
+      "Sloan*": 3500
+    }
+  }
+  "Glenn*": {
+    301801: {  // Gigapotion
+      "Selene*": 900 
+      "Dag*": 900
+      "Horton*": 1300
+      "Orpheus*": 1900
+      "Anihal*": 2200
+      "Bernard*": 2800
+      "Shirley*": 2400
+      "Prince Castor*": 3000
+      "Roddy*": 3500
+      "Lily*": 3800
+      "Galahad*": 4000
+      "Folie*": 4300
+      "Martha*": 5200
+      "Helio*": 5400
+      "Gladys*": 5400
+      "Domenic*": 5900
+      "Glenn*": 5000
+      "Vigintio*": 6500
+      "Lonsdale*": 6200
+      "Marla*": 6200
+      "Adam*": 7000
+      "Sloan*": 9500
+    }
+    301802: {  // Contagion Agent
+      "Selene*": 300
+      "Dag*": 300
+      "Horton*": 400
+      "Orpheus*": 600
+      "Anihal*": 700
+      "Bernard*": 800
+      "Shirley*": 700
+      "Prince Castor*": 900
+      "Roddy*": 1100
+      "Lily*": 1100
+      "Galahad*": 1200
+      "Folie*": 1300
+      "Martha*": 1500
+      "Helio*": 1600
+      "Gladys*": 1600
+      "Domenic*": 1800
+      "Glenn*": 1500
+      "Vigintio*": 2000
+      "Lonsdale*": 2000
+      "Marla*": 2000
+      "Adam*": 2500
+      "Sloan*": 3500
+    }
+  }
+  "Vigintio*": {
+    301902: {  // Electon
+      "Selene*": 1.5
+      "Dag*": 1.5
+      "Horton*": 3
+      "Orpheus*": 4.5
+      "Anihal*": 4.5
+      "Bernard*": 4.5
+      "Shirley*": 4.5
+      "Prince Castor*": 6
+      "Roddy*": 6
+      "Lily*": 6
+      "Galahad*": 6
+      "Folie*": 7.5
+      "Martha*": 7.5
+      "Helio*": 7.5
+      "Gladys*": 7.5
+      "Domenic*": 9
+      "Glenn*": 7.5
+      "Vigintio*": 9
+      "Lonsdale*": 9
+      "Marla*": 9
+      "Adam*": 9
+      "Sloan*": 12
+    }
+    301903: {  // Darkga
+      "Selene*": 1
+      "Dag*": 1
+      "Horton*": 2
+      "Orpheus*": 3
+      "Anihal*": 3
+      "Bernard*": 3
+      "Shirley*": 3
+      "Prince Castor*": 4
+      "Roddy*": 4
+      "Lily*": 4
+      "Galahad*": 4
+      "Folie*": 5
+      "Martha*": 5
+      "Helio*": 5
+      "Gladys*": 5
+      "Domenic*": 6
+      "Glenn*": 5
+      "Vigintio*": 6
+      "Lonsdale*": 6
+      "Marla*": 6
+      "Adam*": 6
+      "Sloan*": 8
+    }
+  }
+  "Sloan*": {
+    302305: {  // Victory Smite
+      "Selene*": 777
+      "Dag*": 777
+      "Horton*": 1111
+      "Orpheus*": 1425
+      "Anihal*": 1919
+      "Bernard*": 2222
+      "Shirley*": 2001
+      "Prince Castor*": 2662
+      "Roddy*": 3111
+      "Lily*": 3111
+      "Galahad*": 3333
+      "Folie*": 3765
+      "Martha*": 4444
+      "Helio*": 4767
+      "Gladys*": 4787
+      "Domenic*": 5199
+      "Glenn*": 4321
+      "Vigintio*": 5876
+      "Lonsdale*": 5555
+      "Marla*": 5555
+      "Adam*": 6666
+      "Sloan*": 8888
+    }
+  }
+}

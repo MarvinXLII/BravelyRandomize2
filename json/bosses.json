@@ -1,0 +1,47 @@
+{
+  // Musa bosses -- include Edna?????
+  Asura: {
+    Id: 106605
+    Name: Asura
+    LateGame: true
+    Party: [
+      {
+	PartyId: 750001
+	Slot: Monster1Id
+      }
+    ]
+  }
+  Catoblepas: {
+    Id: 101605
+    Name: Catoblepas
+    LateGame: true
+    Party: [
+      {
+	PartyId: 750002
+	Slot: Monster1Id
+      }
+    ]
+  }
+  Genbu: {
+    Id: 102605
+    Name: Genbu
+    LateGame: true
+    Party: [
+      {
+	PartyId: 750003
+	Slot: Monster1Id
+      }
+    ]
+  }
+  Immortal: {
+    Id: 105605
+    Name: Immortal
+    LateGame: true
+    Party: [
+      {
+	PartyId: 750004
+	Slot: Monster1Id
+      }
+    ]
+  }
+}
