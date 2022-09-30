@@ -75,7 +75,7 @@
 	name: bosses
 	label: "Shuffle bosses"
 	type: checkbutton
-	help: "Shuffle asterisk bosses, Hall of Tribulation bosses, and replace Night's Nexus' arms with Hall of Tribulation bosses."
+	help: "Shuffle asterisk bosses, Hall of Tribulation bosses, and replace Night's Nexus' arms with Hall of Tribulation bosses.\n\nNB: Test runs have been beatable, but bosses aren't very well balanced. It can be quite tough."
       }
       {
 	name: resistance

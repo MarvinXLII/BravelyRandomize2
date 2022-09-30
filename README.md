@@ -24,7 +24,7 @@ Some quality of life options include
 - Scaling exp, JP, and pg from battles.
 - Free Magnifying Glasses and Teleport Stones from shops.
 
-Some shops are automaticlly updates based on options selected. Check them out!
+Some shops are automaticlly updated based on options selected. Check them out!
 
 - Early shops include Hi-Potions and Ethers (only when shuffling job abilities)
 - Early shops include attack items (only when shuffling bosses and/or their resistances)
@@ -69,6 +69,10 @@ it to the location of the original pak folder. On Windows, the mod's location sh
 
 #### BOSS SHUFFLER
 
+- Bosses were rescaled a bit. In my experience they were beatable, but
+  they can get really brutal, especially in the early game. Select
+  this option at your own risk!
+
 - Various enemy attacks and healing abilities had to be rescaled. In
   some cases, they had to be rescaled based on either the user's or
   the targets HP. Most are done fairly (in my opinion), e.g. Roddy's
@@ -76,16 +80,14 @@ it to the location of the original pak folder. On Windows, the mod's location sh
   Orpheus' Stone and Glenn's Gigapotion will seem poorly balanced in
   the Halls of Tribulation because the exact same abilities are reused
   for all their battles. I chose to rescale these abilities for
-  mandatory battles for the story, NOT for optional battles. But don't
-  worry, the Hall of Tribulation battles will still be very doable.
+  mandatory battles for the story, NOT for optional battles.
 
 - Some enemy buff/heal abilities are hard coded for specific party
   members. The following abilities are no longer guaranteed work in
   the Halls of Tribulation: Selene's "Revive All", "Shell", and
   "Protect", Glenn's "Gigapotion", "Mega Pheonix", and "BP Tonic" and
   Gladys' "Three Steps Ahead". In the main game, the same applies for
-  Gladys' "One Step Ahead". I'll look into fixing this, but no
-  guarantees it is practical for a randomizer.
+  Gladys' "One Step Ahead".
 
 - Some battles have specific layouts for enemies, and cannot
   accommodate certain groups. This will be most notable in fights with

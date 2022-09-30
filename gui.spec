@@ -33,7 +33,8 @@ a = Analysis(
 pyz = PYZ(
     a.pure,
     a.zipped_data,
-    cipher=block_cipher
+    cipher=block_cipher,
+    name='mybuild'
 )
 
 exe = EXE(
